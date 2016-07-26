@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	
+
 	<parent>
 		<groupId>de.dbo.samples.springboot</groupId>
 		<artifactId>spring-boot</artifactId>
@@ -18,6 +18,11 @@ Reactor for Spring-boot REST-samples.
 This reactor corrects standard spring-boot dependencies to disable standard spring-boot logging.
 Instead the SLF4J with Log4J version 1.2 is used 
 	</description>
+
+	<modules>
+		<module>spring-boot-REST-0</module>
+		<module>spring-boot-REST-1</module>
+	</modules>
 
 	<dependencies>
 		<dependency>
@@ -44,16 +49,6 @@ Instead the SLF4J with Log4J version 1.2 is used
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-actuator</artifactId>
-			<exclusions>
-				<exclusion>
-					<groupId>org.springframework.boot</groupId>
-					<artifactId>spring-boot-starter-logging</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
@@ -70,12 +65,11 @@ Instead the SLF4J with Log4J version 1.2 is used
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-web</artifactId>
 		</dependency>
+
 	</dependencies>
 
 
 
-	<modules>
-		<module>spring-boot-REST-0</module>
-	</modules>
+
 
 </project>

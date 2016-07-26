@@ -1,5 +1,4 @@
 package de.dbo.samples.springboot.rest.actuator;
-
 import java.util.Collections;
 import java.util.Date;
 import java.util.LinkedHashMap;
@@ -11,9 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Description;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -23,14 +21,14 @@ public class SampleController {
 	@Autowired
 	private HelloWorldService helloWorldService;
 
-	@GetMapping("/")
+	@RequestMapping(value = "/", method = RequestMethod.GET)
 	@ResponseBody
 	public Map<String, String> hello() {
 		return Collections.singletonMap("message",
 				this.helloWorldService.getHelloMessage());
 	}
 
-	@PostMapping("/")
+	@RequestMapping(value = "/", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> olleh(@Validated Message message) {
 		Map<String, Object> model = new LinkedHashMap<String, Object>();
@@ -62,4 +60,3 @@ public class SampleController {
 	}
 
 }
-
