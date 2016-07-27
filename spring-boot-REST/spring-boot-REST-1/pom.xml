@@ -11,7 +11,7 @@
 	<artifactId>spring-boot-REST-1</artifactId>
 	<name>Spring Boot Actuator Sample</name>
 	<description>Spring Boot Actuator Sample</description>
-	<url>http://projects.spring.io/spring-boot/</url>
+	<url>https://github.com/spring-projects/spring-boot/tree/v1.3.6.RELEASE/spring-boot-samples/spring-boot-sample-actuator</url>
 	
 
 	

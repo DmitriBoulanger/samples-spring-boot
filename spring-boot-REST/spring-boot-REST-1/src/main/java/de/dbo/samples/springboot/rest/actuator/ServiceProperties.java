@@ -16,7 +16,6 @@ package de.dbo.samples.springboot.rest.actuator;
  * limitations under the License.
  */
 
-
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
@@ -24,15 +23,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class ServiceProperties {
 
-	private String name = "World";
+    private String name = "World";
 
-	public String getName() {
-		return this.name;
-	}
+    public String getName() {
+        return this.name;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
 }
-
