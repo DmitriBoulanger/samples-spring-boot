@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	
+
 	<parent>
 		<groupId>de.dbo.samples.springboot</groupId>
 		<artifactId>spring-boot-REST</artifactId>
@@ -9,25 +10,68 @@
 	</parent>
 
 	<artifactId>spring-boot-REST-1</artifactId>
-	<name>Spring Boot Actuator Sample</name>
+	
+	<name>Samples Spring-Boot REST - 1</name>
 	<description>Spring Boot Actuator Sample</description>
 	<url>https://github.com/spring-projects/spring-boot/tree/v1.3.6.RELEASE/spring-boot-samples/spring-boot-sample-actuator</url>
-	
 
-	
-	
 	<properties>
 		<main.basedir>${basedir}/../..</main.basedir>
 	</properties>
-	
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>ch.qos.logback</groupId>
+					<artifactId>logback-classic</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>jcl-over-slf4j</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>log4j-over-slf4j</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-logging</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>ch.qos.logback</groupId>
+					<artifactId>logback-classic</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>ch.qos.logback</groupId>
+					<artifactId>logback-core</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>log4j-over-slf4j</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-web</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>jcl-over-slf4j</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -50,7 +94,8 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-<!--		<dependency>
+<!-- 
+		<dependency>
 			<groupId>org.crashub</groupId>
 			<artifactId>crash.connectors.telnet</artifactId>
 			<exclusions>
@@ -63,9 +108,16 @@
 					<artifactId>commons-logging</artifactId>
 				</exclusion>
 			</exclusions>
-		</dependency> -->
+		</dependency>
+ -->
+ 
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+			<version>1.2</version>
+		</dependency>
+		
 	</dependencies>
-	
 
 	<build>
 		<plugins>
@@ -75,24 +127,9 @@
 				<configuration>
 					<executable>true</executable>
 				</configuration>
-				<executions>
-					<execution>
-						<id>generate build info</id>
-						<goals>
-							<goal>help</goal>
-						</goals>
-						<configuration>
-							<additionalProperties>
-								<encoding.source>${project.build.sourceEncoding}</encoding.source>
-								<encoding.reporting>${project.reporting.outputEncoding}</encoding.reporting>
-								<java.source>${maven.compiler.source}</java.source>
-								<java.target>${maven.compiler.target}</java.target>
-							</additionalProperties>
-						</configuration>
-					</execution>
-				</executions>
 			</plugin>
 		</plugins>
 	</build>
- 
+
+
 </project>

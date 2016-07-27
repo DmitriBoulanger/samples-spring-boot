@@ -1,4 +1,4 @@
-package de.dbo.samples.springboot.rest.hello;
+package de.dbo.samples.springboot.rest.greeting;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
