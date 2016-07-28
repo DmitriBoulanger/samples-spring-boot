@@ -14,6 +14,12 @@ Root reactor for Spring-boot samples.
 This reactor corrects imports standard v1.3.6.RELEASE dependency management
 and the corresponding plug-in management
 	</description>
+	
+	<modules>
+		<module>spring-boot-bom</module>
+		<module>spring-boot-REST</module>
+		<module>spring-boot-camel</module>
+	</modules>
 
 	<properties>
 		<!-- Java -->
@@ -34,7 +40,7 @@ and the corresponding plug-in management
 		<dependencies>
 			<dependency>
 				<groupId>de.dbo.samples.springboot</groupId>
-				<artifactId>spring-boot-dependencies</artifactId>
+				<artifactId>spring-boot-bom</artifactId>
 				<version>0.0.0-SNAPSHOT</version>
 				<type>pom</type>
 				<scope>import</scope>
@@ -181,11 +187,33 @@ and the corresponding plug-in management
 					<target>1.8</target>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
 		</plugins>
 		
 	</build>
 
 	<dependencies>
+	
+		<!-- =========== -->	
+	    <!-- Spring-boot -->
+	    <!-- =========== -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		
+
+	    <!-- =============== -->	
+	    <!-- Spring-boot WEB -->
+	    <!-- =============== -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -208,16 +236,16 @@ and the corresponding plug-in management
 				</exclusion>
 			</exclusions>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-actuator</artifactId>
-		</dependency>
+		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
 		
+		<!-- =============== -->
+		<!-- SLF4J and Log4J -->
+		<!-- =============== -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
@@ -227,16 +255,6 @@ and the corresponding plug-in management
 			<artifactId>slf4j-log4j12</artifactId>
 		</dependency>
 
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-web</artifactId>
-		</dependency>
 	</dependencies>
-
-
-	<modules>
-		<module>spring-boot-bom</module>
-		<module>spring-boot-REST</module>
-	</modules>
 
 </project>

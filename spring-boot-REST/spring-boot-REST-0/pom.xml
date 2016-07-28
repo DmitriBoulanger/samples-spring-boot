@@ -9,7 +9,6 @@
 		<version>0.0.0-SNAPSHOT</version>
 	</parent>
 
-	<groupId>org.springframework</groupId>
 	<artifactId>spring-boot-REST-0</artifactId>
 	<url>https://spring.io/guides/gs/actuator-service/</url>
 	
@@ -20,6 +19,6 @@ Basic REST-sample
   
 	<dependencies>
 		
-
 	</dependencies>
+	
 </project>

@@ -9,45 +9,21 @@
 		<version>0.0.0-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>spring-boot-REST</artifactId>
+	<artifactId>spring-boot-camel</artifactId>
 	<packaging>pom</packaging>
 
-	<name>Samples Spring-Boot REST</name>
+	<name>Samples Spring-Boot Camel</name>
 	<description>
-Reactor for Spring-boot REST-samples.
+Reactor for Spring-boot Camel-samples.
 This reactor corrects standard spring-boot dependencies to disable standard spring-boot logging.
 Instead the SLF4J with Log4J version 1.2 is used 
 	</description>
 
 	<modules>
-		<module>spring-boot-REST-0</module>
-		<module>spring-boot-REST-1</module>
+		<module>spring-boot-camel-0</module>
 	</modules>
 
 	<dependencies>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-actuator</artifactId>
-			<exclusions>
-					<exclusion>
-						<groupId>commons-logging</groupId>
-						<artifactId>commons-logging</artifactId>
-					</exclusion>
-				<exclusion>
-					<groupId>ch.qos.logback</groupId>
-					<artifactId>logback-classic</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.slf4j</groupId>
-					<artifactId>jcl-over-slf4j</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.slf4j</groupId>
-					<artifactId>log4j-over-slf4j</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-web</artifactId>
@@ -75,15 +51,13 @@ Instead the SLF4J with Log4J version 1.2 is used
 			</exclusions>
 		</dependency>
 		
-		<!-- Logging -->
+		<!-- Camel -->
 		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-spring-boot</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
-		</dependency>
+		
+
 		
 		<!-- Test -->
 		<dependency>
@@ -91,8 +65,6 @@ Instead the SLF4J with Log4J version 1.2 is used
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-
-
 
 	</dependencies>
 

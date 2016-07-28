@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>de.dbo.samples.springboot</groupId>
+		<artifactId>spring-boot-camel</artifactId>
+		<version>0.0.0-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>spring-boot-camel-0</artifactId>
+	<name>Samples Spring-Boot Camel - 0</name>
+	<description>An example showing how to work with Camel and Spring Boot using Spring Boot Starter</description>
+
+	<properties>
+		<spring.boot-version>1.3.6</spring.boot-version>
+	</properties>
+	
+	<dependencies>
+
+    	<!-- camel -->
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-stream</artifactId>
+		</dependency>
+
+    	<!-- test -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+	</dependencies>
+
+</project>
