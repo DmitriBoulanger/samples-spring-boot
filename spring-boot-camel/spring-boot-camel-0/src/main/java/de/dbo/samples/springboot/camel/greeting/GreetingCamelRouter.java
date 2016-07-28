@@ -1,4 +1,4 @@
-package de.dbo.samples.springboot.camel.simple;
+package de.dbo.samples.springboot.camel.greeting;
 
 import org.apache.camel.builder.RouteBuilder;
 import org.springframework.stereotype.Component;
@@ -9,12 +9,12 @@ import org.springframework.stereotype.Component;
  * Use <tt>@Component</tt> to make Camel auto detect this route when starting.
  */
 @Component
-public class SampleCamelRouter extends RouteBuilder {
+public class GreetingCamelRouter extends RouteBuilder {
 
     @Override
     public void configure() throws Exception {
         from("timer:hello?period={{timer.period}}")
-                .transform(method("myBean", "saySomething"))
+                .transform(method("greetingBean", "saySomething"))
                 .to("stream:out");
     }
 

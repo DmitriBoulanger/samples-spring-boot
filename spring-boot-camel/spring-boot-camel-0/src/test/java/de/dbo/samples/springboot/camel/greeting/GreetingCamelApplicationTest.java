@@ -1,4 +1,4 @@
-package de.dbo.samples.springboot.camel.simple;
+package de.dbo.samples.springboot.camel.greeting;
 
 import java.util.concurrent.TimeUnit;
 
@@ -12,9 +12,11 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import static org.junit.Assert.assertTrue;
 
+import de.dbo.samples.springboot.camel.greeting.GreetingCamelApplication;
+
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(SampleCamelApplication.class)
-public class SampleCamelApplicationTest {
+@SpringApplicationConfiguration(GreetingCamelApplication.class)
+public class GreetingCamelApplicationTest {
 
     @Autowired
     private CamelContext camelContext;

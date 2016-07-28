@@ -237,12 +237,6 @@ and the corresponding plug-in management
 			</exclusions>
 		</dependency>
 		
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-		
 		<!-- =============== -->
 		<!-- SLF4J and Log4J -->
 		<!-- =============== -->
