@@ -13,6 +13,7 @@ public class GreetingCamelRouter extends RouteBuilder {
 
     @Override
     public void configure() throws Exception {
+	
         from("timer:hello?period={{timer.period}}")
                 .transform(method("greetingBean", "saySomething"))
                 .to("stream:out");
