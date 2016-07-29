@@ -26,7 +26,7 @@
 		<spring.version>4.2.7.RELEASE</spring.version>
 		
 		<!-- Camel Components -->
-		
+
 		<camel.version>2.17.2</camel.version>
 		
 		<!-- Spring Components -->
@@ -152,28 +152,33 @@
 		<webjars-locator.version>0.28</webjars-locator.version>
 		<wsdl4j.version>1.6.3</wsdl4j.version>
 	</properties>
-	
 
-	
+
+
 	<dependencyManagement>
 		<dependencies>
 		
 		<!-- Camel Components -->
-		<dependency>
-			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-spring-boot</artifactId>
-			<version>${camel.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-stream</artifactId>
-			<version>${camel.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-test</artifactId>
-			<version>${camel.version}</version>
-		</dependency>
+			<dependency>
+				<groupId>org.apache.camel</groupId>
+				<artifactId>camel-spring-boot</artifactId>
+				<version>${camel.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.camel</groupId>
+				<artifactId>camel-commands-spring-boot</artifactId>
+				<version>${camel.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.camel</groupId>
+				<artifactId>camel-stream</artifactId>
+				<version>${camel.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.camel</groupId>
+				<artifactId>camel-test</artifactId>
+				<version>${camel.version}</version>
+			</dependency>
 		
 			<!-- Spring Boot -->
 			<dependency>

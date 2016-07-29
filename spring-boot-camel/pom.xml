@@ -21,6 +21,7 @@ Instead the SLF4J with Log4J version 1.2 is used
 
 	<modules>
 		<module>spring-boot-camel-0</module>
+		<module>spring-boot-camel-1</module>
 	</modules>
 
 	<dependencies>

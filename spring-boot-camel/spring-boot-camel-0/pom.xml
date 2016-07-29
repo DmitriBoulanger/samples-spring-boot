@@ -13,6 +13,7 @@
 	<artifactId>spring-boot-camel-0</artifactId>
 	<name>Samples Spring-Boot Camel - 0</name>
 	<description>An example showing how to work with Camel and Spring Boot using Spring Boot Starter</description>
+	<url>https://github.com/apache/camel/tree/camel-2.17.2/examples/camel-example-spring-boot-starter</url>
 
 	<properties>
 		<spring.boot-version>1.3.6</spring.boot-version>
