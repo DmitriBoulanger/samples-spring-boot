@@ -17,6 +17,8 @@
 
 	<properties>
 		<main.basedir>${basedir}/../..</main.basedir>
+		
+		<commons-logging.version>1.2</commons-logging.version>
 	</properties>
 
 	<dependencies>
@@ -73,8 +75,9 @@
 		
 		<!-- TODO: Tomcat needs this ... -->
 		<dependency>
-			<groupId>commons-logging</groupId>
-			<artifactId>commons-logging</artifactId>
+				<groupId>commons-logging</groupId>
+				<artifactId>commons-logging</artifactId>
+				<version>${commons-logging.version}</version>
 		</dependency>
 <!-- 
 		<dependency>
