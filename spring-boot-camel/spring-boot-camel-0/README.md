@@ -1,3 +1,5 @@
+https://github.com/apache/camel/blob/camel-2.17.2/examples/camel-example-spring-boot/README.md
+
 = Spring Boot Camel Sample
 
 This example shows how to work with a simple Apache Camel application using Spring Boot.

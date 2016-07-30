@@ -4,6 +4,8 @@ import org.apache.camel.spring.boot.FatJarRouter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.endpoint.HealthEndpoint;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.embedded.EmbeddedServletContainerFactory;
+import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory;
 import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
@@ -27,5 +29,12 @@ public class MySpringBootRouter extends FatJarRouter {
     String myBean() {
         return "I'm Spring bean!";
     }
+    
+    @Bean
+    public EmbeddedServletContainerFactory servletContainer() {
+        TomcatEmbeddedServletContainerFactory factory = 
+                      new TomcatEmbeddedServletContainerFactory();
+        return factory;
+     }
 
 }

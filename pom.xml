@@ -15,13 +15,8 @@ This reactor corrects imports standard v1.3.6.RELEASE dependency management
 and the corresponding plug-in management
 	</description>
 	
-	<modules>
-		<module>spring-boot-bom</module>
-		<module>spring-boot-REST</module>
-		<module>spring-boot-camel</module>
-	</modules>
-
 	<properties>
+	
 		<!-- Java -->
 		<java.version>1.8</java.version>
 		<jdk.version>jdk-8u65</jdk.version>
@@ -32,9 +27,18 @@ and the corresponding plug-in management
 
 		<!-- Versions used in the plugin-management -->
 		<spring-boot.version>1.3.6.RELEASE</spring-boot.version>
+		
+		<spring-boot.pom>spring-boot-bom/v${spring-boot.version}</spring-boot.pom>
 		<jooq.version>3.7.4</jooq.version>
 
 	</properties>
+ 
+	<modules>
+		<module>${spring-boot.pom}</module>
+		
+		<module>spring-boot-REST</module>
+		<module>spring-boot-camel</module>
+	</modules>
 
 	<dependencyManagement>
 		<dependencies>

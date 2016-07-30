@@ -14,16 +14,44 @@
 
 	<name>Samples Spring-Boot Camel</name>
 	<description>
-Reactor for Spring-boot Camel-samples.
+Reactor for Spring-Boot Camel-samples.
 This reactor corrects standard spring-boot dependencies to disable standard spring-boot logging.
 Instead the SLF4J with Log4J version 1.2 is used 
 	</description>
+	
+	<properties>
+		<spring-boot-camel.version>2.17.2</spring-boot-camel.version>
+		<spring-boot-camel.pom>spring-boot-camel-bom/v${spring-boot-camel.version}</spring-boot-camel.pom>
+	</properties>
 
 	<modules>
+		<module>${spring-boot-camel.pom}</module>
+	
 		<module>spring-boot-camel-0</module>
 		<module>spring-boot-camel-1</module>
 	</modules>
-
+	  
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>de.dbo.samples.springboot</groupId>
+				<artifactId>spring-boot-bom</artifactId>
+				<version>0.0.0-SNAPSHOT</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<!--  
+			<dependency>
+				<groupId>de.dbo.samples.springboot</groupId>
+				<artifactId>spring-boot-camel-bom</artifactId>
+				<version>0.0.0-SNAPSHOT</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			-->
+		</dependencies>
+	</dependencyManagement> 
+ 	 
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -51,6 +79,7 @@ Instead the SLF4J with Log4J version 1.2 is used
 				</exclusion>
 			</exclusions>
 		</dependency>
+		
 		
 		<!-- Camel -->
 		<dependency>
