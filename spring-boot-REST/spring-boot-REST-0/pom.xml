@@ -10,15 +10,34 @@
 	</parent>
 
 	<artifactId>spring-boot-REST-0</artifactId>
-	<url>https://spring.io/guides/gs/actuator-service/</url>
-	
+	<packaging>war</packaging>
 	<name>Samples Spring-Boot REST - 0</name>
+
 	<description>
-Basic REST-sample
+Very basic REST-sample implementation using Spring-Boot
 	</description>
-  
+	<url>https://spring.io/guides/gs/actuator-service/</url>
+
 	<dependencies>
-		
+
 	</dependencies>
-	
+
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<failOnMissingWebXml>false</failOnMissingWebXml>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<executable>true</executable>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
 </project>

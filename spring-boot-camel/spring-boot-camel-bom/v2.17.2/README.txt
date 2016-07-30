@@ -15,5 +15,10 @@ camel:       version 2.17.2
 	
 2. Original Maven variables
 ===========================
-	<origin-project.version>2.17.2</origin-project.version>
-    ${project.version} => ${origin-project.version}
+The properties item	
+      <origin-project.version>2.17.2</origin-project.version> 
+added and the global replacement performed
+      ${project.version} => ${origin-project.version}
+    
+3. Plug-in management
+===========================
