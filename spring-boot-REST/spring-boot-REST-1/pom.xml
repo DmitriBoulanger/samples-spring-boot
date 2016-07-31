@@ -10,16 +10,20 @@
 	</parent>
 
 	<artifactId>spring-boot-REST-1</artifactId>
-	
+
 	<name>Samples Spring-Boot REST - 1</name>
 	<description>Spring Boot Actuator Sample</description>
-	<url>https://github.com/spring-projects/spring-boot/tree/v1.3.6.RELEASE/spring-boot-samples/spring-boot-sample-actuator</url>
+	<url>https://github.com/spring-projects/spring-boot/tree/v1.4.0.RELEASE/spring-boot-samples/spring-boot-sample-actuator</url>
 
 	<properties>
 		<main.basedir>${basedir}/../..</main.basedir>
 	</properties>
 
 	<dependencies>
+	
+		<!-- ========================================================================================= -->	
+	    <!--                                  SPRING-BOOT                                              -->
+		<!-- ========================================================================================= -->
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -44,7 +48,7 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-jdbc</artifactId>
-						<exclusions>
+			<exclusions>
 				<exclusion>
 					<groupId>org.springframework.boot</groupId>
 					<artifactId>spring-boot-starter-logging</artifactId>
@@ -54,10 +58,6 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-remote-shell</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -70,9 +70,27 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+			<optional>true</optional>
+		</dependency>
 		
-
-<!-- 
+		<!-- ========================================================================================= -->	
+	    <!--                                  ETC                                                      -->
+		<!-- ========================================================================================= -->	
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+		</dependency>
+		
+		<!-- TODO: Tomcat needs this ... -->
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+		</dependency>
+		
+		<!-- 
 		<dependency>
 			<groupId>org.crashub</groupId>
 			<artifactId>crash.connectors.telnet</artifactId>
@@ -87,24 +105,7 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
- -->
-
-
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-configuration-processor</artifactId>
-			<optional>true</optional>
-		</dependency>
-		
-		<!-- ========================================================================================= -->	
-	    <!--                                  ETC                                                      -->
-		<!-- ========================================================================================= -->	
-		<!-- TODO: Tomcat needs this ... -->
-		<dependency>
-			<groupId>commons-logging</groupId>
-			<artifactId>commons-logging</artifactId>
-		</dependency>
+ 		-->
 	</dependencies>
 
 	<build>
