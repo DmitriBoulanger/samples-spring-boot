@@ -24,6 +24,7 @@ Reactor for Spring-Boot REST-samples.
 	<modules>
 		<module>spring-boot-REST-0</module>
 		<module>spring-boot-REST-1</module>
+		<module>spring-boot-REST-2</module>
 	</modules>
 	
 	<dependencies>
