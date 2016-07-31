@@ -19,23 +19,34 @@ Very basic REST-sample implementation using Spring-Boot
 	<url>https://spring.io/guides/gs/actuator-service/</url>
 
 	<dependencies>
+	
+		<!-- ========================================================================================= -->	
+	    <!--                                  ETC                                                      -->
+		<!-- ========================================================================================= -->	
+	
+		<!-- TODO: Tomcat needs this ... -->
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+		</dependency>
 
 	</dependencies>
 
 	<build>
 		<plugins>
+		
+			<!-- MAVEN -->
 			<plugin>
 				<artifactId>maven-war-plugin</artifactId>
 				<configuration>
 					<failOnMissingWebXml>false</failOnMissingWebXml>
 				</configuration>
 			</plugin>
+			
+			<!-- SPRING-BOOT -->
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<executable>true</executable>
-				</configuration>
 			</plugin>
 		</plugins>
 	</build>

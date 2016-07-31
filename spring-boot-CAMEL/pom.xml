@@ -9,7 +9,7 @@
 		<version>0.0.0-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>spring-boot-camel</artifactId>
+	<artifactId>spring-boot-CAMEL</artifactId>
 	<packaging>pom</packaging>
 
 	<name>Samples Spring-Boot Camel</name>
@@ -25,9 +25,9 @@ Instead the SLF4J with Log4J version 1.2 is used
 	</properties>
 
 	<modules>
-		<module>spring-boot-camel-bom/v${spring-boot-camel.version}</module>
-		<module>spring-boot-camel-0</module>
-		<module>spring-boot-camel-1</module>
+		<module>spring-boot-CAMEL-bom/v${spring-boot-camel.version}</module>
+		<module>spring-boot-CAMEL-0</module>
+		<module>spring-boot-CAMEL-1</module>
 	</modules>
 	  
 	<dependencyManagement>

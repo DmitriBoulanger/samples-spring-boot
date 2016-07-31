@@ -17,8 +17,6 @@
 
 	<properties>
 		<main.basedir>${basedir}/../..</main.basedir>
-		
-		<commons-logging.version>1.2</commons-logging.version>
 	</properties>
 
 	<dependencies>
@@ -73,12 +71,7 @@
 			</exclusions>
 		</dependency>
 		
-		<!-- TODO: Tomcat needs this ... -->
-		<dependency>
-				<groupId>commons-logging</groupId>
-				<artifactId>commons-logging</artifactId>
-				<version>${commons-logging.version}</version>
-		</dependency>
+
 <!-- 
 		<dependency>
 			<groupId>org.crashub</groupId>
@@ -102,6 +95,15 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-configuration-processor</artifactId>
 			<optional>true</optional>
+		</dependency>
+		
+		<!-- ========================================================================================= -->	
+	    <!--                                  ETC                                                      -->
+		<!-- ========================================================================================= -->	
+		<!-- TODO: Tomcat needs this ... -->
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
 		</dependency>
 	</dependencies>
 

@@ -18,9 +18,9 @@ Reactor for Spring-boot REST-samples.
 This reactor corrects standard spring-boot dependencies to disable standard spring-boot logging.
 Instead the SLF4J with Log4J version 1.2 is used 
 	</description>
-	
+
 	<properties>
-		 
+		<commons-logging.version>1.2</commons-logging.version>
 	</properties>
 
 	<modules>
@@ -30,14 +30,20 @@ Instead the SLF4J with Log4J version 1.2 is used
 	
 	<dependencies>
 	
-		<!-- =========== -->	
-	    <!--SPRING-BOOT  -->
-	    <!-- =========== -->
+		<!-- ========================================================================================= -->	
+	    <!--                                  SPRING-BOOT                                              -->
+		<!-- ========================================================================================= -->	
 	    
 	   <!-- Spring-Boot -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-logging</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 	    
 	    <!-- Spring-Boot-Web -->
@@ -59,6 +65,7 @@ Instead the SLF4J with Log4J version 1.2 is used
 				</exclusion>
 			</exclusions>
 		</dependency>
+		
 		<!-- Spring-Boot-Actuator -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -82,17 +89,25 @@ Instead the SLF4J with Log4J version 1.2 is used
 				</exclusion>
 			</exclusions>
 		</dependency>
+		
 		<!-- Spring-Boot-Test -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		
 		<!-- Spring-Framework -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-web</artifactId>
 		</dependency>
+		
+		<!-- ========================================================================================= -->	
+	    <!--                                  ETC                                                      -->
+		<!-- ========================================================================================= -->	
+		
+				
 	</dependencies>
 
 	<build>

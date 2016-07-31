@@ -23,8 +23,11 @@ This reactor performs complete plug-in management and fixes Java with its compil
 		<java.version>1.8</java.version>
 		
 		<!-- SPRING-BOOT version -->
-		<spring-boot.version>1.3.7.RELEASE</spring-boot.version>
+		<spring-boot.version>1.4.0.RELEASE</spring-boot.version>
 		<spring-boot.pom>spring-boot-bom/v${spring-boot.version}</spring-boot.pom>
+		
+		<!-- ETC version -->
+		<commons-logging.version>1.2</commons-logging.version>
 		
 	<!-- ====================================================================================================== -->
 	<!--                        MAVEN Plug-Ins Versions                                                         -->
@@ -74,6 +77,8 @@ This reactor performs complete plug-in management and fixes Java with its compil
 	<!-- ====================================================================================================== -->
 	<!--                           ETC Plug-Ins  Versions                                                       -->
 	<!-- ====================================================================================================== -->
+	
+		<jooq.version>3.8.4</jooq.version>
 		
 	</properties>
  
@@ -81,7 +86,7 @@ This reactor performs complete plug-in management and fixes Java with its compil
 		<module>spring-boot-bom/v${spring-boot.version}</module>
 		
 		<module>spring-boot-REST</module>
-		<module>spring-boot-camel</module>
+		<module>spring-boot-CAMEL</module>
 	</modules>
 	
 	<dependencyManagement>
@@ -94,6 +99,13 @@ This reactor performs complete plug-in management and fixes Java with its compil
 				<version>${project.version}</version>
 				<type>pom</type>
 				<scope>import</scope>
+			</dependency>
+			
+			<!-- TODO: Tomcat needs this ... -->
+			<dependency>
+				<groupId>commons-logging</groupId>
+				<artifactId>commons-logging</artifactId>
+				<version>${commons-logging.version}</version>
 			</dependency>
 			
 		</dependencies>
@@ -238,7 +250,7 @@ This reactor performs complete plug-in management and fixes Java with its compil
 				<plugin>
 					<groupId>org.jooq</groupId>
 					<artifactId>jooq-codegen-maven</artifactId>
-					<version>3.7.4</version>
+					<version>${jooq.version}</version>
 				</plugin>
 				<plugin>
 					<groupId>pl.project13.maven</groupId>

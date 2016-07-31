@@ -5,11 +5,11 @@
 
 	<parent>
 		<groupId>de.dbo.samples.springboot</groupId>
-		<artifactId>spring-boot-camel</artifactId>
+		<artifactId>spring-boot-CAMEL</artifactId>
 		<version>0.0.0-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>spring-boot-camel-0</artifactId>
+	<artifactId>spring-boot-CAMEL-0</artifactId>
 	<name>Samples Spring-Boot Camel - 0</name>
 	<description>Very basic example showing usage of Camel and Spring Boot with Spring Boot Starter</description>
 	<url>https://github.com/apache/camel/tree/camel-2.17.2/examples/camel-example-spring-boot-starter</url>

@@ -6,11 +6,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class HelloWorldService {
 
-    @Autowired
-    private ServiceProperties configuration;
+	@Autowired
+	private ServiceProperties configuration;
 
-    public String getHelloMessage() {
-        return "Hello " + this.configuration.getName();
-    }
+	public String getHelloMessage() {
+		return "Hello " + this.configuration.getName();
+	}
 
 }
