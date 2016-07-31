@@ -13,7 +13,7 @@
 Root reactor for all Spring-boot samples.
 This reactor performs complete plug-in management and fixes Java with its compiler
 	</description>
-	
+
 	<properties>
 		<!-- UTF-8 -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -29,10 +29,10 @@ This reactor performs complete plug-in management and fixes Java with its compil
 		<!-- ETC version -->
 		<commons-logging.version>1.2</commons-logging.version>
 		
-	<!-- ====================================================================================================== -->
-	<!--                        MAVEN Plug-Ins Versions                                                         -->
-	<!-- ====================================================================================================== -->
-	
+		<!-- ====================================================================================================== -->
+		<!--                        MAVEN Plug-Ins Versions                                                         -->
+		<!-- ====================================================================================================== -->
+
 		<maven-antrun-plugin.version>1.6</maven-antrun-plugin.version>
 		<maven-archetype-plugin.version>2.0</maven-archetype-plugin.version>
 		<maven-assembly-plugin.version>2.5.1</maven-assembly-plugin.version>
@@ -40,55 +40,73 @@ This reactor performs complete plug-in management and fixes Java with its compil
 		<!-- problems by upgrading to maven-bundle-plugin 2.4.0 -->
 		<maven-bundle.version>2.3.7</maven-bundle.version>
 		<maven-bundle-plugin.version>${maven-bundle.version}</maven-bundle-plugin.version>
-    	
+
 		<maven-checkstyle-plugin.version>2.16</maven-checkstyle-plugin.version>
     	<!-- AtomicException.java causes a problem with Checksyle > 6.6 due to  https://github.com/checkstyle/checkstyle/issues/1903 -->
 		<maven-checkstyle.version>6.6</maven-checkstyle.version>
 		<maven-clean-plugin.version>2.5</maven-clean-plugin.version>
 		<maven-compiler-plugin.version>3.5.1</maven-compiler-plugin.version>
-		
+
 		<maven-dependency-plugin.version>2.10</maven-dependency-plugin.version>
 		<maven-deploy-plugin.version>2.8.2</maven-deploy-plugin.version>
-		
+
 		<maven-eclipse-plugin.version>2.10</maven-eclipse-plugin.version>
-		
+
+		<maven-failsafe-plugin.version>2.18.1</maven-failsafe-plugin.version>
+
+		<maven-install-plugin.version>2.5.2</maven-install-plugin.version>
+
+		<maven-help-plugin.version>2.2</maven-help-plugin.version>
+
+		<maven-jar-plugin.version>2.5</maven-jar-plugin.version>
 		<maven-javadoc-plugin.version>2.10.4</maven-javadoc-plugin.version>
 		<maven-jboss-as-maven-plugin.version>7.7.Final</maven-jboss-as-maven-plugin.version>
-		
+
 		<maven-remote-resources-plugin.version>1.4</maven-remote-resources-plugin.version>
     	<!-- resources plug-in needed by Camel maven archetypes -->
 		<maven-resources-plugin.version>2.7</maven-resources-plugin.version>
-		
+
 		<maven-reporting-api.version>2.2.1</maven-reporting-api.version>
 		<maven-reporting-impl.version>2.0.5</maven-reporting-impl.version>
-		
+
 		<maven-shade-plugin.version>2.4.1</maven-shade-plugin.version>
+		<maven-site-plugin.version>3.4</maven-site-plugin.version>
+		<maven-source-plugin.version>2.4</maven-source-plugin.version>
 		<maven-surefire-plugin.version>2.19.1</maven-surefire-plugin.version>
 		<maven-surefire-report-plugin.version>2.13</maven-surefire-report-plugin.version>
-		
+
 		<maven-war-plugin.version>2.6</maven-war-plugin.version>
 		
-	<!-- ====================================================================================================== -->
-	<!--                     SPRING-BOOT Plug-Ins Versions                                                      -->
-	<!-- ====================================================================================================== -->
-	
+		<!-- ====================================================================================================== -->
+		<!--                                   MOJO Plug-Ins Versions                                               -->
+		<!-- ====================================================================================================== -->
+
+		<build-helper-maven-plugin.version>1.9.1</build-helper-maven-plugin.version>
+		<exec-maven-plugin.version>1.3.2</exec-maven-plugin.version>
+		<versions-maven-plugin.version>2.2</versions-maven-plugin.version>
+		
+		<!-- ====================================================================================================== -->
+		<!--                     SPRING-BOOT Plug-Ins Versions                                                      -->
+		<!-- ====================================================================================================== -->
+
 		<spring-boot-maven-plugin.version>${spring-boot.version}</spring-boot-maven-plugin.version>
 		
-	<!-- ====================================================================================================== -->
-	<!--                           ETC Plug-Ins  Versions                                                       -->
-	<!-- ====================================================================================================== -->
-	
+		<!-- ====================================================================================================== -->
+		<!--                           ETC Plug-Ins  Versions                                                       -->
+		<!-- ====================================================================================================== -->
+
 		<jooq.version>3.8.4</jooq.version>
-		
+		<git-commit-id-plugin.version>2.1.13</git-commit-id-plugin.version>
+
 	</properties>
- 
+
 	<modules>
 		<module>spring-boot-bom/v${spring-boot.version}</module>
-		
+
 		<module>spring-boot-REST</module>
 		<module>spring-boot-CAMEL</module>
 	</modules>
-	
+
 	<dependencyManagement>
 		<dependencies>
 		
@@ -107,7 +125,7 @@ This reactor performs complete plug-in management and fixes Java with its compil
 				<artifactId>commons-logging</artifactId>
 				<version>${commons-logging.version}</version>
 			</dependency>
-			
+
 		</dependencies>
 	</dependencyManagement>
 
@@ -118,7 +136,7 @@ This reactor performs complete plug-in management and fixes Java with its compil
 				<!-- ============================================================================================ -->
 				<!--                               MAVEN Plug-Ins                                                 -->
 				<!-- ============================================================================================ -->
-				
+
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-antrun-plugin</artifactId>
@@ -160,22 +178,22 @@ This reactor performs complete plug-in management and fixes Java with its compil
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-failsafe-plugin</artifactId>
-					<version>2.18.1</version>
+					<version>${maven-failsafe-plugin.version}</version>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-install-plugin</artifactId>
-					<version>2.5.2</version>
+					<version>${maven-install-plugin.version}</version>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-help-plugin</artifactId>
-					<version>2.2</version>
+					<version>${maven-help-plugin.version}</version>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-jar-plugin</artifactId>
-					<version>2.5</version>
+					<version>${maven-jar-plugin.version}</version>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -195,12 +213,12 @@ This reactor performs complete plug-in management and fixes Java with its compil
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-site-plugin</artifactId>
-					<version>3.4</version>
+					<version>${maven-site-plugin.version}</version>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-source-plugin</artifactId>
-					<version>2.4</version>
+					<version>${maven-source-plugin.version}</version>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -220,23 +238,23 @@ This reactor performs complete plug-in management and fixes Java with its compil
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
 					<artifactId>build-helper-maven-plugin</artifactId>
-					<version>1.9.1</version>
+					<version>${build-helper-maven-plugin.version}</version>
 				</plugin>
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
 					<artifactId>exec-maven-plugin</artifactId>
-					<version>1.3.2</version>
+					<version>${exec-maven-plugin.version}</version>
 				</plugin>
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
 					<artifactId>versions-maven-plugin</artifactId>
-					<version>2.2</version>
+					<version>${versions-maven-plugin.version}</version>
 				</plugin>	
 
 				<!-- ============================================================================================ -->
 				<!--                             SPRING-BOOT Plug-Ins                                             -->
-				<!-- ============================================================================================ -->	
-				
+				<!-- ============================================================================================ -->
+
 				<plugin>
 					<groupId>org.springframework.boot</groupId>
 					<artifactId>spring-boot-maven-plugin</artifactId>
@@ -246,7 +264,7 @@ This reactor performs complete plug-in management and fixes Java with its compil
 				<!-- ============================================================================================ -->
 				<!--                             ETC Plug-Ins                                                     -->
 				<!-- ============================================================================================ -->
-	
+
 				<plugin>
 					<groupId>org.jooq</groupId>
 					<artifactId>jooq-codegen-maven</artifactId>
@@ -255,9 +273,9 @@ This reactor performs complete plug-in management and fixes Java with its compil
 				<plugin>
 					<groupId>pl.project13.maven</groupId>
 					<artifactId>git-commit-id-plugin</artifactId>
-					<version>2.1.13</version>
+					<version>${git-commit-id-plugin.version}</version>
 				</plugin>
-				
+
 			</plugins>
 		</pluginManagement>
 
@@ -274,19 +292,62 @@ This reactor performs complete plug-in management and fixes Java with its compil
 	</build>
 
 	<dependencies>
-	
-		<!-- =============== -->
-		<!-- SLF4J and Log4J -->
-		<!-- =============== -->
+		<!-- ========================================================================================= -->	
+	    <!--                                  SPRING-BOOT                                              -->
+		<!-- ========================================================================================= -->	
+	    
+	   <!-- Spring-Boot -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-logging</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		
+		<!-- Spring-Boot-Test -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-logging</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		
+		<!-- ========================================================================================= -->	
+	    <!--                                  Log4j                                                   -->
+	    <!-- 
+	    <dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-log4j</artifactId>
+			<version>1.3.7.RELEASE</version>
+		</dependency>
+	    <dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-log4j2</artifactId>
+			<version>1.3.7.RELEASE</version>
+		</dependency>
+	     -->
+		<!-- ========================================================================================= -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
+			<artifactId>jcl-over-slf4j</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jul-to-slf4j</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
 		</dependency>
-		
 	</dependencies>
 
 </project>
