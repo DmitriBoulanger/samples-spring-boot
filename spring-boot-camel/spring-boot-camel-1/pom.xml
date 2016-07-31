@@ -17,6 +17,8 @@
 	<url>https://github.com/apache/camel/blob/camel-2.17.2/examples/camel-example-spring-boot</url>
 
   <dependencies>
+  
+  
     <dependency>
       <groupId>org.apache.camel</groupId>
       <artifactId>camel-spring-boot</artifactId>
@@ -41,10 +43,6 @@
       		<groupId>ch.qos.logback</groupId>
       		<artifactId>logback-core</artifactId>
       	</exclusion>
-      	<exclusion>
-      		<groupId>org.springframework</groupId>
-      		<artifactId>spring-web</artifactId>
-      	</exclusion>
       </exclusions>
     </dependency>
 
@@ -60,18 +58,9 @@
 
     <!-- remote shell -->
     <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-remote-shell</artifactId>
-    </dependency>
-    <dependency>
       <groupId>org.apache.camel</groupId>
       <artifactId>camel-commands-spring-boot</artifactId>
     </dependency>
-    
-    <dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-tomcat</artifactId>
-</dependency>
 
     <!-- testing -->
     <dependency>

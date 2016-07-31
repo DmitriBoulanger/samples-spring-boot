@@ -20,15 +20,12 @@ Instead the SLF4J with Log4J version 1.2 is used
 	</description>
 
 	<properties>
+		<!-- CAMEL version -->
 		<spring-boot-camel.version>2.17.2</spring-boot-camel.version>
-		<spring-boot-camel.pom>spring-boot-camel-bom/v${spring-boot-camel.version}</spring-boot-camel.pom>
-		
-	
 	</properties>
 
 	<modules>
-		<module>${spring-boot-camel.pom}</module>
-	
+		<module>spring-boot-camel-bom/v${spring-boot-camel.version}</module>
 		<module>spring-boot-camel-0</module>
 		<module>spring-boot-camel-1</module>
 	</modules>
@@ -47,7 +44,7 @@ Instead the SLF4J with Log4J version 1.2 is used
 			<dependency>
 				<groupId>de.dbo.samples.springboot</groupId>
 				<artifactId>spring-boot-camel-bom</artifactId>
-				<version>0.0.0-SNAPSHOT</version>
+				<version>${project.version}</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
