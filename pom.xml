@@ -10,9 +10,8 @@
 
 	<name>Samples Spring-Boot</name>
 	<description>
-Root reactor for Spring-boot samples.
-This reactor corrects imports standard v1.3.6.RELEASE dependency management
-and the corresponding plug-in management
+Root reactor for all Spring-boot samples.
+This reactor performs complete plug-in management and fixes Java with its compiler
 	</description>
 	
 	<properties>
@@ -20,15 +19,15 @@ and the corresponding plug-in management
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	
-		<!-- Java -->
+		<!-- JAVA -->
 		<java.version>1.8</java.version>
-		<jdk.version>jdk-8u65</jdk.version>
-
+		
+		<!-- SPRING-BOOT version -->
 		<spring-boot.version>1.3.7.RELEASE</spring-boot.version>
 		<spring-boot.pom>spring-boot-bom/v${spring-boot.version}</spring-boot.pom>
 		
 	<!-- ====================================================================================================== -->
-	<!--                         Maven Plug-Ins Versions                                                        -->
+	<!--                        MAVEN Plug-Ins Versions                                                         -->
 	<!-- ====================================================================================================== -->
 	
 		<maven-antrun-plugin.version>1.6</maven-antrun-plugin.version>
@@ -42,7 +41,11 @@ and the corresponding plug-in management
 		<maven-checkstyle-plugin.version>2.16</maven-checkstyle-plugin.version>
     	<!-- AtomicException.java causes a problem with Checksyle > 6.6 due to  https://github.com/checkstyle/checkstyle/issues/1903 -->
 		<maven-checkstyle.version>6.6</maven-checkstyle.version>
+		<maven-clean-plugin.version>2.5</maven-clean-plugin.version>
 		<maven-compiler-plugin.version>3.5.1</maven-compiler-plugin.version>
+		
+		<maven-dependency-plugin.version>2.10</maven-dependency-plugin.version>
+		<maven-deploy-plugin.version>2.8.2</maven-deploy-plugin.version>
 		
 		<maven-eclipse-plugin.version>2.10</maven-eclipse-plugin.version>
 		
@@ -50,8 +53,9 @@ and the corresponding plug-in management
 		<maven-jboss-as-maven-plugin.version>7.7.Final</maven-jboss-as-maven-plugin.version>
 		
 		<maven-remote-resources-plugin.version>1.4</maven-remote-resources-plugin.version>
-    	<!-- resources plugin needed by Camel maven archetypes -->
+    	<!-- resources plug-in needed by Camel maven archetypes -->
 		<maven-resources-plugin.version>2.7</maven-resources-plugin.version>
+		
 		<maven-reporting-api.version>2.2.1</maven-reporting-api.version>
 		<maven-reporting-impl.version>2.0.5</maven-reporting-impl.version>
 		
@@ -61,35 +65,46 @@ and the corresponding plug-in management
 		
 		<maven-war-plugin.version>2.6</maven-war-plugin.version>
 		
+	<!-- ====================================================================================================== -->
+	<!--                     SPRING-BOOT Plug-Ins Versions                                                      -->
+	<!-- ====================================================================================================== -->
+	
+		<spring-boot-maven-plugin.version>${spring-boot.version}</spring-boot-maven-plugin.version>
+		
+	<!-- ====================================================================================================== -->
+	<!--                           ETC Plug-Ins  Versions                                                       -->
+	<!-- ====================================================================================================== -->
+		
 	</properties>
  
 	<modules>
-		<module>${spring-boot.pom}</module>
+		<module>spring-boot-bom/v${spring-boot.version}</module>
 		
 		<module>spring-boot-REST</module>
 		<module>spring-boot-camel</module>
 	</modules>
-
+	
 	<dependencyManagement>
 		<dependencies>
+		
+			<!-- SPRING-BOOT with dependencies -->
 			<dependency>
 				<groupId>de.dbo.samples.springboot</groupId>
 				<artifactId>spring-boot-bom</artifactId>
-				<version>0.0.0-SNAPSHOT</version>
+				<version>${project.version}</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
-		
+			
 		</dependencies>
 	</dependencyManagement>
 
 	<build>
-	
 		<pluginManagement>
 			<plugins>
 			
 				<!-- ============================================================================================ -->
-				<!-- Standard Maven Plug-Ins (from Spring-Boot Plugin Management v1.3.7.RELEASE (see origin.xml)  -->
+				<!--                               MAVEN Plug-Ins                                                 -->
 				<!-- ============================================================================================ -->
 				
 				<plugin>
@@ -108,7 +123,7 @@ and the corresponding plug-in management
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-clean-plugin</artifactId>
-					<version>2.5</version>
+					<version>${maven-clean-plugin.version}</version>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -118,17 +133,17 @@ and the corresponding plug-in management
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-deploy-plugin</artifactId>
-					<version>2.8.2</version>
+					<version>${maven-deploy-plugin.version}</version>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-dependency-plugin</artifactId>
-					<version>2.10</version>
+					<version>${maven-dependency-plugin.version}</version>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-eclipse-plugin</artifactId>
-					<version>2.9</version>
+					<version>${maven-eclipse-plugin.version}</version>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -187,7 +202,7 @@ and the corresponding plug-in management
 				</plugin>
 				
 				<!-- ============================================================================================ -->
-				<!-- Mojo Plug-Ins  (from Spring-Boot Plugin Management v1.3.7.RELEASE (see origin.xml)           -->
+				<!--                                   MOJO Plug-Ins                                              -->
 				<!-- ============================================================================================ -->
 
 				<plugin>
@@ -204,20 +219,20 @@ and the corresponding plug-in management
 					<groupId>org.codehaus.mojo</groupId>
 					<artifactId>versions-maven-plugin</artifactId>
 					<version>2.2</version>
-				</plugin>			
-			
+				</plugin>	
+
 				<!-- ============================================================================================ -->
-				<!--   Spring-Boot Plug-Ins    (from Spring-Boot Plugin Management v1.3.7.RELEASE (see origin.xml)                        -->
-				<!-- ============================================================================================ -->
-			
+				<!--                             SPRING-BOOT Plug-Ins                                             -->
+				<!-- ============================================================================================ -->	
+				
 				<plugin>
 					<groupId>org.springframework.boot</groupId>
 					<artifactId>spring-boot-maven-plugin</artifactId>
-					<version>${spring-boot.version}</version>
-				</plugin>
-				
+					<version>${spring-boot-maven-plugin.version}</version>
+				</plugin>					
+
 				<!-- ============================================================================================ -->
-				<!--          ETC  (from Spring-Boot Plugin Management v1.3.7.RELEASE (see origin.xml)            -->
+				<!--                             ETC Plug-Ins                                                     -->
 				<!-- ============================================================================================ -->
 	
 				<plugin>
@@ -243,41 +258,11 @@ and the corresponding plug-in management
 					<target>${java.version}</target>
 				</configuration>
 			</plugin>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
 		</plugins>
 	</build>
 
 	<dependencies>
 	
-		<!-- =========== -->	
-	    <!-- Spring-boot -->
-	    <!-- =========== -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-web</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-			<exclusions>
-				<exclusion>
-					<groupId>ch.qos.logback</groupId>
-					<artifactId>logback-classic</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>ch.qos.logback</groupId>
-					<artifactId>logback-core</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.slf4j</groupId>
-					<artifactId>log4j-over-slf4j</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		
 		<!-- =============== -->
 		<!-- SLF4J and Log4J -->
 		<!-- =============== -->
@@ -289,7 +274,7 @@ and the corresponding plug-in management
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
 		</dependency>
-
+		
 	</dependencies>
 
 </project>
