@@ -9,9 +9,8 @@
 	</parent>
 
 	<artifactId>spring-boot-REST-3</artifactId>
-	<packaging>war</packaging>
 
-	<name>Samples Spring-Boot REST - 3</name>
+	<name>Samples Spring-Boot REST - 3 (test)</name>
 	<description>Spring Boot Actuator Sample</description>
 	<url>https://github.com/spring-projects/spring-boot/tree/v1.4.0.RELEASE/spring-boot-samples/spring-boot-sample-test</url>
 	
@@ -31,6 +30,7 @@
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-api</artifactId>
 		</dependency>
+		
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
@@ -39,6 +39,8 @@
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 		</dependency>
+		
+		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -55,6 +57,7 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+	
 	<build>
 		<plugins>
 			<plugin>

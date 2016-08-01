@@ -11,7 +11,7 @@
 
 	<artifactId>spring-boot-REST-1</artifactId>
 
-	<name>Samples Spring-Boot REST - 1</name>
+	<name>Samples Spring-Boot REST - 1 (Actuator)</name>
 	<description>Spring Boot Actuator Sample</description>
 	<url>https://github.com/spring-projects/spring-boot/tree/v1.4.0.RELEASE/spring-boot-samples/spring-boot-sample-actuator</url>
 

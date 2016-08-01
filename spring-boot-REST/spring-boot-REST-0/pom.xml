@@ -11,7 +11,7 @@
 
 	<artifactId>spring-boot-REST-0</artifactId>
 	<packaging>war</packaging>
-	<name>Samples Spring-Boot REST - 0</name>
+	<name>Samples Spring-Boot REST - 0 (Greeting)</name>
 
 	<description>
 Very basic REST-sample implementation using Spring-Boot

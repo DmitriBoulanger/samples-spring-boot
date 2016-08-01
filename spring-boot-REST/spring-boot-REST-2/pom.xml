@@ -12,7 +12,7 @@
 	<artifactId>spring-boot-REST-2</artifactId>
 	<packaging>war</packaging>
 
-	<name>Samples Spring-Boot REST - 2</name>
+	<name>Samples Spring-Boot REST - 2 (war)</name>
 	<description>Spring Boot Actuator Sample</description>
 	<url>https://github.com/spring-projects/spring-boot/tree/v1.4.0.RELEASE/spring-boot-samples/spring-boot-sample-war</url>
 

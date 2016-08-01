@@ -8,7 +8,7 @@
 	<version>0.0.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
-	<name>Samples Spring-Boot</name>
+	<name>Samples Spring-Boot root</name>
 	<description>
 Root reactor for all Spring-boot samples.
 This reactor performs complete plug-in management and fixes Java with its compiler
@@ -287,6 +287,22 @@ This reactor performs complete plug-in management and fixes Java with its compil
 				<configuration>
 					<source>${java.version}</source>
 					<target>${java.version}</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<includes>
+						<include>**/*Tests.java</include>
+						<include>**/*Test.java</include>
+					</includes>
+					<excludes>
+						<exclude>**/Abstract*.java</exclude>
+					</excludes>
+					<systemPropertyVariables>
+						<java.awt.headless>true</java.awt.headless>
+					</systemPropertyVariables>
 				</configuration>
 			</plugin>
 		</plugins>
