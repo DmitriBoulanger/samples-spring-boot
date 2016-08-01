@@ -22,6 +22,6 @@ Origin line 106
 
  	<jooq.version>3.7.4</jooq.version>
  	
-It is used in the origin the plug-in management.
+It is used in the origin plug-in management.
 This version-value is copied into plag-in management of the spring-boot pom.xml 
   
