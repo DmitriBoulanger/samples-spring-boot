@@ -21,8 +21,6 @@ import org.springframework.stereotype.Component;
 
 /**
  * Properties for the service.
- *
- * @author Phillip Webb
  */
 @Component
 @ConfigurationProperties

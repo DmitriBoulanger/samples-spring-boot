@@ -9,6 +9,7 @@
 	<configs>
 		<config>java:de.dbo.samples.springboot.rest.test.WelcomeCommandLineRunner</config>
 		<config>java:de.dbo.samples.springboot.rest.test.web.UserVehicleService</config>
+		<config>java:de.dbo.samples.springboot.rest.test.service.ServiceProperties</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>
