@@ -24,7 +24,6 @@ This reactor performs complete plug-in management and fixes Java with its compil
 		
 		<!-- SPRING-BOOT version -->
 		<spring-boot.version>1.4.0.RELEASE</spring-boot.version>
-		<spring-boot.pom>spring-boot-bom/v${spring-boot.version}</spring-boot.pom>
 		
 		<!-- ETC version -->
 		<commons-logging.version>1.2</commons-logging.version>
@@ -101,6 +100,7 @@ This reactor performs complete plug-in management and fixes Java with its compil
 	</properties>
 
 	<modules>
+		<!--  SPRING-BOOT DEPENDENCIS as POM-artifact spring-boot-bom -->
 		<module>spring-boot-bom/v${spring-boot.version}</module>
 
 		<module>spring-boot-REST</module>
@@ -110,7 +110,8 @@ This reactor performs complete plug-in management and fixes Java with its compil
 	<dependencyManagement>
 		<dependencies>
 		
-			<!-- SPRING-BOOT with dependencies -->
+			<!-- SPRING-BOOT with dependencies                -->
+			<!-- Artifact is created as a module in the above -->
 			<dependency>
 				<groupId>de.dbo.samples.springboot</groupId>
 				<artifactId>spring-boot-bom</artifactId>
@@ -119,7 +120,7 @@ This reactor performs complete plug-in management and fixes Java with its compil
 				<scope>import</scope>
 			</dependency>
 			
-			<!-- TODO: Tomcat needs this ... -->
+			<!-- TODO: TOMCAT cannot run without this ...     -->
 			<dependency>
 				<groupId>commons-logging</groupId>
 				<artifactId>commons-logging</artifactId>
