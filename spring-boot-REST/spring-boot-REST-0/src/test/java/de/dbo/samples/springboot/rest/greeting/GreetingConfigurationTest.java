@@ -55,7 +55,7 @@ public class GreetingConfigurationTest {
     public void testGreeting() throws Exception {
         final RestTemplate restTemplate = new TestRestTemplate();
         final URI uri = toURI(HELLO);
-        log.info("request " + uri + " ...");
+        log.warn("request " + uri + " ...");
         @SuppressWarnings("rawtypes")
         final ResponseEntity<Map> entity = restTemplate.getForEntity(uri, Map.class);
         assertThatHttpStatus(HttpStatus.OK, entity);

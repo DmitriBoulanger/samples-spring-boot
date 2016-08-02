@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+	<appender name="CONSOLE_ERROR" class="ch.qos.logback.core.ConsoleAppender">
+	<target>System.err</target>
+		<encoder>
+			<pattern>%-4relative ms. [%30thread] %-5level %logger{0} - %msg%n</pattern>
+		</encoder>
+	</appender>
+	
+	<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+	 	<target>System.out</target>
+		<encoder>
+			<pattern>%-4relative ms. [%30thread] %-5level %logger{0} - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<root level="WARN">
+		<appender-ref ref="CONSOLE_ERROR" />
+	</root>
+	
+	<logger name="de.dbo.samples" 
+		level="DEBUG" additivity="false">
+		<appender-ref ref="CONSOLE" />
+	</logger>
+
+</configuration>

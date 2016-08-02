@@ -103,6 +103,7 @@ This reactor performs complete plug-in management and fixes Java with its compil
 		<!--  SPRING-BOOT DEPENDENCIS as POM-artifact spring-boot-bom -->
 		<module>spring-boot-bom/v${spring-boot.version}</module>
 
+		<module>spring-boot-utilities</module>
 		<module>spring-boot-REST</module>
 		<module>spring-boot-CAMEL</module>
 	</modules>
@@ -118,13 +119,6 @@ This reactor performs complete plug-in management and fixes Java with its compil
 				<version>${project.version}</version>
 				<type>pom</type>
 				<scope>import</scope>
-			</dependency>
-			
-			<!-- TODO: TOMCAT cannot run without this ...     -->
-			<dependency>
-				<groupId>commons-logging</groupId>
-				<artifactId>commons-logging</artifactId>
-				<version>${commons-logging.version}</version>
 			</dependency>
 
 		</dependencies>
@@ -281,6 +275,7 @@ This reactor performs complete plug-in management and fixes Java with its compil
 		</pluginManagement>
 
 		<plugins>
+			<!-- Compiler -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -289,6 +284,7 @@ This reactor performs complete plug-in management and fixes Java with its compil
 					<target>${java.version}</target>
 				</configuration>
 			</plugin>
+			<!-- Tests -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
@@ -317,12 +313,6 @@ This reactor performs complete plug-in management and fixes Java with its compil
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter</artifactId>
-			<exclusions>
-				<exclusion>
-					<groupId>org.springframework.boot</groupId>
-					<artifactId>spring-boot-starter-logging</artifactId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 		
 		<!-- Spring-Boot-Test -->
@@ -330,40 +320,14 @@ This reactor performs complete plug-in management and fixes Java with its compil
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
-			<exclusions>
-				<exclusion>
-					<groupId>org.springframework.boot</groupId>
-					<artifactId>spring-boot-starter-logging</artifactId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 		
 		<!-- ========================================================================================= -->	
-	    <!--                                  Log4j                                                   -->
-	    <!-- 
-	    <dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-log4j</artifactId>
-			<version>1.3.7.RELEASE</version>
-		</dependency>
-	    <dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-log4j2</artifactId>
-			<version>1.3.7.RELEASE</version>
-		</dependency>
-	     -->
+	    <!--                                  SLF4J                                                    -->
 		<!-- ========================================================================================= -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
-			<artifactId>jcl-over-slf4j</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>jul-to-slf4j</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
+			<artifactId>slf4j-api</artifactId>
 		</dependency>
 	</dependencies>
 
