@@ -1,39 +1,38 @@
 package de.dbo.samples.springboot.utilities.logging;
-import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
+import ch.qos.logback.classic.Logger;
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.LoggerContext;
-import ch.qos.logback.core.Context;
 import ch.qos.logback.core.util.StatusPrinter;
 
 public class LoggingInfo {
 
   public static StringBuilder print() {
-     final StringBuilder sb = new StringBuilder("Available loggers:");
-    final LoggerContext loggerContext = (LoggerContext) LoggerFactory.getILoggerFactory();
-    final List<ch.qos.logback.classic.Logger> loggers = loggerContext.getLoggerList();
-    for(final ch.qos.logback.classic.Logger logger:loggers) {
-	final Level level = logger.getLevel();
+    final StringBuilder sb = new StringBuilder("Available loggers:");
+    for(final Logger logger : getLoggerContext().getLoggerList()) {
 	sb.append("\n\t - " + padRight(logger.getName(),90));
+	final Level level = logger.getEffectiveLevel();
 	if (null!=level) {
 	    sb.append(padRight(level.toString(),6));
 	}
-	
     }
     return sb;
   }
   
   public static boolean hasLogger(final String name) {
-      final LoggerContext loggerContext = (LoggerContext) LoggerFactory.getILoggerFactory();
-      return null!= loggerContext.getLogger(name);
+      return null!=  getLoggerContext().getLogger(name);
   }
   
   public static void printInternalState() {
-      StatusPrinter.print((Context) LoggerFactory.getILoggerFactory());  
+      StatusPrinter.print(getLoggerContext());  
+      getLoggerContext().getStatusManager().clear();
    }
+  
+  private static final LoggerContext getLoggerContext() {
+//      LoggerContext x;
+//      x.getStatusManager().
+      return (LoggerContext) org.slf4j.LoggerFactory.getILoggerFactory();
+  }
   
   
   /**
