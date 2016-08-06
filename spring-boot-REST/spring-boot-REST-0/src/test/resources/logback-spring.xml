@@ -1,13 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 	 <include resource="org/springframework/boot/logging/logback/base.xml"/>
-
-	<appender name="CONSOLE_ERROR" class="ch.qos.logback.core.ConsoleAppender">
-	<target>System.err</target>
-		<encoder>
-			<pattern>%-7relative ms. [%30thread] %-5level %50logger{0} - %msg%n</pattern>
-		</encoder>
-	</appender>
 	
 	<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
 	 	<target>System.out</target>

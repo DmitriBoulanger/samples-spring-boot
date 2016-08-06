@@ -13,6 +13,11 @@ public class Greeting {
         this.id = id;
         this.content = content;
         log.info("created. ID=" + id);
+        
+        
+        log.info("INFO");
+	log.warn("WARN");
+	log.error("ERROR");
     }
 
     public long getId() {

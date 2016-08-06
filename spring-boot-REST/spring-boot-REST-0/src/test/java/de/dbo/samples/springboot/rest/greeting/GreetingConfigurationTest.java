@@ -35,7 +35,7 @@ import de.dbo.samples.springboot.rest.greeting.GreetingConfiguration;
  */
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = GreetingConfiguration.class)
+@SpringApplicationConfiguration(classes = GreetingApplication.class)
 @WebAppConfiguration
 @IntegrationTest({"server.port=0", "management.port=0"})
 @DirtiesContext
@@ -69,6 +69,13 @@ public class GreetingConfigurationTest {
         @SuppressWarnings("rawtypes")
         final ResponseEntity<Map> entity = restTemplate.getForEntity(uri, Map.class);
         assertThatHttpStatus(HttpStatus.OK, entity);
+    }
+    
+    @Test
+    public void logging() {
+	log.info("INFO");
+	log.warn("WARN");
+	log.error("ERROR");
     }
 
     // ========================
