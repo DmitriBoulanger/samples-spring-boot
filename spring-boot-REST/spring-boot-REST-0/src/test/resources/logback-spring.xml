@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+
 <configuration>
 	 <include resource="org/springframework/boot/logging/logback/base.xml"/>
 	
@@ -10,7 +12,7 @@
 	</appender>
 
 	<root level="WARN" additivity="false">
-		<appender-ref ref="CONSOLE_ERROR" />
+		<appender-ref ref="CONSOLE" />
 	</root>
 	
 	<logger name="de.dbo.samples" 

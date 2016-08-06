@@ -7,18 +7,24 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Map;
 
+import javax.annotation.PostConstruct;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.embedded.LocalServerPort;
 import org.springframework.boot.test.IntegrationTest;
 import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.boot.test.TestRestTemplate;
+import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.web.client.RestTemplate;
 
@@ -34,26 +40,34 @@ import de.dbo.samples.springboot.rest.greeting.GreetingConfiguration;
  *
  */
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = GreetingApplication.class)
-@WebAppConfiguration
-@IntegrationTest({"server.port=0", "management.port=0"})
+@RunWith(SpringRunner.class)
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @DirtiesContext
-public class GreetingConfigurationTest {
-    private static final Logger log = LoggerFactory.getLogger(GreetingConfigurationTest.class);
+public class GreetingTest {
+    private static final Logger log = LoggerFactory.getLogger(GreetingTest.class);
 
-    @Value("${local.server.port}")
+    @LocalServerPort
     private int                 port;
 
-    @Value("${local.management.port}")
+    // application.properties
+    @Value("${management.port}")
     private int                 mgt;
 
+    // application.properties
     @Value("${management.address}")
     private String              localhost;
+    
+    private void printPorts(final String comment) {
+	final StringBuilder sb = new StringBuilder("Server ports in "+comment+":");
+	sb.append("\n\t - port = " + port);
+	sb.append("\n\t - mgt  = " + mgt);
+	log.info( sb.toString() );
+    }
 
     @Test
     public void testGreeting() throws Exception {
-        final RestTemplate restTemplate = new TestRestTemplate();
+	printPorts("testGreeting");
+        final TestRestTemplate restTemplate = new TestRestTemplate();
         final URI uri = toURI(HELLO);
         log.warn("request " + uri + " ...");
         @SuppressWarnings("rawtypes")
@@ -63,7 +77,8 @@ public class GreetingConfigurationTest {
 
     @Test
     public void testInfo() throws Exception {
-        final RestTemplate restTemplate = new TestRestTemplate();
+	printPorts("testInfo");
+	 final TestRestTemplate restTemplate = new TestRestTemplate();
         final URI uri = toURI(INFO);
         log.info("request " + uri + " ...");
         @SuppressWarnings("rawtypes")
@@ -71,12 +86,6 @@ public class GreetingConfigurationTest {
         assertThatHttpStatus(HttpStatus.OK, entity);
     }
     
-    @Test
-    public void logging() {
-	log.info("INFO");
-	log.warn("WARN");
-	log.error("ERROR");
-    }
 
     // ========================
     // Test implementations
