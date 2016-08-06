@@ -106,6 +106,7 @@ This reactor performs complete plug-in management and fixes Java with its compil
 		<module>spring-boot-utilities</module>
 		<module>spring-boot-REST</module>
 		<module>spring-boot-CAMEL</module>
+		<module>spring-boot-ETC</module>
 	</modules>
 
 	<dependencyManagement>
