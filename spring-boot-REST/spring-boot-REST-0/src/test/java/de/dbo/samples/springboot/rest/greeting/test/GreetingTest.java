@@ -1,4 +1,4 @@
-package de.dbo.samples.springboot.rest.greeting;
+package de.dbo.samples.springboot.rest.greeting.test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
