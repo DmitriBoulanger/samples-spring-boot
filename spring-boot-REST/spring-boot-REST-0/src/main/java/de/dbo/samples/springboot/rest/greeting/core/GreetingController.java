@@ -1,4 +1,4 @@
-package de.dbo.samples.springboot.rest.greeting;
+package de.dbo.samples.springboot.rest.greeting.core;
 import java.util.concurrent.atomic.AtomicLong;
 
 import org.springframework.stereotype.Controller;

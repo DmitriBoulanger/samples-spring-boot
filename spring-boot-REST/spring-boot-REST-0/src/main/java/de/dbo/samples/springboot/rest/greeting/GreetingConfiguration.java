@@ -10,7 +10,7 @@ public class GreetingConfiguration {
     private static final Logger log = LoggerFactory.getLogger(GreetingConfiguration.class);
 
     public GreetingConfiguration() {
-        log.error("created", new Exception("test error with exception just to see it"));
+        log.error("created - production");
     }
 
 

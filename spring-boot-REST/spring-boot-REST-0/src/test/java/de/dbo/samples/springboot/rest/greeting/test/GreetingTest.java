@@ -3,6 +3,8 @@ package de.dbo.samples.springboot.rest.greeting.test;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
+import de.dbo.samples.springboot.rest.greeting.GreetingConfiguration;
+
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Map;
@@ -18,6 +20,7 @@ import org.springframework.boot.context.embedded.LocalServerPort;
 import org.springframework.boot.test.IntegrationTest;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.http.HttpStatus;
@@ -27,8 +30,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.web.client.RestTemplate;
-
-import de.dbo.samples.springboot.rest.greeting.GreetingConfiguration;
 
 /**
  * Basic integration tests for service demo application.
@@ -43,6 +44,7 @@ import de.dbo.samples.springboot.rest.greeting.GreetingConfiguration;
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @DirtiesContext
+@ComponentScan({"de.dbo.samples.springboot.rest.greeting.core, de.dbo.samples.springboot.rest.greeting.test"})
 public class GreetingTest {
     private static final Logger log = LoggerFactory.getLogger(GreetingTest.class);
 

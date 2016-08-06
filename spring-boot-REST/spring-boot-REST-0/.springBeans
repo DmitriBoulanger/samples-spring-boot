@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beansProjectDescription>
 	<version>1</version>
-	<pluginVersion><![CDATA[3.8.0.201606301005-RELEASE]]></pluginVersion>
+	<pluginVersion><![CDATA[3.8.1.201607290748-RELEASE]]></pluginVersion>
 	<configSuffixes>
 		<configSuffix><![CDATA[xml]]></configSuffix>
 	</configSuffixes>
 	<enableImports><![CDATA[false]]></enableImports>
 	<configs>
 		<config>java:de.dbo.samples.springboot.rest.greeting.GreetingConfiguration</config>
+		<config>java:de.dbo.samples.springboot.rest.greeting.test.GreetingTestConfiguration</config>
 	</configs>
 	<autoconfigs>
+		<config>java:de.dbo.samples.springboot.rest.greeting.GreetingApplication</config>
 	</autoconfigs>
 	<configSets>
 	</configSets>
