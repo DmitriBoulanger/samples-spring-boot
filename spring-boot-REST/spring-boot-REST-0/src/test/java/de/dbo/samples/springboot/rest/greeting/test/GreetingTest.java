@@ -4,6 +4,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 //
 import de.dbo.samples.springboot.rest.greeting.core.GreetingApplicationContextProvider;
+import de.dbo.samples.springboot.utilities.logging.LoggingInfo;
 //
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -97,6 +98,11 @@ public class GreetingTest {
 	log.info("request " + uri + " ...");
 	final ResponseEntity<Map> entity = restTemplate.getForEntity(uri, Map.class);
 	assertThatHttpStatus(HttpStatus.OK, entity);
+    }
+    
+    @Test
+    public void nr90_testLogging() throws Exception {
+	log.info(LoggingInfo.printAvailableLoggers(130).toString());
     }
     
     // ========================

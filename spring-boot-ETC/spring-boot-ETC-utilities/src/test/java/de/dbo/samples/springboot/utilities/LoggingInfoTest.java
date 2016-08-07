@@ -24,6 +24,7 @@ public class LoggingInfoTest {
 	assertThat("No expected logger found", LoggingInfo.hasLogger(LoggingInfoTest.class.getName()));
 	
 	log.info("INFO!");
+	log.debug("DEBUG!");
 	log.warn("WARNING!");
 	log.error("ERROR!");
 
