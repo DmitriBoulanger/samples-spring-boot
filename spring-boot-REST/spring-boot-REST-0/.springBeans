@@ -9,6 +9,7 @@
 	<configs>
 		<config>java:de.dbo.samples.springboot.rest.greeting.GreetingConfiguration</config>
 		<config>java:de.dbo.samples.springboot.rest.greeting.test.GreetingTestConfiguration</config>
+		<config>java:de.dbo.samples.springboot.rest.greeting.core.GreetingApplicationContextProvider</config>
 	</configs>
 	<autoconfigs>
 		<config>java:de.dbo.samples.springboot.rest.greeting.GreetingApplication</config>

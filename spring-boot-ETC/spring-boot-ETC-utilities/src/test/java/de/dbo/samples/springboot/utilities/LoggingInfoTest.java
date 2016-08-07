@@ -14,9 +14,12 @@ public class LoggingInfoTest {
     
     @Test
     public void test() {
-	log.info(LoggingInfo.print().toString());
-	log.info("Internal logger state:\n");
-	LoggingInfo.printInternalState();
+	log.info(LoggingInfo.printAvailableLoggers().toString());
+	
+	log.info("Internal logger state:");
+	LoggingInfo.printInternalStateToConsole();
+	log.info("Internal warnings or errors in the logger state:");
+	LoggingInfo.printInternalStateWarningsToConsole();
 	
 	assertThat("No expected logger found", LoggingInfo.hasLogger(LoggingInfoTest.class.getName()));
 	

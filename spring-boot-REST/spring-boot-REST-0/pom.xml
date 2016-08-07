@@ -10,7 +10,6 @@
 	</parent>
 
 	<artifactId>spring-boot-REST-0</artifactId>
-	<packaging>war</packaging>
 	<name>Samples Spring-Boot REST - 0 (Greeting)</name>
 
 	<description>
@@ -32,20 +31,20 @@ Very basic REST-sample implementation using Spring-Boot
 			
 		<!-- ========================================================================================= -->	
 	    <!--                                  ETC                                                      -->
-		<!-- ========================================================================================= -->	
-
+		<!-- ========================================================================================= -->
+		
+		<dependency>
+			<groupId>de.dbo.samples.springboot</groupId>
+			<artifactId>spring-boot-ETC-utilities</artifactId>
+			<version>${project.version}</version>	
+		</dependency>
+		
 	</dependencies>
 
 	<build>
 		<plugins>
 		
 			<!-- MAVEN -->
-			<plugin>
-				<artifactId>maven-war-plugin</artifactId>
-				<configuration>
-					<failOnMissingWebXml>false</failOnMissingWebXml>
-				</configuration>
-			</plugin>
 			
 			<!-- SPRING-BOOT -->
 			<plugin>

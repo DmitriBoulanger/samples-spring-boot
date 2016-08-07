@@ -18,7 +18,7 @@ Reactor for Spring-Boot REST-samples.
 	</description>
 
 	<properties>
-		<commons-logging.version>1.2</commons-logging.version>
+		 
 	</properties>
 
 	<modules>
@@ -38,17 +38,6 @@ Reactor for Spring-Boot REST-samples.
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
-			<exclusions>
-				<exclusion>
-					<groupId>ch.qos.logback</groupId>
-					<artifactId>logback-classic</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>ch.qos.logback</groupId>
-					<artifactId>logback-core</artifactId>
-				</exclusion>
-				
-			</exclusions>
 		</dependency>	    
 		
 		<!-- ========================================================================================= -->	
@@ -59,6 +48,11 @@ Reactor for Spring-Boot REST-samples.
 
 	<build>
 		<plugins>
+		
+			<!-- ========================================================================================= -->	
+	    	<!--                                  SPRING-BOOT                                              -->
+			<!-- ========================================================================================= -->	
+			
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>

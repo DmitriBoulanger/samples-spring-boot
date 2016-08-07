@@ -7,7 +7,7 @@
 	<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
 	 	<target>System.out</target>
 		<encoder>
-			<pattern>%-7relative ms. [%30thread] %-5level %50logger{0} - %msg%n</pattern>
+			<pattern>%7relative ms. [%30thread] %-5level %50logger{0} - %msg%n</pattern>
 		</encoder>
 	</appender>
 
@@ -16,7 +16,7 @@
 	</root>
 	
 	<logger name="de.dbo.samples" 
-		level="DEBUG" additivity="false">
+		level="INFO" additivity="false">
 		<appender-ref ref="CONSOLE" />
 	</logger>
 	<logger name="org.springframework.boot.context.embedded.tomcat" 
@@ -24,11 +24,11 @@
 		<appender-ref ref="CONSOLE" />
 	</logger>
 	<logger name="org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory"
-		level="DEBUG" additivity="false">
+		level="INFO" additivity="false">
 		<appender-ref ref="CONSOLE" />
 	</logger>
 	<logger name="org.springframework.boot.web" 
-		level="DEBUG" additivity="false">
+		level="INFO" additivity="false">
 		<appender-ref ref="CONSOLE" />
 	</logger>
 

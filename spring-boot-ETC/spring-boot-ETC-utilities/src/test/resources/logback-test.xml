@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+
+<!-- =========================================================================================================== -->
+<!--                                LOGBACK INDEPENDENT CONFIGURATION                                            -->
+<!-- Name of this file is NOT logback-spring.xml, and, therefore  the logger configures it by itself.            -->
+<!-- There is NO influence from the Spring-Boot, e.g application.properties file is completely ignored           -->
+<!-- =========================================================================================================== -->
+
+<configuration debug="false">
+
+	<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%-4relative ms. [%30thread] %-5level %40logger{0} - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="de.dbo.samples" level="DEBUG" additivity="false">
+		<appender-ref ref="CONSOLE" />
+	</logger>
+
+
+	<root level="WARN" additivity="false">
+		<appender-ref ref="CONSOLE" />
+	</root>
+
+</configuration>
