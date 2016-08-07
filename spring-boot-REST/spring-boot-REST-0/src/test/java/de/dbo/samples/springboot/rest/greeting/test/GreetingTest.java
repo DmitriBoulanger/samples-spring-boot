@@ -86,7 +86,7 @@ public class GreetingTest {
     public void nr00_testGreeting() throws Exception {
 	final TestRestTemplate restTemplate = new TestRestTemplate();
 	final URI uri = toURI(HELLO);
-	log.warn("request " + uri + " ...");
+	log.info("request " + uri + " ...");
 	final ResponseEntity<Map> entity = restTemplate.getForEntity(uri, Map.class);
 	assertThatHttpStatus(HttpStatus.OK, entity);
     }
@@ -102,7 +102,11 @@ public class GreetingTest {
     
     @Test
     public void nr90_testLogging() throws Exception {
-	log.info(LoggingInfo.printAvailableLoggers(130).toString());
+	if (log.isTraceEnabled()) {
+	    log.trace(LoggingInfo.printAvailableLoggers(130,true).toString());
+	}
+	
+	log.info(LoggingInfo.printAppenderAttachments().toString());
     }
     
     // ========================

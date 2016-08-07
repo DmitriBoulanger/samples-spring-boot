@@ -15,30 +15,30 @@
 	<!-- ======================================================================================================= -->
 	
 	<!-- Normal console for INFO, DEBUG and TRACE -->
-	<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+	<appender name="NORMAL_MESSAGES" class="ch.qos.logback.core.ConsoleAppender">
 		<target>System.out</target>
-		<filter class="ch.qos.logback.classic.filter.LevelFilter">
-			<level>ERROR</level>
-			<onMatch>DENY</onMatch>
-			<onMismatch>NEUTRAL</onMismatch>
-		</filter>
-		<filter class="ch.qos.logback.classic.filter.LevelFilter">
-			<level>WARN</level>
-			<onMatch>DENY</onMatch>
-			<onMismatch>NEUTRAL</onMismatch>
-		</filter>
+	    <filter class="ch.qos.logback.classic.filter.LevelFilter">
+      		<level>ERROR</level>
+      		<onMatch>DENY</onMatch>
+      		<onMismatch>NEUTRAL</onMismatch>
+    	</filter>
+    	<filter class="ch.qos.logback.classic.filter.LevelFilter">
+      		<level>WARN</level>
+      		<onMatch>DENY</onMatch>
+      		<onMismatch>NEUTRAL</onMismatch>
+    	</filter>
 		<encoder>
 			<pattern>%-4relative ms. [%30thread] %-5level %40logger{0} - %msg%n</pattern>
 		</encoder>
 	</appender>
 
 	<!-- Error console for WARNINGS and ERRORS -->
-	<appender name="CONSOLE_ERROR" class="ch.qos.logback.core.ConsoleAppender">
+	<appender name="WARNINGS_ERRORS" class="ch.qos.logback.core.ConsoleAppender">
 		<target>System.err</target>
 		<!-- deny all events with a level below WARN, that is INFO, TRACE and DEBUG -->
-		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
-			<level>WARN</level>
-		</filter>
+    	<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+      		<level>WARN</level>
+    	</filter>
 		<encoder>
 			<pattern>%-4relative ms. [%30thread] %-5level %40logger{0} - %msg%n</pattern>
 		</encoder>
@@ -49,24 +49,21 @@
 	<!-- ======================================================================================================= -->
 	
 	<!-- Any warning or error has to be logged -->
-	<root level="WARN" additivity="false">
-		<appender-ref ref="CONSOLE_ERROR" />
+	<root level="WARN">
+		<appender-ref ref="WARNINGS_ERRORS" />
 	</root>
 
 	<logger name="de.dbo.samples" 
 		level="DEBUG">
-		<appender-ref ref="CONSOLE" />
+		<appender-ref ref="NORMAL_MESSAGES" />
 	</logger>
 	<logger name="org.springframework.boot.context.embedded.tomcat" 
+		level="DEBUG" additivity="false">
+		<appender-ref ref="NORMAL_MESSAGES" />
+	</logger>
+	<logger name="org.springframework.boot.web" 
 		level="DEBUG">
-		<appender-ref ref="CONSOLE" />
-	</logger>
-	<logger name="org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory"
-		level="INFO">
-		<appender-ref ref="CONSOLE" />
-	</logger>
-	<logger name="org.springframework.boot.web" level="DEBUG">
-		<appender-ref ref="CONSOLE" />
+		<appender-ref ref="NORMAL_MESSAGES" />
 	</logger>
 
 </configuration>

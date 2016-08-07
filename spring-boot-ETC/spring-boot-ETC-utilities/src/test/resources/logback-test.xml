@@ -16,7 +16,7 @@
 	<contextName>Logback reference configuration</contextName>
 	
 	<!-- Normal console for INFO, DEBUG and TRACE -->
-	<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+	<appender name="NORMAL_MESSAGES" class="ch.qos.logback.core.ConsoleAppender">
 		<target>System.out</target>
 	    <filter class="ch.qos.logback.classic.filter.LevelFilter">
       		<level>ERROR</level>
@@ -33,8 +33,8 @@
 		</encoder>
 	</appender>
 
-	<!-- Error console for WARN and ERRORS -->
-	<appender name="CONSOLE_ERROR" class="ch.qos.logback.core.ConsoleAppender">
+	<!-- Error console for WARNINGS and ERRORS -->
+	<appender name="WARNINGS_ERRORS" class="ch.qos.logback.core.ConsoleAppender">
 		<target>System.err</target>
 		<!-- deny all events with a level below WARN, that is INFO, TRACE and DEBUG -->
     	<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
@@ -50,12 +50,12 @@
 	<!-- ======================================================================================================= -->
 	
 	<!-- Any warning or error has to be logged -->
-	<root level="WARN" additivity="false">
-		<appender-ref ref="CONSOLE_ERROR" />
+	<root level="WARN">
+		<appender-ref ref="WARNINGS_ERRORS" />
 	</root>
 	
-	<logger name="de.dbo.samples" level="INFO" additivity="true">
-		<appender-ref ref="CONSOLE" />
+	<logger name="de.dbo.samples" level="INFO">
+		<appender-ref ref="NORMAL_MESSAGES" />
 	</logger>
 
 
