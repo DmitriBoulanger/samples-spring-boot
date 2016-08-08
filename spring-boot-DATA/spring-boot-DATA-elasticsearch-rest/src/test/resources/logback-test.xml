@@ -57,19 +57,10 @@
 		level="DEBUG">
 		<appender-ref ref="NORMAL_MESSAGES" />
 	</logger>
-	<logger name="org.springframework" 
+	<logger name="org.springframework.data" 
 		level="DEBUG" additivity="false">
 		<appender-ref ref="NORMAL_MESSAGES" />
 	</logger>
-	
-	<logger name="org.springframework.boot.autoconfigure.data" 
-		level="DEBUG" additivity="false">
-		<appender-ref ref="NORMAL_MESSAGES" />
-	</logger>
-	 
-	
-	
-	 
 	
 
 </configuration>

@@ -11,7 +11,7 @@
 
 	<artifactId>spring-boot-ETC-utilities</artifactId>
 	<packaging>jar</packaging>
-	<name>spring-boot-ETC-utilities</name>
+	<name>Samples Spring-Boot ETC - utilities</name>
 
 	<description>
 Utilities for Spring-Boot.

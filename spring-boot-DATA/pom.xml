@@ -23,6 +23,7 @@ Reactor for Spring-Boot DATA-samples.
 
 	<modules>
 		<module>spring-boot-DATA-elasticsearch</module>
+		<module>spring-boot-DATA-elasticsearch-rest</module>
 	</modules>
 	
 	<dependencies>
