@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+
+<!-- =========================================================================================================== -->
+<!--                                LOGBACK INDEPENDENT CONFIGURATION                                            -->
+<!-- Name of this file is NOT logback-spring.xml, and, therefore the logger configures it by itself.             -->
+<!-- =========================================================================================================== -->
+
+<configuration debug="false">
+
+	<contextName>Logback Elasticserach Configuration</contextName>
+
+	<!-- ======================================================================================================= -->
+	<!--                                   STANDARD APPENDERS                                                    -->
+	<!-- ======================================================================================================= -->
+	
+	<!-- Normal console for INFO, DEBUG and TRACE -->
+	<appender name="NORMAL_MESSAGES" class="ch.qos.logback.core.ConsoleAppender">
+		<target>System.out</target>
+	    <filter class="ch.qos.logback.classic.filter.LevelFilter">
+      		<level>ERROR</level>
+      		<onMatch>DENY</onMatch>
+      		<onMismatch>NEUTRAL</onMismatch>
+    	</filter>
+    	<filter class="ch.qos.logback.classic.filter.LevelFilter">
+      		<level>WARN</level>
+      		<onMatch>DENY</onMatch>
+      		<onMismatch>NEUTRAL</onMismatch>
+    	</filter>
+		<encoder>
+			<pattern>%-4relative ms. [%30thread] %-5level %40logger{0} - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<!-- Error console for WARNINGS and ERRORS -->
+	<appender name="WARNINGS_ERRORS" class="ch.qos.logback.core.ConsoleAppender">
+		<target>System.err</target>
+		<!-- deny all events with a level below WARN, that is INFO, TRACE and DEBUG -->
+    	<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+      		<level>WARN</level>
+    	</filter>
+		<encoder>
+			<pattern>%-4relative ms. [%30thread] %-5level %40logger{0} - %msg%n</pattern>
+		</encoder>
+	</appender>
+	
+	<!-- ======================================================================================================= -->
+	<!--                                  LOGGERS                                                                -->
+	<!-- ======================================================================================================= -->
+	
+	<!-- Any warning or error has to be logged -->
+	<root level="WARN">
+		<appender-ref ref="WARNINGS_ERRORS" />
+	</root>
+
+	<logger name="de.dbo.samples" 
+		level="DEBUG">
+		<appender-ref ref="NORMAL_MESSAGES" />
+	</logger>
+	<logger name="org.springframework.data" 
+		level="DEBUG" additivity="false">
+		<appender-ref ref="NORMAL_MESSAGES" />
+	</logger>
+	
+
+</configuration>
