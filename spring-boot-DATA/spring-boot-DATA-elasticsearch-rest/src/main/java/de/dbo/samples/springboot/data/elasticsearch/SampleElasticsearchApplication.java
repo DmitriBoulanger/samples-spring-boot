@@ -21,6 +21,9 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import de.dbo.samples.springboot.data.elasticsearch.domain.Customer;
+import de.dbo.samples.springboot.data.elasticsearch.domain.CustomerRepository;
+
 @SpringBootApplication
 public class SampleElasticsearchApplication implements CommandLineRunner {
 

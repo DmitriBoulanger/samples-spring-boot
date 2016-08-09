@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package de.dbo.samples.springboot.data.elasticsearch;
+package de.dbo.samples.springboot.data.elasticsearch.domain;
 
 import java.util.List;
 
