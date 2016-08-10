@@ -1,17 +1,17 @@
-package de.dbo.samples.springboot.data.elasticsearch.rest;
+package de.dbo.samples.springboot.data.elasticsearch.service;
 
 import java.util.concurrent.atomic.AtomicLong;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import de.dbo.samples.springboot.data.elasticsearch.domain.CustomerRepository;
 
-@Controller
+@RestController
 @RequestMapping("/hello-world")
 public class GreetingController {
 

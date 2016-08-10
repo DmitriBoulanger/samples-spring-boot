@@ -3,17 +3,15 @@
 
 <!-- =========================================================================================================== -->
 <!-- LOGBACK INDEPENDENT CONFIGURATION                                                                           -->
-<!-- Name of this file is NOT logback-spring.xml, and, therefore the logger configures it by itself.             -->
-<!-- There is NO influence from the Spring-Boot, e.g application.properties file is completely ignored           -->
 <!-- =========================================================================================================== -->
 
 <configuration debug="false">
 
-	<contextName> Logback Test-Configuration</contextName>
-
 	<!-- ======================================================================================================= -->
 	<!-- STANDARD APPENDERS                                                                                      -->
 	<!-- ======================================================================================================= -->
+
+	<contextName>Greeting Logback-Configuration</contextName>
 
 	<!-- Normal console for INFO, DEBUG and TRACE -->
 	<appender name="NORMAL_MESSAGES" class="ch.qos.logback.core.ConsoleAppender">
@@ -73,12 +71,31 @@
 		<appender-ref ref="WARNINGS_ERRORS" />
 	</root>
 
-	<logger name="de.dbo.samples.test" level="DEBUG">
+	<logger name="de.ityx.response.services.rcase" level="DEBUG">
+		<appender-ref ref="NORMAL_MESSAGES" />
+	</logger>
+
+	<logger name="org.springframework.data" 
+		level="DEBUG" additivity="false">
 		<appender-ref ref="NORMAL_MESSAGES" />
 	</logger>
 	
-	<logger name="de.dbo.samples" level="DEBUG">
+	 <logger name="org.springframework.boot.context.embedded.tomcat" 
+		level="DEBUG" additivity="false">
 		<appender-ref ref="NORMAL_MESSAGES" />
+	</logger>
+	
+	<logger name="org.springframework.boot.web" 
+		level="DEBUG">
+		<appender-ref ref="NORMAL_MESSAGES" />
+	</logger>
+     
+	<!-- =================================================================================================== -->
+	<!--                                               SPECIAL LOGGERS                                       -->
+	<!-- =================================================================================================== -->
+	<logger name="org.springframework.beans.factory.support" level="INFO"
+		additivity="false">
+		<appender-ref ref="NORMAL_MESSAGES_SPRING" />
 	</logger>
 
 </configuration>
