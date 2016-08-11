@@ -24,7 +24,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 public class GreetingTestApplication {
 
     public static void main(String[] args) throws Exception {
-         final ConfigurableApplicationContext ctx =  SpringApplication.run(GreetingTestConfiguration.class, args);
+         final ConfigurableApplicationContext ctx =  SpringApplication.run(GreetingTestApplication.class, args);
 //         ctx.close();
     }
 

@@ -58,6 +58,11 @@
 			<pattern>${STANDARD_PATTERN}</pattern>
 		</encoder>
 	</appender>
+	
+	<!-- Any warning or error has to be logged -->
+	<root level="WARN">
+		<appender-ref ref="WARNINGS_ERRORS" />
+	</root>
 
 </included>
 

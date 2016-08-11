@@ -8,11 +8,6 @@
 <configuration debug="false">
 
 	<contextName>Greeting-Elasticsearch Test Logback-Configuration</contextName>
-
-	<!-- ======================================================================================================= -->
-	<!--                                   APPENDERS                                                             -->
-	<!-- ======================================================================================================= -->
-	
 	<include resource="de/dbo/samples/springboot/utilities/logging/logback-appenders.xml"/>
 
 	<!-- ======================================================================================================= -->
@@ -24,12 +19,12 @@
 		<appender-ref ref="WARNINGS_ERRORS" />
 	</root>
 
-	<logger name="de.dbo.samples" level="DEBUG" additivity="false">
+	<logger name="de.dbo.samples" level="DEBUG">
 		<appender-ref ref="NORMAL_MESSAGES" />
 	</logger>
 	
-	<logger name="org.springframework.data.elasticsearch" 
-		level="DEBUG">
+	<logger name="org.springframework" 
+		level="INFO">
 		<appender-ref ref="NORMAL_MESSAGES" />
 	</logger>
 

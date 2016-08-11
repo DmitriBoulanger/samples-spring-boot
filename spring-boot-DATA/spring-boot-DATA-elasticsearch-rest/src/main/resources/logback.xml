@@ -1,24 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE xml>
 
-<!-- =========================================================================================================== -->
-<!--              LOGBACK SPRING-BOOT CONFIGURATION                                                              -->
-<!-- =========================================================================================================== -->
-
 <configuration debug="false">
 
 	<contextName>Greeting-Elasticsearch Logback-Configuration</contextName>
-
 	<include resource="de/dbo/samples/springboot/utilities/logging/logback-appenders.xml"/>
 
 	<!-- ======================================================================================================= -->
 	<!--                            LOGGERS                                                                      -->
 	<!-- ======================================================================================================= -->
 
-	<!-- Any warning or error has to be logged -->
-	<root level="WARN">
-		<appender-ref ref="WARNINGS_ERRORS" />
-	</root>
 
 	<logger name="de.dbo.samples.springboot.data.elasticsearch" 
 		level="INFO" additivity="false">

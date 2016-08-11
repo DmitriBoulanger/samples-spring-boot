@@ -14,13 +14,13 @@ import org.springframework.data.repository.init.Jackson2RepositoryPopulatorFacto
 public class GreetingTestConfiguration {
     private static final Logger log = LoggerFactory.getLogger(GreetingTestConfiguration.class);
 
-    public GreetingTestConfiguration() {
-	log.error("created - TEST", new Exception("test error with exception just to see it"));
-	log.trace(LoggingInfo.printAvailableLoggers(120).toString());
-    }
 
     @Bean
     public Jackson2RepositoryPopulatorFactoryBean repositoryPopulator() {
+	
+	log.error("created - TEST", new Exception("test error with exception just to see it"));
+	log.trace(LoggingInfo.printAvailableLoggers(120).toString());
+	
 	Jackson2RepositoryPopulatorFactoryBean factory = new Jackson2RepositoryPopulatorFactoryBean();
 	factory.setResources(new Resource[]{new ClassPathResource("data/customers.json")});
 	return factory;
