@@ -3,48 +3,18 @@
 
 <!-- =========================================================================================================== -->
 <!--                                LOGBACK INDEPENDENT CONFIGURATION                                            -->
-<!-- Name of this file is NOT logback-spring.xml, and, therefore  the logger configures it by itself.            -->
-<!-- There is NO influence from the Spring-Boot, e.g application.properties file is completely ignored           -->
 <!-- =========================================================================================================== -->
 
 <configuration debug="false">
+
+	<contextName>Logback test configuration</contextName>
 
 	<!-- ======================================================================================================= -->
 	<!--                                   STANDARD APPENDERS                                                    -->
 	<!-- ======================================================================================================= -->
 	
-	<contextName>Logback reference configuration</contextName>
-	
-	<!-- Normal console for INFO, DEBUG and TRACE -->
-	<appender name="NORMAL_MESSAGES" class="ch.qos.logback.core.ConsoleAppender">
-		<target>System.out</target>
-	    <filter class="ch.qos.logback.classic.filter.LevelFilter">
-      		<level>ERROR</level>
-      		<onMatch>DENY</onMatch>
-      		<onMismatch>NEUTRAL</onMismatch>
-    	</filter>
-    	<filter class="ch.qos.logback.classic.filter.LevelFilter">
-      		<level>WARN</level>
-      		<onMatch>DENY</onMatch>
-      		<onMismatch>NEUTRAL</onMismatch>
-    	</filter>
-		<encoder>
-			<pattern>%-4relative ms. [%30thread] %-5level %40logger{0} - %msg%n</pattern>
-		</encoder>
-	</appender>
-
-	<!-- Error console for WARNINGS and ERRORS -->
-	<appender name="WARNINGS_ERRORS" class="ch.qos.logback.core.ConsoleAppender">
-		<target>System.err</target>
-		<!-- deny all events with a level below WARN, that is INFO, TRACE and DEBUG -->
-    	<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
-      		<level>WARN</level>
-    	</filter>
-		<encoder>
-			<pattern>%-4relative ms. [%30thread] %-5level %40logger{0} - %msg%n</pattern>
-		</encoder>
-	</appender>
-	
+	<include resource="de/dbo/samples/springboot/utilities/logging/logback-standard-appenders.xml"/>
+ 
 	<!-- ======================================================================================================= -->
 	<!--                                  LOGGERS                                                                -->
 	<!-- ======================================================================================================= -->

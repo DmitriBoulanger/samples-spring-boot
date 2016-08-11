@@ -1,4 +1,4 @@
-package de.dbo.samples.test.springboot.data.elasticsearch;
+package de.dbo.samples.springboot.data.elasticsearch;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -24,8 +24,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import de.dbo.samples.springboot.utilities.logging.LoggingInfo;
-
 /**
  * Basic integration tests for service demo application.
  *
@@ -37,7 +35,7 @@ import de.dbo.samples.springboot.utilities.logging.LoggingInfo;
  */
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT, classes={GreetingTestApplication.class})
 @DirtiesContext
 //
 //@FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -45,33 +43,11 @@ import de.dbo.samples.springboot.utilities.logging.LoggingInfo;
 public class GreetingTest {
     private static final Logger log = LoggerFactory.getLogger(GreetingTest.class);
 
-    //    private static boolean      PRINT_DONE = false;
-    //
-    //    @Autowired
-    //    private ContextProvider     greetingApplicationContextProvider;
-
     @LocalServerPort
     private int                 port;
 
-    //    @Value("${management.port}") /* from application.properties */
-    //TODO how-to use tomcat management port     @LocalServerPort
-    //    private int                 mgt;
-
-    //    @Value("${management.address}") /* from application.properties */
-    //    private String              localhost;
-
-    //    @PostConstruct
-    //    public void init() {
-    //        //        mgt = port;
-    //        //        if (!PRINT_DONE) {
-    //        //            printPorts("PostConstruct");
-    //        //            log.trace(greetingApplicationContextProvider.printBeans().toString());
-    //        //            PRINT_DONE = true;
-    //        //        }
-    //    }
-
     @Test
-    public void nr00_testGreeting() throws Exception {
+    public void test00_Greeting() throws Exception {
 
         final TestRestTemplate restTemplate = new TestRestTemplate();
         final URI uri = toURI(HELLO);
@@ -81,21 +57,12 @@ public class GreetingTest {
     }
 
     @Test
-    public void nr10_testAdmin() throws Exception {
+    public void test10_Admin() throws Exception {
         final TestRestTemplate restTemplate = new TestRestTemplate();
         final URI uri = toURI(INFO);
         log.info("request " + uri + " ...");
         final ResponseEntity<Map> entity = restTemplate.getForEntity(uri, Map.class);
         assertThatHttpStatus(HttpStatus.OK, entity);
-    }
-
-    @Test
-    public void nr90_testLogging() throws Exception {
-        if (log.isTraceEnabled()) {
-            log.trace(LoggingInfo.printAvailableLoggers(130, true).toString());
-        }
-
-        log.info(LoggingInfo.printAppenderAttachments().toString());
     }
 
     // ========================
@@ -138,10 +105,5 @@ public class GreetingTest {
     //   HELPERS
     // =======================
 
-    private void printPorts(final String comment) {
-        final StringBuilder sb = new StringBuilder("Server ports in " + comment + ":");
-        sb.append("\n\t - port = " + port);
-        //        sb.append("\n\t - mgt  = " + mgt);
-        log.info(sb.toString());
-    }
+
 }

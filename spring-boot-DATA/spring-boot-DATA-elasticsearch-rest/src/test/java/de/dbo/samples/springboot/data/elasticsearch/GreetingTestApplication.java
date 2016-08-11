@@ -14,16 +14,18 @@
  * limitations under the License.
  */
 
-package de.dbo.samples.test.springboot.data.elasticsearch;
+package de.dbo.samples.springboot.data.elasticsearch;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
 
 @SpringBootApplication
 public class GreetingTestApplication {
 
     public static void main(String[] args) throws Exception {
-        SpringApplication.run(GreetingTestApplication.class, args).close();
+         final ConfigurableApplicationContext ctx =  SpringApplication.run(GreetingTestConfiguration.class, args);
+//         ctx.close();
     }
 
 }

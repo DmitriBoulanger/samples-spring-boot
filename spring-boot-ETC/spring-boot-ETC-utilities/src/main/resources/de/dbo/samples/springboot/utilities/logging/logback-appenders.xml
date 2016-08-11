@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+
+<included>
+ 
+	<!-- ======================================================================================================= -->
+	<!-- STANDARD APPENDERS                                                                                      -->
+	<!-- ======================================================================================================= -->
+	
+	<property name="STANDARD_PATTERN" value="%8relative ms. [%26thread] %-5level %50logger{0} - %msg%n" />
+
+	<!-- Normal console for INFO, DEBUG and TRACE -->
+	<appender name="NORMAL_MESSAGES" class="ch.qos.logback.core.ConsoleAppender">
+		<target>System.out</target>
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>ERROR</level>
+			<onMatch>DENY</onMatch>
+			<onMismatch>NEUTRAL</onMismatch>
+		</filter>
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>WARN</level>
+			<onMatch>DENY</onMatch>
+			<onMismatch>NEUTRAL</onMismatch>
+		</filter>
+		<encoder>
+			<pattern>${STANDARD_PATTERN}</pattern>
+		</encoder>
+	</appender>
+
+	<!-- Error console for WARNINGS and ERRORS -->
+	<appender name="WARNINGS_ERRORS" class="ch.qos.logback.core.ConsoleAppender">
+		<target>System.err</target>
+		<!-- deny all events with a level below WARN, that is INFO, TRACE and DEBUG -->
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>WARN</level>
+		</filter>
+		<encoder>
+			<pattern>${STANDARD_PATTERN}</pattern>
+		</encoder>
+	</appender>
+	
+	<!-- ======================================================================================================= -->
+	<!--                              SPECIAL APPENDERS                                                          -->
+	<!-- ======================================================================================================= -->
+
+	<!-- Spring messages with bean-creation confirmation  -->
+	<appender name="NORMAL_MESSAGES_SPRING" class="ch.qos.logback.core.ConsoleAppender">
+		<filter class="ch.qos.logback.core.filter.EvaluatorFilter">
+			<evaluator>
+				<expression>
+					return message.contains("Finished creating instance of bean");
+				</expression>
+			</evaluator>
+			<OnMismatch>DENY</OnMismatch>
+			<OnMatch>NEUTRAL</OnMatch>
+		</filter>
+		<encoder>
+			<pattern>${STANDARD_PATTERN}</pattern>
+		</encoder>
+	</appender>
+
+</included>
+
+	

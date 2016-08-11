@@ -25,5 +25,7 @@ public interface CustomerRepository extends ElasticsearchRepository<Customer, St
 	public Customer findByFirstName(String firstName);
 
 	public List<Customer> findByLastName(String lastName);
+	
+	
 
 }
