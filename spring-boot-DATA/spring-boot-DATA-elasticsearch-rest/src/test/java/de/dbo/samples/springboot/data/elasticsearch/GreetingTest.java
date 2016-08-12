@@ -3,8 +3,6 @@ package de.dbo.samples.springboot.data.elasticsearch;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
-import de.dbo.samples.springboot.utilities.logging.LoggingInfo;
-
 //
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -37,7 +35,7 @@ import org.springframework.test.context.junit4.SpringRunner;
  */
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT, classes = {GreetingTestApplication.class, GreetingTestConfiguration.class})
 @DirtiesContext
 //
 //@FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -47,7 +45,7 @@ public class GreetingTest {
 
     @LocalServerPort
     private int                 port;
-    
+
     @Test
     public void test00_Greeting() throws Exception {
 
@@ -106,6 +104,5 @@ public class GreetingTest {
     // =======================
     //   HELPERS
     // =======================
-
 
 }
