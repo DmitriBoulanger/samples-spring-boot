@@ -42,10 +42,6 @@ Elasticserach REST data-sample
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
-		<dependency>
-			<groupId>org.codehaus.janino</groupId>
-			<artifactId>janino</artifactId>
-		</dependency>
 
 		<!-- ========================================================================================= -->
 		<!-- ETC -->

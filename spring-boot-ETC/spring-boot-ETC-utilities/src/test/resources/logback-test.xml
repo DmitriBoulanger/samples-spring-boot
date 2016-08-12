@@ -8,12 +8,7 @@
 <configuration debug="false">
 
 	<contextName>Logback test configuration</contextName>
-
-	<!-- ======================================================================================================= -->
-	<!--                                   STANDARD APPENDERS                                                    -->
-	<!-- ======================================================================================================= -->
-	
-	<include resource="de/dbo/samples/springboot/utilities/logging/logback-standard-appenders.xml"/>
+	<include resource="de/dbo/samples/springboot/utilities/logging/logback-appenders.xml"/>
  
 	<!-- ======================================================================================================= -->
 	<!--                                  LOGGERS                                                                -->

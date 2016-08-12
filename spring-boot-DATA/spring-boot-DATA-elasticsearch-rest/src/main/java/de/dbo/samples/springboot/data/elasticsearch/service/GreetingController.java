@@ -28,15 +28,21 @@ public class GreetingController {
 
     @RequestMapping(method = RequestMethod.GET)
     public @ResponseBody Greeting sayHello(@RequestParam(value = "name", required = false, defaultValue = "Stranger") String name) {
-	
-	 final List<Customer> customers = customerRepository.findByLastName("Smith");
-	 final StringBuilder sb = new StringBuilder("Repository count " + customerRepository.count() + ": ");
-	 for (Customer customer:customers) {
-	    sb.append("\n\t - ID=" + customer.getId() + " " + customer.getFirstName());
-	 }
-	 log.info(sb.toString());
-      
-         return new Greeting(counter.incrementAndGet(), String.format(template, name));
+
+	final long repositoryCount = customerRepository.count() ;
+	if (0==repositoryCount) {
+	    log.info("No data in the customer repository: Elastic search repository was not loaded?");
+	} 
+	else {
+	    final List<Customer> customers = customerRepository.findByLastName("Smith");
+	    final StringBuilder sb = new StringBuilder("Repository count " +repositoryCount + ": ");
+	    for (Customer customer:customers) {
+		sb.append("\n\t - ID=" + customer.getId() + " " + customer.getFirstName());
+	    }
+	    log.info(sb.toString());
+	}
+
+	return new Greeting(counter.incrementAndGet(), String.format(template, name));
     }
 
 }
