@@ -23,6 +23,7 @@ Reactor for Spring-Boot ETC-samples.
 
 	<modules>
 		<module>spring-boot-ETC-logback</module>
+		<module>spring-boot-ETC-logback-additivity</module>
 		<module>spring-boot-ETC-utilities</module>
 	</modules>
 	

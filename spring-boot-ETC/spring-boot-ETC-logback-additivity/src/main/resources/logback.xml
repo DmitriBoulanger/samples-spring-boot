@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+
+<configuration debug="false">
+
+	<property name="LOG_HOME" value="target/logs/" />
+	<property name="LOG_PATTERN" value="%-5level %logger{36} - %msg%n" />
+	
+	<appender name="FILE1" class="ch.qos.logback.core.FileAppender">
+		<file>${LOG_HOME}/log1.log</file>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<Pattern>${LOG_PATTERN}</Pattern>
+		</encoder>		
+	</appender>
+	
+	<appender name="FILE2" class="ch.qos.logback.core.FileAppender">
+		<file>${LOG_HOME}/log2.log</file>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<Pattern>${LOG_PATTERN}</Pattern>
+		</encoder>		
+	</appender>
+	
+	<appender name="FILE3" class="ch.qos.logback.core.FileAppender">
+		<file>${LOG_HOME}/log3.log</file>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<Pattern>${LOG_PATTERN}</Pattern>
+		</encoder>		
+	</appender>
+	
+	<appender name="FILE4" class="ch.qos.logback.core.FileAppender">
+		<file>${LOG_HOME}/log4.log</file>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<Pattern>${LOG_PATTERN}</Pattern>>
+		</encoder>		
+	</appender>
+	
+	<appender name="FILE5" class="ch.qos.logback.core.FileAppender">
+		<file>${LOG_HOME}/log5.log</file>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<Pattern>${LOG_PATTERN}</Pattern>
+		</encoder>		
+	</appender>
+
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<Pattern>${LOG_PATTERN}</Pattern>
+		</encoder>		
+ 	</appender>
+ 	  	
+	<root level="INFO">
+		<appender-ref ref="FILE1" />
+		<appender-ref ref="STDOUT" />
+  	</root>
+  	  		
+	<logger name="employee.director" level="INFO">
+		<appender-ref ref="FILE2" />
+	</logger>
+	
+	<logger name="employee.director.manager" level="INFO" additivity="false">
+		<appender-ref ref="FILE3" />
+	</logger>
+	
+	<logger name="employee.director.manager.engineer" level="INFO">
+		<appender-ref ref="FILE4" />
+	</logger>
+	
+	<logger name="employee.director.manager.engineer.intern" level="INFO" additivity="false">
+		<appender-ref ref="FILE5" />
+	</logger>
+
+
+</configuration>

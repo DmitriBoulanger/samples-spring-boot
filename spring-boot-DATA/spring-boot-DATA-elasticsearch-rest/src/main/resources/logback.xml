@@ -15,11 +15,6 @@
 		<appender-ref ref="NORMAL_MESSAGES" />
 	</logger>
 	
-<!-- 	<logger name="org.springframework"  -->
-<!-- 		level="INFO"> -->
-<!-- 		<appender-ref ref="NORMAL_MESSAGES" /> -->
-<!-- 	</logger> -->
-	
 	<logger name="org.springframework.data.repository.init" 
 		level="DEBUG" additivity="false">
 		<appender-ref ref="NORMAL_MESSAGES" />
