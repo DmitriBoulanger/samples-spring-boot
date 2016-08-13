@@ -31,7 +31,6 @@ public class GreetingController {
 	log.error("ok");
     }
     
-
     @RequestMapping(method = RequestMethod.GET)
     public @ResponseBody Greeting sayHello(@RequestParam(value = "name", required = false, defaultValue = "Stranger") String name) {
 

@@ -19,7 +19,8 @@
 		<appender-ref ref="WARNINGS_ERRORS" />
 	</root>
 
-	<logger name="de.dbo.samples" level="DEBUG">
+	<logger name="de.dbo.samples" 
+		level="DEBUG" additivity="true">
 		<appender-ref ref="NORMAL_MESSAGES" />
 	</logger>
 	
@@ -34,7 +35,7 @@
 	</logger>
 
 	 <logger name="org.springframework.boot.context.embedded.tomcat" 
-		level="INFO" additivity="false">
+		level="INFO" additivity="true">
 		<appender-ref ref="NORMAL_MESSAGES" />
 	</logger>
 	
