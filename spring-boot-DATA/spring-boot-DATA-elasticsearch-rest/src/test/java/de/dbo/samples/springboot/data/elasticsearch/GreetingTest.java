@@ -8,8 +8,10 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Map;
 
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 //
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,12 +35,12 @@ import org.springframework.test.context.junit4.SpringRunner;
  *           only incidentally for computers to execute
  *
  */
-
+//
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT, classes = {GreetingTestApplication.class, GreetingTestConfiguration.class})
 @DirtiesContext
 //
-//@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @SuppressWarnings("rawtypes")
 public class GreetingTest {
     private static final Logger log = LoggerFactory.getLogger(GreetingTest.class);

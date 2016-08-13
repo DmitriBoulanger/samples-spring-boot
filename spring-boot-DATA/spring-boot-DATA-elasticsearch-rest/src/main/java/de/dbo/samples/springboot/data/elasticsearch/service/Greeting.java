@@ -12,7 +12,7 @@ public class Greeting {
     public Greeting(long id, String content) {
         this.id = id;
         this.content = content;
-        log.info("created. ID=" + id);
+        log.info("created. ID=" + id+ ": " + content);
     }
 
     public long getId() {

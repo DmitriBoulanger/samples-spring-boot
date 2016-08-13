@@ -36,7 +36,7 @@
 	</logger>
 	
 	<logger name="de.dbo.samples.springboot.data.elasticsearch" 
-		level="INFO" additivity="false">
+		level="DEBUG" additivity="false">
 		<appender-ref ref="NORMAL_MESSAGES" />
 	</logger>
      

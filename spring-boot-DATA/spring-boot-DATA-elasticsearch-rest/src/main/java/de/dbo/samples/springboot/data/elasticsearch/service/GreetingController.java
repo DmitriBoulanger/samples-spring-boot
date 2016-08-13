@@ -25,13 +25,20 @@ public class GreetingController {
 
     @Autowired
     CustomerRepository          customerRepository;
+    
+    public GreetingController() {
+	log.info("Greeting service-controller created");
+	log.error("ok");
+    }
+    
 
     @RequestMapping(method = RequestMethod.GET)
     public @ResponseBody Greeting sayHello(@RequestParam(value = "name", required = false, defaultValue = "Stranger") String name) {
 
 	final long repositoryCount = customerRepository.count() ;
+	log.info("Repository count : " + repositoryCount);
 	if (0==repositoryCount) {
-	    log.info("No data in the customer repository: Elastic search repository was not loaded?");
+	    log.error("No data in the customer repository: Elastic search repository was not loaded?");
 	} 
 	else {
 	    final List<Customer> customers = customerRepository.findByLastName("Smith");
@@ -41,8 +48,13 @@ public class GreetingController {
 	    }
 	    log.info(sb.toString());
 	}
+	
+	if (null!=name && name.equals("XXX")) {
+	    log.error("Bad name:", new Exception("Bad-name exception just to see it"));
+	}
 
-	return new Greeting(counter.incrementAndGet(), String.format(template, name));
+	final Greeting greeting =  new Greeting(counter.incrementAndGet(), String.format(template, name));
+	return greeting;
     }
 
 }
