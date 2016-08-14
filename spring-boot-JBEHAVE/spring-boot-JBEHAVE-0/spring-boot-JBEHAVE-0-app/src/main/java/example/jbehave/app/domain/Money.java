@@ -24,4 +24,8 @@ public class Money {
     public String getCurrency() {
         return currency;
     }
+    
+    public String toString() {
+	return amount + " "  + currency;
+    }
 }

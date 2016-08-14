@@ -2,6 +2,8 @@ package example.jbehave.tests.steps;
 
 import example.jbehave.app.domain.*;
 import org.jbehave.core.annotations.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -10,6 +12,7 @@ import static org.junit.Assert.assertEquals;
 
 @Steps
 public class ShoppingCartSteps {
+    private static final Logger log = LoggerFactory.getLogger(ShoppingCartSteps.class);
 
     @Autowired
     private ShoppingCartService shoppingCartService;
@@ -19,6 +22,7 @@ public class ShoppingCartSteps {
 
     @Given("empty shopping cart")
     public void emptyShoppingCart() {
+	log.info("emptyShoppingCart ...");
         shoppingCartService.createEmptyShoppingCart();
     }
 
@@ -27,17 +31,20 @@ public class ShoppingCartSteps {
         for (ShoppingCartRow row : rows) {
             Product product = productRepository.findByName(row.getProductName());
             shoppingCartService.addProductToShoppingCart(product.getSku(), row.getQuantity());
+            log.info("added product " + product.getName());
         }
     }
 
     @Then("shopping cart is empty")
     public void isEmpty() {
+	log.info("isEmpty ...");
         ShoppingCart shoppingCart = shoppingCartService.getShoppingCart();
         assertEquals(0, shoppingCart.numberOfItems());
     }
 
     @Then("the number of products in shopping cart is $numberOfItems")
     public void numberOfItems(int numberOfItems) {
+	log.info("numberOfItems " +numberOfItems+ "  ...");
         ShoppingCart shoppingCart = shoppingCartService.getShoppingCart();
         assertEquals(numberOfItems, shoppingCart.numberOfItems());
     }
@@ -45,6 +52,7 @@ public class ShoppingCartSteps {
     @Then("total price is $price")
     @Pending
     public void totalPrice(Money price) {
+	log.info("totalPrice " + price + "  ...");
         // TODO: implement missing functionality and enable step
     }
 
