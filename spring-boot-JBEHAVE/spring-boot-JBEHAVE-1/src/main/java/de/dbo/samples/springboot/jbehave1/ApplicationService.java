@@ -1,6 +1,11 @@
 package de.dbo.samples.springboot.jbehave1;
 
-import org.springframework.stereotype.Service;
+import de.dbo.samples.springboot.jbehave1.steps.TestSteps;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
+//import org.springframework.stereotype.Service;
 
 /**
  * 
@@ -10,8 +15,13 @@ import org.springframework.stereotype.Service;
  *           only incidentally for computers to execute 
  *
  */
-@Service
+@Component
 public class ApplicationService {
+    private static final Logger log = LoggerFactory.getLogger(ApplicationService.class);
+    
+    public ApplicationService() {
+	log.info("created");
+    }
 
     public int multiply(int x, int y) {
         return x * y;

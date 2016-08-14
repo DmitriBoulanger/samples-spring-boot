@@ -6,6 +6,8 @@ import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Named;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
@@ -20,6 +22,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class TestSteps {
+    private static final Logger log = LoggerFactory.getLogger(TestSteps.class);
 
     @Autowired
     private ApplicationContext applicationContext;
@@ -29,17 +32,20 @@ public class TestSteps {
 
     @Given("a variable x with value $value")
     public void givenXValue(@Named("value") int value) {
+	log.info("givenXValue "  + value + " ...");
         testSession = applicationContext.getBean(IntegrationTestSession.class);
         testSession.setX(value);
     }
 
     @When("I multiply x by $value")
     public void whenImultiplyXBy(@Named("value") int value) {
+	log.info("whenImultiplyXBy "  + value + " ...");
         result = testSession.multiply(value);
     }
 
     @Then("result should equal $value")
     public void thenXshouldBe(@Named("value") int value) {
+	log.info("thenXshouldBe "  + value + " ...");
         if (value != result)
             throw new RuntimeException("result is " + result + ", but should be " + value);
     }
