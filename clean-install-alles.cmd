@@ -31,5 +31,5 @@ echo Runnig Maven clean install ...
 pause
 echo.
 
-mvn clean install
+mvn -DskipTests=true clean install
 

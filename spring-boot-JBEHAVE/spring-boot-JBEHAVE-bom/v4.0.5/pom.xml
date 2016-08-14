@@ -7,11 +7,11 @@
 	<version>0.0.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
-	<name>Samples Spring-Boot JBEHAVE dependencies 3.9.2</name>
+	<name>Samples Spring-Boot JBEHAVE dependencies 4.0.5</name>
 
 	<properties>
-		<jbehave.version>3.9.2</jbehave.version>
-		<jbehave-site-resources.version>3.1.1</jbehave-site-resources.version>
+		<jbehave.version>4.0.5</jbehave.version>
+		<jbehave-site-resources.version>3.3</jbehave-site-resources.version>
 
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
