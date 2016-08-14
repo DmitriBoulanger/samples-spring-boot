@@ -47,6 +47,12 @@
 				<type>zip</type>
 			</dependency>
 
+			<dependency>
+				<groupId>org.jbehave</groupId>
+				<artifactId>jbehave-gherkin</artifactId>
+				<version>${jbehave.version}</version>
+			</dependency>
+
 		</dependencies>
 	</dependencyManagement>
 </project>
