@@ -1,6 +1,7 @@
-package com.github.reeda.springbootjbehave.steps;
+package de.dbo.samples.springboot.jbehave1.steps;
 
-import com.github.reeda.springbootjbehave.IntegrationTestSession;
+import de.dbo.samples.springboot.jbehave1.IntegrationTestSession;
+
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Named;
 import org.jbehave.core.annotations.Then;
@@ -10,7 +11,12 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 /**
- * Created by andrew on 11/18/15.
+ * 
+ * @author Dmitri Boulanger, Hombach
+ *
+ * D. Knuth: Programs are meant to be read by humans and 
+ *           only incidentally for computers to execute 
+ *
  */
 @Component
 public class TestSteps {

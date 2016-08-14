@@ -1,4 +1,4 @@
-package com.github.reeda.springbootjbehave;
+package de.dbo.samples.springboot.jbehave1;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;

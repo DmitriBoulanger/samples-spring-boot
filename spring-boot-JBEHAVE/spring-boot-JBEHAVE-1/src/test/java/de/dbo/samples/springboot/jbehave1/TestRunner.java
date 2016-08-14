@@ -1,4 +1,4 @@
-package com.github.reeda.springbootjbehave;
+package de.dbo.samples.springboot.jbehave1;
 
 import org.jbehave.core.configuration.MostUsefulConfiguration;
 import org.jbehave.core.failures.FailingUponPendingStep;
@@ -17,17 +17,26 @@ import org.jbehave.core.steps.SilentStepMonitor;
 import org.jbehave.core.steps.spring.SpringStepsFactory;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import de.dbo.samples.springboot.jbehave1.ApplicationToTest;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
 
 /**
- * Created by andrew on 11/18/15.
+ * Application has a lot of moving parts so it made sense to wrap some of the operations in an integration test session.
+ * 
+ * 
+ * @author Dmitri Boulanger, Hombach
+ *
+ * D. Knuth: Programs are meant to be read by humans and 
+ *           only incidentally for computers to execute 
+ *
  */
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = { ApplicationToTest.class})
 public class TestRunner extends JUnitStories {
