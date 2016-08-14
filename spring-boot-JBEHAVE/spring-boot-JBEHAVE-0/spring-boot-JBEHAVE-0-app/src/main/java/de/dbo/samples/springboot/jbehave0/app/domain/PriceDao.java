@@ -1,4 +1,4 @@
-package example.jbehave.app.domain;
+package de.dbo.samples.springboot.jbehave0.app.domain;
 
 public interface PriceDao {
 

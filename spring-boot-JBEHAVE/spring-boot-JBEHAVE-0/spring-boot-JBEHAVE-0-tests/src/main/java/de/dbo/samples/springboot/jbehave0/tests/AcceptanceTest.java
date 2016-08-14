@@ -1,4 +1,4 @@
-package example.jbehave.tests;
+package de.dbo.samples.springboot.jbehave0.tests;
 
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.test.annotation.DirtiesContext;

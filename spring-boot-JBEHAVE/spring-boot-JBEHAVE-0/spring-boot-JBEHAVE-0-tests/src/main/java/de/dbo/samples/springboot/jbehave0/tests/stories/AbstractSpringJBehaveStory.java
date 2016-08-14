@@ -1,4 +1,4 @@
-package example.jbehave.tests.stories;
+package de.dbo.samples.springboot.jbehave0.tests.stories;
 
 import org.jbehave.core.configuration.Configuration;
 import org.jbehave.core.configuration.MostUsefulConfiguration;

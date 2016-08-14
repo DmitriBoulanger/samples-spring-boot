@@ -7,13 +7,13 @@
 	</configSuffixes>
 	<enableImports><![CDATA[false]]></enableImports>
 	<configs>
-		<config>java:example.jbehave.app.infrastructure.InMemoryShoppingCartRepository</config>
-		<config>java:example.jbehave.app.infrastructure.InMemoryProductDao</config>
-		<config>java:example.jbehave.app.infrastructure.InMemoryPriceDao</config>
-		<config>java:example.jbehave.app.infrastructure.InfrastructureConfiguration</config>
-		<config>java:example.jbehave.app.domain.DomainConfiguration</config>
-		<config>java:example.jbehave.app.domain.ShoppingCartService</config>
-		<config>java:example.jbehave.app.domain.SystemService</config>
+		<config>java:de.dbo.samples.springboot.jbehave0.app.domain.DomainConfiguration</config>
+		<config>java:de.dbo.samples.springboot.jbehave0.app.domain.ShoppingCartService</config>
+		<config>java:de.dbo.samples.springboot.jbehave0.app.domain.SystemService</config>
+		<config>java:de.dbo.samples.springboot.jbehave0.app.infrastructure.InMemoryShoppingCartRepository</config>
+		<config>java:de.dbo.samples.springboot.jbehave0.app.infrastructure.InMemoryProductDao</config>
+		<config>java:de.dbo.samples.springboot.jbehave0.app.infrastructure.InMemoryPriceDao</config>
+		<config>java:de.dbo.samples.springboot.jbehave0.app.infrastructure.InfrastructureConfiguration</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>

@@ -1,4 +1,4 @@
-package example.jbehave.app.web;
+package de.dbo.samples.springboot.jbehave0.app.web;
 
 import org.springframework.stereotype.Controller;
 

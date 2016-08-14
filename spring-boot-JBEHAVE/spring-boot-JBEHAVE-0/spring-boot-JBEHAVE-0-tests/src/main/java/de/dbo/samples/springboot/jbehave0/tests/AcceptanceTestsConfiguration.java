@@ -1,7 +1,8 @@
-package example.jbehave.tests;
+package de.dbo.samples.springboot.jbehave0.tests;
 
-import example.jbehave.app.domain.DomainConfiguration;
-import example.jbehave.app.infrastructure.InfrastructureConfiguration;
+import de.dbo.samples.springboot.jbehave0.app.domain.DomainConfiguration;
+import de.dbo.samples.springboot.jbehave0.app.infrastructure.InfrastructureConfiguration;
+
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;

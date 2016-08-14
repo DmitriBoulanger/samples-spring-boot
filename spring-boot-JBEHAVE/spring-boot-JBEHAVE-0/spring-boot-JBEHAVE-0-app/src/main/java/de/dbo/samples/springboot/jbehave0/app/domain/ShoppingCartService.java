@@ -1,4 +1,4 @@
-package example.jbehave.app.domain;
+package de.dbo.samples.springboot.jbehave0.app.domain;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

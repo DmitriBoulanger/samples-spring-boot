@@ -1,4 +1,4 @@
-package example.jbehave.tests.converters;
+package de.dbo.samples.springboot.jbehave0.tests.converters;
 
 import org.springframework.stereotype.Component;
 

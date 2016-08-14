@@ -1,6 +1,5 @@
-package example.jbehave.tests.steps;
+package de.dbo.samples.springboot.jbehave0.tests.steps;
 
-import example.jbehave.app.domain.*;
 import org.jbehave.core.annotations.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+
+import de.dbo.samples.springboot.jbehave0.app.domain.*;
 
 @Steps
 public class ShoppingCartSteps {

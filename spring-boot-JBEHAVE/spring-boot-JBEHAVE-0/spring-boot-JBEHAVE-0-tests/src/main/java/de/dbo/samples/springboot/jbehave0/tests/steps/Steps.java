@@ -1,4 +1,4 @@
-package example.jbehave.tests.steps;
+package de.dbo.samples.springboot.jbehave0.tests.steps;
 
 import org.springframework.stereotype.Component;
 

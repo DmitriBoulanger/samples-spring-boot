@@ -1,6 +1,7 @@
-package example.jbehave.tests.stories;
+package de.dbo.samples.springboot.jbehave0.tests.stories;
 
-import example.jbehave.tests.AcceptanceTest;
+import de.dbo.samples.springboot.jbehave0.tests.AcceptanceTest;
+
 import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 

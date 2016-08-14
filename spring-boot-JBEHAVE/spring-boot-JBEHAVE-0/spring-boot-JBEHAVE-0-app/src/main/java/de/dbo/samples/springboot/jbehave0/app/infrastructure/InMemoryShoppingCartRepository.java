@@ -1,9 +1,10 @@
-package example.jbehave.app.infrastructure;
+package de.dbo.samples.springboot.jbehave0.app.infrastructure;
 
-import example.jbehave.app.domain.CustomerIdentifier;
-import example.jbehave.app.domain.ShoppingCart;
-import example.jbehave.app.domain.ShoppingCartRepository;
 import org.springframework.stereotype.Component;
+
+import de.dbo.samples.springboot.jbehave0.app.domain.CustomerIdentifier;
+import de.dbo.samples.springboot.jbehave0.app.domain.ShoppingCart;
+import de.dbo.samples.springboot.jbehave0.app.domain.ShoppingCartRepository;
 
 import java.util.HashMap;
 import java.util.Map;

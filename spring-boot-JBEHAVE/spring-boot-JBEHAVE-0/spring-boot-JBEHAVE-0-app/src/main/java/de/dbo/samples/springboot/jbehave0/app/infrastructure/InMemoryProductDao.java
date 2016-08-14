@@ -1,8 +1,9 @@
-package example.jbehave.app.infrastructure;
+package de.dbo.samples.springboot.jbehave0.app.infrastructure;
 
-import example.jbehave.app.domain.Product;
-import example.jbehave.app.domain.ProductDao;
 import org.springframework.stereotype.Component;
+
+import de.dbo.samples.springboot.jbehave0.app.domain.Product;
+import de.dbo.samples.springboot.jbehave0.app.domain.ProductDao;
 
 import java.util.HashMap;
 import java.util.Map;

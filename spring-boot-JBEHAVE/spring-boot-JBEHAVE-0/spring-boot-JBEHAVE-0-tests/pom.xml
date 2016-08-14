@@ -22,7 +22,7 @@
 					<testSourceDirectory>${basedir}/src/main/java/</testSourceDirectory>
 					<testClassesDirectory>${project.build.directory}/classes/</testClassesDirectory>
 					<includes>
-						<include>example/jbehave/tests/stories/**/*.java</include>
+						<include>de/dbo/samples/springboot/jbehave0/tests/stories/**/*.java</include>
 					</includes>
 				</configuration>
 			</plugin>

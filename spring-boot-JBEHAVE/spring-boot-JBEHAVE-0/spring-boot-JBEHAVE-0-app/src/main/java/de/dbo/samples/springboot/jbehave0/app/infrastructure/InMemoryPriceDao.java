@@ -1,9 +1,10 @@
-package example.jbehave.app.infrastructure;
+package de.dbo.samples.springboot.jbehave0.app.infrastructure;
 
-import example.jbehave.app.domain.Money;
-import example.jbehave.app.domain.PriceDao;
-import example.jbehave.app.domain.StockKeepingUnit;
 import org.springframework.stereotype.Component;
+
+import de.dbo.samples.springboot.jbehave0.app.domain.Money;
+import de.dbo.samples.springboot.jbehave0.app.domain.PriceDao;
+import de.dbo.samples.springboot.jbehave0.app.domain.StockKeepingUnit;
 
 import java.util.HashMap;
 import java.util.Map;

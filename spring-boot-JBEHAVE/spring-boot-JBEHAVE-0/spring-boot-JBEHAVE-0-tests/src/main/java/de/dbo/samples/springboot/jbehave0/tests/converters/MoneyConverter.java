@@ -1,6 +1,7 @@
-package example.jbehave.tests.converters;
+package de.dbo.samples.springboot.jbehave0.tests.converters;
 
-import example.jbehave.app.domain.Money;
+import de.dbo.samples.springboot.jbehave0.app.domain.Money;
+
 import org.jbehave.core.annotations.AsParameterConverter;
 import org.jbehave.core.steps.ParameterConverters;
 import org.springframework.util.StringUtils;

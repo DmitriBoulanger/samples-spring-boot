@@ -1,6 +1,7 @@
-package example.jbehave.tests.steps;
+package de.dbo.samples.springboot.jbehave0.tests.steps;
 
-import example.jbehave.app.domain.*;
+import de.dbo.samples.springboot.jbehave0.app.domain.*;
+
 import org.jbehave.core.annotations.Given;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
