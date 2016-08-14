@@ -50,7 +50,6 @@ Elasticserach REST data-sample
 		<dependency>
 			<groupId>de.dbo.samples.springboot</groupId>
 			<artifactId>spring-boot-ETC-utilities</artifactId>
-			<version>${project.version}</version>
 		</dependency>
 
 	</dependencies>

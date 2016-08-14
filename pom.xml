@@ -96,6 +96,7 @@ This reactor performs complete plug-in management and fixes Java with its compil
 
 		<jooq.version>3.8.4</jooq.version>
 		<git-commit-id-plugin.version>2.1.13</git-commit-id-plugin.version>
+		<jbehave-maven-plugin.version>4.0.5</jbehave-maven-plugin.version>
 
 	</properties>
 
@@ -104,6 +105,7 @@ This reactor performs complete plug-in management and fixes Java with its compil
 		<module>spring-boot-bom/v${spring-boot.version}</module>
 		<module>spring-boot-REST</module>
 		<module>spring-boot-DATA</module>
+		<module>spring-boot-JBEHAVE</module>
 		<module>spring-boot-CAMEL</module>
 		<module>spring-boot-ETC</module>
 	</modules>
@@ -119,6 +121,12 @@ This reactor performs complete plug-in management and fixes Java with its compil
 				<version>${project.version}</version>
 				<type>pom</type>
 				<scope>import</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>de.dbo.samples.springboot</groupId>
+				<artifactId>spring-boot-ETC-utilities</artifactId>
+				<version>${project.version}</version>
 			</dependency>
 
 		</dependencies>
@@ -254,7 +262,8 @@ This reactor performs complete plug-in management and fixes Java with its compil
 					<groupId>org.springframework.boot</groupId>
 					<artifactId>spring-boot-maven-plugin</artifactId>
 					<version>${spring-boot-maven-plugin.version}</version>
-				</plugin>					
+				</plugin>	
+								
 
 				<!-- ============================================================================================ -->
 				<!--                             ETC Plug-Ins                                                     -->
@@ -269,6 +278,12 @@ This reactor performs complete plug-in management and fixes Java with its compil
 					<groupId>pl.project13.maven</groupId>
 					<artifactId>git-commit-id-plugin</artifactId>
 					<version>${git-commit-id-plugin.version}</version>
+				</plugin>
+
+				<plugin>
+					<groupId>org.jbehave</groupId>
+					<artifactId>jbehave-maven-plugin</artifactId>
+					<version>${jbehave-maven-plugin.version}</version>
 				</plugin>
 
 			</plugins>
@@ -312,8 +327,8 @@ This reactor performs complete plug-in management and fixes Java with its compil
 	
 		<!-- ========================================================================================= -->	
 	    <!--                                  SPRING-BOOT                                              -->
-		<!-- ========================================================================================= -->	
-	    
+		<!-- ========================================================================================= -->
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter</artifactId>
@@ -331,13 +346,13 @@ This reactor performs complete plug-in management and fixes Java with its compil
 
 		<!-- ========================================================================================= -->	
 	    <!--                                  LOGGING                                                  -->
-		<!-- ========================================================================================= -->	
-				
+		<!-- ========================================================================================= -->
+
 		<dependency>
 			<groupId>org.codehaus.janino</groupId>
 			<artifactId>janino</artifactId>
 		</dependency>
-		
+
 	</dependencies>
 
 </project>

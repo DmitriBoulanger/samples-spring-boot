@@ -18,7 +18,7 @@ Reactor for Spring-Boot JBEHAVE-samples.
 	</description>
 
 	<properties>
-		<jbehave.version>3.9.2</jbehave.version>
+		<jbehave.version>4.0.5</jbehave.version>
 		<commons-logging.version>1.2</commons-logging.version>
 	</properties>
 
@@ -51,9 +51,15 @@ Reactor for Spring-Boot JBEHAVE-samples.
 			<artifactId>spring-boot-starter-logging</artifactId>
 		</dependency>	    
 		
-		<!-- ========================================================================================= -->	
-	    <!--                                  ETC                                                      -->
-		<!-- ========================================================================================= -->	
+		<!-- ========================================================================================= -->
+		<!--                                          ETC                                              -->
+		<!-- ========================================================================================= -->
+
+		<dependency>
+			<groupId>de.dbo.samples.springboot</groupId>
+			<artifactId>spring-boot-ETC-utilities</artifactId>
+			<version>${project.version}</version>
+		</dependency>
 		
 	</dependencies>
 

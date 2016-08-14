@@ -30,7 +30,6 @@
 			<plugin>
 				<groupId>org.jbehave</groupId>
 				<artifactId>jbehave-maven-plugin</artifactId>
-				<version>${jbehave.version}</version>
 				<executions>
 					<execution>
 						<id>unpack-view-resources</id>
