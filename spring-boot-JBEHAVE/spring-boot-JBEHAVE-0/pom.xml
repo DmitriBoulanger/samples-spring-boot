@@ -1,0 +1,48 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>de.dbo.samples.springboot</groupId>
+		<artifactId>spring-boot-JBEHAVE</artifactId>
+		<version>0.0.0-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>spring-boot-JBEHAVE-0</artifactId>
+	<packaging>pom</packaging>
+
+	<name>Samples Spring-Boot JBEHAVE 0</name>
+	<url>http://mkuthan.github.io/blog/2014/05/29/acceptance-testing-using-jbehave-spring-framework-and-maven/</url>
+
+	<properties>
+		
+	</properties>
+
+	<modules>
+		<module>spring-boot-JBEHAVE-0-app</module>
+		<module>spring-boot-JBEHAVE-0-tests</module>
+	</modules>
+
+	<dependencyManagement>
+		<dependencies>
+
+			<dependency>
+				<groupId>${project.groupId}</groupId>
+				<artifactId>spring-boot-JBEHAVE-0-app</artifactId>
+				<version>${project.version}</version>
+				<classifier>classes</classifier>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-core</artifactId>
+				<exclusions>
+					<exclusion>
+						<groupId>commons-logging</groupId>
+						<artifactId>commons-logging</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+</project>
