@@ -54,14 +54,16 @@ public class TestRunner extends JUnitStories {
                 .useStoryLoader(new LoadFromClasspath(thisClass.getClassLoader()))
                 .usePendingStepStrategy(new FailingUponPendingStep())
                 .useStepdocReporter(new PrintStreamStepdocReporter())
-                .useStoryReporterBuilder(new StoryReporterBuilder()
-                        .withCodeLocation(CodeLocations.codeLocationFromClass(thisClass))
-                        .withDefaultFormats()
-                        .withFormats(Format.CONSOLE, Format.TXT, Format.HTML, Format.XML, Format.STATS)
-                        .withCrossReference(new CrossReference())
-                        .withFailureTrace(true))
-                .useParameterConverters(new ParameterConverters()
-                        .addConverters(new ParameterConverters.DateConverter(new SimpleDateFormat("yyyy-MM-dd"))))
+                .useStoryReporterBuilder(
+                        new StoryReporterBuilder()
+                                .withCodeLocation(CodeLocations.codeLocationFromClass(thisClass))
+                                .withDefaultFormats()
+                                .withFormats(Format.CONSOLE, Format.TXT, Format.HTML, Format.XML, Format.STATS)
+                                .withCrossReference(new CrossReference())
+                                .withFailureTrace(true))
+                .useParameterConverters(
+                        new ParameterConverters()
+                                .addConverters(new ParameterConverters.DateConverter(new SimpleDateFormat("yyyy-MM-dd"))))
                 //                .useStoryParser(new GherkinStoryParser())
                 .useStepMonitor(new SilentStepMonitor()));
     }

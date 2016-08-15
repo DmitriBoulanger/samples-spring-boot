@@ -26,8 +26,9 @@ Reactor for Spring-Boot JBEHAVE-samples.
 		<module>spring-boot-JBEHAVE-bom/v${jbehave.version}</module>
 		<module>spring-boot-JBEHAVE-0</module>
 		<module>spring-boot-JBEHAVE-1</module>
+		<module>spring-boot-JBEHAVE-2</module>
 	</modules>
-	
+
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
@@ -39,34 +40,67 @@ Reactor for Spring-Boot JBEHAVE-samples.
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-	
-	<dependencies>
-	
-		<!-- ========================================================================================= -->	
-	    <!--                                  SPRING-BOOT                                              -->
-		<!-- ========================================================================================= -->	
 
-	    <!-- Spring-Boot-Logging -->
+	<build>
+		<pluginManagement>
+			<plugins>
+				<!--This plugin's configuration is used to store Eclipse m2e settings 
+					only. It has no influence on the Maven build itself. -->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.jbehave</groupId>
+										<artifactId>
+											jbehave-maven-plugin
+										</artifactId>
+										<versionRange>
+											[4.0.5,)
+										</versionRange>
+										<goals>
+											<goal>
+												unpack-view-resources
+											</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+
+	<dependencies>
+
+		<!-- ========================================================================================= -->
+		<!-- SPRING-BOOT -->
+		<!-- ========================================================================================= -->
+
+		<!-- Spring-Boot Logging -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-logging</artifactId>
-		</dependency>	    
-		
+		</dependency>
+
 		<!-- ========================================================================================= -->
-		<!--                                          ETC                                              -->
+		<!-- ETC -->
 		<!-- ========================================================================================= -->
 
 		<dependency>
 			<groupId>de.dbo.samples.springboot</groupId>
 			<artifactId>spring-boot-ETC-utilities</artifactId>
-			<version>${project.version}</version>
 		</dependency>
-		
-	</dependencies>
 
-	<build>
-		
-	</build>
-	
+	</dependencies>
 
 </project>
