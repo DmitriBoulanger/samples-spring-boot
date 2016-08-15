@@ -1,5 +1,8 @@
 package de.dbo.samples.springboot.jbehave1;
 
+import java.text.SimpleDateFormat;
+import java.util.List;
+
 import org.jbehave.core.configuration.MostUsefulConfiguration;
 import org.jbehave.core.failures.FailingUponPendingStep;
 import org.jbehave.core.io.CodeLocations;
@@ -21,24 +24,19 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import de.dbo.samples.springboot.jbehave1.ApplicationToTest;
-
-import java.text.SimpleDateFormat;
-import java.util.List;
-
 /**
  * Application has a lot of moving parts so it made sense to wrap some of the operations in an integration test session.
- * 
- * 
+ *
+ *
  * @author Dmitri Boulanger, Hombach
  *
- * D. Knuth: Programs are meant to be read by humans and 
- *           only incidentally for computers to execute 
+ * D. Knuth: Programs are meant to be read by humans and
+ *           only incidentally for computers to execute
  *
  */
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringBootTest(classes = { ApplicationToTest.class})
+@SpringBootTest(classes = {ApplicationToTest.class})
 public class TestRunner extends JUnitStories {
 
     @Autowired
@@ -71,6 +69,7 @@ public class TestRunner extends JUnitStories {
         return new SpringStepsFactory(configuration(), applicationContext);
     }
 
+    @Override
     protected List<String> storyPaths() {
         return new StoryFinder().findPaths(CodeLocations.codeLocationFromClass(this.getClass()), "**/*.story", "**/excluded*.story");
     }

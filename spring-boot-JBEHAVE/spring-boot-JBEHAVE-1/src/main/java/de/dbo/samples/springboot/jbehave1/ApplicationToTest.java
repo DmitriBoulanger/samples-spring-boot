@@ -4,13 +4,16 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 
 /**
- * 
+ *
  * @author Dmitri Boulanger, Hombach
  *
- * D. Knuth: Programs are meant to be read by humans and 
- *           only incidentally for computers to execute 
+ * D. Knuth: Programs are meant to be read by humans and
+ *           only incidentally for computers to execute
  *
  */
+//@SpringBootApplication(exclude = {ElasticsearchAutoConfiguration.class})
+//@Configuration
+//@EnableAutoConfiguration(exclude = {ElasticsearchDataAutoConfiguration.class})
 @SpringBootApplication
 public class ApplicationToTest {
 
