@@ -16,17 +16,17 @@ import org.springframework.context.ConfigurableApplicationContext;
  *
  */
 
-@SpringBootApplication(scanBasePackages = {"de.dbo.samples.springboot.jbehave2.app, de.dbo.samples.springboot.jbehave2.tests"}, exclude = {WebClientAutoConfiguration.class})
-public class Application {
+@SpringBootApplication(exclude={WebClientAutoConfiguration.class})
+public class TestApplication {
 
-    private static final Logger log = LoggerFactory.getLogger(Application.class);
+    private static final Logger log = LoggerFactory.getLogger(TestApplication.class);
 
-    public Application() {
+    public TestApplication() {
         log.info("created");
     }
 
     public static void main(String[] args) {
-        final ConfigurableApplicationContext ctx = SpringApplication.run(Application.class, args);
+        final ConfigurableApplicationContext ctx = SpringApplication.run(TestApplication.class, args);
         ctx.close();
     }
 

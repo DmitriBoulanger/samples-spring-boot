@@ -4,11 +4,12 @@ import org.jbehave.core.annotations.AsParameterConverter;
 import org.jbehave.core.steps.ParameterConverters;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import de.dbo.samples.springboot.jbehave2.app.domain.Money;
 
-@Converter
+@Component
 public class MoneyConverter {
     private static final Logger log = LoggerFactory.getLogger(MoneyConverter.class);
 

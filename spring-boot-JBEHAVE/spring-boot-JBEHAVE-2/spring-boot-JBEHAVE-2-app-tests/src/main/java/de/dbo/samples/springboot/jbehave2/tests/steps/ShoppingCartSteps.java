@@ -16,6 +16,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 //
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import de.dbo.samples.springboot.jbehave2.app.domain.Money;
 import de.dbo.samples.springboot.jbehave2.app.domain.Product;
@@ -23,7 +24,7 @@ import de.dbo.samples.springboot.jbehave2.app.domain.ProductDao;
 import de.dbo.samples.springboot.jbehave2.app.domain.ShoppingCart;
 import de.dbo.samples.springboot.jbehave2.app.domain.ShoppingCartService;
 
-@Steps
+@Component
 public class ShoppingCartSteps {
     private static final Logger log = LoggerFactory.getLogger(ShoppingCartSteps.class);
 
