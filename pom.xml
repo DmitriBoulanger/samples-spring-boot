@@ -311,6 +311,7 @@ This reactor performs complete plug-in management and fixes Java with its compil
 					<includes>
 						<include>**/*Tests.java</include>
 						<include>**/*Test.java</include>
+						<include>**/Test.java</include>
 					</includes>
 					<excludes>
 						<exclude>**/Abstract*.java</exclude>

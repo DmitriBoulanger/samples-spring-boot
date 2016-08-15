@@ -11,7 +11,7 @@
 	<artifactId>spring-boot-JBEHAVE-2-app</artifactId>
 	<packaging>jar</packaging>
 
-	<name>Samples Spring-Boot JBEHAVE 2-App Spring-Boot</name>
+	<name>Samples Spring-Boot JBEHAVE 2-App</name>
 
 	<properties>
 		

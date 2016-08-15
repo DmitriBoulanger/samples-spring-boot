@@ -9,24 +9,24 @@
 		<version>0.0.0-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>spring-boot-JBEHAVE-2-app-tests</artifactId>
+	<artifactId>spring-boot-JBEHAVE-2-app-stories</artifactId>
 	<packaging>jar</packaging>
 
-	<name>Samples Spring-Boot JBEHAVE 2-JB Tests Spring-Boot</name>
+	<name>Samples Spring-Boot JBEHAVE 2-App Stories</name>
 
 	<build>
 		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<configuration>
-					<testSourceDirectory>${basedir}/src/main/java/</testSourceDirectory>
-					<testClassesDirectory>${project.build.directory}/classes/</testClassesDirectory>
-					<includes>
-						<include>de/dbo/samples/springboot/jbehave2/tests/stories/**/*.java</include>
-					</includes>
-				</configuration>
-			</plugin>
+<!-- 			<plugin> -->
+<!-- 				<groupId>org.apache.maven.plugins</groupId> -->
+<!-- 				<artifactId>maven-surefire-plugin</artifactId> -->
+<!-- 				<configuration> -->
+<!-- 					<testSourceDirectory>${basedir}/src/main/java/</testSourceDirectory> -->
+<!-- 					<testClassesDirectory>${project.build.directory}/classes/</testClassesDirectory> -->
+<!-- 					<includes> -->
+<!-- 						<include>de/dbo/samples/springboot/jbehave2/tests/stories/**/*.java</include> -->
+<!-- 					</includes> -->
+<!-- 				</configuration> -->
+<!-- 			</plugin> -->
 
 			<!-- ================================================================= -->
 			<!-- JBehave: Installation of the WEB-Resources for Report-Generation -->

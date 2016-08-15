@@ -1,12 +1,23 @@
 package de.dbo.samples.springboot.jbehave2.tests.converters;
 
+/* 
+ * JBehave 
+ */
 import org.jbehave.core.annotations.AsParameterConverter;
 import org.jbehave.core.steps.ParameterConverters;
+/* 
+ * SLF4J 
+ */
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+/* 
+ * Spring 
+ */
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
-
+/* 
+ * Application 
+ */
 import de.dbo.samples.springboot.jbehave2.app.domain.Money;
 
 @Component
