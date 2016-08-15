@@ -2,7 +2,8 @@ package de.dbo.samples.springboot.jbehave1;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
+//import org.springframework.stereotype.Service;
 
 /**
  *
@@ -12,11 +13,11 @@ import org.springframework.stereotype.Service;
  *           only incidentally for computers to execute
  *
  */
-@Service
-public class ApplicationService {
-    private static final Logger log = LoggerFactory.getLogger(ApplicationService.class);
+@Component
+public class Service {
+    private static final Logger log = LoggerFactory.getLogger(Service.class);
 
-    public ApplicationService() {
+    public Service() {
         log.info("created");
     }
 

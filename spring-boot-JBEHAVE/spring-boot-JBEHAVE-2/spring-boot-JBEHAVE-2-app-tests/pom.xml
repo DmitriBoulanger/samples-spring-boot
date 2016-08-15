@@ -11,7 +11,7 @@
 	<artifactId>spring-boot-JBEHAVE-2-app-tests</artifactId>
 	<packaging>jar</packaging>
 
-	<name>Samples Spring-Boot JBEHAVE 2-Application Tests</name>
+	<name>Samples Spring-Boot JBEHAVE 2-JB Tests Spring-Boot</name>
 
 	<build>
 		<plugins>
@@ -27,8 +27,10 @@
 				</configuration>
 			</plugin>
 
+			<!-- ================================================================= -->
 			<!-- JBehave: Installation of the WEB-Resources for Report-Generation  -->
 			<!-- Default location: target/jbehave/view                             -->
+			<!-- ================================================================= -->
 			<plugin>
 				<groupId>org.jbehave</groupId>
 				<artifactId>jbehave-maven-plugin</artifactId>
@@ -70,7 +72,7 @@
 		<!--                      JBEHAVE                                                              -->
 		<!-- ========================================================================================= -->
 		
-		<!-- JBehave Core -->
+		<!-- Core -->
 		<dependency>
 			<groupId>org.jbehave</groupId>
 			<artifactId>jbehave-core</artifactId>
@@ -80,7 +82,7 @@
 			<artifactId>jbehave-spring</artifactId>
 		</dependency>
 
-		<!-- JBehave WEB-Resources for Report-Generation -->
+		<!-- WEB-Resources for Report-Generation -->
 		<dependency>
 			<groupId>org.jbehave.site</groupId>
 			<artifactId>jbehave-site-resources</artifactId>

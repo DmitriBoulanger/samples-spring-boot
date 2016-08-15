@@ -1,6 +1,5 @@
 package de.dbo.samples.springboot.jbehave2.tests;
 
-
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 
@@ -15,7 +14,7 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 //@SpringBootApplication(exclude = {ElasticsearchAutoConfiguration.class})
 //@Configuration
 //@EnableAutoConfiguration(exclude = {ElasticsearchDataAutoConfiguration.class})
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"de.dbo.samples.springboot.jbehave2.app, de.dbo.samples.springboot.jbehave2.tests.steps"})
 public class TestApplication {
 
     public static void main(String[] args) {

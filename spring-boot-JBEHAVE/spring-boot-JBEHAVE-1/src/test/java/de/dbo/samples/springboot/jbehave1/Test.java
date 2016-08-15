@@ -36,30 +36,32 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  */
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringBootTest(classes = {ApplicationToTest.class})
-public class TestRunner extends JUnitStories {
+@SpringBootTest(classes = {Application.class})
+public class Test extends JUnitStories {
 
     @Autowired
     private ApplicationContext applicationContext;
 
-    public TestRunner() {
+    public Test() {
         initJBehaveConfiguration();
     }
 
     private void initJBehaveConfiguration() {
-        Class<?> thisClass = this.getClass();
+        final Class<?> thisClass = this.getClass();
         useConfiguration(new MostUsefulConfiguration()
                 .useStoryLoader(new LoadFromClasspath(thisClass.getClassLoader()))
                 .usePendingStepStrategy(new FailingUponPendingStep())
                 .useStepdocReporter(new PrintStreamStepdocReporter())
-                .useStoryReporterBuilder(new StoryReporterBuilder()
-                        .withCodeLocation(CodeLocations.codeLocationFromClass(thisClass))
-                        .withDefaultFormats()
-                        .withFormats(Format.CONSOLE, Format.TXT, Format.HTML, Format.XML, Format.STATS)
-                        .withCrossReference(new CrossReference())
-                        .withFailureTrace(true))
-                .useParameterConverters(new ParameterConverters()
-                        .addConverters(new ParameterConverters.DateConverter(new SimpleDateFormat("yyyy-MM-dd"))))
+                .useStoryReporterBuilder(
+                        new StoryReporterBuilder()
+                                .withCodeLocation(CodeLocations.codeLocationFromClass(thisClass))
+                                .withDefaultFormats()
+                                .withFormats(Format.CONSOLE, Format.TXT, Format.HTML, Format.XML, Format.STATS)
+                                .withCrossReference(new CrossReference())
+                                .withFailureTrace(true))
+                .useParameterConverters(
+                        new ParameterConverters()
+                                .addConverters(new ParameterConverters.DateConverter(new SimpleDateFormat("yyyy-MM-dd"))))
                 .useStoryParser(new GherkinStoryParser())
                 .useStepMonitor(new SilentStepMonitor()));
     }

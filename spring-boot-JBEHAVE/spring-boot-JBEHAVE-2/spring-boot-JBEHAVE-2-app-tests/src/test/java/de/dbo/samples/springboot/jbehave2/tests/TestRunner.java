@@ -23,9 +23,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import de.dbo.samples.springboot.jbehave2.tests.steps.SharedSteps;
-import de.dbo.samples.springboot.jbehave2.tests.steps.ShoppingCartSteps;
-
 /**
  * Application has a lot of moving parts so it made sense to wrap some of the operations in an integration test session.
  *
@@ -38,7 +35,7 @@ import de.dbo.samples.springboot.jbehave2.tests.steps.ShoppingCartSteps;
  */
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringBootTest(classes = {TestApplication.class, SharedSteps.class, ShoppingCartSteps.class})
+@SpringBootTest(classes = {TestApplication.class})
 public class TestRunner extends JUnitStories {
 
     @Autowired

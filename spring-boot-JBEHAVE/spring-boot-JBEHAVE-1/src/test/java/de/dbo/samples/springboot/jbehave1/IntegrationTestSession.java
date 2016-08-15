@@ -3,9 +3,10 @@ package de.dbo.samples.springboot.jbehave1;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.config.ConfigurableBeanFactory;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Service;
+//import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+//import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+//import org.springframework.stereotype.Service;
 
 /**
  * Application has a lot of moving parts so it made sense to wrap
@@ -17,13 +18,14 @@ import org.springframework.stereotype.Service;
  *           only incidentally for computers to execute
  *
  */
-@Service
-@Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+@Component
+//@Service
+//@Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class IntegrationTestSession {
     private static final Logger log = LoggerFactory.getLogger(IntegrationTestSession.class);
 
     @Autowired
-    private ApplicationService  applicationService;
+    private Service  applicationService;
 
     public IntegrationTestSession() {
         log.info("created");

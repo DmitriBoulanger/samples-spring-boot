@@ -11,7 +11,7 @@
 	<artifactId>spring-boot-JBEHAVE-0-tests</artifactId>
 	<packaging>jar</packaging>
 
-	<name>Samples Spring-Boot JBEHAVE 0-Tests</name>
+	<name>Samples Spring-Boot JBEHAVE 0-JB Tests Spring</name>
 
 	<build>
 		<plugins>

@@ -11,7 +11,7 @@
     <artifactId>spring-boot-JBEHAVE-0-app</artifactId>
     <packaging>war</packaging>
     
-    <name>Samples Spring-Boot JBEHAVE 0-Application</name>
+    <name>Samples Spring-Boot JBEHAVE 0-App Spring-Boot WEB</name>
 
     <properties>
         <failIfNoTests>false</failIfNoTests>

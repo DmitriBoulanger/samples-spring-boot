@@ -12,4 +12,6 @@ import de.dbo.samples.springboot.jbehave2.app.infrastructure.InfrastructureConfi
 @Configuration
 @Import({DomainConfiguration.class, InfrastructureConfiguration.class})
 @ComponentScan
-public class AcceptanceTestsConfiguration {}
+public class AcceptanceTestsConfiguration {
+
+}

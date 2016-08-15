@@ -5,7 +5,6 @@ import static org.jbehave.core.reporters.Format.IDE_CONSOLE;
 import static org.jbehave.core.reporters.Format.TXT;
 
 import java.util.Arrays;
-import java.util.List;
 
 import org.jbehave.core.configuration.Configuration;
 import org.jbehave.core.configuration.MostUsefulConfiguration;
@@ -13,7 +12,6 @@ import org.jbehave.core.embedder.Embedder;
 import org.jbehave.core.embedder.EmbedderControls;
 import org.jbehave.core.io.CodeLocations;
 import org.jbehave.core.io.LoadFromClasspath;
-import org.jbehave.core.io.StoryFinder;
 import org.jbehave.core.io.StoryLoader;
 import org.jbehave.core.io.StoryPathResolver;
 import org.jbehave.core.io.UnderscoredCamelCaseResolver;
@@ -28,10 +26,10 @@ import org.springframework.context.ApplicationContext;
 
 public abstract class AbstractStory extends JUnitStory {
 
-    private static final int   STORY_TIMEOUT = 120;
+    private static final String STORY_TIMEOUT_SECS = "120";
 
     @Autowired
-    private ApplicationContext applicationContext;
+    private ApplicationContext  applicationContext;
 
     public AbstractStory() {
         Embedder embedder = new Embedder();
@@ -42,18 +40,11 @@ public abstract class AbstractStory extends JUnitStory {
 
     @Override
     public Configuration configuration() {
-        //        return new MostUsefulConfiguration()
-        //                .useStoryPathResolver(storyPathResolver())
-        //                .useStoryLoader(storyLoader())
-        //                .useStoryReporterBuilder(storyReporterBuilder())
-        //                .useParameterControls(parameterControls())
-
         return new MostUsefulConfiguration()
                 .useStoryPathResolver(storyPathResolver())
                 .useStoryLoader(storyLoader())
                 .useStoryReporterBuilder(storyReporterBuilder())
                 .useParameterControls(parameterControls());
-
     }
 
     @Override
@@ -64,7 +55,7 @@ public abstract class AbstractStory extends JUnitStory {
     private EmbedderControls embedderControls() {
         return new EmbedderControls()
                 .doIgnoreFailureInView(true)
-                .useStoryTimeoutInSecs(STORY_TIMEOUT);
+                .useStoryTimeouts(STORY_TIMEOUT_SECS);
     }
 
     private ParameterControls parameterControls() {
@@ -83,14 +74,10 @@ public abstract class AbstractStory extends JUnitStory {
     private StoryReporterBuilder storyReporterBuilder() {
         return new StoryReporterBuilder()
                 .withCodeLocation(CodeLocations.codeLocationFromClass(this.getClass()))
+                .withPathResolver(new ResolveToPackagedName())
                 .withFailureTrace(true)
                 .withDefaultFormats()
-                .withFormats(IDE_CONSOLE, TXT, HTML)
-                .withPathResolver(new ResolveToPackagedName());
-    }
-
-    protected List<String> storyPaths() {
-        return new StoryFinder().findPaths(CodeLocations.codeLocationFromClass(this.getClass()), "**/*.story", "**/excluded*.story");
+                .withFormats(IDE_CONSOLE, TXT, HTML);
     }
 
 }

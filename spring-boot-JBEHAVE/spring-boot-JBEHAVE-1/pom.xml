@@ -19,39 +19,60 @@
 
 	<dependencies>
 
+		<!-- ========================================================================================= -->
+		<!--                            SPRING-BOOT                                                    -->
+		<!-- ========================================================================================= -->
+		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot</artifactId>
 		</dependency>
 		
 		<dependency>
-			<groupId>net.java.dev.jna</groupId>
-			<artifactId>jna</artifactId>
-			<scope>runtime</scope>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.springframework</groupId>
-			<artifactId>spring-core</artifactId>
+			<artifactId>spring-test</artifactId>
+			<scope>test</scope>
 		</dependency>
+		 
+
+		<!-- ========================================================================================= -->
+		<!--                            JBEHAVE                                                        -->
+		<!-- ========================================================================================= -->
+		
 		<dependency>
-		     <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.jbehave</groupId>
-            <artifactId>jbehave-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.jbehave</groupId>
-            <artifactId>jbehave-spring</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.jbehave</groupId>
-            <artifactId>jbehave-gherkin</artifactId>
-        </dependency>
-        
-        		<dependency>
+			<groupId>org.jbehave</groupId>
+			<artifactId>jbehave-core</artifactId>
+		</dependency>
+		
+ 		<dependency>
+			<groupId>org.jbehave</groupId>
+			<artifactId>jbehave-spring</artifactId>
+			<exclusions>
+				<!-- Spring-resources are coming from the sprint-boot -->
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-test</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency> 
+		
+		<dependency>
+			<groupId>org.jbehave</groupId>
+			<artifactId>jbehave-gherkin</artifactId>
+		</dependency>
+
+		<dependency>
 			<groupId>org.jbehave.site</groupId>
 			<artifactId>jbehave-site-resources</artifactId>
 			<type>zip</type>
@@ -63,12 +84,13 @@
 			<classifier>resources</classifier>
 			<type>zip</type>
 		</dependency>
-		
+
+
 	</dependencies>
-	
+
 	<build>
 		<plugins>
-					<plugin>
+			<plugin>
 				<groupId>org.jbehave</groupId>
 				<artifactId>jbehave-maven-plugin</artifactId>
 				<executions>
@@ -83,6 +105,5 @@
 			</plugin>
 		</plugins>
 	</build>
-
 
 </project>
