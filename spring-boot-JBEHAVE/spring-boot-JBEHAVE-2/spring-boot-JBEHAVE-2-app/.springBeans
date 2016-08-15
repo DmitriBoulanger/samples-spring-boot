@@ -7,7 +7,9 @@
 	</configSuffixes>
 	<enableImports><![CDATA[false]]></enableImports>
 	<configs>
-		<config>java:de.dbo.samples.springboot.jbehave2.tests.converters.Converter</config>
+		<config>java:de.dbo.samples.springboot.jbehave2.app.domain.SystemService</config>
+		<config>java:de.dbo.samples.springboot.jbehave2.app.domain.ShoppingCartService</config>
+		<config>java:de.dbo.samples.springboot.jbehave2.app.domain.DomainConfiguration</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>
