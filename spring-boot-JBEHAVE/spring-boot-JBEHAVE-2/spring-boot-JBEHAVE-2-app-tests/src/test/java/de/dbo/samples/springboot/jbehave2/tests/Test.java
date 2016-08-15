@@ -35,13 +35,13 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  */
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringBootTest(classes = {TestApplication.class})
-public class TestRunner extends JUnitStories {
+@SpringBootTest(classes = {Application.class, AcceptanceTestsConfiguration.class})
+public class Test extends JUnitStories {
 
     @Autowired
     private ApplicationContext applicationContext;
 
-    public TestRunner() {
+    public Test() {
         initJBehaveConfiguration();
     }
 

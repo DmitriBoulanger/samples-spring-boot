@@ -1,4 +1,5 @@
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://maven.apache.org/POM/4.0.0"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
@@ -28,8 +29,8 @@
 			</plugin>
 
 			<!-- ================================================================= -->
-			<!-- JBehave: Installation of the WEB-Resources for Report-Generation  -->
-			<!-- Default location: target/jbehave/view                             -->
+			<!-- JBehave: Installation of the WEB-Resources for Report-Generation -->
+			<!-- Default location: target/jbehave/view -->
 			<!-- ================================================================= -->
 			<plugin>
 				<groupId>org.jbehave</groupId>
@@ -48,30 +49,36 @@
 	</build>
 
 	<dependencies>
-	
+
 		<!-- ========================================================================================= -->
-		<!--                       APPLICATION TO BE TESTED                                            -->
+		<!-- APPLICATION TO BE TESTED                                                                  -->
 		<!-- ========================================================================================= -->
-		
+
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>spring-boot-JBEHAVE-2-app</artifactId>
 			<classifier>classes</classifier>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-boot-starter-web</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<!-- ========================================================================================= -->
-		<!--                       SPRING-BOOT                                                         -->
+		<!-- SPRING-BOOT                                                                               -->
 		<!-- ========================================================================================= -->
-		
+
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
 		</dependency>
 
 		<!-- ========================================================================================= -->
-		<!--                      JBEHAVE                                                              -->
+		<!--                             JBEHAVE                                                       -->
 		<!-- ========================================================================================= -->
-		
+
 		<!-- Core -->
 		<dependency>
 			<groupId>org.jbehave</groupId>
@@ -94,17 +101,17 @@
 			<classifier>resources</classifier>
 			<type>zip</type>
 		</dependency>
-	
+
 		<!-- ========================================================================================= -->
-		<!--                      TEST-RUNTIME                                                         -->
-		<!-- ========================================================================================= -->	
-		
+		<!-- TEST-RUNTIME -->
+		<!-- ========================================================================================= -->
+
 		<dependency>
 			<groupId>net.java.dev.jna</groupId>
 			<artifactId>jna</artifactId>
 			<scope>runtime</scope>
 		</dependency>
-		
+
 	</dependencies>
 
 </project>

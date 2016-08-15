@@ -25,7 +25,7 @@
 	</logger>
 	
 	<logger name="org.springframework" 
-		level="DEBUG">
+		level="INFO">
 		<appender-ref ref="NORMAL_MESSAGES" />
 	</logger>
 	
@@ -54,9 +54,9 @@
 	<!--                                SPECIAL LOGGERS                                                      -->
 	<!-- =================================================================================================== -->
 	
-<!-- 	<logger name="org.springframework.beans.factory.support" level="DEBUG" -->
-<!-- 		additivity="false"> -->
-<!-- 		<appender-ref ref="NORMAL_MESSAGES_SPRING" /> -->
-<!-- 	</logger> -->
+	<logger name="org.springframework.beans.factory.support" level="DEBUG"
+		additivity="false">
+		<appender-ref ref="NORMAL_MESSAGES_SPRING" />
+	</logger>
 
 </configuration>

@@ -33,6 +33,10 @@ public class ShoppingCartSteps {
     @Autowired
     private ProductDao          productRepository;
 
+    public ShoppingCartSteps() {
+        log.info("created");
+    }
+
     @Given("empty shopping cart")
     public void emptyShoppingCart() {
         log.info("emptyShoppingCart ...");

@@ -21,6 +21,10 @@ public class SharedSteps {
     @Autowired
     private PriceDao            priceRepository;
 
+    public SharedSteps() {
+        log.info("created");
+    }
+
     @Given("product $name with SKU $sku")
     public void product(String name, StockKeepingUnit sku) {
         log.info("product: name=" + name + " sku=" + sku);
@@ -29,7 +33,7 @@ public class SharedSteps {
 
     @Given("product $name price is $price")
     public void price(String name, Money price) {
-        log.info("product: name=" + name + " price=" + price + " amount=" + price + " ...");
+        log.info("product: name=" + name + " price=" + price + " ...");
         Product product = productRepository.findByName(name);
         priceRepository.save(product.getSku(), price);
     }
