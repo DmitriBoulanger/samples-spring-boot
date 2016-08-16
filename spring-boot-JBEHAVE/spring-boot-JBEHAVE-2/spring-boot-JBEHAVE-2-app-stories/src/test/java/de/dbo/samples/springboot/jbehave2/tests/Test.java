@@ -3,6 +3,9 @@ package de.dbo.samples.springboot.jbehave2.tests;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
+
+import javax.annotation.PostConstruct;
+
 /* JBehave */
 import org.jbehave.core.configuration.MostUsefulConfiguration;
 import org.jbehave.core.io.CodeLocations;
@@ -19,6 +22,9 @@ import org.jbehave.core.steps.SilentStepMonitor;
 import org.jbehave.core.steps.spring.SpringStepsFactory;
 /* JUnit */
 import org.junit.runner.RunWith;
+/* SLF4J */
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 /* Spring */
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -38,11 +44,17 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes={TestApplication.class})
 public class Test extends JUnitStories {
+    private static final Logger log = LoggerFactory.getLogger(TestApplication.class);
 
     @Autowired
-    private ApplicationContext applicationContext;
+    private ApplicationContext  applicationContext;
 
     public Test() {
+        log.info("created");
+    }
+
+    @PostConstruct
+    public void init() {
         initJBehaveConfiguration();
     }
 
@@ -50,7 +62,7 @@ public class Test extends JUnitStories {
         Class<?> thisClass = this.getClass();
         useConfiguration(new MostUsefulConfiguration()
                 .useStoryLoader(new LoadFromClasspath(thisClass.getClassLoader()))
-//                .usePendingStepStrategy(new org.jbehave.core.failures.FailingUponPendingStep())
+                //                .usePendingStepStrategy(new org.jbehave.core.failures.FailingUponPendingStep())
                 .useStepdocReporter(new PrintStreamStepdocReporter())
                 .useStoryReporterBuilder(
                         new StoryReporterBuilder()
@@ -58,8 +70,7 @@ public class Test extends JUnitStories {
                                 .withDefaultFormats()
                                 .withFormats(Format.CONSOLE, Format.TXT, Format.HTML, Format.XML, Format.STATS)
                                 .withCrossReference(new CrossReference())
-                                .withFailureTrace(true)
-                                )
+                                .withFailureTrace(true))
                 .useParameterConverters(
                         new ParameterConverters()
                                 .addConverters(new ParameterConverters.DateConverter(new SimpleDateFormat("yyyy-MM-dd"))))
@@ -73,7 +84,14 @@ public class Test extends JUnitStories {
 
     @Override
     protected List<String> storyPaths() {
-        return new StoryFinder().findPaths(CodeLocations.codeLocationFromClass(this.getClass()), "**/*.story", "**/excluded*.story");
+        final List<String> storyPaths =
+            new StoryFinder().findPaths(CodeLocations.codeLocationFromClass(this.getClass()), "**/*.story", "**/excluded/*.story");
+        final StringBuilder sb = new StringBuilder("Stories to run:");
+        for (final String path : storyPaths) {
+            sb.append("\n\t - " + path);
+        }
+        log.info(sb.toString());
+        return storyPaths;
     }
 
 }

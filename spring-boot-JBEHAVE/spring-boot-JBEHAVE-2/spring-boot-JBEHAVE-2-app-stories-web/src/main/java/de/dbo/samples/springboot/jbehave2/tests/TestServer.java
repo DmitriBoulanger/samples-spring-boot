@@ -13,8 +13,12 @@ public class TestServer {
     public int getPort() {
         return Integer.parseInt(environment.getProperty("local.server.port"));
     }
+    
+    public String getHost() {
+        return "localhost";
+    }
 
     public String print() {
-        return "localhost:" + getPort();
+        return  getHost() + ":" + getPort();
     }
 }

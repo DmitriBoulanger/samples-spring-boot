@@ -5,6 +5,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 /* Hamcrest */
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.Matchers.*;
 
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
@@ -24,10 +26,10 @@ import de.dbo.samples.springboot.jbehave2.app.web.customer.Customer;
 import de.dbo.samples.springboot.jbehave2.tests.TestServer;
 
 @Component
-public class WebSteps {
-    private static final Logger log = LoggerFactory.getLogger(WebSteps.class);
+public class CustomerSteps {
+    private static final Logger log = LoggerFactory.getLogger(CustomerSteps.class);
 
-    public WebSteps() {
+    public CustomerSteps() {
         log.info("created");
     }
 
@@ -39,21 +41,23 @@ public class WebSteps {
     @When("server initialized")
     public void init() {
         final int port = testServer.getPort();
-        assertThat("Server port is not as expected", port, greaterThan(1));
+        assertThat("Server port is not as expected", port, greaterThan(9999));
+        final String host = testServer.getHost();
+        assertThat("Server host is null", host ,notNullValue());
+        log.debug("test server initialized: " + testServer.print());
+        
         requestSpecification = new RequestSpecBuilder()
                 .setContentType(ContentType.JSON)
-                .setBaseUri("http://localhost:" + port + "/")
+                .setBaseUri("http://"+host +":" + port + "/")
                 .addFilter(new ResponseLoggingFilter())
                 .addFilter(new RequestLoggingFilter())
                 .build();
-        log.info("test server initialized: " + testServer.print());
     }
 
     @Then("customer created")
     public void createCustomer() {
         String customerName = "Testcustomer";
 
-        //create new customer
         final Customer newCustomer = given()
                 .spec(requestSpecification)
                 .body("{\"name\":\"" + customerName + "\"}")
@@ -63,11 +67,10 @@ public class WebSteps {
                 .statusCode(201)
                 .extract().as(Customer.class);
 
-        assertThat(newCustomer.getId() != null);
-        assertThat(!newCustomer.getId().isEmpty());
-        assertThat(newCustomer.getName().equals(customerName));
+        assertThat("Customer ID is null or empty string", newCustomer.getId(), not(isEmptyOrNullString()));
+        assertThat("Name of the found customer is not as expected", newCustomer.getName(), equalTo((customerName)));
 
-        //get the created customer
+        // get the created customer
         final Customer newCustomer2 = given()
                 .spec(requestSpecification)
                 .when()
@@ -76,7 +79,7 @@ public class WebSteps {
                 .statusCode(200)
                 .extract().as(Customer.class);
 
-        assertThat(newCustomer.equals(newCustomer2));
+        assertThat("Found customer is not the same as just created",  newCustomer, equalTo(newCustomer2));
     }
 
     @Then("unknown customer not found")

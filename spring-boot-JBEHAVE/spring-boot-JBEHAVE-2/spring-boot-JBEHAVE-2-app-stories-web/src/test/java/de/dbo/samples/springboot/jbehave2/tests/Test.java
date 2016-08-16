@@ -45,10 +45,8 @@ import de.dbo.samples.springboot.jbehave2.tests.steps.SharedSteps;
  */
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT /*, classes = {WebConfiguration.class, TestServer.class} */)
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @EnableAutoConfiguration
-//@DirtiesContext
-//@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 
 public class Test extends JUnitStories {
     private static final Logger log = LoggerFactory.getLogger(TestApplication.class);
