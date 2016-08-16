@@ -27,6 +27,14 @@ public class TestApplication {
 
     public static void main(String[] args) {
         final ConfigurableApplicationContext ctx = SpringApplication.run(TestApplication.class, args);
+        log.info("Test Server " + ctx.getBean(TestServer.class).print());
+        final long pause = 300;
+        try {
+            log.info("sleeping " + pause + " sec. ...");
+	    Thread.sleep(pause*1000);
+	} catch (InterruptedException e) {
+	   log.error("Can't sleep any more:",e);
+	}
         ctx.close();
     }
 
