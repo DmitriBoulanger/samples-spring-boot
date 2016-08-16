@@ -27,14 +27,12 @@ import org.slf4j.LoggerFactory;
 /* Spring */
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.context.embedded.LocalServerPort;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.context.ApplicationContext;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import de.dbo.samples.springboot.jbehave2.app.web.WebConfiguration;
+import de.dbo.samples.springboot.jbehave2.tests.steps.SharedSteps;
 
 /**
  * TestApplication has a lot of moving parts
@@ -47,29 +45,24 @@ import de.dbo.samples.springboot.jbehave2.app.web.WebConfiguration;
  */
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT, classes = {WebConfiguration.class, TestServer.class})
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT /*, classes = {WebConfiguration.class, TestServer.class} */)
 @EnableAutoConfiguration
-@DirtiesContext
+//@DirtiesContext
 //@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 
-public class StoriesTest extends JUnitStories {
+public class Test extends JUnitStories {
     private static final Logger log = LoggerFactory.getLogger(TestApplication.class);
-
-    @LocalServerPort
-    private int                 port;
 
     @Autowired
     private ApplicationContext  applicationContext;
 
-    public StoriesTest() {
+    public Test() {
         log.info("created");
     }
 
     @PostConstruct
     public void init() {
-        applicationContext.getBean(TestServer.class).setPort(port);
         initJBehaveConfiguration();
-        log.info("initialized in post-construct. Server " + applicationContext.getBean(TestServer.class).print());
     }
 
     private void initJBehaveConfiguration() {
@@ -80,7 +73,7 @@ public class StoriesTest extends JUnitStories {
                 .useStepdocReporter(new PrintStreamStepdocReporter())
                 .useStoryReporterBuilder(
                         new StoryReporterBuilder()
-                                .withCodeLocation(CodeLocations.codeLocationFromClass(thisClass))
+                                .withCodeLocation(CodeLocations.codeLocationFromClass(SharedSteps.class /*thisClass*/))
                                 .withDefaultFormats()
                                 .withFormats(Format.CONSOLE, Format.TXT, Format.HTML, Format.XML, Format.STATS)
                                 .withCrossReference(new CrossReference())
@@ -98,7 +91,14 @@ public class StoriesTest extends JUnitStories {
 
     @Override
     protected List<String> storyPaths() {
-        return new StoryFinder().findPaths(CodeLocations.codeLocationFromClass(this.getClass()), "**/no-web/*.story", "**/web/*.story");
+        final List<String> storyPaths =
+            new StoryFinder().findPaths(CodeLocations.codeLocationFromClass(this.getClass()), "**/*.story", "**/excluded/*.story");
+        final StringBuilder sb = new StringBuilder("Stories to run:");
+        for (final String path : storyPaths) {
+            sb.append("\n\t - " + path);
+        }
+        log.info(sb.toString());
+        return storyPaths;
     }
 
 }

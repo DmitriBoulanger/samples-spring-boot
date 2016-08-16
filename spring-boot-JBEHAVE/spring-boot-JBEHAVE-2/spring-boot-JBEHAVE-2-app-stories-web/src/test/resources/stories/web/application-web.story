@@ -5,7 +5,7 @@ I want to define WEB story
 
 Scenario: Customer service story
 
-Given server initialized
-And customer created
+When server initialized
+Then customer created
 And unknown customer not found
 
