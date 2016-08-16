@@ -2,8 +2,8 @@ package de.dbo.samples.springboot.jbehave2.tests.steps;
 
 import static com.jayway.restassured.RestAssured.given;
 import static org.assertj.core.api.Assertions.assertThat;
-
-import javax.annotation.PostConstruct;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.greaterThan;
 
 import org.jbehave.core.annotations.Given;
 // SLF4J
@@ -34,9 +34,10 @@ public class CustomerSteps {
 
     private RequestSpecification requestSpecification;
 
-    @PostConstruct
+    @Given("server initialized")
     public void init() {
         int port = testServer.getPort();
+        assertThat("Server port is not as expected", port, greaterThan(1));
         requestSpecification = new RequestSpecBuilder()
                 .setContentType(ContentType.JSON)
                 .setBaseUri("http://localhost:" + port + "/")
