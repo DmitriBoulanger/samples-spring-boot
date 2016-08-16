@@ -12,7 +12,7 @@
 	<artifactId>spring-boot-CAMEL</artifactId>
 	<packaging>pom</packaging>
 
-	<name>Samples Spring-Boot Camel reactor</name>
+	<name>Samples Spring-Boot CAMEL reactor</name>
 	<description>
 Reactor for Spring-Boot Camel-samples.
 This reactor corrects standard spring-boot dependencies to disable standard spring-boot logging.

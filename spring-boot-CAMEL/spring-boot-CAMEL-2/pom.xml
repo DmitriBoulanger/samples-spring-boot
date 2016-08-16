@@ -12,7 +12,7 @@
 
 	<artifactId>spring-boot-CAMEL-2</artifactId>
 	<packaging>war</packaging>
-	<name>Samples Spring-Boot Camel - 2</name>
+	<name>Samples Spring-Boot CAMEL - 2</name>
 	<description>An example showing how to work with Camel and Spring Boot</description>
 	<url>https://github.com/apache/camel/blob/camel-2.17.2/examples/camel-example-spring-boot</url>
 
