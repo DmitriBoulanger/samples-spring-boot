@@ -19,9 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * The Customer Service is used for creating and managing {@link Customer} entities
- *
- * @see <a href="https://confluence.ityx.de/display/RES/Customer+Service">https://confluence.ityx.de/display/RES/Customer+Service</a>
+ * Customer Service
  */
 @RestController
 public class CustomerService {

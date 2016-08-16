@@ -1,10 +1,7 @@
 package de.dbo.samples.springboot.jbehave2.app.web.customer;
 
 /**
- *  The Customer entity
- *
- *  @see <a href="https://confluence.ityx.de/display/RES/Customer+Entity">https://confluence.ityx.de/display/RES/Customer+Entity</a>
- *  @see <a href="https://confluence.ityx.de/display/RES/Domain+Model">https://confluence.ityx.de/display/RES/Domain+Model</a>
+ *  Customer entity
  */
 public class Customer {
 
@@ -21,7 +18,7 @@ public class Customer {
 
     public Customer(String id, String name) {
         this.id = id;
-        this.name= name;
+        this.name = name;
     }
 
     public String getId() {
