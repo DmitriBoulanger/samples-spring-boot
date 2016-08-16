@@ -14,18 +14,13 @@
 	<!--                            LOGGERS                                                                      -->
 	<!-- ======================================================================================================= -->
 
-	<logger name="de.dbo.samples.springboot.jbehave2.tests" 
-		level="DEBUG" additivity="true">
-		<appender-ref ref="NORMAL_MESSAGES" />
-	</logger>
-	
-	<logger name="de.dbo.samples.springboot.jbehave2.app" 
-		level="DEBUG" additivity="true">
+	<logger name="de.dbo.samples.springboot" 
+		level="INFO" additivity="true">
 		<appender-ref ref="NORMAL_MESSAGES" />
 	</logger>
 	
 	<logger name="org.jbehave" 
-		level="DEBUG" additivity="true">
+		level="INFO" additivity="true">
 		<appender-ref ref="NORMAL_MESSAGES" />
 	</logger>
 	
@@ -33,19 +28,37 @@
 		level="INFO" additivity="false">
 		<appender-ref ref="NORMAL_MESSAGES" />
 	</logger>
-	
-	 <logger name="org.springframework.boot.context.embedded.tomcat" 
-		level="INFO" additivity="false">
+
+	<logger name="org.springframework.web.servlet.mvc" 
+		level="DEBUG" additivity="false">
 		<appender-ref ref="NORMAL_MESSAGES" />
 	</logger>
+	
+	<logger name="org.springframework.web.servlet.resource" 
+		level="DEBUG" additivity="false">
+		<appender-ref ref="NORMAL_MESSAGES" />
+	</logger>		
+	
+	<logger name="org.springframework.web.servlet.handler" 
+		level="DEBUG" additivity="false">
+		<appender-ref ref="NORMAL_MESSAGES" />
+	</logger>
+	
+	
+
+	
+<!-- 	 <logger name="org.springframework.boot.context.embedded.tomcat"  -->
+<!-- 		level="DEBUG" additivity="false"> -->
+<!-- 		<appender-ref ref="NORMAL_MESSAGES" /> -->
+<!-- 	</logger> -->
 	
 	<!-- =================================================================================================== -->
 	<!--                                SPECIAL LOGGERS                                                      -->
 	<!-- =================================================================================================== -->
 	
-	<logger name="org.springframework.beans.factory.support" level="DEBUG"
-		additivity="false">
-		<appender-ref ref="NORMAL_MESSAGES_SPRING" />
-	</logger>
+<!-- 	<logger name="org.springframework.beans.factory.support" level="DEBUG" -->
+<!-- 		additivity="false"> -->
+<!-- 		<appender-ref ref="NORMAL_MESSAGES_SPRING" /> -->
+<!-- 	</logger> -->
 
 </configuration>

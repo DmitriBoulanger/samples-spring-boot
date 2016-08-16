@@ -1,11 +1,12 @@
 Narrative:
-In order to learn JBehave with Spring-Boot Environment
-As a test-developer
-I want to define WEB story
+In order to learn JBehave in the Spring-Boot Environment
+As a CI test-developer
+I want to define micro-service WEB-story
 
-Scenario: Customer service story
+Scenario: Customer Service WEB-story
 
-When server initialized
-Then customer created
+Given server initialized
+When new customer created
+Then created customer found
 And unknown customer not found
 

@@ -35,12 +35,16 @@ public class ShoppingCartSteps {
     private ProductDao          productRepository;
 
     public ShoppingCartSteps() {
-        log.info("created");
+	if (log.isDebugEnabled()) {
+        log.debug("created");
+	}
     }
 
     @Given("empty shopping cart")
     public void emptyShoppingCart() {
-        log.info("emptyShoppingCart ...");
+	if (log.isDebugEnabled()) {
+        log.debug("emptyShoppingCart ...");
+	}
         shoppingCartService.createEmptyShoppingCart();
     }
 
@@ -49,20 +53,26 @@ public class ShoppingCartSteps {
         for (ShoppingCartRow row : rows) {
             Product product = productRepository.findByName(row.getProductName());
             shoppingCartService.addProductToShoppingCart(product.getSku(), row.getQuantity());
-            log.info("added product " + product.getName());
+            if (log.isDebugEnabled()) {
+            log.debug("added product " + product.getName());
+            }
         }
     }
 
     @Then("shopping cart is empty")
     public void isEmpty() {
-        log.info("isEmpty ...");
+	if (log.isDebugEnabled()) {
+        log.debug("isEmpty ...");
+	}
         ShoppingCart shoppingCart = shoppingCartService.getShoppingCart();
         assertEquals(0, shoppingCart.numberOfItems());
     }
 
     @Then("the number of products in shopping cart is $numberOfItems")
     public void numberOfItems(int numberOfItems) {
-        log.info("numberOfItems " + numberOfItems + "  ...");
+	if (log.isDebugEnabled()) {
+        log.debug("numberOfItems " + numberOfItems + "  ...");
+	}
         ShoppingCart shoppingCart = shoppingCartService.getShoppingCart();
         assertEquals(numberOfItems, shoppingCart.numberOfItems());
     }
@@ -70,7 +80,9 @@ public class ShoppingCartSteps {
     @Then("total price is $price")
     @Pending
     public void totalPrice(Money price) {
-        log.info("totalPrice " + price + "  ...");
+	if (log.isDebugEnabled()) {
+        log.debug("totalPrice " + price + "  ...");
+	}
         // TODO: implement missing functionality and enable step
     }
 
