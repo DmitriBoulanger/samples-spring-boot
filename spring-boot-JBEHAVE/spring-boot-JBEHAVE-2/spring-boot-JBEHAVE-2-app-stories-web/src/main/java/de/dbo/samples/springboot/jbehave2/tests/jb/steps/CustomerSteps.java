@@ -22,7 +22,7 @@ import com.jayway.restassured.filter.log.ResponseLoggingFilter;
 import com.jayway.restassured.http.ContentType;
 import com.jayway.restassured.specification.RequestSpecification;
 
-import de.dbo.samples.springboot.jbehave2.app.web.customer.Customer;
+import de.dbo.samples.springboot.jbehave2.app.domain.Customer;
 import de.dbo.samples.springboot.jbehave2.tests.TestServer;
 
 @Component

@@ -1,4 +1,4 @@
-package de.dbo.samples.springboot.jbehave2.tests.converters;
+package de.dbo.samples.springboot.jbehave2.tests.jb.converters;
 
 import org.jbehave.core.annotations.AsParameterConverter;
 import org.slf4j.Logger;

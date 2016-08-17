@@ -18,6 +18,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import de.dbo.samples.springboot.jbehave2.app.domain.Customer;
+import de.dbo.samples.springboot.jbehave2.app.domain.ErrorObject;
+
 /**
  * Customer Service
  */

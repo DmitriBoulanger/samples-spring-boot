@@ -19,13 +19,13 @@ import com.jayway.restassured.filter.log.ResponseLoggingFilter;
 import com.jayway.restassured.http.ContentType;
 import com.jayway.restassured.specification.RequestSpecification;
 
+import de.dbo.samples.springboot.jbehave2.app.domain.Customer;
 import de.dbo.samples.springboot.jbehave2.app.web.WebConfiguration;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT, classes = {WebConfiguration.class})
 @EnableAutoConfiguration
 @DirtiesContext
-//@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class CustomerTest {
 
     @LocalServerPort

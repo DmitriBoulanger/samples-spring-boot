@@ -1,4 +1,4 @@
-package de.dbo.samples.springboot.jbehave2.app.web.customer;
+package de.dbo.samples.springboot.jbehave2.app.domain;
 
 /**
  *  Customer entity

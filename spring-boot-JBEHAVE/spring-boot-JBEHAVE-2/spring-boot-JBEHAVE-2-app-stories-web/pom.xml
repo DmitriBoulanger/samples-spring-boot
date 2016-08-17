@@ -41,7 +41,7 @@
 	<dependencies>
 
 		<!-- ========================================================================================= -->
-		<!-- APPLICATION TO BE TESTED                                                                  -->
+		<!--                        APPLICATIONS TO BE TESTED                                          -->
 		<!-- ========================================================================================= -->
 
 		<dependency>
@@ -50,6 +50,11 @@
 				<version>0.0.0-SNAPSHOT</version>
 		</dependency>
 
+		<dependency>
+				<groupId>de.dbo.samples.springboot</groupId>
+				<artifactId>spring-boot-JBEHAVE-2-app2</artifactId>
+				<version>0.0.0-SNAPSHOT</version>
+		</dependency>
 		<!-- ========================================================================================= -->
 		<!-- SPRING-BOOT                                                                               -->
 		<!-- ========================================================================================= -->

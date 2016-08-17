@@ -1,7 +1,5 @@
 package de.dbo.samples.springboot.jbehave2.tests;
 
-import de.dbo.samples.springboot.jbehave2.tests.jb.steps.SharedSteps;
-
 import java.text.SimpleDateFormat;
 import java.util.List;
 
@@ -34,6 +32,8 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import de.dbo.samples.springboot.jbehave2.tests.jb.steps.SharedSteps;
+
 /**
  * TestApplication has a lot of moving parts
  * so it made sense to wrap some of the operations in an integration test session.
@@ -47,7 +47,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @EnableAutoConfiguration
-
 public class Test extends JUnitStories {
     private static final Logger log = LoggerFactory.getLogger(TestApplication.class);
 
@@ -62,6 +61,10 @@ public class Test extends JUnitStories {
     public void init() {
         initJBehaveConfiguration();
     }
+
+    // =====================================================================================================================================
+    // JBEHAVE CONFIGURATION  - VERY BAD: HAS TO BE DONE IN ANOTHER WAY ....
+    // =====================================================================================================================================
 
     private void initJBehaveConfiguration() {
         Class<?> thisClass = this.getClass();
@@ -80,6 +83,8 @@ public class Test extends JUnitStories {
                         new ParameterConverters()
                                 .addConverters(new ParameterConverters.DateConverter(new SimpleDateFormat("yyyy-MM-dd"))))
                 .useStepMonitor(new SilentStepMonitor()));
+        configuredEmbedder().embedderControls().useThreads(10);
+
     }
 
     @Override
