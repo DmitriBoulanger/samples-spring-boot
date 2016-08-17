@@ -19,7 +19,8 @@
 	</properties>
 
 	<modules>
-		<module>spring-boot-JBEHAVE-2-app</module>
+		<module>spring-boot-JBEHAVE-2-app1</module>
+		<module>spring-boot-JBEHAVE-2-app2</module>
 		<module>spring-boot-JBEHAVE-2-app-stories</module>
 		<module>spring-boot-JBEHAVE-2-app-stories-web</module>
 	</modules>
