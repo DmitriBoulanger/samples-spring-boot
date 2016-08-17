@@ -8,10 +8,10 @@
 		<version>0.0.0-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>spring-boot-JBEHAVE-2</artifactId>
+	<artifactId>spring-boot-JBEHAVE-2-app</artifactId>
 	<packaging>pom</packaging>
 
-	<name>Samples Spring-Boot JBEHAVE 2</name>
+	<name>Samples Spring-Boot JBEHAVE 2 App</name>
 	<url>/</url>
 
 	<properties>
@@ -19,10 +19,9 @@
 	</properties>
 
 	<modules>
-		<module>spring-boot-JBEHAVE-2-app</module>
-		
-		<module>spring-boot-JBEHAVE-2-stories</module>
-		<module>spring-boot-JBEHAVE-2-stories-web</module>
+		<module>spring-boot-JBEHAVE-2-app-1</module>
+		<module>spring-boot-JBEHAVE-2-app-2</module>
+		<module>spring-boot-JBEHAVE-2-app-3</module>
 	</modules>
 
 </project>
