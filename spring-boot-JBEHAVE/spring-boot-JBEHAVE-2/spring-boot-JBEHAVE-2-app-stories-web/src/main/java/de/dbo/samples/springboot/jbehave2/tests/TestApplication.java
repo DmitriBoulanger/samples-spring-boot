@@ -20,7 +20,7 @@ public class TestApplication {
     private static final Logger log = LoggerFactory.getLogger(TestApplication.class);
 
     public TestApplication() {
-        log.info("created");
+        log.info("created. HashCode=[" + hashCode() + "]");
     }
 
     public static void main(String[] args) {

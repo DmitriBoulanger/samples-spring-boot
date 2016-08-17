@@ -1,4 +1,4 @@
-package de.dbo.samples.springboot.jbehave2.tests.steps;
+package de.dbo.samples.springboot.jbehave2.tests.jb.steps;
 
 import static com.jayway.restassured.RestAssured.given;
 /* Hamcrest */
@@ -30,7 +30,7 @@ public class CustomerSteps {
     private static final Logger log = LoggerFactory.getLogger(CustomerSteps.class);
 
     public CustomerSteps() {
-	log.debug("created");
+	 log.info("created. HashCode=[" + hashCode() + "]");
     }
 
     @Autowired
