@@ -16,14 +16,14 @@ public class ShoppingCartService {
     private PriceDao priceRepository;
 
     public void createEmptyShoppingCart() {
-        CustomerIdentifier customerIdentifier = systemService.authenticatedCustomer();
+        ShoperIdentifier customerIdentifier = systemService.authenticatedCustomer();
 
         ShoppingCart emptyShoppingCart = new ShoppingCart(customerIdentifier);
         shoppingCartRepository.add(emptyShoppingCart);
     }
 
     public void addProductToShoppingCart(StockKeepingUnit sku, int quantity) {
-        CustomerIdentifier customerIdentifier = systemService.authenticatedCustomer();
+        ShoperIdentifier customerIdentifier = systemService.authenticatedCustomer();
         Money price = priceRepository.findBySku(sku);
 
         ShoppingCart shoppingCart = shoppingCartRepository.load(customerIdentifier);
@@ -31,7 +31,7 @@ public class ShoppingCartService {
     }
 
     public ShoppingCart getShoppingCart() {
-        CustomerIdentifier customerIdentifier = systemService.authenticatedCustomer();
+        ShoperIdentifier customerIdentifier = systemService.authenticatedCustomer();
         return shoppingCartRepository.load(customerIdentifier);
     }
 

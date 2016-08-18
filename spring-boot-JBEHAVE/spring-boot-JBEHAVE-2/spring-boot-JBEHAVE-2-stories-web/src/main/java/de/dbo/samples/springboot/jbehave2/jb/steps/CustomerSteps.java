@@ -22,7 +22,7 @@ import com.jayway.restassured.filter.log.ResponseLoggingFilter;
 import com.jayway.restassured.http.ContentType;
 import com.jayway.restassured.specification.RequestSpecification;
 
-import de.dbo.samples.springboot.jbehave2.app1.domain.Customer;
+import de.dbo.samples.springboot.jbehave2.app1.domain.Shoper;
 import de.dbo.samples.springboot.jbehave2.tests.TestServer;
 
 @Component
@@ -57,7 +57,7 @@ public class CustomerSteps {
 		.build();
     }
 
-    private Customer newCustomer;
+    private Shoper newCustomer;
 
     @When("new customer created")
     public void createCustomer() {
@@ -69,22 +69,22 @@ public class CustomerSteps {
 		.post("customers")
 		.then()
 		.statusCode(201)
-		.extract().as(Customer.class);
+		.extract().as(Shoper.class);
 
-	assertThat("Customer ID is null or empty string", newCustomer.getId(), not(isEmptyOrNullString()));
+	assertThat("Shoper ID is null or empty string", newCustomer.getId(), not(isEmptyOrNullString()));
 	assertThat("Name of the found customer is not as expected", newCustomer.getName(), equalTo((customerName)));
     }
 
     @Then("created customer found")
     public void foundCustomer() {
 
-	final Customer newCustomerClone = given()
+	final Shoper newCustomerClone = given()
 		.spec(requestSpecification)
 		.when()
 		.get("customers/" + newCustomer.getId())
 		.then()
 		.statusCode(200)
-		.extract().as(Customer.class);
+		.extract().as(Shoper.class);
 
 	assertThat("Found customer-clone is not the same as origin",  newCustomer, equalTo(newCustomerClone));
     }
