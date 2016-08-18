@@ -1,4 +1,4 @@
-package de.dbo.samples.springboot.jbehave2.jb.steps;
+package de.dbo.samples.springboot.jbehave2.IT.jb.web.steps;
 
 import static com.jayway.restassured.RestAssured.given;
 /* Hamcrest */
@@ -20,7 +20,7 @@ import com.jayway.restassured.filter.log.ResponseLoggingFilter;
 import com.jayway.restassured.http.ContentType;
 import com.jayway.restassured.specification.RequestSpecification;
 
-import de.dbo.samples.springboot.jbehave2.IT.ITTestServer;
+import de.dbo.samples.springboot.jbehave2.IT.web.ITestServer;
 
 @Component
 public class A2_ProjectSteps {
@@ -31,7 +31,7 @@ public class A2_ProjectSteps {
     }
 
     @Autowired
-    private ITTestServer         testServer;
+    private ITestServer         testServer;
 
     private RequestSpecification requestSpecification;
 

@@ -1,4 +1,4 @@
-package de.dbo.samples.springboot.jbehave2.IT;
+package de.dbo.samples.springboot.jbehave2.IT.web;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -33,7 +33,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
 /**
- * ITTestApplication has a lot of moving parts
+ * ITestApplication has a lot of moving parts
  * so it made sense to wrap some of the operations in an integration test session.
  *
  * @author Dmitri Boulanger, Hombach
@@ -45,13 +45,13 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @EnableAutoConfiguration
-public class ITTest extends JUnitStories {
-    private static final Logger log = LoggerFactory.getLogger(ITTestApplication.class);
+public class ITest extends JUnitStories {
+    private static final Logger log = LoggerFactory.getLogger(ITestApplication.class);
 
     @Autowired
     private ApplicationContext  applicationContext;
 
-    public ITTest() {
+    public ITest() {
         log.info("created");
     }
 
@@ -94,7 +94,7 @@ public class ITTest extends JUnitStories {
     protected List<String> storyPaths() {
         final List<String> storyPaths =
             new StoryFinder().findPaths(CodeLocations.codeLocationFromClass(this.getClass()), "**/*.story", "**/excluded/*.story");
-        final StringBuilder sb = new StringBuilder("Stories to run:");
+        final StringBuilder sb = new StringBuilder("Stories found:");
         for (final String path : storyPaths) {
             sb.append("\n\t - " + path);
         }

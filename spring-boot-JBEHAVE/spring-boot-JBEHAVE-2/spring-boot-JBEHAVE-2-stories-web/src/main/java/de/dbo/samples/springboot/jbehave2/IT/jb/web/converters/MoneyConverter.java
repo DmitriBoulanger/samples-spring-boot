@@ -1,4 +1,4 @@
-package de.dbo.samples.springboot.jbehave2.jb.converters;
+package de.dbo.samples.springboot.jbehave2.IT.jb.web.converters;
 
 /*
  * JBehave

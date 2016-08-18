@@ -7,10 +7,10 @@
 	</configSuffixes>
 	<enableImports><![CDATA[false]]></enableImports>
 	<configs>
-		<config>java:de.dbo.samples.springboot.jbehave2.jb.converters.MoneyConverter</config>
-		<config>java:de.dbo.samples.springboot.jbehave2.jb.converters.StockKeepingUnitConverter</config>
-		<config>java:de.dbo.samples.springboot.jbehave2.IT.ITTestApplication</config>
-		<config>java:de.dbo.samples.springboot.jbehave2.IT.ITTestServer</config>
+		<config>java:de.dbo.samples.springboot.jbehave2.IT.jb.web.converters.MoneyConverter</config>
+		<config>java:de.dbo.samples.springboot.jbehave2.IT.jb.web.converters.StockKeepingUnitConverter</config>
+		<config>java:de.dbo.samples.springboot.jbehave2.IT.web.ITestApplication</config>
+		<config>java:de.dbo.samples.springboot.jbehave2.IT.web.ITestServer</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>

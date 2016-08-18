@@ -1,11 +1,11 @@
-package de.dbo.samples.springboot.jbehave2.IT;
+package de.dbo.samples.springboot.jbehave2.IT.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ITTestServer {
+public class ITestServer {
 
     @Autowired
     Environment environment;

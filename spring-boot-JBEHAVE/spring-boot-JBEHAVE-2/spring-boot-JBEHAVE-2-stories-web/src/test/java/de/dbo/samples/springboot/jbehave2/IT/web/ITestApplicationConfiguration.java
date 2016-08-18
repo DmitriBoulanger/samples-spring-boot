@@ -1,4 +1,4 @@
-package de.dbo.samples.springboot.jbehave2.IT;
+package de.dbo.samples.springboot.jbehave2.IT.web;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,8 +30,8 @@ import de.dbo.samples.springboot.utilities.logging.LoggingInfo;
 
 @Configuration
 @ComponentScan(value = {
-        // Steps Factory for all Applications
-        "de.dbo.samples.springboot.jbehave2.jb"
+        // Steps-Factory for all Applications to be integrated
+        "de.dbo.samples.springboot.jbehave2.IT.jb.web"
         // Application 1
         , "de.dbo.samples.springboot.jbehave2.app1"
         // Application 2
@@ -40,8 +40,8 @@ import de.dbo.samples.springboot.utilities.logging.LoggingInfo;
         , "de.dbo.samples.springboot.jbehave2.app3"
 })
 @EnableElasticsearchRepositories(basePackages = {"de.dbo.samples.springboot.jbehave2.app3.domain"})
-public class ITTestApplicationConfiguration {
-    private static final Logger log = LoggerFactory.getLogger(ITTestApplicationConfiguration.class);
+public class ITestApplicationConfiguration {
+    private static final Logger log = LoggerFactory.getLogger(ITestApplicationConfiguration.class);
 
     @Bean
     public Jackson2RepositoryPopulatorFactoryBean repositoryPopulator() {

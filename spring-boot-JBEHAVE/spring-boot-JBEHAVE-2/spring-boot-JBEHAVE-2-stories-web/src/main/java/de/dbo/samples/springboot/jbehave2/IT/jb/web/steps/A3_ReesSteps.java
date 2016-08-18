@@ -1,4 +1,4 @@
-package de.dbo.samples.springboot.jbehave2.jb.steps;
+package de.dbo.samples.springboot.jbehave2.IT.jb.web.steps;
 
 /* Hamcrest */
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -21,7 +21,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
-import de.dbo.samples.springboot.jbehave2.IT.ITTestServer;
+import de.dbo.samples.springboot.jbehave2.IT.web.ITestServer;
 
 @Component
 public class A3_ReesSteps {
@@ -32,7 +32,7 @@ public class A3_ReesSteps {
     }
 
     @Autowired
-    private ITTestServer testServer;
+    private ITestServer testServer;
 
     @Given("A3 server initialized")
     public void init() {

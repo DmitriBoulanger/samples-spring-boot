@@ -1,4 +1,4 @@
-package de.dbo.samples.springboot.jbehave2.IT;
+package de.dbo.samples.springboot.jbehave2.IT.web;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,16 +16,16 @@ import org.springframework.context.ConfigurableApplicationContext;
  */
 
 @SpringBootApplication
-public class ITTestApplication {
-    private static final Logger log = LoggerFactory.getLogger(ITTestApplication.class);
+public class ITestApplication {
+    private static final Logger log = LoggerFactory.getLogger(ITestApplication.class);
 
-    public ITTestApplication() {
+    public ITestApplication() {
         log.info("created. HashCode=[" + hashCode() + "]");
     }
 
     public static void main(String[] args) {
-        final ConfigurableApplicationContext ctx = SpringApplication.run(ITTestApplication.class, args);
-        log.info("ITTest Server " + ctx.getBean(ITTestServer.class).print());
+        final ConfigurableApplicationContext ctx = SpringApplication.run(ITestApplication.class, args);
+        log.info("ITest Server " + ctx.getBean(ITestServer.class).print());
         final long pause = 300;
         try {
             log.info("sleeping " + pause + " sec. ...");
