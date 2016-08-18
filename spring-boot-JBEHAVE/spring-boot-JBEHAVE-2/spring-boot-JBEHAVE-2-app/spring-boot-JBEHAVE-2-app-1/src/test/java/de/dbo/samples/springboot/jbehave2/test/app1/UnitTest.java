@@ -7,8 +7,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+/* Spring-Boot */
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.test.annotation.DirtiesContext;
@@ -25,13 +25,12 @@ import com.jayway.restassured.specification.RequestSpecification;
 import de.dbo.samples.springboot.jbehave2.app1.domain.Shoper;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT, classes = {JUnitTestApplication.class})
-@EnableAutoConfiguration
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT, classes = {UnitTestApplication.class})
 @DirtiesContext
-public class JUnitTest {
+public class UnitTest {
 
     @Autowired
-    private JUnitTestServer      testServer;
+    private UnitTestServer      testServer;
 
     private RequestSpecification spec;
 
@@ -47,10 +46,10 @@ public class JUnitTest {
 
     @Test
     public void testCreateShoper() {
-        final String shoperName = "TestShoper";
+        final String shoperName = "Test Shoper";
 
         //create new customer
-        Shoper newCustomer = given()
+        Shoper newShoper = given()
                 .spec(spec)
                 .body("{\"name\":\"" + shoperName + "\"}")
                 .when()
@@ -59,20 +58,20 @@ public class JUnitTest {
                 .statusCode(201)
                 .extract().as(Shoper.class);
 
-        assertThat(newCustomer.getId() != null);
-        assertThat(!newCustomer.getId().isEmpty());
-        assertThat(newCustomer.getName().equals(shoperName));
+        assertThat(newShoper.getId() != null);
+        assertThat(!newShoper.getId().isEmpty());
+        assertThat(newShoper.getName().equals(shoperName));
 
         //get the created customer
         Shoper newCustomer2 = given()
                 .spec(spec)
                 .when()
-                .get("shopers/" + newCustomer.getId())
+                .get("shopers/" + newShoper.getId())
                 .then()
                 .statusCode(200)
                 .extract().as(Shoper.class);
 
-        assertThat(newCustomer.equals(newCustomer2));
+        assertThat(newShoper.equals(newCustomer2));
     }
 
     @Test

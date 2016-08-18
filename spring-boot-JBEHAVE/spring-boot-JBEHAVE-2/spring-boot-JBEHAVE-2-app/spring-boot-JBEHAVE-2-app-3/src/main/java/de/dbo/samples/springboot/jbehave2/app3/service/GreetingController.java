@@ -1,6 +1,5 @@
 package de.dbo.samples.springboot.jbehave2.app3.service;
 
-import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
 import org.slf4j.Logger;
@@ -18,21 +17,23 @@ import de.dbo.samples.springboot.jbehave2.app3.domain.CustomerRepository;
 @RestController
 @RequestMapping("/hello-world")
 public class GreetingController {
-    private static final Logger log      = LoggerFactory.getLogger(GreetingController.class);
+    private static final Logger log              = LoggerFactory.getLogger(GreetingController.class);
 
-    private static final String template = "Hello, %s!";
-    private final AtomicLong    counter  = new AtomicLong();
+    private static final String RESPONE_TEMPLATE = "Hello, %s! Your visit has been recorded as ";
+    private static final String DEFAULT_NAME     = "Stranger";
+    private static final String DEFAULT_LASTNAME = "Unknown";
+    private final AtomicLong    counter          = new AtomicLong();
 
     @Autowired
     CustomerRepository          customerRepository;
 
     public GreetingController() {
-        log.info("Greeting service-controller created");
+        log.info("created. HashCode=[" + hashCode() + "]");
         log.error("ok");
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public @ResponseBody Greeting sayHello(@RequestParam(value = "name", required = false, defaultValue = "Stranger") String name) {
+    public @ResponseBody Greeting sayHello(@RequestParam(value = "name", required = false, defaultValue = DEFAULT_NAME) String name) {
 
         final long repositoryCount = customerRepository.count();
         log.info("Repository count is " + repositoryCount);
@@ -40,7 +41,7 @@ public class GreetingController {
             log.error("No data in the customer repository: Elastic search repository was not loaded?");
         }
         else {
-            final List<Customer> customers = customerRepository.findByLastName("Smith");
+            final Iterable<Customer> customers = customerRepository.findAll();
             final StringBuilder sb = new StringBuilder("Repository contents: ");
             for (Customer customer : customers) {
                 sb.append("\n\t - ID=" + customer.getId() + " " + customer.getFirstName());
@@ -48,11 +49,22 @@ public class GreetingController {
             log.info(sb.toString());
         }
 
-        if (null != name && name.equals("XXX")) {
-            log.error("Bad name:", new Exception("Bad-name exception just to see it"));
+        final boolean badName = null != name && name.equals("XXX");
+        if (badName) {
+            log.error("Bad name:", new Exception("Bad-name Exception just to see it in log"));
         }
 
-        final Greeting greeting = new Greeting(counter.incrementAndGet(), String.format(template, name));
+        final long id = counter.incrementAndGet();
+        final Customer customer;
+        if (null == name) {
+            customer = new Customer(DEFAULT_NAME + id, DEFAULT_LASTNAME);
+        }
+        else {
+            customer = new Customer(name + id, DEFAULT_LASTNAME);
+        }
+        customerRepository.save(customer);
+        final Greeting greeting = new Greeting(id, String.format(RESPONE_TEMPLATE, name) + customer.toString()
+                + (badName ? " You have ugly name!" : ""), customerRepository.count());
         return greeting;
     }
 

@@ -26,8 +26,8 @@ import de.dbo.samples.springboot.utilities.logging.LoggingInfo;
 @Configuration
 @EnableElasticsearchRepositories(basePackages = {"de.dbo.samples.springboot.jbehave2.app3.domain"})
 @ComponentScan(basePackages = {"de.dbo.samples.springboot.jbehave2.app3"})
-public class JUnitTestConfiguration {
-    private static final Logger log = LoggerFactory.getLogger(JUnitTestConfiguration.class);
+public class UnitTestConfiguration {
+    private static final Logger log = LoggerFactory.getLogger(UnitTestConfiguration.class);
 
     @Bean
     public Jackson2RepositoryPopulatorFactoryBean repositoryPopulator() {

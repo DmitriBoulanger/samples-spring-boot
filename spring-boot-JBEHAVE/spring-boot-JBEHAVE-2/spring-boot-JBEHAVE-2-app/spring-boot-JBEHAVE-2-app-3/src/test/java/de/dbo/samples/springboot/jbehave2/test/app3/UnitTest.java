@@ -36,16 +36,16 @@ import org.springframework.test.context.junit4.SpringRunner;
  */
 //
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT, classes = {JUnitTestApplication.class})
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT, classes = {UnitTestApplication.class})
 @DirtiesContext
 //
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @SuppressWarnings("rawtypes")
-public class JUnitTest {
-    private static final Logger log = LoggerFactory.getLogger(JUnitTest.class);
+public class UnitTest {
+    private static final Logger log = LoggerFactory.getLogger(UnitTest.class);
 
     @Autowired
-    private JUnitTestServer     testServer;
+    private UnitTestServer     testServer;
 
     @Test
     public void test00_Greeting() throws Exception {

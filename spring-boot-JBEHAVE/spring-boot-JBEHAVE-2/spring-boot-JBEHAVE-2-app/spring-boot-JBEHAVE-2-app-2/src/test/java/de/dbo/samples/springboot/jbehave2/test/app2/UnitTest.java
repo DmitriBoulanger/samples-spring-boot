@@ -19,13 +19,13 @@ import com.jayway.restassured.http.ContentType;
 import com.jayway.restassured.specification.RequestSpecification;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT, classes = {JUnitTestApplication.class})
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT, classes = {UnitTestApplication.class})
 @EnableAutoConfiguration
 @DirtiesContext
-public class JUnitTest {
+public class UnitTest {
 
     @Autowired
-    private JUnitTestServer             testServer;
+    private UnitTestServer             testServer;
 
     private static RequestSpecification spec;
 

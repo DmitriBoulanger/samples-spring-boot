@@ -8,11 +8,13 @@ public class Greeting {
 
     private final long          id;
     private final String        content;
+    private final long          cnt;
 
-    public Greeting(long id, String content) {
+    public Greeting(long id, String content, long cnt) {
         this.id = id;
         this.content = content;
-        log.info("created. ID=" + id+ ": " + content);
+        this.cnt = cnt;
+        log.info("created. ID=" + id + ": " + content);
     }
 
     public long getId() {
@@ -21,6 +23,10 @@ public class Greeting {
 
     public String getContent() {
         return content;
+    }
+
+    public long getCnt() {
+        return cnt;
     }
 
 }

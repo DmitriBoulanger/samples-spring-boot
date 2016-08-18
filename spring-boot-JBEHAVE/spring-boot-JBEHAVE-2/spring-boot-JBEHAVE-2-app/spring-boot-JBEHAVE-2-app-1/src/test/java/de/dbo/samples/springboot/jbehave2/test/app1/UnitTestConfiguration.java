@@ -5,10 +5,10 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @ComponentScan(basePackages = {"de.dbo.samples.springboot.jbehave2.app1"})
-public class JUnitTestConfiguration {
+public class UnitTestConfiguration {
 
     //    @Bean
-    //    public JUnitTestServer testServer() {
-    //        return new JUnitTestServer();
+    //    public UnitTestServer testServer() {
+    //        return new UnitTestServer();
     //    }
 }

@@ -7,7 +7,7 @@
 	</configSuffixes>
 	<enableImports><![CDATA[false]]></enableImports>
 	<configs>
-		<config>java:de.dbo.samples.springboot.jbehave2.test.app3.JUnitTestApplication</config>
+		<config>java:de.dbo.samples.springboot.jbehave2.test.app3.UnitTestApplication</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>

@@ -12,13 +12,13 @@ import org.springframework.context.ConfigurableApplicationContext;
 import de.dbo.samples.springboot.jbehave2.app3.domain.CustomerRepository;
 
 @SpringBootApplication
-public class JUnitTestApplication {
-    private static final Logger log = LoggerFactory.getLogger(JUnitTestApplication.class);
+public class UnitTestApplication {
+    private static final Logger log = LoggerFactory.getLogger(UnitTestApplication.class);
 
     @Autowired
     private CustomerRepository  repository;
 
-    public JUnitTestApplication() {
+    public UnitTestApplication() {
         log.info("created. HashCode=[" + hashCode() + "]");
     }
 
@@ -29,8 +29,8 @@ public class JUnitTestApplication {
     }
 
     public static void main(String[] args) {
-        final ConfigurableApplicationContext ctx = SpringApplication.run(JUnitTestApplication.class, args);
-        log.info("Test Server " + ctx.getBean(JUnitTestServer.class).print());
+        final ConfigurableApplicationContext ctx = SpringApplication.run(UnitTestApplication.class, args);
+        log.info("Test Server " + ctx.getBean(UnitTestServer.class).print());
         final long pause = 300;
         try {
             log.info("sleeping " + pause + " sec. ...");

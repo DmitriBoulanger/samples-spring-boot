@@ -5,6 +5,6 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @ComponentScan(basePackages = {"de.dbo.samples.springboot.jbehave2.app2"})
-public class JUnitTestConfiguration {
+public class UnitTestConfiguration {
 
 }
