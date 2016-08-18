@@ -31,7 +31,7 @@ public class A2_ProjectSteps {
     }
 
     @Autowired
-    private ITestServer         testServer;
+    private ITestServer          testServer;
 
     private RequestSpecification requestSpecification;
 
@@ -63,6 +63,7 @@ public class A2_ProjectSteps {
         assertThat("A2 Server port is not as expected", port, greaterThan(9999));
         final String host = testServer.getHost();
         assertThat("A2 Server host is null", host, notNullValue());
+        log.info("A2 server available");
     }
 
 }

@@ -1,4 +1,4 @@
-package de.dbo.samples.springboot.jbehave2.tests;
+package de.dbo.samples.springboot.jbehave2.IT.java;
 
 
 import java.text.SimpleDateFormat;
@@ -32,7 +32,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
 /**
- * TestApplication has a lot of moving parts 
+ * ITestApplication has a lot of moving parts 
  * so it made sense to wrap some of the operations in an integration test session.
  *
  * @author Dmitri Boulanger, Hombach
@@ -42,14 +42,14 @@ import org.springframework.test.context.junit4.SpringRunner;
  */
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes={TestApplication.class})
-public class Test extends JUnitStories {
-    private static final Logger log = LoggerFactory.getLogger(TestApplication.class);
+@SpringBootTest(classes={ITestApplication.class})
+public class ITest extends JUnitStories {
+    private static final Logger log = LoggerFactory.getLogger(ITestApplication.class);
 
     @Autowired
     private ApplicationContext  applicationContext;
 
-    public Test() {
+    public ITest() {
         log.info("created");
     }
 

@@ -1,4 +1,4 @@
-package de.dbo.samples.springboot.jbehave2.tests.jb.steps;
+package de.dbo.samples.springboot.jbehave2.IT.jb.java.steps;
 
 import static org.junit.Assert.assertEquals;
 

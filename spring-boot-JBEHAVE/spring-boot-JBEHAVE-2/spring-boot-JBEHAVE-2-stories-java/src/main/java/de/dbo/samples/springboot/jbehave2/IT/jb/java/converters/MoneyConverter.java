@@ -1,4 +1,4 @@
-package de.dbo.samples.springboot.jbehave2.tests.jb.converters;
+package de.dbo.samples.springboot.jbehave2.IT.jb.java.converters;
 
 import de.dbo.samples.springboot.jbehave2.app1.domain.Money;
 

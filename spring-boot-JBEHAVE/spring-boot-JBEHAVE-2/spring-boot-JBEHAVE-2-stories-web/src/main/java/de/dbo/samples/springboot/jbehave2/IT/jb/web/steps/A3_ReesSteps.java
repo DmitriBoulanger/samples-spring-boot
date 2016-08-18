@@ -41,7 +41,6 @@ public class A3_ReesSteps {
 
     @Then("greeting")
     public void greeting() throws Exception {
-
         final TestRestTemplate restTemplate = new TestRestTemplate();
         final URI uri = toURI(HELLO);
         log.info("request " + uri + " ...");
@@ -96,9 +95,10 @@ public class A3_ReesSteps {
      */
     private void assertThatTestServerInitialized() {
         final int port = testServer.getPort();
-        assertThat("A2 Server port is not as expected", port, greaterThan(9999));
+        assertThat("A3 Server port is not as expected", port, greaterThan(9999));
         final String host = testServer.getHost();
-        assertThat("A2 Server host is null", host, notNullValue());
+        assertThat("A3 Server host is null", host, notNullValue());
+        log.info("A3 server available");
     }
 
     private static final void assertThatHttpStatus(final HttpStatus expectedHttpStatus, @SuppressWarnings("rawtypes") final ResponseEntity<Map> entity) {

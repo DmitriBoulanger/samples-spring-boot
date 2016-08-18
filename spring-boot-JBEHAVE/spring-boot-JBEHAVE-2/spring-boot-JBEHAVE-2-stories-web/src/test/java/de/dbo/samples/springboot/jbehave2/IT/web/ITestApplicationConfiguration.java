@@ -30,7 +30,7 @@ import de.dbo.samples.springboot.utilities.logging.LoggingInfo;
 
 @Configuration
 @ComponentScan(value = {
-        // Steps-Factory for all Applications to be integrated
+        // Steps-classes for all Applications to be integrated
         "de.dbo.samples.springboot.jbehave2.IT.jb.web"
         // Application 1
         , "de.dbo.samples.springboot.jbehave2.app1"

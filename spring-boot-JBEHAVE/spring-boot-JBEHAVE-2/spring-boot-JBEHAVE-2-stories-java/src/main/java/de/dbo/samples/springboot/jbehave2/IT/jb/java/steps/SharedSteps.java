@@ -1,4 +1,4 @@
-package de.dbo.samples.springboot.jbehave2.tests.jb.steps;
+package de.dbo.samples.springboot.jbehave2.IT.jb.java.steps;
 
 import de.dbo.samples.springboot.jbehave2.app1.domain.Money;
 import de.dbo.samples.springboot.jbehave2.app1.domain.PriceDao;

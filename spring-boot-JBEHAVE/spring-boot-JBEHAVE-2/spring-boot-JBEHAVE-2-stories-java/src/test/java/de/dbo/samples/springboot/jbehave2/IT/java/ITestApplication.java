@@ -1,4 +1,4 @@
-package de.dbo.samples.springboot.jbehave2.tests;
+package de.dbo.samples.springboot.jbehave2.IT.java;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,17 +17,17 @@ import org.springframework.context.ConfigurableApplicationContext;
  */
 
 @SpringBootApplication(exclude={WebClientAutoConfiguration.class})
-public class TestApplication {
+public class ITestApplication {
 
-    private static final Logger log = LoggerFactory.getLogger(TestApplication.class);
+    private static final Logger log = LoggerFactory.getLogger(ITestApplication.class);
 
-    public TestApplication() {
+    public ITestApplication() {
         log.info("created");
     }
 
     public static void main(String[] args) {
-        final ConfigurableApplicationContext ctx = SpringApplication.run(TestApplication.class, args);
-        log.info("Test Server " + ctx.getBean(TestServer.class).print());
+        final ConfigurableApplicationContext ctx = SpringApplication.run(ITestApplication.class, args);
+        log.info("ITest Server " + ctx.getBean(ITestServer.class).print());
         final long pause = 300;
         try {
             log.info("sleeping " + pause + " sec. ...");
