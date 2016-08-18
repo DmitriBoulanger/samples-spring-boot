@@ -1,6 +1,12 @@
-package de.dbo.samples.springboot.jbehave2.IT.jb.web.steps;
+package de.dbo.samples.springboot.jbehave2.IT.jb.java.steps;
 
 import static org.junit.Assert.assertEquals;
+
+import de.dbo.samples.springboot.jbehave2.app1.domain.Money;
+import de.dbo.samples.springboot.jbehave2.app1.domain.Product;
+import de.dbo.samples.springboot.jbehave2.app1.domain.ProductDao;
+import de.dbo.samples.springboot.jbehave2.app1.domain.ShoppingCart;
+import de.dbo.samples.springboot.jbehave2.app1.domain.ShoppingCartService;
 
 import java.util.List;
 
@@ -18,12 +24,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import de.dbo.samples.springboot.jbehave2.app1.domain.Money;
-import de.dbo.samples.springboot.jbehave2.app1.domain.Product;
-import de.dbo.samples.springboot.jbehave2.app1.domain.ProductDao;
-import de.dbo.samples.springboot.jbehave2.app1.domain.ShoppingCart;
-import de.dbo.samples.springboot.jbehave2.app1.domain.ShoppingCartService;
-
 @Component
 public class A1_ShoppingCartSteps {
     private static final Logger log = LoggerFactory.getLogger(A1_ShoppingCartSteps.class);
@@ -35,14 +35,12 @@ public class A1_ShoppingCartSteps {
     private ProductDao          productRepository;
 
     public A1_ShoppingCartSteps() {
-        log.info("created. HashCode=[" + hashCode() + "]");
+        log.info("created");
     }
 
     @Given("empty shopping cart")
     public void emptyShoppingCart() {
-        if (log.isDebugEnabled()) {
-            log.debug("emptyShoppingCart ...");
-        }
+        log.info("emptyShoppingCart ...");
         shoppingCartService.createEmptyShoppingCart();
     }
 
@@ -51,26 +49,20 @@ public class A1_ShoppingCartSteps {
         for (ShoppingCartRow row : rows) {
             Product product = productRepository.findByName(row.getProductName());
             shoppingCartService.addProductToShoppingCart(product.getSku(), row.getQuantity());
-            if (log.isDebugEnabled()) {
-                log.debug("added product " + product.getName());
-            }
+            log.info("added product " + product.getName());
         }
     }
 
     @Then("shopping cart is empty")
     public void isEmpty() {
-        if (log.isDebugEnabled()) {
-            log.debug("isEmpty ...");
-        }
+        log.info("isEmpty ...");
         ShoppingCart shoppingCart = shoppingCartService.getShoppingCart();
         assertEquals(0, shoppingCart.numberOfItems());
     }
 
     @Then("the number of products in shopping cart is $numberOfItems")
     public void numberOfItems(int numberOfItems) {
-        if (log.isDebugEnabled()) {
-            log.debug("numberOfItems " + numberOfItems + "  ...");
-        }
+        log.info("numberOfItems " + numberOfItems + "  ...");
         ShoppingCart shoppingCart = shoppingCartService.getShoppingCart();
         assertEquals(numberOfItems, shoppingCart.numberOfItems());
     }
@@ -78,9 +70,7 @@ public class A1_ShoppingCartSteps {
     @Then("total price is $price")
     @Pending
     public void totalPrice(Money price) {
-        if (log.isDebugEnabled()) {
-            log.debug("totalPrice " + price + "  ...");
-        }
+        log.info("totalPrice " + price + "  ...");
         // TODO: implement missing functionality and enable step
     }
 
