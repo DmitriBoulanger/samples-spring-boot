@@ -1,17 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beansProjectDescription>
 	<version>1</version>
-	<pluginVersion><![CDATA[3.8.0.201606301005-RELEASE]]></pluginVersion>
+	<pluginVersion><![CDATA[3.8.1.201607290748-RELEASE]]></pluginVersion>
 	<configSuffixes>
 		<configSuffix><![CDATA[xml]]></configSuffix>
 	</configSuffixes>
 	<enableImports><![CDATA[false]]></enableImports>
 	<configs>
-		<config>java:de.dbo.samples.springboot.jbehave2.app.infrastructure.InfrastructureConfiguration</config>
-		<config>java:de.dbo.samples.springboot.jbehave2.app2.domain.SystemService</config>
-		<config>java:de.dbo.samples.springboot.jbehave2.app2.domain.ShoppingCartService</config>
-		<config>java:de.dbo.samples.springboot.jbehave2.app2.domain.DomainConfiguration</config>
-		<config>java:de.dbo.samples.springboot.jbehave2.app2.web.WebConfiguration</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>

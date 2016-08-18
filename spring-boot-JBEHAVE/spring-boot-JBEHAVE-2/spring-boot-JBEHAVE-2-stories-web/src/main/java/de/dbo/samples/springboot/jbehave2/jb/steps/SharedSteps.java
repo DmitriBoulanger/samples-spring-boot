@@ -1,4 +1,4 @@
-package de.dbo.samples.springboot.jbehave2.tests.jb.steps;
+package de.dbo.samples.springboot.jbehave2.jb.steps;
 
 import de.dbo.samples.springboot.jbehave2.app1.domain.Money;
 import de.dbo.samples.springboot.jbehave2.app1.domain.PriceDao;
@@ -23,19 +23,23 @@ public class SharedSteps {
     private PriceDao            priceRepository;
 
     public SharedSteps() {
-        log.info("created");
+	 log.info("created. HashCode=[" + hashCode() + "]");
     }
 
     @Given("product $name with SKU $sku")
     public void product(String name, StockKeepingUnit sku) {
-        log.info("product: name=" + name + " sku=" + sku);
-        productRepository.save(new Product(sku, name));
+	if (log.isDebugEnabled()) {
+	    log.debug("product: name=" + name + " sku=" + sku);
+	}
+	productRepository.save(new Product(sku, name));
     }
 
     @Given("product $name price is $price")
     public void price(String name, Money price) {
-        log.info("product: name=" + name + " price=" + price + " ...");
-        Product product = productRepository.findByName(name);
-        priceRepository.save(product.getSku(), price);
+	if (log.isDebugEnabled()) {
+	    log.debug("product: name=" + name + " price=" + price + " ...");
+	}
+	Product product = productRepository.findByName(name);
+	priceRepository.save(product.getSku(), price);
     }
 }

@@ -1,4 +1,4 @@
-package de.dbo.samples.springboot.jbehave2.tests.jb.converters;
+package de.dbo.samples.springboot.jbehave2.jb.converters;
 
 import de.dbo.samples.springboot.jbehave2.app1.domain.StockKeepingUnit;
 
@@ -13,7 +13,7 @@ public class StockKeepingUnitConverter {
     private static final Logger log = LoggerFactory.getLogger(StockKeepingUnitConverter.class);
 
     public StockKeepingUnitConverter() {
-        log.info("created");
+	 log.info("created. HashCode=[" + hashCode() + "]");
     }
 
     @AsParameterConverter

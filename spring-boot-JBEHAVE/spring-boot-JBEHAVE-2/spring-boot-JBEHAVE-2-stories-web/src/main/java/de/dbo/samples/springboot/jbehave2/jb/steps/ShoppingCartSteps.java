@@ -1,4 +1,4 @@
-package de.dbo.samples.springboot.jbehave2.tests.jb.steps;
+package de.dbo.samples.springboot.jbehave2.jb.steps;
 
 import static org.junit.Assert.assertEquals;
 
@@ -35,69 +35,79 @@ public class ShoppingCartSteps {
     private ProductDao          productRepository;
 
     public ShoppingCartSteps() {
-        log.info("created");
+	log.info("created. HashCode=[" + hashCode() + "]");
     }
 
     @Given("empty shopping cart")
     public void emptyShoppingCart() {
-        log.info("emptyShoppingCart ...");
-        shoppingCartService.createEmptyShoppingCart();
+	if (log.isDebugEnabled()) {
+	    log.debug("emptyShoppingCart ...");
+	}
+	shoppingCartService.createEmptyShoppingCart();
     }
 
     @When("products are added to the shopping cart: $productNames")
     public void addProducts(List<ShoppingCartRow> rows) {
-        for (ShoppingCartRow row : rows) {
-            Product product = productRepository.findByName(row.getProductName());
-            shoppingCartService.addProductToShoppingCart(product.getSku(), row.getQuantity());
-            log.info("added product " + product.getName());
-        }
+	for (ShoppingCartRow row : rows) {
+	    Product product = productRepository.findByName(row.getProductName());
+	    shoppingCartService.addProductToShoppingCart(product.getSku(), row.getQuantity());
+	    if (log.isDebugEnabled()) {
+		log.debug("added product " + product.getName());
+	    }
+	}
     }
 
     @Then("shopping cart is empty")
     public void isEmpty() {
-        log.info("isEmpty ...");
-        ShoppingCart shoppingCart = shoppingCartService.getShoppingCart();
-        assertEquals(0, shoppingCart.numberOfItems());
+	if (log.isDebugEnabled()) {
+	    log.debug("isEmpty ...");
+	}
+	ShoppingCart shoppingCart = shoppingCartService.getShoppingCart();
+	assertEquals(0, shoppingCart.numberOfItems());
     }
 
     @Then("the number of products in shopping cart is $numberOfItems")
     public void numberOfItems(int numberOfItems) {
-        log.info("numberOfItems " + numberOfItems + "  ...");
-        ShoppingCart shoppingCart = shoppingCartService.getShoppingCart();
-        assertEquals(numberOfItems, shoppingCart.numberOfItems());
+	if (log.isDebugEnabled()) {
+	    log.debug("numberOfItems " + numberOfItems + "  ...");
+	}
+	ShoppingCart shoppingCart = shoppingCartService.getShoppingCart();
+	assertEquals(numberOfItems, shoppingCart.numberOfItems());
     }
 
     @Then("total price is $price")
     @Pending
     public void totalPrice(Money price) {
-        log.info("totalPrice " + price + "  ...");
-        // TODO: implement missing functionality and enable step
+	if (log.isDebugEnabled()) {
+	    log.debug("totalPrice " + price + "  ...");
+	}
+	// TODO: implement missing functionality and enable step
     }
 
     @AsParameters
     public static class ShoppingCartRow {
 
-        @Parameter(name = "PRODUCT")
-        private String  productName;
+	@Parameter(name = "PRODUCT")
+	private String  productName;
 
-        @Parameter(name = "QTY")
-        private Integer quantity;
+	@Parameter(name = "QTY")
+	private Integer quantity;
 
-        public String getProductName() {
-            return productName;
-        }
+	public String getProductName() {
+	    return productName;
+	}
 
-        public void setProductName(String productName) {
-            this.productName = productName;
-        }
+	public void setProductName(String productName) {
+	    this.productName = productName;
+	}
 
-        public Integer getQuantity() {
-            return quantity;
-        }
+	public Integer getQuantity() {
+	    return quantity;
+	}
 
-        public void setQuantity(Integer quantity) {
-            this.quantity = quantity;
-        }
+	public void setQuantity(Integer quantity) {
+	    this.quantity = quantity;
+	}
     }
 
 }

@@ -1,5 +1,7 @@
 package de.dbo.samples.springboot.jbehave2.tests;
 
+import de.dbo.samples.springboot.jbehave2.jb.steps.SharedSteps;
+
 import java.text.SimpleDateFormat;
 import java.util.List;
 
@@ -31,8 +33,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import de.dbo.samples.springboot.jbehave2.tests.jb.steps.SharedSteps;
 
 /**
  * TestApplication has a lot of moving parts

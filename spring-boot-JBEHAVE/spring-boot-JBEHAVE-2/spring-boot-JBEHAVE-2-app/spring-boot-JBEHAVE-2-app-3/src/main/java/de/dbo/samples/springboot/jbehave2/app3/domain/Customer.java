@@ -1,4 +1,3 @@
-
 package de.dbo.samples.springboot.jbehave2.app3.domain;
 
 import org.springframework.data.annotation.Id;

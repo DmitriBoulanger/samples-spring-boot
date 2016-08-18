@@ -19,7 +19,7 @@
 		<appender-ref ref="NORMAL_MESSAGES" />
 	</logger>
 	
-	<logger name="de.dbo.samples.springboot.jbehave2.app" 
+	<logger name="de.dbo.samples.springboot.jbehave2.app1" 
 		level="DEBUG" additivity="true">
 		<appender-ref ref="NORMAL_MESSAGES" />
 	</logger>

@@ -1,4 +1,4 @@
-package de.dbo.samples.springboot.jbehave2.tests.jb.converters;
+package de.dbo.samples.springboot.jbehave2.jb.converters;
 
 import de.dbo.samples.springboot.jbehave2.app1.domain.Money;
 
@@ -23,7 +23,7 @@ public class MoneyConverter {
     private static final Logger log = LoggerFactory.getLogger(MoneyConverter.class);
 
     public MoneyConverter() {
-        log.info("created");
+	 log.info("created. HashCode=[" + hashCode() + "]");
     }
 
     @AsParameterConverter
