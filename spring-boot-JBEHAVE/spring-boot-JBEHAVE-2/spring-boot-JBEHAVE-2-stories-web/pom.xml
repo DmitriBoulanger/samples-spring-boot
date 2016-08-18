@@ -63,7 +63,7 @@
 		</dependency>
 		
 		<!-- ========================================================================================= -->
-		<!--                        STEPS-RESOURCES FROM OTHER RELEVANT PROJECTS                       -->
+		<!--                    STEPS-RESOURCES FROM OTHER INTEGRATION PROJECTS                       -->
 		<!-- ========================================================================================= -->
 		
 		<dependency>
