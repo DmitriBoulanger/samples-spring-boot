@@ -1,12 +1,12 @@
-package de.dbo.samples.springboot.jbehave2.app2.web.project;
+package de.dbo.samples.springboot.jbehave2.test.app2;
 
 import static com.jayway.restassured.RestAssured.given;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.context.embedded.LocalServerPort;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.test.annotation.DirtiesContext;
@@ -18,22 +18,20 @@ import com.jayway.restassured.filter.log.ResponseLoggingFilter;
 import com.jayway.restassured.http.ContentType;
 import com.jayway.restassured.specification.RequestSpecification;
 
-import de.dbo.samples.springboot.jbehave2.app2.web.Web2Configuration;
-
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT, classes = {Web2Configuration.class})
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT, classes = {JUnitTestApplication.class})
 @EnableAutoConfiguration
 @DirtiesContext
-public class ProjectTest {
+public class JUnitTest {
 
-    @LocalServerPort
-    private int                         port;
+    @Autowired
+    private JUnitTestServer             testServer;
 
     private static RequestSpecification spec;
 
     @Before
     public void initSpec() {
-        spec = new RequestSpecBuilder().setContentType(ContentType.JSON).setBaseUri("http://localhost:" + port + "/")
+        spec = new RequestSpecBuilder().setContentType(ContentType.JSON).setBaseUri("http://" + testServer.getHost() + ":" + testServer.getPort() + "/")
                 .addFilter(new ResponseLoggingFilter())
                 .addFilter(new RequestLoggingFilter()).build();
     }

@@ -14,7 +14,12 @@
 	<!--                            LOGGERS                                                                      -->
 	<!-- ======================================================================================================= -->
 
-	<logger name="de.dbo.samples.springboot.jbehave2.app1" 
+	<logger name="de.dbo.samples.springboot.jbehave2.app2" 
+		level="DEBUG" additivity="true">
+		<appender-ref ref="NORMAL_MESSAGES" />
+	</logger>
+	
+	<logger name="de.dbo.samples.springboot.jbehave2.test.app2" 
 		level="DEBUG" additivity="true">
 		<appender-ref ref="NORMAL_MESSAGES" />
 	</logger>

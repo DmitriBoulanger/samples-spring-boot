@@ -1,4 +1,4 @@
-package de.dbo.samples.springboot.jbehave2.app3;
+package de.dbo.samples.springboot.jbehave2.test.app3;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -15,8 +15,7 @@ import org.junit.runners.MethodSorters;
 //
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-//
-import org.springframework.boot.context.embedded.LocalServerPort;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
@@ -37,16 +36,16 @@ import org.springframework.test.context.junit4.SpringRunner;
  */
 //
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT, classes = {GreetingTestApplication.class, GreetingTestConfiguration.class})
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT, classes = {JUnitTestApplication.class})
 @DirtiesContext
 //
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @SuppressWarnings("rawtypes")
-public class GreetingTest {
-    private static final Logger log = LoggerFactory.getLogger(GreetingTest.class);
+public class JUnitTest {
+    private static final Logger log = LoggerFactory.getLogger(JUnitTest.class);
 
-    @LocalServerPort
-    private int                 port;
+    @Autowired
+    private JUnitTestServer     testServer;
 
     @Test
     public void test00_Greeting() throws Exception {
@@ -84,22 +83,28 @@ public class GreetingTest {
     private static final String INFO  = "info";
 
     private final URI toURI(final String path) {
+        String urlAsString = null;
         try {
+
             switch (path) {
 
                 case HELLO:
-                    return new URI("http://" + "localhost" + ":" + this.port + "/" + path);
+                    urlAsString = "http://" + testServer.getHost() + ":" + testServer.getPort() + "/" + path;
+                    break;
 
                 case INFO:
-                    return new URI("http://localhost:" + this.port + "/" + path);
+                    urlAsString = "http://" + testServer.getHost() + ":" + testServer.getPort() + "/" + path;
+                    break;
 
                 default:
                     throw new IllegalArgumentException("Path [" + path + "] is unknown");
             }
 
+            return new URI(urlAsString);
+
         }
         catch(URISyntaxException e) {
-            throw new IllegalStateException("Should never happen error: non-parsable hard-coded URI");
+            throw new IllegalStateException("Non-parsable hard-coded URI: " + urlAsString);
         }
     }
 
