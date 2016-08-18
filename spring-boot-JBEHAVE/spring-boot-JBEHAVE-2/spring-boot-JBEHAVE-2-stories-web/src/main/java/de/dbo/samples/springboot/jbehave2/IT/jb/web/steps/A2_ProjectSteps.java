@@ -1,10 +1,10 @@
 package de.dbo.samples.springboot.jbehave2.IT.jb.web.steps;
 
 import static com.jayway.restassured.RestAssured.given;
-/* Hamcrest */
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.greaterThan;
-import static org.hamcrest.Matchers.notNullValue;
+
+import static de.dbo.samples.springboot.jbehave2.IT.commons.TestServerAssertions.assertThatTestServerInitialized;
+
+import de.dbo.samples.springboot.jbehave2.IT.commons.TestServer;
 
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
@@ -20,8 +20,6 @@ import com.jayway.restassured.filter.log.ResponseLoggingFilter;
 import com.jayway.restassured.http.ContentType;
 import com.jayway.restassured.specification.RequestSpecification;
 
-import de.dbo.samples.springboot.jbehave2.IT.web.ITestServer;
-
 @Component
 public class A2_ProjectSteps {
     private static final Logger log = LoggerFactory.getLogger(A2_ProjectSteps.class);
@@ -31,13 +29,13 @@ public class A2_ProjectSteps {
     }
 
     @Autowired
-    private ITestServer          testServer;
+    private TestServer          testServer;
 
     private RequestSpecification requestSpecification;
 
     @Given("A2 server initialized")
     public void init() {
-        assertThatTestServerInitialized();
+        assertThatTestServerInitialized(testServer);
         requestSpecification = new RequestSpecBuilder()
                 .setContentType(ContentType.JSON)
                 .setBaseUri("http://" + testServer.getHost() + ":" + testServer.getPort() + "/")
@@ -55,15 +53,5 @@ public class A2_ProjectSteps {
     //                                   ASSERTIONS
     // ==================================================================================================================
 
-    /**
-     * assert test-server initialization
-     */
-    private void assertThatTestServerInitialized() {
-        final int port = testServer.getPort();
-        assertThat("A2 Server port is not as expected", port, greaterThan(9999));
-        final String host = testServer.getHost();
-        assertThat("A2 Server host is null", host, notNullValue());
-        log.info("A2 server available");
-    }
-
+  
 }

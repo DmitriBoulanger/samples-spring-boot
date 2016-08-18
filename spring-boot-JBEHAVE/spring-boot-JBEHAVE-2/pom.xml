@@ -12,13 +12,26 @@
 	<packaging>pom</packaging>
 
 	<name>Samples Spring-Boot JBEHAVE 2</name>
-	<url>/</url>
+	<description>
+Main reactor with sample projects to learn an implementation 
+of Integration Test using JBehave framework in a Spring-Boot environment.
+The modules of this project are as follows:
+
+- jb is a library with commons and APIs used in developing of JBehave Steps
+
+- app is a reactor with sample applications to be integrated and tested
+
+- stories-java is a pure Java Integration Test
+
+- stories-web is a complete Integration Test that uses REST controllers and Elasticsearch data-repositories</description>
+	<url></url>
 
 	<properties>
 		
 	</properties>
 
 	<modules>
+		<module>spring-boot-JBEHAVE-2-jb</module>
 		<module>spring-boot-JBEHAVE-2-app</module>
 		
 		<module>spring-boot-JBEHAVE-2-stories-java</module>

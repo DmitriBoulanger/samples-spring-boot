@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+
+<!-- =========================================================================================================== -->
+<!--              LOGBACK SPRING-BOOT CONFIGURATION                                                              -->
+<!-- =========================================================================================================== -->
+
+<configuration debug="false">
+
+	<contextName>JBehave Tests Logback-Configuration</contextName>
+	<include resource="de/dbo/samples/springboot/utilities/logging/logback-appenders.xml"/>
+
+	<!-- ======================================================================================================= -->
+	<!--                            LOGGERS                                                                      -->
+	<!-- ======================================================================================================= -->
+
+	<logger name="de.dbo.samples.springboot" 
+		level="DEBUG" additivity="true">
+		<appender-ref ref="NORMAL_MESSAGES" />
+	</logger>
+	
+	<logger name="org.jbehave" 
+		level="DEBUG" additivity="true">
+		<appender-ref ref="NORMAL_MESSAGES" />
+	</logger>
+	
+
+</configuration>

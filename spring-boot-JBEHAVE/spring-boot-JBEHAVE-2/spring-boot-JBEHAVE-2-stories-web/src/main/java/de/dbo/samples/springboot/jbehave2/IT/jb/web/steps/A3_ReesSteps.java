@@ -21,6 +21,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
+import static de.dbo.samples.springboot.jbehave2.IT.commons.TestServerAssertions.assertThatTestServerInitialized;
+
+import de.dbo.samples.springboot.jbehave2.IT.commons.TestServer;
 import de.dbo.samples.springboot.jbehave2.IT.web.ITestServer;
 
 @Component
@@ -32,11 +35,11 @@ public class A3_ReesSteps {
     }
 
     @Autowired
-    private ITestServer testServer;
+    private TestServer testServer;
 
     @Given("A3 server initialized")
     public void init() {
-        assertThatTestServerInitialized();
+        assertThatTestServerInitialized(testServer);
     }
 
     @Then("greeting")
@@ -90,17 +93,7 @@ public class A3_ReesSteps {
     //                                   ASSERTIONS
     // ==================================================================================================================
 
-    /**
-     * assert test-server initialization
-     */
-    private void assertThatTestServerInitialized() {
-        final int port = testServer.getPort();
-        assertThat("A3 Server port is not as expected", port, greaterThan(9999));
-        final String host = testServer.getHost();
-        assertThat("A3 Server host is null", host, notNullValue());
-        log.info("A3 server available");
-    }
-
+  
     private static final void assertThatHttpStatus(final HttpStatus expectedHttpStatus, @SuppressWarnings("rawtypes") final ResponseEntity<Map> entity) {
         final HttpStatus responseHttpStatus = entity.getStatusCode();
         assertThat("HTTP response code is not as expected", expectedHttpStatus, equalTo(responseHttpStatus));

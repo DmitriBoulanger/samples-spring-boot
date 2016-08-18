@@ -1,14 +1,11 @@
-**JBehave Stories and Spring-Boot Application**
+JBehave Stories and Integration Tests of Spring-Boot Application
+================================================================
 
-Project is a reactor with two item-projects:
+This project is the main reactor containing sample projects used to learn an implementation 
+of Integration Tests with JBehave framework in a Spring-Boot environment.
+The modules in this project are as follows:
 
-- Spring-Boot application
-- JBehave stories to test the application
-
-Spring-Boot Application is a "hello-word" WEB-application with empty WEB-Components, e.g. Controller is there but it is empty
-
-JBehaave stories are **light-weight stories** that only use the domain and business-logic parts of the application. 
-The WEB-parts of the application are ignored
-
-The Stories are activated as a standard JUnit test with the standard Spring-Boot test-runner. 
-The Spring-Boot application of the stories is actually configured so that it is simple Java application
+- jb is a library with commons and APIs used in developing of JBehave Steps
+- app is a reactor with sample applications to be integrated and tested
+- stories-java is a pure Java Integration Test
+- stories-web is a complete Integration Test that uses REST controllers and Elasticsearch data-repositories

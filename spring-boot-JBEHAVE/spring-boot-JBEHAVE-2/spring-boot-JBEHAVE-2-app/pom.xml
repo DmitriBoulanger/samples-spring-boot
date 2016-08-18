@@ -4,7 +4,7 @@
 
 	<parent>
 		<groupId>de.dbo.samples.springboot</groupId>
-		<artifactId>spring-boot-JBEHAVE</artifactId>
+		<artifactId>spring-boot-JBEHAVE-2</artifactId>
 		<version>0.0.0-SNAPSHOT</version>
 	</parent>
 

@@ -1,28 +1,20 @@
 package de.dbo.samples.springboot.jbehave2.IT.web;
 
+import de.dbo.samples.springboot.jbehave2.IT.commons.TestServer;
+import de.dbo.samples.springboot.jbehave2.IT.commons.TestServerLocalhost;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ITestServer {
+public class ITestServer extends TestServerLocalhost implements TestServer {
 
     @Autowired
     Environment environment;
-
-    public Integer getPort() {
-	final String port = environment.getProperty("local.server.port");
-	if (null==port) {
-	    return null;
-	}
-        return Integer.parseInt(port);
-    }
     
-    public String getHost() {
-        return "localhost";
+    public String name() {
+	return "WEB Container";
     }
-
-    public String print() {
-        return  getHost() + ":" + getPort();
-    }
+ 
 }
