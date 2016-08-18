@@ -1,10 +1,15 @@
 package de.dbo.samples.springboot.jbehave2.IT.web;
 
+import javax.annotation.PostConstruct;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
+
+import de.dbo.samples.springboot.jbehave2.app3.domain.CustomerRepository;
 
 /**
  *
@@ -14,7 +19,6 @@ import org.springframework.context.ConfigurableApplicationContext;
  *           only incidentally for computers to execute
  *
  */
-
 @SpringBootApplication
 public class ITestApplication {
     private static final Logger log = LoggerFactory.getLogger(ITestApplication.class);
@@ -23,17 +27,18 @@ public class ITestApplication {
         log.info("created. HashCode=[" + hashCode() + "]");
     }
 
+    @Autowired
+    public CustomerRepository customerRepository;
+
+    @PostConstruct
+    public void init() {
+        log.info("repository available. HashCode=[" + customerRepository.hashCode() + "]");
+        /*  Attention: at this moment the repository is NOT really operational! */
+    }
+
     public static void main(String[] args) {
         final ConfigurableApplicationContext ctx = SpringApplication.run(ITestApplication.class, args);
+        ctx.registerShutdownHook();
         log.info("ITest Server " + ctx.getBean(ITestServer.class).print());
-        final long pause = 300;
-        try {
-            log.info("sleeping " + pause + " sec. ...");
-            Thread.sleep(pause * 1000);
-        }
-        catch(InterruptedException e) {
-            log.error("Can't sleep any more:", e);
-        }
-        ctx.close();
     }
 }

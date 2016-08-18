@@ -49,7 +49,7 @@ public class ITestApplicationConfiguration {
         log.error("created - TEST", new Exception("test error with exception just to see it"));
         log.trace(LoggingInfo.printAvailableLoggers(120).toString());
 
-        Jackson2RepositoryPopulatorFactoryBean factory = new Jackson2RepositoryPopulatorFactoryBean();
+        final Jackson2RepositoryPopulatorFactoryBean factory = new Jackson2RepositoryPopulatorFactoryBean();
         factory.setResources(new Resource[]{new ClassPathResource("data/customers.json")});
         return factory;
     }

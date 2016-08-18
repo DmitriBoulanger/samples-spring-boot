@@ -61,7 +61,7 @@ public class ITest extends JUnitStories {
     }
 
     // =====================================================================================================================================
-    // JBEHAVE CONFIGURATION  - VERY BAD: HAS TO BE DONE IN ANOTHER WAY ....
+    //                                   JBEHAVE CONFIGURATION  - VERY BAD: HAS TO BE DONE IN ANOTHER WAY ....
     // =====================================================================================================================================
 
     private void initJBehaveConfiguration() {
@@ -82,7 +82,6 @@ public class ITest extends JUnitStories {
                                 .addConverters(new ParameterConverters.DateConverter(new SimpleDateFormat("yyyy-MM-dd"))))
                 .useStepMonitor(new SilentStepMonitor()));
         configuredEmbedder().embedderControls().useThreads(10);
-
     }
 
     @Override
