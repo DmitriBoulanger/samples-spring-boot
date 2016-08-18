@@ -25,7 +25,7 @@
 	</logger>
 	
 	<logger name="org.springframework" 
-		level="DEBUG" additivity="false">
+		level="INFO" additivity="false">
 		<appender-ref ref="NORMAL_MESSAGES" />
 	</logger>
 

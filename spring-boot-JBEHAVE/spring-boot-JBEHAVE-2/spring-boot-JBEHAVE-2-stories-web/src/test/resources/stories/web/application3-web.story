@@ -4,9 +4,9 @@ In order to learn JBehave in the Spring-Boot Environment
 As a CI test-developer
 I want to define micro-service WEB-story
 
-Scenario: ES Service WEB-story
+Scenario: Application 3 - Elasticsearch witt REST-Service WEB-story
 
-Given server initialized 3
+Given A3 server initialized
 Then greeting
 And admin
 

@@ -1,6 +1,4 @@
-package de.dbo.samples.springboot.jbehave2.tests;
-
-import de.dbo.samples.springboot.jbehave2.jb.steps.SharedSteps;
+package de.dbo.samples.springboot.jbehave2.IT;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -35,7 +33,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
 /**
- * TestApplication has a lot of moving parts
+ * ITTestApplication has a lot of moving parts
  * so it made sense to wrap some of the operations in an integration test session.
  *
  * @author Dmitri Boulanger, Hombach
@@ -47,13 +45,13 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @EnableAutoConfiguration
-public class Test extends JUnitStories {
-    private static final Logger log = LoggerFactory.getLogger(TestApplication.class);
+public class ITTest extends JUnitStories {
+    private static final Logger log = LoggerFactory.getLogger(ITTestApplication.class);
 
     @Autowired
     private ApplicationContext  applicationContext;
 
-    public Test() {
+    public ITTest() {
         log.info("created");
     }
 
@@ -67,14 +65,14 @@ public class Test extends JUnitStories {
     // =====================================================================================================================================
 
     private void initJBehaveConfiguration() {
-        Class<?> thisClass = this.getClass();
+        final Class<?> thisClass = this.getClass();
         useConfiguration(new MostUsefulConfiguration()
                 .useStoryLoader(new LoadFromClasspath(thisClass.getClassLoader()))
                 //                .usePendingStepStrategy(new org.jbehave.core.failures.FailingUponPendingStep())
                 .useStepdocReporter(new PrintStreamStepdocReporter())
                 .useStoryReporterBuilder(
                         new StoryReporterBuilder()
-                                .withCodeLocation(CodeLocations.codeLocationFromClass(SharedSteps.class /*thisClass*/))
+                                .withCodeLocation(CodeLocations.codeLocationFromClass(thisClass))
                                 .withDefaultFormats()
                                 .withFormats(Format.CONSOLE, Format.TXT, Format.HTML, Format.XML, Format.STATS)
                                 .withCrossReference(new CrossReference())

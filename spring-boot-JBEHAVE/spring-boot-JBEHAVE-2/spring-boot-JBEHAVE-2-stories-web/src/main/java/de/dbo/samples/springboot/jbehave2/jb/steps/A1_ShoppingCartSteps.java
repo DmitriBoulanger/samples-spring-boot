@@ -25,8 +25,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ShoppingCartSteps {
-    private static final Logger log = LoggerFactory.getLogger(ShoppingCartSteps.class);
+public class A1_ShoppingCartSteps {
+    private static final Logger log = LoggerFactory.getLogger(A1_ShoppingCartSteps.class);
 
     @Autowired
     private ShoppingCartService shoppingCartService;
@@ -34,7 +34,7 @@ public class ShoppingCartSteps {
     @Autowired
     private ProductDao          productRepository;
 
-    public ShoppingCartSteps() {
+    public A1_ShoppingCartSteps() {
 	log.info("created. HashCode=[" + hashCode() + "]");
     }
 

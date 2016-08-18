@@ -13,8 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class SharedSteps {
-    private static final Logger log = LoggerFactory.getLogger(SharedSteps.class);
+public class A1_SharedSteps {
+    private static final Logger log = LoggerFactory.getLogger(A1_SharedSteps.class);
 
     @Autowired
     private ProductDao          productRepository;
@@ -22,7 +22,7 @@ public class SharedSteps {
     @Autowired
     private PriceDao            priceRepository;
 
-    public SharedSteps() {
+    public A1_SharedSteps() {
 	 log.info("created. HashCode=[" + hashCode() + "]");
     }
 

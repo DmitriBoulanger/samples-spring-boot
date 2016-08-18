@@ -4,10 +4,10 @@ In order to learn JBehave in the Spring-Boot Environment
 As a CI test-developer
 I want to define micro-service WEB-story
 
-Scenario: Customer Service WEB-story
+Scenario: Application 1 - Shoper Service WEB-story
 
-Given server initialized
-When new customer created
-Then created customer found
-And unknown customer not found
+Given A1 server initialized
+When new shoper created
+Then created shoper found
+And unknown shoper not found
 
