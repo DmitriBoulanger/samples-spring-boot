@@ -1,4 +1,3 @@
-Story: JBehave and Spring-Boot WEB-application
 
 Narrative:
 In order to learn JBehave with Spring-Boot Environment
