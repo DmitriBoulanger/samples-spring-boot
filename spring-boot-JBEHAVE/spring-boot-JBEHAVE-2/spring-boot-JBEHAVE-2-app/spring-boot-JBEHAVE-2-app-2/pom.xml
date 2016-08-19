@@ -9,15 +9,30 @@
 	</parent>
 
 	<artifactId>spring-boot-JBEHAVE-2-app-2</artifactId>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 
 	<name>Samples Spring-Boot JBEHAVE 2-App 2</name>
+	<description>
+A2 application to be integrated and tested
+	</description>
 
 	<properties>
 		
 	</properties>
 
 	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<!-- Very important to access classes from other Maven projects!                     -->
+					<!-- This artifact with classifier classes is deployed to the local maven-repository -->
+					<attachClasses>true</attachClasses>
+					<failOnMissingWebXml>false</failOnMissingWebXml>
+				</configuration>
+			</plugin>
+		</plugins>
 	</build>
 
 	<dependencies>

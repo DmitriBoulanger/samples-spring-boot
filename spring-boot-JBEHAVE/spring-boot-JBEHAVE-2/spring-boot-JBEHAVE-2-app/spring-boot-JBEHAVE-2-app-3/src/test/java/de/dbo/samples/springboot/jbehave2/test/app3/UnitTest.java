@@ -9,6 +9,7 @@ import java.net.URISyntaxException;
 import java.util.Map;
 
 import org.junit.FixMethodOrder;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
@@ -45,7 +46,7 @@ public class UnitTest {
     private static final Logger log = LoggerFactory.getLogger(UnitTest.class);
 
     @Autowired
-    private UnitTestServer     testServer;
+    private UnitTestServer      testServer;
 
     @Test
     public void test00_Greeting() throws Exception {
@@ -58,6 +59,7 @@ public class UnitTest {
     }
 
     @Test
+    @Ignore
     public void test10_Admin() throws Exception {
         final TestRestTemplate restTemplate = new TestRestTemplate();
         final URI uri = toURI(INFO);

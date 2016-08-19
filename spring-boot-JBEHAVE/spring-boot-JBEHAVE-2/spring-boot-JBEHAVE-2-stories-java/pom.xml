@@ -58,12 +58,14 @@
 				<groupId>de.dbo.samples.springboot</groupId>
 				<artifactId>spring-boot-JBEHAVE-2-app-2</artifactId>
 				<version>0.0.0-SNAPSHOT</version>
-			<exclusions>
-				<exclusion>
-					<groupId>org.springframework.boot</groupId>
-					<artifactId>spring-boot-starter-web</artifactId>
-				</exclusion>
-			</exclusions>
+				<classifier>classes</classifier>
+				<!-- Exclusions are needed if the application is a JAR-artifact -->
+<!-- 				<exclusions> -->
+<!-- 					<exclusion> -->
+<!-- 						<groupId>org.springframework.boot</groupId> -->
+<!-- 						<artifactId>spring-boot-starter-web</artifactId> -->
+<!-- 					</exclusion> -->
+<!-- 				</exclusions> -->
 		</dependency>
 
 		<!-- ========================================================================================= -->

@@ -8,7 +8,7 @@ echo.
 pause
 
 set CURRENT_DIRECTORY=%~dp0
-set REPOSITORY=E:\___TMP\m2\repository
+set REPOSITORY=%HOME%\.m2\repository
 echo.
 echo Maven repository %REPOSITORY% 
 cd %REPOSITORY%
@@ -25,7 +25,9 @@ echo.
 dir /B
 
 cd %CURRENT_DIRECTORY%
+echo Current Directory: 
 dir /B
+pause
 echo.
 echo Runnig Maven clean install ...
 pause

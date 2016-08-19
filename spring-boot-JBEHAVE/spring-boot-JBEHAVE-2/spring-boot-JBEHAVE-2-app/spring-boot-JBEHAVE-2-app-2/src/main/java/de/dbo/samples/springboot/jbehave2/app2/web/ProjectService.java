@@ -17,6 +17,10 @@ import de.dbo.samples.springboot.jbehave2.app2.domain.Project;
 
 /**
  *
+ * @author Dmitri Boulanger
+ *
+ * Programs are meant to be read by humans and only incidentally for computers to execute (D. Knuth)
+ *
  */
 @RestController
 public class ProjectService {
@@ -39,6 +43,7 @@ public class ProjectService {
 
         // TODO: Project Loading
 
+        @SuppressWarnings("unused")
         final ObjectMapper mapper = new ObjectMapper();
 
         return ResponseEntity.status(HttpStatus.OK).body(projects);

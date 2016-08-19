@@ -10,6 +10,7 @@ import java.net.URISyntaxException;
 import java.util.Map;
 
 import org.jbehave.core.annotations.Given;
+import org.jbehave.core.annotations.Pending;
 import org.jbehave.core.annotations.Then;
 // SLF4J
 import org.slf4j.Logger;
@@ -49,6 +50,7 @@ public class A3_ReesSteps {
     }
 
     @Then("admin")
+    @Pending
     public void admin() throws Exception {
         final TestRestTemplate restTemplate = new TestRestTemplate();
         final URI uri = toURI(INFO);
