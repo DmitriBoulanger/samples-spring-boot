@@ -1,4 +1,4 @@
-package de.dbo.samples.springboot.jbehave2.app2.web.project;
+package de.dbo.samples.springboot.jbehave2.app2.web;
 
 import java.util.ArrayList;
 import java.util.List;

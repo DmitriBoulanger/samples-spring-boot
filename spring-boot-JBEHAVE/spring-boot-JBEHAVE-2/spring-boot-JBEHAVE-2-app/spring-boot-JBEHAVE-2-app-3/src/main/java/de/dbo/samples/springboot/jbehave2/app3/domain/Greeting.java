@@ -1,4 +1,4 @@
-package de.dbo.samples.springboot.jbehave2.app3.service;
+package de.dbo.samples.springboot.jbehave2.app3.domain;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -4,6 +4,6 @@ public interface ShoppingCartRepository {
 
     void add(ShoppingCart shoppingCart);
 
-    ShoppingCart load(ShoperIdentifier customerIdentifier);
+    ShoppingCart load(ShopperIdentifier customerIdentifier);
 
 }

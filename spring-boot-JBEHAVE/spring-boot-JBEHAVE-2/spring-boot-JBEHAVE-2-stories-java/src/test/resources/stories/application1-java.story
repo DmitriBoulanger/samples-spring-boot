@@ -1,10 +1,13 @@
+
+Story: Shopping
+
 Narrative:
 In order to learn JBehave with Spring-Boot Environment
 As a test-developer
 I want to define sample story
 
 Lifecycle:
-Before:
+Before: 
 Given product DDD with SKU 1234
 And product DDD price is 35 EUR
 

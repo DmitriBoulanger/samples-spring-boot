@@ -22,7 +22,7 @@ import com.jayway.restassured.http.ContentType;
 import com.jayway.restassured.specification.RequestSpecification;
 
 /* App1 Domain*/
-import de.dbo.samples.springboot.jbehave2.app1.domain.Shoper;
+import de.dbo.samples.springboot.jbehave2.app1.domain.Shopper;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT, classes = {UnitTestApplication.class})
@@ -30,7 +30,7 @@ import de.dbo.samples.springboot.jbehave2.app1.domain.Shoper;
 public class UnitTest {
 
     @Autowired
-    private UnitTestServer      testServer;
+    private UnitTestServer       testServer;
 
     private RequestSpecification spec;
 
@@ -46,30 +46,30 @@ public class UnitTest {
 
     @Test
     public void testCreateShoper() {
-        final String shoperName = "Test Shoper";
+        final String shoperName = "Test Shopper";
 
         //create new customer
-        Shoper newShoper = given()
+        Shopper newShoper = given()
                 .spec(spec)
                 .body("{\"name\":\"" + shoperName + "\"}")
                 .when()
-                .post("shopers")
+                .post("shoppers")
                 .then()
                 .statusCode(201)
-                .extract().as(Shoper.class);
+                .extract().as(Shopper.class);
 
         assertThat(newShoper.getId() != null);
         assertThat(!newShoper.getId().isEmpty());
         assertThat(newShoper.getName().equals(shoperName));
 
         //get the created customer
-        Shoper newCustomer2 = given()
+        Shopper newCustomer2 = given()
                 .spec(spec)
                 .when()
-                .get("shopers/" + newShoper.getId())
+                .get("shoppers/" + newShoper.getId())
                 .then()
                 .statusCode(200)
-                .extract().as(Shoper.class);
+                .extract().as(Shopper.class);
 
         assertThat(newShoper.equals(newCustomer2));
     }
@@ -79,7 +79,7 @@ public class UnitTest {
         given()
                 .spec(spec)
                 .when()
-                .get("shopers/unknownID")
+                .get("shoppers/unknownID")
                 .then()
                 .statusCode(404);
     }

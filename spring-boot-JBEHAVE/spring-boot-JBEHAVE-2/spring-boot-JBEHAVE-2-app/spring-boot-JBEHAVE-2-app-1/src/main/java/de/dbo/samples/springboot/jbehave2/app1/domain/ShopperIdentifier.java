@@ -1,10 +1,10 @@
 package de.dbo.samples.springboot.jbehave2.app1.domain;
 
-public class ShoperIdentifier {
+public class ShopperIdentifier {
 
     private String identifier;
 
-    public ShoperIdentifier(String identifier) {
+    public ShopperIdentifier(String identifier) {
         this.identifier = identifier;
     }
 
@@ -17,7 +17,7 @@ public class ShoperIdentifier {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        ShoperIdentifier that = (ShoperIdentifier) o;
+        ShopperIdentifier that = (ShopperIdentifier) o;
 
         return !(identifier != null ? !identifier.equals(that.identifier) : that.identifier != null);
 

@@ -28,13 +28,13 @@ import com.jayway.restassured.http.ContentType;
 import com.jayway.restassured.specification.RequestSpecification;
 
 import de.dbo.samples.springboot.jbehave2.IT.commons.TestServer;
-import de.dbo.samples.springboot.jbehave2.app1.domain.Shoper;
+import de.dbo.samples.springboot.jbehave2.app1.domain.Shopper;
 
 @Component
-public class A1_ShoperSteps {
-    private static final Logger log = LoggerFactory.getLogger(A1_ShoperSteps.class);
+public class A1_ShopperSteps {
+    private static final Logger log = LoggerFactory.getLogger(A1_ShopperSteps.class);
 
-    public A1_ShoperSteps() {
+    public A1_ShopperSteps() {
         log.info("created. HashCode=[" + hashCode() + "]");
     }
 
@@ -54,44 +54,44 @@ public class A1_ShoperSteps {
                 .build();
     }
 
-    private Shoper newCustomer;
+    private Shopper newShoper;
 
-    @When("new shoper created")
+    @When("new shopper created")
     public void createShoper() {
-        final String shoperName = "Test Shoper";
-        newCustomer = given()
+        final String shopperName = "Test Shopper";
+        newShoper = given()
                 .spec(requestSpecification)
-                .body("{\"name\":\"" + shoperName + "\"}")
+                .body("{\"name\":\"" + shopperName + "\"}")
                 .when()
-                .post("shopers")
+                .post("shoppers")
                 .then()
                 .statusCode(201)
-                .extract().as(Shoper.class);
+                .extract().as(Shopper.class);
 
-        assertThat("Shoper ID is null or empty string", newCustomer.getId(), not(isEmptyOrNullString()));
-        assertThat("Name of the found customer is not as expected", newCustomer.getName(), equalTo((shoperName)));
+        assertThat("Shopper ID is null or empty string", newShoper.getId(), not(isEmptyOrNullString()));
+        assertThat("Name of the found customer is not as expected", newShoper.getName(), equalTo((shopperName)));
     }
 
-    @Then("created shoper found")
+    @Then("created shopper found")
     public void foundCustomer() {
 
-        final Shoper newShoperClone = given()
+        final Shopper newShoperClone = given()
                 .spec(requestSpecification)
                 .when()
-                .get("shopers/" + newCustomer.getId())
+                .get("shoppers/" + newShoper.getId())
                 .then()
                 .statusCode(200)
-                .extract().as(Shoper.class);
+                .extract().as(Shopper.class);
 
-        assertThat("Found customer-clone is not the same as origin", newCustomer, equalTo(newShoperClone));
+        assertThat("Found customer-clone is not the same as origin", newShoper, equalTo(newShoperClone));
     }
 
-    @Then("unknown shoper not found")
+    @Then("unknown shopper not found")
     public void testShoperNotFound() {
         given()
                 .spec(requestSpecification)
                 .when()
-                .get("shopers/unknownID")
+                .get("shoppers/unknownID")
                 .then()
                 .statusCode(404);
     }

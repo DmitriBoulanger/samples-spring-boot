@@ -1,22 +1,22 @@
 package de.dbo.samples.springboot.jbehave2.app1.domain;
 
 /**
- *  Shoper entity
+ *  Shopper entity
  */
-public class Shoper {
+public class Shopper {
 
     private String id;
 
     private String name;
 
-    public Shoper() {
+    public Shopper() {
     }
 
-    public Shoper(String name) {
+    public Shopper(String name) {
         this.name = name;
     }
 
-    public Shoper(String id, String name) {
+    public Shopper(String id, String name) {
         this.id = id;
         this.name = name;
     }
@@ -57,7 +57,7 @@ public class Shoper {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        Shoper other = (Shoper) obj;
+        Shopper other = (Shopper) obj;
         if (id == null) {
             if (other.id != null) {
                 return false;
@@ -79,7 +79,7 @@ public class Shoper {
 
     @Override
     public String toString() {
-        return "Shoper [id=" + id + ", name=" + name + "]";
+        return "Shopper [id=" + id + ", name=" + name + "]";
     }
 
 }

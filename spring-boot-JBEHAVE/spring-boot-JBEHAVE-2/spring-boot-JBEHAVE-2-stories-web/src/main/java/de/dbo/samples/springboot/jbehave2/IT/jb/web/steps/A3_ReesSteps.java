@@ -1,10 +1,9 @@
 package de.dbo.samples.springboot.jbehave2.IT.jb.web.steps;
 
+import static de.dbo.samples.springboot.jbehave2.IT.commons.TestServerAssertions.assertThatTestServerInitialized;
 /* Hamcrest */
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.greaterThan;
-import static org.hamcrest.Matchers.notNullValue;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -21,10 +20,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
-import static de.dbo.samples.springboot.jbehave2.IT.commons.TestServerAssertions.assertThatTestServerInitialized;
-
 import de.dbo.samples.springboot.jbehave2.IT.commons.TestServer;
-import de.dbo.samples.springboot.jbehave2.IT.web.ITestServer;
 
 @Component
 public class A3_ReesSteps {
@@ -93,7 +89,6 @@ public class A3_ReesSteps {
     //                                   ASSERTIONS
     // ==================================================================================================================
 
-  
     private static final void assertThatHttpStatus(final HttpStatus expectedHttpStatus, @SuppressWarnings("rawtypes") final ResponseEntity<Map> entity) {
         final HttpStatus responseHttpStatus = entity.getStatusCode();
         assertThat("HTTP response code is not as expected", expectedHttpStatus, equalTo(responseHttpStatus));

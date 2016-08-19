@@ -1,4 +1,4 @@
-package de.dbo.samples.springboot.jbehave2.app3.service;
+package de.dbo.samples.springboot.jbehave2.app3.web;
 
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import de.dbo.samples.springboot.jbehave2.app3.domain.Customer;
 import de.dbo.samples.springboot.jbehave2.app3.domain.CustomerRepository;
+import de.dbo.samples.springboot.jbehave2.app3.domain.Greeting;
 
 @RestController
 @RequestMapping("/hello-world")

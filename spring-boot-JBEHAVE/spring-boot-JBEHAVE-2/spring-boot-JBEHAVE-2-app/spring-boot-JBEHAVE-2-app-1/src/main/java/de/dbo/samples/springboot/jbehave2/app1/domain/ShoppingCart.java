@@ -5,15 +5,15 @@ import java.util.List;
 
 public class ShoppingCart {
 
-    private ShoperIdentifier customerIdentifier;
+    private ShopperIdentifier customerIdentifier;
 
     private List<ShoppingCartItem> items = new ArrayList<>();
 
-    public ShoppingCart(ShoperIdentifier customerIdentifier) {
+    public ShoppingCart(ShopperIdentifier customerIdentifier) {
         this.customerIdentifier = customerIdentifier;
     }
 
-    public ShoperIdentifier getCustomerIdentifier() {
+    public ShopperIdentifier getCustomerIdentifier() {
         return customerIdentifier;
     }
 

@@ -5,9 +5,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class SystemService {
 
-    private final static ShoperIdentifier DEFAULT_CUSTOMER = new ShoperIdentifier("default customer");
+    private final static ShopperIdentifier DEFAULT_CUSTOMER = new ShopperIdentifier("default customer");
 
-    public ShoperIdentifier authenticatedCustomer() {
+    public ShopperIdentifier authenticatedCustomer() {
         return DEFAULT_CUSTOMER;
     }
 

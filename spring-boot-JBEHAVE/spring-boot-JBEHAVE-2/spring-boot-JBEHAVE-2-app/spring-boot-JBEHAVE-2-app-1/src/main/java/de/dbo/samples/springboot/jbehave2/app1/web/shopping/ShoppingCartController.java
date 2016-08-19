@@ -1,4 +1,4 @@
-package de.dbo.samples.springboot.jbehave2.app1.web.shoping;
+package de.dbo.samples.springboot.jbehave2.app1.web.shopping;
 
 import org.springframework.stereotype.Controller;
 

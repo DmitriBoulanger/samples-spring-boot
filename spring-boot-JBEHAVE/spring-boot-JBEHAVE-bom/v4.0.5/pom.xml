@@ -19,7 +19,6 @@
 	<dependencyManagement>
 		<dependencies>
 
-
 			<dependency>
 				<groupId>org.jbehave</groupId>
 				<artifactId>jbehave-core</artifactId>
