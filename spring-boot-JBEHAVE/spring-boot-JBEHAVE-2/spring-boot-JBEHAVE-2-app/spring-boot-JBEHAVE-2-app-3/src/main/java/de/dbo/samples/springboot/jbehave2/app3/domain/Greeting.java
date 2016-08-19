@@ -6,9 +6,13 @@ import org.slf4j.LoggerFactory;
 public class Greeting {
     private static final Logger log = LoggerFactory.getLogger(Greeting.class);
 
-    private final long          id;
-    private final String        content;
-    private final long          cnt;
+    private long                id;
+    private String              content;
+    private long                cnt;
+
+    public Greeting() {
+
+    }
 
     public Greeting(long id, String content, long cnt) {
         this.id = id;
@@ -16,6 +20,10 @@ public class Greeting {
         this.cnt = cnt;
         log.info("created. ID=" + id + ": " + content);
     }
+
+    // =======================================================================================
+    //                       Getters and Setters
+    // =======================================================================================
 
     public long getId() {
         return id;
@@ -27,6 +35,18 @@ public class Greeting {
 
     public long getCnt() {
         return cnt;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public void setCnt(long cnt) {
+        this.cnt = cnt;
     }
 
 }

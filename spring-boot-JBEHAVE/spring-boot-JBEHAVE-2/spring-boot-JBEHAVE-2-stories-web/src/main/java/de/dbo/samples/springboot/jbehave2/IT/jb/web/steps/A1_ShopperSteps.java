@@ -57,7 +57,7 @@ public class A1_ShopperSteps {
     private Shopper newShoper;
 
     @When("new shopper created")
-    public void createShoper() {
+    public void createShopper() {
         final String shopperName = "Test Shopper";
         newShoper = given()
                 .spec(requestSpecification)
@@ -66,14 +66,15 @@ public class A1_ShopperSteps {
                 .post("shoppers")
                 .then()
                 .statusCode(201)
-                .extract().as(Shopper.class);
+                .extract()
+                .as(Shopper.class);
 
         assertThat("Shopper ID is null or empty string", newShoper.getId(), not(isEmptyOrNullString()));
         assertThat("Name of the found customer is not as expected", newShoper.getName(), equalTo((shopperName)));
     }
 
     @Then("created shopper found")
-    public void foundCustomer() {
+    public void foundShopper() {
 
         final Shopper newShoperClone = given()
                 .spec(requestSpecification)
@@ -81,13 +82,14 @@ public class A1_ShopperSteps {
                 .get("shoppers/" + newShoper.getId())
                 .then()
                 .statusCode(200)
-                .extract().as(Shopper.class);
+                .extract()
+                .as(Shopper.class);
 
         assertThat("Found customer-clone is not the same as origin", newShoper, equalTo(newShoperClone));
     }
 
     @Then("unknown shopper not found")
-    public void testShoperNotFound() {
+    public void testShopperNotFound() {
         given()
                 .spec(requestSpecification)
                 .when()

@@ -1,3 +1,7 @@
-Application 1 - To Be Integrated and Tested
+Application 3 - To be Integrated and Tested
 ===========================================
+
+**Special features**
+
+This application is REST micro-service that uses a Elasticsearch Data-Repository
  
