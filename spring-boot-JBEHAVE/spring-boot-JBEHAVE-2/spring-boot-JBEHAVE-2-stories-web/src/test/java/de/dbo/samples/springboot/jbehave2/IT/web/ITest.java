@@ -1,39 +1,12 @@
 package de.dbo.samples.springboot.jbehave2.IT.web;
 
-import de.dbo.samples.springboot.jbehave2.IT.commons.configuration.ConfigurationJBehaveDefault;
 import de.dbo.samples.springboot.jbehave2.IT.commons.jbehaveruntime.JBehaveRunnerDefault;
-import de.dbo.samples.springboot.jbehave2.IT.commons.stories.StoriesProvider;
 
-import java.text.SimpleDateFormat;
-import java.util.List;
-
-import javax.annotation.PostConstruct;
-
-/* JBehave */
-import org.jbehave.core.configuration.MostUsefulConfiguration;
-import org.jbehave.core.io.CodeLocations;
-import org.jbehave.core.io.LoadFromClasspath;
-import org.jbehave.core.io.StoryFinder;
-import org.jbehave.core.junit.JUnitStories;
-import org.jbehave.core.reporters.CrossReference;
-import org.jbehave.core.reporters.Format;
-import org.jbehave.core.reporters.PrintStreamStepdocReporter;
-import org.jbehave.core.reporters.StoryReporterBuilder;
-import org.jbehave.core.steps.InjectableStepsFactory;
-import org.jbehave.core.steps.ParameterConverters;
-import org.jbehave.core.steps.SilentStepMonitor;
-import org.jbehave.core.steps.spring.SpringStepsFactory;
 /* JUnit */
 import org.junit.runner.RunWith;
-/* SLF4J */
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-/* Spring */
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
-import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
 /**
@@ -51,16 +24,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 @EnableAutoConfiguration
 public class ITest extends JBehaveRunnerDefault {
     
-    @Autowired
-    private ApplicationContext  applicationContext;
-
     public ITest() {
-        super("IT WEB-Integration");
-    }
-    
-    @PostConstruct
-    public void init() {
-	init(applicationContext);
-    }
 
+    }
 }
