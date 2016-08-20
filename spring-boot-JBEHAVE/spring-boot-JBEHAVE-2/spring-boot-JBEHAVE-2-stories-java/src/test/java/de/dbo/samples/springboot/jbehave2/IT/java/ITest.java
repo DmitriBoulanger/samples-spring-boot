@@ -1,7 +1,7 @@
 package de.dbo.samples.springboot.jbehave2.IT.java;
 
 
-import de.dbo.samples.springboot.jbehave2.IT.commons.configuration.DefaultJBehaveConfiguration;
+import de.dbo.samples.springboot.jbehave2.IT.commons.configuration.ConfigurationJBehaveDefault;
 import de.dbo.samples.springboot.jbehave2.IT.commons.stories.StoriesProvider;
 
 import java.text.SimpleDateFormat;
@@ -62,7 +62,7 @@ public class ITest extends JUnitStories {
 
     @PostConstruct
     public void init() {
-	useConfiguration(applicationContext.getBean(DefaultJBehaveConfiguration.class));
+	useConfiguration(applicationContext.getBean(ConfigurationJBehaveDefault.class));
         configuredEmbedder().embedderControls().useThreads(10);
     }
 

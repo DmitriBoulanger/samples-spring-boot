@@ -20,13 +20,13 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 @Component
-public class DefaultJBehaveConfiguration extends MostUsefulConfiguration {
-    private static final Logger log = LoggerFactory.getLogger(DefaultJBehaveConfiguration.class);
+public class ConfigurationJBehaveDefault extends MostUsefulConfiguration {
+    private static final Logger log = LoggerFactory.getLogger(ConfigurationJBehaveDefault.class);
 
     @Autowired
     private ApplicationContext  applicationContext;
     
-    public DefaultJBehaveConfiguration() {
+    public ConfigurationJBehaveDefault() {
 	
     }
 

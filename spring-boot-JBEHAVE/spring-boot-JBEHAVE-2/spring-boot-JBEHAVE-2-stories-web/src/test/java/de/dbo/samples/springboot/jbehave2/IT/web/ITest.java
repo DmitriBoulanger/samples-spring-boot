@@ -1,6 +1,7 @@
 package de.dbo.samples.springboot.jbehave2.IT.web;
 
-import de.dbo.samples.springboot.jbehave2.IT.commons.configuration.DefaultJBehaveConfiguration;
+import de.dbo.samples.springboot.jbehave2.IT.commons.configuration.ConfigurationJBehaveDefault;
+import de.dbo.samples.springboot.jbehave2.IT.commons.jbehaveruntime.JBehaveRunnerDefault;
 import de.dbo.samples.springboot.jbehave2.IT.commons.stories.StoriesProvider;
 
 import java.text.SimpleDateFormat;
@@ -48,34 +49,18 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @EnableAutoConfiguration
-public class ITest extends JUnitStories {
-    private static final Logger log = LoggerFactory.getLogger(ITestApplication.class);
-
+public class ITest extends JBehaveRunnerDefault {
+    
     @Autowired
     private ApplicationContext  applicationContext;
 
     public ITest() {
-        log.info("created");
+        super("IT WEB-Integration");
     }
     
-    // =====================================================================================================================================
-    //                                   JBEHAVE CONFIGURATION
-    // =====================================================================================================================================
-
     @PostConstruct
     public void init() {
-	useConfiguration(applicationContext.getBean(DefaultJBehaveConfiguration.class));
-        configuredEmbedder().embedderControls().useThreads(10);
-    }
-
-    @Override
-    public InjectableStepsFactory stepsFactory() {
-        return new SpringStepsFactory(configuration(), applicationContext);
-    }
-
-    @Override
-    protected List<String> storyPaths() {
-	return applicationContext.getBean(StoriesProvider.class).defaultStoryPaths(this.getClass());
+	init(applicationContext);
     }
 
 }
