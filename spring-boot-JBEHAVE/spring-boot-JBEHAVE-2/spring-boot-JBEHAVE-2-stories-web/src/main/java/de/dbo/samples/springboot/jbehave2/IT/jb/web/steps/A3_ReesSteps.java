@@ -1,9 +1,15 @@
 package de.dbo.samples.springboot.jbehave2.IT.jb.web.steps;
 
-import static de.dbo.samples.springboot.jbehave2.IT.commons.TestServerAssertions.assertThatTestServerInitialized;
 /* Hamcrest */
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
+
+import static de.dbo.samples.springboot.jbehave2.IT.commons.server.TestServerAssertions.assertThatTestServerInitialized;
+
+import de.dbo.samples.springboot.jbehave2.IT.commons.context.ContextThreadLocal;
+import de.dbo.samples.springboot.jbehave2.IT.commons.steps.BaicSteps;
+import de.dbo.samples.springboot.jbehave2.IT.commons.stepsimpl.StepsBase;
+import de.dbo.samples.springboot.jbehave2.app3.domain.Greeting;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -14,31 +20,23 @@ import org.jbehave.core.annotations.Then;
 /* SLF4J */
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-/* Spring-Boot */
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
-/* JB and Applications*/
-import de.dbo.samples.springboot.jbehave2.IT.commons.TestServer;
-import de.dbo.samples.springboot.jbehave2.app3.domain.Greeting;
-
 @Component
-public class A3_ReesSteps {
+public class A3_ReesSteps extends StepsBase {
     private static final Logger log = LoggerFactory.getLogger(A3_ReesSteps.class);
-
+   
     public A3_ReesSteps() {
         log.info("created. HashCode=[" + hashCode() + "]");
     }
 
-    @Autowired
-    private TestServer testServer;
-
     @Given("A3 server initialized")
     public void init() {
         assertThatTestServerInitialized(testServer);
+        myCtx().setTestSever(testServer);
     }
 
     @Then("greeting")
@@ -77,9 +75,9 @@ public class A3_ReesSteps {
         try {
             switch (path) {
                 case HELLO:
-                    return new URI("http://" + testServer.getHost() + ":" + testServer.getPort() + "/" + path);
+                    return new URI("http://" + myCtx().getHost() + ":" + myCtx().getPort() + "/" + path);
                 case INFO:
-                    return new URI("http://" + testServer.getHost() + ":" + testServer.getPort() + "/" + path);
+                    return new URI("http://" + myCtx().getHost() + ":" + myCtx().getPort() + "/" + path);
                 default:
                     throw new IllegalArgumentException("Path [" + path + "] is unknown");
             }
@@ -89,6 +87,14 @@ public class A3_ReesSteps {
         }
     }
 
+    // ==================================================================================================================
+    //                                   CONTEXT
+    // ==================================================================================================================
+ 
+    private static A3_ReesSteps_Data myCtx() {
+        return (A3_ReesSteps_Data) ContextThreadLocal.contextLocal().getContexData(A3_ReesSteps_Data.class);
+    }
+    
     // ==================================================================================================================
     //                                   ASSERTIONS
     // ==================================================================================================================
@@ -101,4 +107,6 @@ public class A3_ReesSteps {
     // ==================================================================================================================
     //                                   HELPERS
     // ==================================================================================================================
+    
+    
 }

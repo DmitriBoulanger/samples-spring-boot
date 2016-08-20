@@ -29,9 +29,10 @@ import de.dbo.samples.springboot.utilities.logging.LoggingInfo;
  */
 
 @Configuration
-@ComponentScan(value = {
+@ComponentScan(value = {"de.dbo.samples.springboot.jbehave2.IT.commons"
+	
         // Steps-classes for all Applications to be integrated
-        "de.dbo.samples.springboot.jbehave2.IT.jb.java", "de.dbo.samples.springboot.jbehave2.IT.jb.web"
+        ,"de.dbo.samples.springboot.jbehave2.IT.jb.java", "de.dbo.samples.springboot.jbehave2.IT.jb.web"
         // Application 1
         , "de.dbo.samples.springboot.jbehave2.app1"
         // Application 2
@@ -46,7 +47,7 @@ public class ITestApplicationConfiguration {
     @Bean
     public Jackson2RepositoryPopulatorFactoryBean repositoryPopulator() {
 
-        log.error("created - TEST", new Exception("test error with exception just to see it"));
+        log.error("created. " + new Exception("exception just to see it"));
         log.trace(LoggingInfo.printAvailableLoggers(120).toString());
 
         final Jackson2RepositoryPopulatorFactoryBean factory = new Jackson2RepositoryPopulatorFactoryBean();

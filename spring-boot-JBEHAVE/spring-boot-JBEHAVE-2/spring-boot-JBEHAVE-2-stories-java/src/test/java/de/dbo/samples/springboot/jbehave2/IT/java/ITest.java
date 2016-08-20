@@ -1,6 +1,9 @@
 package de.dbo.samples.springboot.jbehave2.IT.java;
 
 
+import de.dbo.samples.springboot.jbehave2.IT.commons.configuration.DefaultJBehaveConfiguration;
+import de.dbo.samples.springboot.jbehave2.IT.commons.stories.StoriesProvider;
+
 import java.text.SimpleDateFormat;
 import java.util.List;
 
@@ -53,28 +56,14 @@ public class ITest extends JUnitStories {
         log.info("created");
     }
 
+    // =====================================================================================================================================
+    //                                   JBEHAVE CONFIGURATION
+    // =====================================================================================================================================
+
     @PostConstruct
     public void init() {
-        initJBehaveConfiguration();
-    }
-
-    private void initJBehaveConfiguration() {
-        Class<?> thisClass = this.getClass();
-        useConfiguration(new MostUsefulConfiguration()
-                .useStoryLoader(new LoadFromClasspath(thisClass.getClassLoader()))
-                //                .usePendingStepStrategy(new org.jbehave.core.failures.FailingUponPendingStep())
-                .useStepdocReporter(new PrintStreamStepdocReporter())
-                .useStoryReporterBuilder(
-                        new StoryReporterBuilder()
-                                .withCodeLocation(CodeLocations.codeLocationFromClass(thisClass))
-                                .withDefaultFormats()
-                                .withFormats(Format.CONSOLE, Format.TXT, Format.HTML, Format.XML, Format.STATS)
-                                .withCrossReference(new CrossReference())
-                                .withFailureTrace(true))
-                .useParameterConverters(
-                        new ParameterConverters()
-                                .addConverters(new ParameterConverters.DateConverter(new SimpleDateFormat("yyyy-MM-dd"))))
-                .useStepMonitor(new SilentStepMonitor()));
+	useConfiguration(applicationContext.getBean(DefaultJBehaveConfiguration.class));
+        configuredEmbedder().embedderControls().useThreads(10);
     }
 
     @Override
@@ -84,14 +73,6 @@ public class ITest extends JUnitStories {
 
     @Override
     protected List<String> storyPaths() {
-        final List<String> storyPaths =
-            new StoryFinder().findPaths(CodeLocations.codeLocationFromClass(this.getClass()), "**/*.story", "**/excluded/*.story");
-        final StringBuilder sb = new StringBuilder("Stories to run:");
-        for (final String path : storyPaths) {
-            sb.append("\n\t - " + path);
-        }
-        log.info(sb.toString());
-        return storyPaths;
+	return applicationContext.getBean(StoriesProvider.class).defaultStoryPaths(this.getClass());
     }
-
 }

@@ -1,4 +1,4 @@
-package de.dbo.samples.springboot.jbehave2.IT.commons;
+package de.dbo.samples.springboot.jbehave2.IT.commons.server;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
@@ -20,6 +20,8 @@ public abstract class TestServerLocalhost  {
     
     public abstract String name();
     
+    public abstract TestServerType  type();
+    
     public Integer getPort() {
 	final String port = environment.getProperty("local.server.port"); /* from application.properties */
 	if (null==port) {
@@ -33,6 +35,6 @@ public abstract class TestServerLocalhost  {
     }
 
     public String print() {
-        return name() + "[" + getHost() + ":" + getPort() + "]";
+        return type() + " " + name() + "[" + getHost() + ":" + getPort() + "]";
     }
 }

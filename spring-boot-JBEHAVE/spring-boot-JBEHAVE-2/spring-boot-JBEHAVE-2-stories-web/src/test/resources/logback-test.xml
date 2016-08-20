@@ -44,9 +44,6 @@
 <!-- 		<appender-ref ref="NORMAL_MESSAGES" /> -->
 <!-- 	</logger> -->
 	
-	
-
-	
 <!-- 	 <logger name="org.springframework.boot.context.embedded.tomcat"  -->
 <!-- 		level="DEBUG" additivity="false"> -->
 <!-- 		<appender-ref ref="NORMAL_MESSAGES" /> -->

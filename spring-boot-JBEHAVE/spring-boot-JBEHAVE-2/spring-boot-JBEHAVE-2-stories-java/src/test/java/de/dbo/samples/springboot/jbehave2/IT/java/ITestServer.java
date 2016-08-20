@@ -1,7 +1,8 @@
 package de.dbo.samples.springboot.jbehave2.IT.java;
 
-import de.dbo.samples.springboot.jbehave2.IT.commons.TestServer;
-import de.dbo.samples.springboot.jbehave2.IT.commons.TestServerLocalhost;
+import de.dbo.samples.springboot.jbehave2.IT.commons.server.TestServer;
+import de.dbo.samples.springboot.jbehave2.IT.commons.server.TestServerLocalhost;
+import de.dbo.samples.springboot.jbehave2.IT.commons.server.TestServerType;
 
 import org.springframework.stereotype.Component;
 
@@ -25,6 +26,10 @@ public final class ITestServer extends TestServerLocalhost implements TestServer
     public String name() {
 	return "A1 Null Server";
     }
+    
+    public TestServerType type() {
+	return TestServerType.NULL;
+    }
 
     /**
      * @return null
@@ -38,12 +43,5 @@ public final class ITestServer extends TestServerLocalhost implements TestServer
      */
     public String getHost() {
         return null;
-    }
-
-    /**
-     * @return pretty-print of this null-server
-     */
-    public String print() {
-        return name() + "[" + getHost() + ":" + getPort() + "]";
     }
 }

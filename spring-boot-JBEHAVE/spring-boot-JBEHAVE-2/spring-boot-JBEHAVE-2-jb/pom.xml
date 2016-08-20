@@ -13,8 +13,9 @@
 	<packaging>jar</packaging>
 
 	<name>Samples Spring-Boot JBEHAVE 2-Steps Library</name>
+	
+	
 	<dependencies>
-
 
 		<!-- ========================================================================================= -->
 		<!--                             JBEHAVE                                                       -->

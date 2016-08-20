@@ -1,4 +1,4 @@
-package de.dbo.samples.springboot.jbehave2.IT.commons;
+package de.dbo.samples.springboot.jbehave2.IT.commons.server;
 
 /**
  * Test Server used in Integration Tests

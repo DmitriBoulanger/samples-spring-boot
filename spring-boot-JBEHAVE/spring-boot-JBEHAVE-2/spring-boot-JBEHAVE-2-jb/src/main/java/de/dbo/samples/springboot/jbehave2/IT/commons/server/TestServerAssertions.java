@@ -1,4 +1,4 @@
-package de.dbo.samples.springboot.jbehave2.IT.commons;
+package de.dbo.samples.springboot.jbehave2.IT.commons.server;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.greaterThan;
@@ -18,7 +18,7 @@ public final class TestServerAssertions {
         assertThat(testServer.name() + ": port is not as expected", port, greaterThan(9999));
         final String host = testServer.getHost();
         assertThat(testServer.name() + ": host is null", host, notNullValue());
-        log.info("A3 server available");
+        log.info("Server ["+ testServer.getClass().getSimpleName() +"] available");
     }
 
 }
