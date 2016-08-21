@@ -33,8 +33,12 @@ public final class ContextThreadLocal {
         };
     }
 
-    public static final ContextThreadLocal contextLocal() {
+    protected static final ContextThreadLocal contextLocal() {
         return THREAD_LOCAL_CONTEXT.get();
+    }
+    
+    public static final ContextData contextData(final Class<? extends ContextData> key) {
+        return contextLocal().getContexData(key);
     }
 
     // =================================================================================================================================

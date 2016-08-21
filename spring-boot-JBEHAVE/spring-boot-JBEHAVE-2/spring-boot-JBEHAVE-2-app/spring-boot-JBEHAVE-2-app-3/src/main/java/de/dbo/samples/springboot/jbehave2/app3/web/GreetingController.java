@@ -30,7 +30,9 @@ public class GreetingController {
 
     public GreetingController() {
         log.info("created. HashCode=[" + hashCode() + "]");
-        log.error("ok");
+        if (log.isDebugEnabled()) {
+            log.error("ok");
+        }
     }
 
     @RequestMapping(method = RequestMethod.GET)
@@ -41,13 +43,13 @@ public class GreetingController {
         if (0 == repositoryCount) {
             log.error("No data in the customer repository: Elastic search repository was not loaded?");
         }
-        else {
+        else if (log.isDebugEnabled()) {
             final Iterable<Customer> customers = customerRepository.findAll();
             final StringBuilder sb = new StringBuilder("Repository contents: ");
             for (Customer customer : customers) {
                 sb.append("\n\t - ID=" + customer.getId() + " " + customer.getFirstName());
             }
-            log.info(sb.toString());
+            log.debug(sb.toString());
         }
 
         final boolean badName = null != name && name.equals("XXX");

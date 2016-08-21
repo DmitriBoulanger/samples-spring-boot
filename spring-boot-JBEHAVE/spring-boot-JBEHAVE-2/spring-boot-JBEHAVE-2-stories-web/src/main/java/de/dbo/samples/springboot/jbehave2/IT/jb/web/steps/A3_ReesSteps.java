@@ -7,7 +7,7 @@ import static org.hamcrest.Matchers.equalTo;
 import static de.dbo.samples.springboot.jbehave2.IT.commons.server.TestServerAssertions.assertThatTestServerInitialized;
 
 import de.dbo.samples.springboot.jbehave2.IT.commons.context.ContextThreadLocal;
-import de.dbo.samples.springboot.jbehave2.IT.commons.steps.BaicSteps;
+import de.dbo.samples.springboot.jbehave2.IT.commons.server.TestServer;
 import de.dbo.samples.springboot.jbehave2.IT.commons.stepsimpl.StepsBase;
 import de.dbo.samples.springboot.jbehave2.app3.domain.Greeting;
 
@@ -35,8 +35,9 @@ public class A3_ReesSteps extends StepsBase {
 
     @Given("A3 server initialized")
     public void init() {
+	final TestServer testServer = testServer("A3 server-clone");
         assertThatTestServerInitialized(testServer);
-        myCtx().setTestSever(testServer);
+        ctx().setTestSever(testServer);
     }
 
     @Then("greeting")
@@ -75,9 +76,9 @@ public class A3_ReesSteps extends StepsBase {
         try {
             switch (path) {
                 case HELLO:
-                    return new URI("http://" + myCtx().getHost() + ":" + myCtx().getPort() + "/" + path);
+                    return new URI("http://" + ctx().getHost() + ":" + ctx().getPort() + "/" + path);
                 case INFO:
-                    return new URI("http://" + myCtx().getHost() + ":" + myCtx().getPort() + "/" + path);
+                    return new URI("http://" + ctx().getHost() + ":" + ctx().getPort() + "/" + path);
                 default:
                     throw new IllegalArgumentException("Path [" + path + "] is unknown");
             }
@@ -88,11 +89,11 @@ public class A3_ReesSteps extends StepsBase {
     }
 
     // ==================================================================================================================
-    //                                   CONTEXT
+    //                                   CONTEXT DATA
     // ==================================================================================================================
  
-    private static A3_ReesSteps_Data myCtx() {
-        return (A3_ReesSteps_Data) ContextThreadLocal.contextLocal().getContexData(A3_ReesSteps_Data.class);
+    private static A3_ReesSteps_Data ctx() {
+        return (A3_ReesSteps_Data) ContextThreadLocal.contextData(A3_ReesSteps_Data.class);
     }
     
     // ==================================================================================================================

@@ -1,6 +1,6 @@
 package de.dbo.samples.springboot.jbehave2.IT.java;
 
-import de.dbo.samples.springboot.jbehave2.IT.commons.jbehaveruntime.JBehaveRunnerDefault;
+import de.dbo.samples.springboot.jbehave2.IT.commons.jbehave.runtime.JBehaveRunnerDefault;
 
 import java.util.List;
 

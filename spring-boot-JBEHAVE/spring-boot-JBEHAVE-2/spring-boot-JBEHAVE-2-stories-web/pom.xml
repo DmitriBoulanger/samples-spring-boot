@@ -1,5 +1,4 @@
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns="http://maven.apache.org/POM/4.0.0"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
@@ -21,7 +20,7 @@
 			<!-- JBehave: Installation of the WEB-Resources for Report-Generation  -->
 			<!-- Location: target/jbehave/view                                     -->
 			<!-- ================================================================= -->
-			
+
 			<plugin>
 				<groupId>org.jbehave</groupId>
 				<artifactId>jbehave-maven-plugin</artifactId>
@@ -45,32 +44,32 @@
 		<!-- ========================================================================================= -->
 
 		<dependency>
-				<groupId>de.dbo.samples.springboot</groupId>
-				<artifactId>spring-boot-JBEHAVE-2-app-1</artifactId>
-				<version>0.0.0-SNAPSHOT</version>
+			<groupId>de.dbo.samples.springboot</groupId>
+			<artifactId>spring-boot-JBEHAVE-2-app-1</artifactId>
+			<version>0.0.0-SNAPSHOT</version>
 		</dependency>
 
 		<dependency>
-				<groupId>de.dbo.samples.springboot</groupId>
-				<artifactId>spring-boot-JBEHAVE-2-app-2</artifactId>
-				<version>0.0.0-SNAPSHOT</version>
-				<classifier>classes</classifier>
+			<groupId>de.dbo.samples.springboot</groupId>
+			<artifactId>spring-boot-JBEHAVE-2-app-2</artifactId>
+			<version>0.0.0-SNAPSHOT</version>
+			<classifier>classes</classifier>
 		</dependency>
-		
+
 		<dependency>
-				<groupId>de.dbo.samples.springboot</groupId>
-				<artifactId>spring-boot-JBEHAVE-2-app-3</artifactId>
-				<version>0.0.0-SNAPSHOT</version>
+			<groupId>de.dbo.samples.springboot</groupId>
+			<artifactId>spring-boot-JBEHAVE-2-app-3</artifactId>
+			<version>0.0.0-SNAPSHOT</version>
 		</dependency>
 		
 		<!-- ========================================================================================= -->
 		<!--                    STEPS-RESOURCES FROM OTHER INTEGRATION PROJECTS                       -->
 		<!-- ========================================================================================= -->
-		
+
 		<dependency>
-				<groupId>de.dbo.samples.springboot</groupId>
-				<artifactId>spring-boot-JBEHAVE-2-stories-java</artifactId>
-				<version>0.0.0-SNAPSHOT</version>
+			<groupId>de.dbo.samples.springboot</groupId>
+			<artifactId>spring-boot-JBEHAVE-2-stories-java</artifactId>
+			<version>0.0.0-SNAPSHOT</version>
 		</dependency>
 		
 		<!-- ========================================================================================= -->
@@ -112,17 +111,17 @@
 		<!-- ========================================================================================= -->
 		<!--                             IT COMMONS                                                    -->
 		<!-- ========================================================================================= -->
-		
+
 		<dependency>
-				<groupId>de.dbo.samples.springboot</groupId>
-				<artifactId>spring-boot-JBEHAVE-2-jb</artifactId>
-				<version>0.0.0-SNAPSHOT</version>
+			<groupId>de.dbo.samples.springboot</groupId>
+			<artifactId>spring-boot-JBEHAVE-2-jb</artifactId>
+			<version>0.0.0-SNAPSHOT</version>
 		</dependency>
 		
 		<!-- ========================================================================================= -->
 		<!--                             ETC                                                           -->
 		<!-- ========================================================================================= -->
-		
+
 		<dependency>
 			<groupId>com.jayway.restassured</groupId>
 			<artifactId>rest-assured</artifactId>

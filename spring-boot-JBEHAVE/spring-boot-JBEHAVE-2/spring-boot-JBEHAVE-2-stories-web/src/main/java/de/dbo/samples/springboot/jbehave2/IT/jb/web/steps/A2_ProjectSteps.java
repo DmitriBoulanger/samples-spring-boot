@@ -7,6 +7,7 @@ import static de.dbo.samples.springboot.jbehave2.IT.commons.server.TestServerAss
 import de.dbo.samples.springboot.jbehave2.IT.commons.context.ContextThreadLocal;
 import de.dbo.samples.springboot.jbehave2.IT.commons.server.TestServer;
 import de.dbo.samples.springboot.jbehave2.IT.commons.stepsimpl.StepsBase;
+import de.dbo.samples.springboot.jbehave2.IT.commons.stepsimpl.StepsBaseRestAssured;
 
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
@@ -24,7 +25,7 @@ import com.jayway.restassured.filter.log.ResponseLoggingFilter;
 import com.jayway.restassured.http.ContentType;
 
 @Component
-public class A2_ProjectSteps extends StepsBase {
+public class A2_ProjectSteps extends StepsBaseRestAssured {
     private static final Logger log = LoggerFactory.getLogger(A2_ProjectSteps.class);
     
     @Autowired
@@ -38,27 +39,25 @@ public class A2_ProjectSteps extends StepsBase {
     @Given("A2 server initialized")
     public void init() {
         assertThatTestServerInitialized(testServer);
-        myCtx().setRequestSpecification(
-        	new RequestSpecBuilder()
-        		.log(LogDetail.STATUS)
-        		.setContentType(ContentType.JSON)
-        		.setBaseUri("http://" + testServer.getHost() + ":" + testServer.getPort() + "/")
-        		.addFilter(new ResponseLoggingFilter())
-        		.addFilter(new RequestLoggingFilter())
-        		.build());
+        ctx().setRequestSpecification(requestSpecBuilder()
+                .setContentType(ContentType.JSON)
+                .setBaseUri("http://" + testServer.getHost() + ":" + testServer.getPort() + "/")
+                .addFilter(requestLoggingFiler())
+                .addFilter(responseLoggingFiler())
+                .build());
     }
 
     @Then("data available")
     public void collectionResourceOK() {
-        given().spec(myCtx().getRequestSpecification()).when().get("/projects").then().statusCode(200);
+        given().spec(ctx().getRequestSpecification()).when().get("/projects").then().statusCode(200);
     }
 
     // ==================================================================================================================
-    //                                   CONTEXT
+    //                                   CONTEXT DATA
     // ==================================================================================================================
  
-    private static A2_ProjectSteps_Data myCtx() {
-        return (A2_ProjectSteps_Data) ContextThreadLocal.contextLocal().getContexData(A2_ProjectSteps_Data.class);
+    private static A2_ProjectSteps_Data ctx() {
+        return (A2_ProjectSteps_Data) ContextThreadLocal.contextData(A2_ProjectSteps_Data.class);
     }
     
   

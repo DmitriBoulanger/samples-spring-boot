@@ -18,5 +18,7 @@ public interface TestServer {
     public String print();
     
     public String name();
+    
+    public TestServer clone(final String name);
 
 }
