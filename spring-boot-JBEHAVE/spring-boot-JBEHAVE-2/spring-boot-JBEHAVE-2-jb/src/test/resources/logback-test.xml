@@ -24,5 +24,39 @@
 		<appender-ref ref="NORMAL_MESSAGES" />
 	</logger>
 	
+	<logger name="org.springframework" 
+		level="DEBUG" additivity="false">
+		<appender-ref ref="NORMAL_MESSAGES" />
+	</logger>
+
+<!-- 	<logger name="org.springframework.web.servlet.mvc"  -->
+<!-- 		level="DEBUG" additivity="false"> -->
+<!-- 		<appender-ref ref="NORMAL_MESSAGES" /> -->
+<!-- 	</logger> -->
+	
+<!-- 	<logger name="org.springframework.web.servlet.resource"  -->
+<!-- 		level="DEBUG" additivity="false"> -->
+<!-- 		<appender-ref ref="NORMAL_MESSAGES" /> -->
+<!-- 	</logger>		 -->
+	
+<!-- 	<logger name="org.springframework.web.servlet.handler"  -->
+<!-- 		level="DEBUG" additivity="false"> -->
+<!-- 		<appender-ref ref="NORMAL_MESSAGES" /> -->
+<!-- 	</logger> -->
+	
+<!-- 	 <logger name="org.springframework.boot.context.embedded.tomcat"  -->
+<!-- 		level="DEBUG" additivity="false"> -->
+<!-- 		<appender-ref ref="NORMAL_MESSAGES" /> -->
+<!-- 	</logger> -->
+	
+	<!-- =================================================================================================== -->
+	<!--                                SPECIAL LOGGERS                                                      -->
+	<!-- =================================================================================================== -->
+	
+	<logger name="org.springframework.beans.factory.support" level="DEBUG"
+		additivity="false">
+		<appender-ref ref="NORMAL_MESSAGES_SPRING" />
+	</logger>
+	
 
 </configuration>

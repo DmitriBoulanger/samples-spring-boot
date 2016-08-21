@@ -15,7 +15,7 @@
 	<!-- ======================================================================================================= -->
 
 	<logger name="de.dbo.samples.springboot" 
-		level="INFO" additivity="true">
+		level="DEBUG" additivity="true">
 		<appender-ref ref="NORMAL_MESSAGES" />
 	</logger>
 	

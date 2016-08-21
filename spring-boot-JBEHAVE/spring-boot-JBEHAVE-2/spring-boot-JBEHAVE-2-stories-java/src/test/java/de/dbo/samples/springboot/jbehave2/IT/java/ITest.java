@@ -2,6 +2,8 @@ package de.dbo.samples.springboot.jbehave2.IT.java;
 
 import de.dbo.samples.springboot.jbehave2.IT.commons.jbehaveruntime.JBehaveRunnerDefault;
 
+import java.util.List;
+
 /* JUnit */
 import org.junit.runner.RunWith;
 /* Spring-Boot */
@@ -21,7 +23,12 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class ITest extends JBehaveRunnerDefault {
     
     public ITest() {
-
+	super(ITest.class);
+    }
+    
+    @Override
+    protected final List<String> storyPaths() {
+	return defaultStoryPaths();
     }
 }
 
