@@ -24,7 +24,7 @@ public class ConfigurationJBehaveProperties implements ConfigurationJBehaveSyste
     public static final int DEFAULT_STORIES_TIMEOUT   = 100;
     public static final boolean DEFAULT_STORIES_CONSOLE = false;
     
-    public static final boolean DEFAULT_LOGGING_THRID_PARTIES = false;
+    public static final boolean DEFAULT_LOGGING_THRID_PARTIES_SILENT = true;
     
 
     // =========================================================================================================
@@ -43,7 +43,7 @@ public class ConfigurationJBehaveProperties implements ConfigurationJBehaveSyste
     @Value("${" + SYSTEM_PROPERTY_JBEHAVE_STORIES_CONSOLE + ":${"+STORIES_CONSOLE+":" + DEFAULT_STORIES_CONSOLE + "}}")
     protected boolean storiesConsole;
     
-    @Value("${" + SYSTEM_PROPERTY_JBEHAVE_LOGGING_THRID_PARTIES + ":${"+LOGGING_THRID_PARTIES+":" + DEFAULT_LOGGING_THRID_PARTIES + "}}")
+    @Value("${" + SYSTEM_PROPERTY_JBEHAVE_LOGGING_THRID_PARTIES__SILENT + ":${"+LOGGING_THRID_PARTIES_SILENT+":" + DEFAULT_LOGGING_THRID_PARTIES_SILENT + "}}")
     protected boolean loggingThirdPartiesSilent;
 
     public ConfigurationJBehaveProperties() {
@@ -100,7 +100,7 @@ public class ConfigurationJBehaveProperties implements ConfigurationJBehaveSyste
 	final ConfigurationPropertyTriple triple2 = 
 		new ConfigurationPropertyTriple(q2(STORIES_CONSOLE, DEFAULT_STORIES_CONSOLE), isStoriesConsole(), SYSTEM_PROPERTY_JBEHAVE_STORIES_CONSOLE);
 	final ConfigurationPropertyTriple triple3 = 
-		new ConfigurationPropertyTriple(q2(LOGGING_THRID_PARTIES, DEFAULT_LOGGING_THRID_PARTIES), isLoggingThirdPartiesSilent(), SYSTEM_PROPERTY_JBEHAVE_LOGGING_THRID_PARTIES);
+		new ConfigurationPropertyTriple(q2(LOGGING_THRID_PARTIES_SILENT, DEFAULT_LOGGING_THRID_PARTIES_SILENT), isLoggingThirdPartiesSilent(), SYSTEM_PROPERTY_JBEHAVE_LOGGING_THRID_PARTIES__SILENT);
 	
 	return Print.configurationProperties("JBehave Properties:",
 		new ConfigurationPropertyTriple[]{triple0,triple1,triple2,triple3,triple4});

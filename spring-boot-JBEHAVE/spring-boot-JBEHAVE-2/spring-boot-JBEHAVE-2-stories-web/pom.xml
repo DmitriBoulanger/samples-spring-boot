@@ -114,7 +114,7 @@
 
 		<dependency>
 			<groupId>de.dbo.samples.springboot</groupId>
-			<artifactId>spring-boot-JBEHAVE-2-jb</artifactId>
+			<artifactId>spring-boot-JBEHAVE-2-commons</artifactId>
 			<version>0.0.0-SNAPSHOT</version>
 		</dependency>
 		

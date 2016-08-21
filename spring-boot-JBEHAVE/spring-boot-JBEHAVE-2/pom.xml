@@ -31,7 +31,7 @@ The modules of this project are as follows:
 	</properties>
 
 	<modules>
-		<module>spring-boot-JBEHAVE-2-jb</module>
+		<module>spring-boot-JBEHAVE-2-commons</module>
 		<module>spring-boot-JBEHAVE-2-app</module>
 		
 		<module>spring-boot-JBEHAVE-2-stories-java</module>

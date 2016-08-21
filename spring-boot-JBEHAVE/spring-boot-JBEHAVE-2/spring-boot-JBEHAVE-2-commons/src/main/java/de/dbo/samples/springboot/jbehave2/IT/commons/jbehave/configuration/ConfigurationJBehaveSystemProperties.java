@@ -34,9 +34,9 @@ public interface ConfigurationJBehaveSystemProperties {
     // =================================================================================================================================
     
     /* jbehave.properties key */
-    public static final String LOGGING_THRID_PARTIES 	                        	=  "logging.thridparties.silent";
+    public static final String LOGGING_THRID_PARTIES_SILENT 	                        	=  "logging.thridparties.silent";
     
     /* system-property key */
-    public static final String SYSTEM_PROPERTY_JBEHAVE_LOGGING_THRID_PARTIES 	=  JBEHAVE_PREFIX + LOGGING_THRID_PARTIES;
+    public static final String SYSTEM_PROPERTY_JBEHAVE_LOGGING_THRID_PARTIES__SILENT 	=  JBEHAVE_PREFIX + LOGGING_THRID_PARTIES_SILENT;
 
 }
