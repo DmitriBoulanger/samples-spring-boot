@@ -17,6 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.jayway.restassured.builder.RequestSpecBuilder;
+import com.jayway.restassured.config.LogConfig;
+import com.jayway.restassured.filter.log.LogDetail;
 import com.jayway.restassured.filter.log.RequestLoggingFilter;
 import com.jayway.restassured.filter.log.ResponseLoggingFilter;
 import com.jayway.restassured.http.ContentType;
@@ -29,18 +31,21 @@ public class A2_ProjectSteps extends StepsBase {
     private TestServer  testServer;
 
     public A2_ProjectSteps() {
+	LogConfig.logConfig().enablePrettyPrinting(false);
         log.info("created. HashCode=[" + hashCode() + "]");
     }
 
     @Given("A2 server initialized")
     public void init() {
         assertThatTestServerInitialized(testServer);
-        myCtx().setRequestSpecification(new RequestSpecBuilder()
-                .setContentType(ContentType.JSON)
-                .setBaseUri("http://" + testServer.getHost() + ":" + testServer.getPort() + "/")
-                .addFilter(new ResponseLoggingFilter())
-                .addFilter(new RequestLoggingFilter())
-                .build());
+        myCtx().setRequestSpecification(
+        	new RequestSpecBuilder()
+        		.log(LogDetail.STATUS)
+        		.setContentType(ContentType.JSON)
+        		.setBaseUri("http://" + testServer.getHost() + ":" + testServer.getPort() + "/")
+        		.addFilter(new ResponseLoggingFilter())
+        		.addFilter(new RequestLoggingFilter())
+        		.build());
     }
 
     @Then("data available")
