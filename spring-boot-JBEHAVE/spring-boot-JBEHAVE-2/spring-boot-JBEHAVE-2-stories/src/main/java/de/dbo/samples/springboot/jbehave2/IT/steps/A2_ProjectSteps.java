@@ -6,7 +6,6 @@ import static de.dbo.samples.springboot.jbehave2.IT.commons.server.TestServerAss
 
 import de.dbo.samples.springboot.jbehave2.IT.commons.context.ContextThreadLocal;
 import de.dbo.samples.springboot.jbehave2.IT.commons.server.TestServer;
-import de.dbo.samples.springboot.jbehave2.IT.commons.stepsimpl.StepsBase;
 import de.dbo.samples.springboot.jbehave2.IT.commons.stepsimpl.StepsBaseRestAssured;
 
 import org.jbehave.core.annotations.Given;
@@ -17,11 +16,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.jayway.restassured.builder.RequestSpecBuilder;
 import com.jayway.restassured.config.LogConfig;
-import com.jayway.restassured.filter.log.LogDetail;
-import com.jayway.restassured.filter.log.RequestLoggingFilter;
-import com.jayway.restassured.filter.log.ResponseLoggingFilter;
 import com.jayway.restassured.http.ContentType;
 
 @Component
