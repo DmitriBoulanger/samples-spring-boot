@@ -16,6 +16,7 @@
 	<description>
 Simple WAR-deployment to running Tomcat WEB-Container
 	</description>
+	<url>https://spring.io/blog/2014/03/07/deploying-spring-boot-applications</url>
 
 	<properties>
 
