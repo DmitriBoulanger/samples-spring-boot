@@ -24,6 +24,7 @@ import de.dbo.samples.springboot.utilities.logging.LoggingInfo;
 
 @Configuration
 @ComponentScan(value = {"de.dbo.samples.springboot.jbehave2.IT.deploy"
+	
         // Application 1
         , "de.dbo.samples.springboot.jbehave2.app1"
         // Application 2

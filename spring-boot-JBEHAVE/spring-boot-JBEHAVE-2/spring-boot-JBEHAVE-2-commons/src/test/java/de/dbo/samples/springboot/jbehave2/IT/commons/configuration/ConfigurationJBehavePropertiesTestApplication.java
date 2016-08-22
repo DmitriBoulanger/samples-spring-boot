@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 /* Spring-Boot */
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.web.WebClientAutoConfiguration;
 import org.springframework.context.ConfigurableApplicationContext;
 
 /**
@@ -20,7 +21,7 @@ import org.springframework.context.ConfigurableApplicationContext;
  * Programs are meant to be read by humans and only incidentally for computers to execute (D. Knuth)
  *
  */
-@SpringBootApplication
+@SpringBootApplication(exclude={WebClientAutoConfiguration.class})
 public class ConfigurationJBehavePropertiesTestApplication {
     private static final Logger log = LoggerFactory.getLogger(ConfigurationJBehavePropertiesTestApplication.class);
 

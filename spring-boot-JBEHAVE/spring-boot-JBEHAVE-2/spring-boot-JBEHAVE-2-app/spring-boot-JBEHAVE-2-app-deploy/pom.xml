@@ -1,5 +1,4 @@
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns="http://maven.apache.org/POM/4.0.0"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
@@ -12,20 +11,82 @@
 	<artifactId>spring-boot-JBEHAVE-2-app-deploy</artifactId>
 	<packaging>war</packaging>
 
-	<name>Samples Spring-Boot JBEHAVE 2-Deployment</name>
+	<name>Samples Spring-Boot JBEHAVE 2-App Deployment</name>
+	<url>https://codehaus-cargo.github.io/cargo/Deploying+to+a+running+container.html</url>
+
+	<properties>
+	
+	    <!-- =================================================== -->
+	    <!--           REMOTE SERVER TO DEPLOY                   -->
+	    <!-- =================================================== -->
+	    
+		<remote.containerId>tomcat8x</remote.containerId>
+		<remote.protocol>http</remote.protocol>
+		<remote.host>localhost</remote.host>
+		<remote.port>8080</remote.port>
+		<remote.user>IT123</remote.user>
+		<remote.pass>123</remote.pass>
+		<remote.context>/IT123</remote.context>
+		<remote.pingTimeout>30000</remote.pingTimeout>
+		<remote.pingURL>${remote.protocol}://${remote.host}:${remote.port}${remote.context}/hello-world</remote.pingURL>
+		
+	</properties>
 
 	<build>
-		<finalName>IT123</finalName>
-	
 		<plugins>
+		
+			<!-- =========================================================================================== -->
+			<!--                   STANDARD (DEFAULT) WAR GENERATION                                         -->
+			<!-- =========================================================================================== -->
 			<plugin>
 				<artifactId>maven-war-plugin</artifactId>
 				<configuration>
-					<failOnMissingWebXml>false</failOnMissingWebXml>
-                    <packagingExcludes>WEB-INF/lib/tomcat-*.jar</packagingExcludes>
-                    <packagingExcludes>WEB-INF/lib/spring-test-*.jar</packagingExcludes>
-                    <packagingExcludes>WEB-INF/lib/spring-boot-test-*.jar</packagingExcludes>
-                    <packagingExcludes>WEB-INF/lib/spring-boot-starter-*.jar</packagingExcludes>
+					<packagingExcludes>WEB-INF/lib/tomcat*.jar</packagingExcludes>
+					<packagingExcludes>WEB-INF/lib/spring-test*.jar</packagingExcludes>
+					<packagingExcludes>WEB-INF/lib/spring-boot-test*.jar</packagingExcludes>
+					<packagingExcludes>WEB-INF/lib/spring-boot-starter*.jar</packagingExcludes>
+				</configuration>
+			</plugin>
+
+			<!-- =========================================================================================== -->
+			<!--                     DEPLOYMENT TO REMOTE CONTAINER                                          -->
+			<!-- =========================================================================================== -->
+			<!-- http://callistaenterprise.se/blogg/teknik/2012/03/12/remote-deploy-to-tomcat-7-using-cargo/ -->
+			<!-- https://codehaus-cargo.github.io/cargo/Deploying+to+a+running+container.html                -->
+			<plugin>
+				<groupId>org.codehaus.cargo</groupId>
+				<artifactId>cargo-maven2-plugin</artifactId>
+				<configuration>
+					<!-- Configuration of the container  -->
+					<container>
+						<containerId>${remote.containerId}</containerId>
+						<type>remote</type>
+					</container>
+					<!-- Configuration to use with the container -->
+					<configuration>
+						<type>runtime</type>
+						<properties>
+							<cargo.hostname>${remote.host}</cargo.hostname>
+							<cargo.protocol>${remote.protocol}</cargo.protocol>
+							<cargo.servlet.port>${remote.port}</cargo.servlet.port>
+							<cargo.remote.username>${remote.user}</cargo.remote.username>
+							<cargo.remote.password>${remote.pass}</cargo.remote.password>
+						</properties>
+					</configuration>
+					
+					<!--Configuration of the WARs to be deployed to the Container -->
+					<deployables>
+						<deployable>
+							<groupId>${project.groupId}</groupId>
+							<artifactId>${project.artifactId}</artifactId>
+							<type>war</type>
+							<properties>
+								<context>${remote.context}</context>
+							</properties>
+							<pingURL>${remote.pingURL}</pingURL>
+							<pingTimeout>${remote.pingTimeout}</pingTimeout>
+						</deployable>
+					</deployables>
 				</configuration>
 			</plugin>
 		</plugins>
@@ -33,14 +94,24 @@
 
 	<dependencies>
 
-		<!-- ========================================================================================= -->
-		<!-- APPLICATIONS TO BE INTEGRATED AND TESTED -->
-		<!-- ========================================================================================= -->
+		<!-- =========================================================================================== -->
+		<!--         APPLICATIONS TO BE DEPLOYED                                                         -->
+		<!-- =========================================================================================== -->
 
 		<dependency>
 			<groupId>de.dbo.samples.springboot</groupId>
 			<artifactId>spring-boot-JBEHAVE-2-app-1</artifactId>
 			<version>0.0.0-SNAPSHOT</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-test</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-tomcat</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<dependency>
@@ -48,34 +119,31 @@
 			<artifactId>spring-boot-JBEHAVE-2-app-2</artifactId>
 			<version>0.0.0-SNAPSHOT</version>
 			<classifier>classes</classifier>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-test</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<dependency>
 			<groupId>de.dbo.samples.springboot</groupId>
 			<artifactId>spring-boot-JBEHAVE-2-app-3</artifactId>
 			<version>0.0.0-SNAPSHOT</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-test</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
- 
-		<!-- ========================================================================================= -->
-		<!-- SPRING-BOOT -->
-		<!-- ========================================================================================= -->
 
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
+			<groupId>org.apache.tomcat.embed</groupId>
+			<artifactId>tomcat-embed-core</artifactId>
+			<scope>provided</scope>
 		</dependency>
-
-
-
 	</dependencies>
 
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>de.dbo.samples.springboot</groupId>
-				<artifactId>spring-boot-JBEHAVE-2-app-2</artifactId>
-				<version>0.0.0-SNAPSHOT</version>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
 </project>

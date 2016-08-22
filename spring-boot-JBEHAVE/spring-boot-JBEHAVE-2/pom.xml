@@ -33,10 +33,8 @@ The modules of this project are as follows:
 	<modules>
 		<module>spring-boot-JBEHAVE-2-commons</module>
 		<module>spring-boot-JBEHAVE-2-app</module>
-		<module>spring-boot-JBEHAVE-2-app-deploy</module>
 		
-		<module>spring-boot-JBEHAVE-2-stories-java</module>
-		<module>spring-boot-JBEHAVE-2-stories-web</module>
+		<module>spring-boot-JBEHAVE-2-stories</module>
 	</modules>
 
 </project>
