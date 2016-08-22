@@ -8,55 +8,70 @@
 <configuration debug="false">
 
 	<contextName>JBehave Tests Logback-Configuration</contextName>
-	<include resource="de/dbo/samples/springboot/utilities/logging/logback-appenders.xml"/>
+	<include resource="de/dbo/samples/springboot/utilities/logging/logback-standard-appenders.xml"/>
+	<include resource="de/dbo/samples/springboot/utilities/logging/logback-debug-appenders.xml"/>
 
 	<!-- ======================================================================================================= -->
 	<!--                            LOGGERS                                                                      -->
 	<!-- ======================================================================================================= -->
 
 	<logger name="de.dbo.samples.springboot" 
-		level="DEBUG" additivity="true">
-		<appender-ref ref="NORMAL_MESSAGES" />
-	</logger>
-	
-	<logger name="org.jbehave" 
-		level="DEBUG" additivity="true">
-		<appender-ref ref="NORMAL_MESSAGES" />
-	</logger>
-	
-	<logger name="org.springframework" 
 		level="DEBUG" additivity="false">
-		<appender-ref ref="NORMAL_MESSAGES" />
+		<appender-ref ref="CONSOLE_STDOUT" />
 	</logger>
+	
+<!-- 	<logger name="org.jbehave"  -->
+<!-- 		level="DEBUG" additivity="true"> -->
+<!-- 		<appender-ref ref="CONSOLE_STDOUT" /> -->
+<!-- 	</logger> -->
+	
+<!-- 	<logger name="org.springframework"  -->
+<!-- 		level="DEBUG" additivity="false"> -->
+<!-- 		<appender-ref ref="CONSOLE_STDOUT" /> -->
+<!-- 	</logger> -->
 
 <!-- 	<logger name="org.springframework.web.servlet.mvc"  -->
 <!-- 		level="DEBUG" additivity="false"> -->
-<!-- 		<appender-ref ref="NORMAL_MESSAGES" /> -->
+<!-- 		<appender-ref ref="CONSOLE_STDOUT" /> -->
 <!-- 	</logger> -->
 	
 <!-- 	<logger name="org.springframework.web.servlet.resource"  -->
 <!-- 		level="DEBUG" additivity="false"> -->
-<!-- 		<appender-ref ref="NORMAL_MESSAGES" /> -->
+<!-- 		<appender-ref ref="CONSOLE_STDOUT" /> -->
 <!-- 	</logger>		 -->
 	
 <!-- 	<logger name="org.springframework.web.servlet.handler"  -->
 <!-- 		level="DEBUG" additivity="false"> -->
-<!-- 		<appender-ref ref="NORMAL_MESSAGES" /> -->
+<!-- 		<appender-ref ref="CONSOLE_STDOUT" /> -->
 <!-- 	</logger> -->
 	
 <!-- 	 <logger name="org.springframework.boot.context.embedded.tomcat"  -->
 <!-- 		level="DEBUG" additivity="false"> -->
-<!-- 		<appender-ref ref="NORMAL_MESSAGES" /> -->
+<!-- 		<appender-ref ref="CONSOLE_STDOUT" /> -->
 <!-- 	</logger> -->
 	
 	<!-- =================================================================================================== -->
-	<!--                                SPECIAL LOGGERS                                                      -->
+	<!--                          SPECIAL DEBUG LOGGERS                                                      -->
 	<!-- =================================================================================================== -->
 	
-	<logger name="org.springframework.beans.factory.support" level="DEBUG"
-		additivity="false">
-		<appender-ref ref="NORMAL_MESSAGES_SPRING" />
+<!-- 	<logger name="org.springframework.beans.factory.support"  -->
+<!-- 		level="DEBUG" additivity="false"> -->
+<!-- 		<appender-ref ref="CONSOLE_STDOUT_SPRING_BEANS" /> -->
+<!-- 	</logger> -->
+	
+<!-- 	<logger name="org.springframework.core.env"  -->
+<!-- 		level="DEBUG" additivity="false"> -->
+<!-- 		<appender-ref ref="CONSOLE_STDOUT_SPRING_PROPERTES_FOUND" /> -->
+<!-- 	</logger> -->
+
+<!-- 	<logger name="org.springframework.core.env"  -->
+<!-- 		level="DEBUG" additivity="false"> -->
+<!-- 		<appender-ref ref="CONSOLE_STDOUT_SPRING_PROPERTES_FOUND" /> -->
+<!-- 	</logger> -->
+
+	<logger name="org.springframework.core.env.PropertySourcesPropertyResolver" 
+		level="DEBUG" additivity="false">
+		<appender-ref ref="CONSOLE_STDOUT" />
 	</logger>
 	
-
 </configuration>

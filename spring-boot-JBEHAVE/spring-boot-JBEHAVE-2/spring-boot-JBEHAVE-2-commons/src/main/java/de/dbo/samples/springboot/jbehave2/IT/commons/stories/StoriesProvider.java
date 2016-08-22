@@ -1,8 +1,5 @@
 package de.dbo.samples.springboot.jbehave2.IT.commons.stories;
 
-import de.dbo.samples.springboot.jbehave2.IT.commons.util.print.Line;
-import de.dbo.samples.springboot.jbehave2.IT.commons.util.print.Print;
-
 import java.net.URL;
 import java.util.List;
 
@@ -11,6 +8,9 @@ import org.jbehave.core.io.StoryFinder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+
+import de.dbo.samples.springboot.jbehave2.IT.commons.util.print.special.Line;
+import de.dbo.samples.springboot.jbehave2.IT.commons.util.print.special.Print;
 
 @Component
 public class StoriesProvider {

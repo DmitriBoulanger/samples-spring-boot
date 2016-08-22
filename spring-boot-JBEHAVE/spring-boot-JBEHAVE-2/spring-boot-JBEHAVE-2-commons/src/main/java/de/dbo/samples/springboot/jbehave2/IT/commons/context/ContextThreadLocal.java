@@ -1,11 +1,12 @@
 package de.dbo.samples.springboot.jbehave2.IT.commons.context;
 
+/* java */
 import java.util.HashMap;
 import java.util.Map;
 
+/* SLF4J */
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.support.GenericTypeAwareAutowireCandidateResolver;
 
 /**
  * Thread-Local context for all Steps-instances
@@ -19,7 +20,7 @@ public final class ContextThreadLocal {
     private static final Logger                          log                  = LoggerFactory.getLogger(ContextThreadLocal.class);
 
     // =================================================================================================================================
-    // FACTORY
+    // =                                                  FACTORY
     // =================================================================================================================================
 
     private static final ThreadLocal<ContextThreadLocal> THREAD_LOCAL_CONTEXT = initialContext();
@@ -36,34 +37,36 @@ public final class ContextThreadLocal {
     protected static final ContextThreadLocal contextLocal() {
         return THREAD_LOCAL_CONTEXT.get();
     }
-    
+
     public static final ContextData contextData(final Class<? extends ContextData> key) {
         return contextLocal().getContexData(key);
     }
 
     // =================================================================================================================================
-    // INSTANCE
+    // =                                          INSTANCE
     // =================================================================================================================================´
-    
+
     /**
      * a singleton instance can be only obtained using the factory
      */
     private ContextThreadLocal() {
         clear();
-	log.info("created. HashCode=[" + hashCode() + "]");
+        if (log.isTraceEnabled()) {
+            log.trace("created. HashCode=[" + hashCode() + "]");
+        }
     }
 
     /**
-    * available data-items in this thread-local context.
-    * Data-item is identified by itself
-    * 
-    * @see #getContexData(Class)
-    * 
-    */
+     * available data-items in this thread-local context.
+     * Data-item is identified by itself
+     *
+     * @see #getContexData(Class)
+     *
+     */
     private final Map<Class<? extends ContextData>, ContextData> data = new HashMap<Class<? extends ContextData>, ContextData>();
 
     /**
-     * total clean-up 
+     * total clean-up
      */
     public void clear() {
         THREAD_LOCAL_CONTEXT.remove();
@@ -80,9 +83,9 @@ public final class ContextThreadLocal {
         }
         return data.get(key);
     }
-    
+
     public StringBuilder print() {
-	final StringBuilder sb = new StringBuilder();
+        final StringBuilder sb = new StringBuilder();
         return sb;
     }
 }

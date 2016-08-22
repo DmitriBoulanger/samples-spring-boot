@@ -24,6 +24,7 @@ Reactor for Spring-Boot JBEHAVE-samples.
 
 	<modules>
 		<module>spring-boot-JBEHAVE-bom/v${jbehave.version}</module>
+		
 		<module>spring-boot-JBEHAVE-0</module>
 		<module>spring-boot-JBEHAVE-1</module>
 		<module>spring-boot-JBEHAVE-2</module>

@@ -22,7 +22,6 @@ import org.jbehave.core.steps.CandidateSteps;
 import org.jbehave.core.steps.InjectableStepsFactory;
 import org.jbehave.core.steps.NullStepMonitor;
 import org.jbehave.core.steps.StepMonitor;
-
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.internal.runners.model.ReflectiveCallable;
@@ -35,10 +34,8 @@ import org.junit.runners.BlockJUnit4ClassRunner;
 import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.InitializationError;
 import org.junit.runners.model.Statement;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.test.annotation.ProfileValueUtils;
 import org.springframework.test.annotation.TestAnnotationUtils;
 import org.springframework.test.context.TestContextManager;
@@ -59,112 +56,113 @@ import de.codecentric.jbehave.junit.monitoring.JUnitScenarioReporter;
 
 /**
  *  TODO
- *  
+ *
  *  Nice JUnit-based UI with running stories and scenarios
- * 
+ *
  * https://blog.codecentric.de/en/2012/06/jbehave-configuration-tutorial/
  * https://github.com/codecentric/jbehave-junit-runner
- * 
- * Problem: 
- * 
+ *
+ * Problem:
+ *
  * should be started with JUnitReportingRunner but the annotation @RunWith
  * is already used to activate the SpringBoot runner org.springframework.test.context.junit4.SpringRunner
- * 
- * Possible solution: 
- * 
+ *
+ * Possible solution:
+ *
  * Merging of:
  * 	- org.springframework.test.context.junit4.SpringRunner
  *      - de.codecentric.jbehave.junit.monitoring.JUnitReportingRunner
- *      
+ *
  * The both are using the same super-class org.junit.runners.BlockJUnit4ClassRunner
- *  
+ *
  *
  * @author Dmitri Boulanger, Hombach
  *
- * D. Knuth: Programs are meant to be read by humans and 
- *           only incidentally for computers to execute 
+ * D. Knuth: Programs are meant to be read by humans and
+ *           only incidentally for computers to execute
  *
  */
 
-public class SpringJBehaveRunner extends BlockJUnit4ClassRunner  {
+public class SpringJBehaveRunner extends BlockJUnit4ClassRunner {
     private static final Logger log = LoggerFactory.getLogger(SpringJBehaveRunner.class);
 
     /* Spring-Boot */
     private static final Method withRulesMethod;
 
     static {
-	if (!ClassUtils.isPresent("org.junit.internal.Throwables", SpringJUnit4ClassRunner.class.getClassLoader())) {
-	    throw new IllegalStateException("SpringJUnit4ClassRunner requires JUnit 4.12 or higher.");
-	}
+        if (!ClassUtils.isPresent("org.junit.internal.Throwables", SpringJUnit4ClassRunner.class.getClassLoader())) {
+            throw new IllegalStateException("SpringJUnit4ClassRunner requires JUnit 4.12 or higher.");
+        }
 
-	withRulesMethod = ReflectionUtils.findMethod(SpringJUnit4ClassRunner.class, "withRules",
-		FrameworkMethod.class, Object.class, Statement.class);
-	if (withRulesMethod == null) {
-	    throw new IllegalStateException("SpringJUnit4ClassRunner requires JUnit 4.12 or higher.");
-	}
-	ReflectionUtils.makeAccessible(withRulesMethod);
+        withRulesMethod = ReflectionUtils.findMethod(SpringJUnit4ClassRunner.class, "withRules",
+                FrameworkMethod.class, Object.class, Statement.class);
+        if (withRulesMethod == null) {
+            throw new IllegalStateException("SpringJUnit4ClassRunner requires JUnit 4.12 or higher.");
+        }
+        ReflectionUtils.makeAccessible(withRulesMethod);
     }
 
-    // 
+    //
     //       INSTANCE
     //
 
     // JBehave
-    private List<Description> storyDescriptions;
-    private Embedder configuredEmbedder;
-    private List<String> storyPaths;
-    private Configuration configuration;
-    private int numberOfTestCases;
-    private Description rootDescription;
-    List<CandidateSteps> candidateSteps;
-    private ConfigurableEmbedder configurableEmbedder;
+    private final List<Description>    storyDescriptions;
+    private Embedder                   configuredEmbedder;
+    private List<String>               storyPaths;
+    private final Configuration        configuration;
+    private int                        numberOfTestCases;
+    private Description                rootDescription;
+    List<CandidateSteps>               candidateSteps;
+    private final ConfigurableEmbedder configurableEmbedder;
     // Spring-Boot
-    private final TestContextManager testContextManager;
+    private final TestContextManager   testContextManager;
 
-    public SpringJBehaveRunner(Class<? extends ConfigurableEmbedder> clazz) 
-	    throws InitializationError, InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
-	super(clazz);
-	if (log.isDebugEnabled()) {
-	    log.debug("SpringJBehaveRunner constructor called with [" + clazz + "]");
-	}
+    public SpringJBehaveRunner(Class<? extends ConfigurableEmbedder> clazz)
+            throws InitializationError, InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
+        super(clazz);
+        if (log.isDebugEnabled()) {
+            log.debug("SpringJBehaveRunner constructor called with [" + clazz + "]");
+        }
 
-	// ============================================================================================
-	//                      Spring-Boot
-	// ============================================================================================
+        // ============================================================================================
+        //                      Spring-Boot
+        // ============================================================================================
 
-	ensureSpringRulesAreNotPresent(clazz);
-	this.testContextManager = createTestContextManager(clazz);
+        ensureSpringRulesAreNotPresent(clazz);
+        this.testContextManager = createTestContextManager(clazz);
 
-	// ============================================================================================
-	//                            JBehave
-	// ============================================================================================
+        // ============================================================================================
+        //                            JBehave
+        // ============================================================================================
 
-	configurableEmbedder = clazz.newInstance();
+        configurableEmbedder = clazz.newInstance();
 
-	if (configurableEmbedder instanceof JUnitStories) {
-	    getStoryPathsFromJUnitStories(clazz);
-	} else if (configurableEmbedder instanceof JUnitStory) {
-	    getStoryPathsFromJUnitStory();
-	}
+        if (configurableEmbedder instanceof JUnitStories) {
+            getStoryPathsFromJUnitStories(clazz);
+        }
+        else if (configurableEmbedder instanceof JUnitStory) {
+            getStoryPathsFromJUnitStory();
+        }
 
-	configuration = configuredEmbedder.configuration();
+        configuration = configuredEmbedder.configuration();
 
-	StepMonitor originalStepMonitor = createCandidateStepsWithNoMonitor();
-	storyDescriptions = buildDescriptionFromStories();
-	createCandidateStepsWith(originalStepMonitor);
+        StepMonitor originalStepMonitor = createCandidateStepsWithNoMonitor();
+        storyDescriptions = buildDescriptionFromStories();
+        createCandidateStepsWith(originalStepMonitor);
 
-	initRootDescription();
+        initRootDescription();
     }
 
     // ============================================================================================
     //                            Spring-JBehave @Override
     // ============================================================================================
 
-//    @Override
-//    public Description getDescription() {
-//	return rootDescription;
-//    }
-    
+    //    @Override
+    //    public Description getDescription() {
+    //	return rootDescription;
+    //    }
+
     /**
      * Return a description suitable for an ignored test class if the test is
      * disabled via {@code @IfProfileValue} at the class-level, and
@@ -173,25 +171,22 @@ public class SpringJBehaveRunner extends BlockJUnit4ClassRunner  {
      */
     @Override
     public Description getDescription() {
-//	if (!ProfileValueUtils.isTestEnabledInThisEnvironment(getTestClass().getJavaClass())) {
-//	    return Description.createSuiteDescription(getTestClass().getJavaClass());
-//	}
-//	return super.getDescription();
-	
-	return rootDescription;
+        //	if (!ProfileValueUtils.isTestEnabledInThisEnvironment(getTestClass().getJavaClass())) {
+        //	    return Description.createSuiteDescription(getTestClass().getJavaClass());
+        //	}
+        //	return super.getDescription();
+
+        return rootDescription;
     }
 
     // ============================================================================================
     //                            JBehave @Override
     // ============================================================================================
 
-
-
     @Override
     public int testCount() {
-	return numberOfTestCases;
+        return numberOfTestCases;
     }
-
 
     /**
      * Returns a {@link Statement}: Call {@link #runChild(Object, RunNotifier)}
@@ -200,32 +195,33 @@ public class SpringJBehaveRunner extends BlockJUnit4ClassRunner  {
      */
     @Override
     protected Statement childrenInvoker(final RunNotifier notifier) {
-	return new Statement() {
-	    @Override
-	    public void evaluate() {
-		JUnitScenarioReporter junitReporter = new JUnitScenarioReporter(
-			notifier, numberOfTestCases, rootDescription, configuration.keywords());
-		// tell the reporter how to handle pending steps
-		junitReporter.usePendingStepStrategy(configuration
-			.pendingStepStrategy());
+        return new Statement() {
+            @Override
+            public void evaluate() {
+                JUnitScenarioReporter junitReporter = new JUnitScenarioReporter(
+                        notifier, numberOfTestCases, rootDescription, configuration.keywords());
+                // tell the reporter how to handle pending steps
+                junitReporter.usePendingStepStrategy(configuration
+                        .pendingStepStrategy());
 
-		addToStoryReporterFormats(junitReporter);
+                addToStoryReporterFormats(junitReporter);
 
-		try {
-		    configuredEmbedder.runStoriesAsPaths(storyPaths);
-		} catch (Throwable e) {
-		    throw new RuntimeException(e);
-		} finally {
-		    configuredEmbedder.generateCrossReference();
-		}
-	    }
-	};
+                try {
+                    configuredEmbedder.runStoriesAsPaths(storyPaths);
+                }
+                catch(Throwable e) {
+                    throw new RuntimeException(e);
+                }
+                finally {
+                    configuredEmbedder.generateCrossReference();
+                }
+            }
+        };
     }
 
     // ============================================================================================
     //                            Spring @Override
     // ============================================================================================
-
 
     /**
      * Check whether the test is enabled in the current execution environment.
@@ -238,11 +234,11 @@ public class SpringJBehaveRunner extends BlockJUnit4ClassRunner  {
      */
     @Override
     public void run(RunNotifier notifier) {
-	if (!ProfileValueUtils.isTestEnabledInThisEnvironment(getTestClass().getJavaClass())) {
-	    notifier.fireTestIgnored(getDescription());
-	    return;
-	}
-	super.run(notifier);
+        if (!ProfileValueUtils.isTestEnabledInThisEnvironment(getTestClass().getJavaClass())) {
+            notifier.fireTestIgnored(getDescription());
+            return;
+        }
+        super.run(notifier);
     }
 
     /**
@@ -254,8 +250,8 @@ public class SpringJBehaveRunner extends BlockJUnit4ClassRunner  {
      */
     @Override
     protected Statement withBeforeClasses(Statement statement) {
-	Statement junitBeforeClasses = super.withBeforeClasses(statement);
-	return new RunBeforeTestClassCallbacks(junitBeforeClasses, getTestContextManager());
+        Statement junitBeforeClasses = super.withBeforeClasses(statement);
+        return new RunBeforeTestClassCallbacks(junitBeforeClasses, getTestContextManager());
     }
 
     /**
@@ -266,8 +262,8 @@ public class SpringJBehaveRunner extends BlockJUnit4ClassRunner  {
      */
     @Override
     protected Statement withAfterClasses(Statement statement) {
-	Statement junitAfterClasses = super.withAfterClasses(statement);
-	return new RunAfterTestClassCallbacks(junitAfterClasses, getTestContextManager());
+        Statement junitAfterClasses = super.withAfterClasses(statement);
+        return new RunAfterTestClassCallbacks(junitAfterClasses, getTestContextManager());
     }
 
     /**
@@ -278,9 +274,9 @@ public class SpringJBehaveRunner extends BlockJUnit4ClassRunner  {
      */
     @Override
     protected Object createTest() throws Exception {
-	Object testInstance = super.createTest();
-	getTestContextManager().prepareTestInstance(testInstance);
-	return testInstance;
+        Object testInstance = super.createTest();
+        getTestContextManager().prepareTestInstance(testInstance);
+        return testInstance;
     }
 
     /**
@@ -291,20 +287,20 @@ public class SpringJBehaveRunner extends BlockJUnit4ClassRunner  {
      */
     @Override
     protected void runChild(FrameworkMethod frameworkMethod, RunNotifier notifier) {
-	Description description = describeChild(frameworkMethod);
-	if (isTestMethodIgnored(frameworkMethod)) {
-	    notifier.fireTestIgnored(description);
-	}
-	else {
-	    Statement statement;
-	    try {
-		statement = methodBlock(frameworkMethod);
-	    }
-	    catch (Throwable ex) {
-		statement = new Fail(ex);
-	    }
-	    runLeaf(statement, description, notifier);
-	}
+        Description description = describeChild(frameworkMethod);
+        if (isTestMethodIgnored(frameworkMethod)) {
+            notifier.fireTestIgnored(description);
+        }
+        else {
+            Statement statement;
+            try {
+                statement = methodBlock(frameworkMethod);
+            }
+            catch(Throwable ex) {
+                statement = new Fail(ex);
+            }
+            runLeaf(statement, description, notifier);
+        }
     }
 
     /**
@@ -333,27 +329,27 @@ public class SpringJBehaveRunner extends BlockJUnit4ClassRunner  {
      */
     @Override
     protected Statement methodBlock(FrameworkMethod frameworkMethod) {
-	Object testInstance;
-	try {
-	    testInstance = new ReflectiveCallable() {
-		@Override
-		protected Object runReflectiveCall() throws Throwable {
-		    return createTest();
-		}
-	    }.run();
-	}
-	catch (Throwable ex) {
-	    return new Fail(ex);
-	}
+        Object testInstance;
+        try {
+            testInstance = new ReflectiveCallable() {
+                @Override
+                protected Object runReflectiveCall() throws Throwable {
+                    return createTest();
+                }
+            }.run();
+        }
+        catch(Throwable ex) {
+            return new Fail(ex);
+        }
 
-	Statement statement = methodInvoker(frameworkMethod, testInstance);
-	statement = possiblyExpectingExceptions(frameworkMethod, testInstance, statement);
-	statement = withBefores(frameworkMethod, testInstance, statement);
-	statement = withAfters(frameworkMethod, testInstance, statement);
-	statement = withRulesReflectively(frameworkMethod, testInstance, statement);
-	statement = withPotentialRepeat(frameworkMethod, testInstance, statement);
-	statement = withPotentialTimeout(frameworkMethod, testInstance, statement);
-	return statement;
+        Statement statement = methodInvoker(frameworkMethod, testInstance);
+        statement = possiblyExpectingExceptions(frameworkMethod, testInstance, statement);
+        statement = withBefores(frameworkMethod, testInstance, statement);
+        statement = withAfters(frameworkMethod, testInstance, statement);
+        statement = withRulesReflectively(frameworkMethod, testInstance, statement);
+        statement = withPotentialRepeat(frameworkMethod, testInstance, statement);
+        statement = withPotentialTimeout(frameworkMethod, testInstance, statement);
+        return statement;
     }
 
     /**
@@ -364,8 +360,8 @@ public class SpringJBehaveRunner extends BlockJUnit4ClassRunner  {
      */
     @Override
     protected Statement possiblyExpectingExceptions(FrameworkMethod frameworkMethod, Object testInstance, Statement next) {
-	Class<? extends Throwable> expectedException = getExpectedException(frameworkMethod);
-	return (expectedException != null ? new ExpectException(next, expectedException) : next);
+        Class<? extends Throwable> expectedException = getExpectedException(frameworkMethod);
+        return (expectedException != null ? new ExpectException(next, expectedException) : next);
     }
 
     /**
@@ -383,27 +379,27 @@ public class SpringJBehaveRunner extends BlockJUnit4ClassRunner  {
     @Override
     @SuppressWarnings("deprecation")
     protected Statement withPotentialTimeout(FrameworkMethod frameworkMethod, Object testInstance, Statement next) {
-	Statement statement = null;
-	long springTimeout = getSpringTimeout(frameworkMethod);
-	long junitTimeout = getJUnitTimeout(frameworkMethod);
-	if (springTimeout > 0 && junitTimeout > 0) {
-	    String msg = String.format("Test method [%s] has been configured with Spring's @Timed(millis=%s) and " +
-		    "JUnit's @Test(timeout=%s) annotations, but only one declaration of a 'timeout' is " +
-		    "permitted per test method.", frameworkMethod.getMethod(), springTimeout, junitTimeout);
-	    log.error(msg);
-	    throw new IllegalStateException(msg);
-	}
-	else if (springTimeout > 0) {
-	    statement = new SpringFailOnTimeout(next, springTimeout);
-	}
-	else if (junitTimeout > 0) {
-	    statement = FailOnTimeout.builder().withTimeout(junitTimeout, TimeUnit.MILLISECONDS).build(next);
-	}
-	else {
-	    statement = next;
-	}
+        Statement statement = null;
+        long springTimeout = getSpringTimeout(frameworkMethod);
+        long junitTimeout = getJUnitTimeout(frameworkMethod);
+        if (springTimeout > 0 && junitTimeout > 0) {
+            String msg = String.format("Test method [%s] has been configured with Spring's @Timed(millis=%s) and " +
+                    "JUnit's @Test(timeout=%s) annotations, but only one declaration of a 'timeout' is " +
+                    "permitted per test method.", frameworkMethod.getMethod(), springTimeout, junitTimeout);
+            log.error(msg);
+            throw new IllegalStateException(msg);
+        }
+        else if (springTimeout > 0) {
+            statement = new SpringFailOnTimeout(next, springTimeout);
+        }
+        else if (junitTimeout > 0) {
+            statement = FailOnTimeout.builder().withTimeout(junitTimeout, TimeUnit.MILLISECONDS).build(next);
+        }
+        else {
+            statement = next;
+        }
 
-	return statement;
+        return statement;
     }
 
     /**
@@ -415,9 +411,9 @@ public class SpringJBehaveRunner extends BlockJUnit4ClassRunner  {
      */
     @Override
     protected Statement withBefores(FrameworkMethod frameworkMethod, Object testInstance, Statement statement) {
-	Statement junitBefores = super.withBefores(frameworkMethod, testInstance, statement);
-	return new RunBeforeTestMethodCallbacks(junitBefores, testInstance, frameworkMethod.getMethod(),
-		getTestContextManager());
+        Statement junitBefores = super.withBefores(frameworkMethod, testInstance, statement);
+        return new RunBeforeTestMethodCallbacks(junitBefores, testInstance, frameworkMethod.getMethod(),
+                getTestContextManager());
     }
 
     /**
@@ -429,143 +425,141 @@ public class SpringJBehaveRunner extends BlockJUnit4ClassRunner  {
      */
     @Override
     protected Statement withAfters(FrameworkMethod frameworkMethod, Object testInstance, Statement statement) {
-	Statement junitAfters = super.withAfters(frameworkMethod, testInstance, statement);
-	return new RunAfterTestMethodCallbacks(junitAfters, testInstance, frameworkMethod.getMethod(),
-		getTestContextManager());
+        Statement junitAfters = super.withAfters(frameworkMethod, testInstance, statement);
+        return new RunAfterTestMethodCallbacks(junitAfters, testInstance, frameworkMethod.getMethod(),
+                getTestContextManager());
     }
-
-
-
-
 
     // ============================================================================================
     //                            JBehave
     // ============================================================================================
 
     private void createCandidateStepsWith(StepMonitor stepMonitor) {
-	// reset step monitor and recreate candidate steps
-	configuration.useStepMonitor(stepMonitor);
-	getCandidateSteps();
-	for (CandidateSteps step : candidateSteps) {
-	    step.configuration().useStepMonitor(stepMonitor);
-	}
+        // reset step monitor and recreate candidate steps
+        configuration.useStepMonitor(stepMonitor);
+        getCandidateSteps();
+        for (CandidateSteps step : candidateSteps) {
+            step.configuration().useStepMonitor(stepMonitor);
+        }
     }
 
     private StepMonitor createCandidateStepsWithNoMonitor() {
-	StepMonitor usedStepMonitor = configuration.stepMonitor();
-	createCandidateStepsWith(new NullStepMonitor());
-	return usedStepMonitor;
+        StepMonitor usedStepMonitor = configuration.stepMonitor();
+        createCandidateStepsWith(new NullStepMonitor());
+        return usedStepMonitor;
     }
 
     private void getStoryPathsFromJUnitStory() {
-	configuredEmbedder = configurableEmbedder.configuredEmbedder();
-	StoryPathResolver resolver = configuredEmbedder.configuration()
-		.storyPathResolver();
-	storyPaths = Arrays.asList(resolver.resolve(configurableEmbedder
-		.getClass()));
+        configuredEmbedder = configurableEmbedder.configuredEmbedder();
+        StoryPathResolver resolver = configuredEmbedder.configuration()
+                .storyPathResolver();
+        storyPaths = Arrays.asList(resolver.resolve(configurableEmbedder
+                .getClass()));
     }
 
     @SuppressWarnings("unchecked")
     private void getStoryPathsFromJUnitStories(Class<? extends ConfigurableEmbedder> testClass)
-	    throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-	configuredEmbedder = configurableEmbedder.configuredEmbedder();
-	Method method = makeStoryPathsMethodPublic(testClass);
-	storyPaths = ((List<String>) method.invoke(
-		(JUnitStories) configurableEmbedder, (Object[]) null));
+            throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+        configuredEmbedder = configurableEmbedder.configuredEmbedder();
+        Method method = makeStoryPathsMethodPublic(testClass);
+        storyPaths = ((List<String>) method.invoke(
+                (JUnitStories) configurableEmbedder, (Object[]) null));
     }
 
     private Method makeStoryPathsMethodPublic(
-	    Class<? extends ConfigurableEmbedder> testClass)
-		    throws NoSuchMethodException {
-	Method method;
-	try {
-	    method = testClass.getDeclaredMethod("storyPaths", (Class[]) null);
-	} catch (NoSuchMethodException e) {
-	    method = testClass.getMethod("storyPaths", (Class[]) null);
-	}
-	method.setAccessible(true);
-	return method;
+            Class<? extends ConfigurableEmbedder> testClass)
+            throws NoSuchMethodException {
+        Method method;
+        try {
+            method = testClass.getDeclaredMethod("storyPaths", (Class[]) null);
+        }
+        catch(NoSuchMethodException e) {
+            method = testClass.getMethod("storyPaths", (Class[]) null);
+        }
+        method.setAccessible(true);
+        return method;
     }
 
     private void getCandidateSteps() {
-	// candidateSteps = configurableEmbedder.configuredEmbedder()
-	// .stepsFactory().createCandidateSteps();
-	InjectableStepsFactory stepsFactory = configurableEmbedder
-		.stepsFactory();
-	if (stepsFactory != null) {
-	    candidateSteps = stepsFactory.createCandidateSteps();
-	} else {
-	    Embedder embedder = configurableEmbedder.configuredEmbedder();
-	    candidateSteps = embedder.candidateSteps();
-	    if (candidateSteps == null || candidateSteps.isEmpty()) {
-		candidateSteps = embedder.stepsFactory().createCandidateSteps();
-	    }
-	}
+        // candidateSteps = configurableEmbedder.configuredEmbedder()
+        // .stepsFactory().createCandidateSteps();
+        InjectableStepsFactory stepsFactory = configurableEmbedder
+                .stepsFactory();
+        if (stepsFactory != null) {
+            candidateSteps = stepsFactory.createCandidateSteps();
+        }
+        else {
+            Embedder embedder = configurableEmbedder.configuredEmbedder();
+            candidateSteps = embedder.candidateSteps();
+            if (candidateSteps == null || candidateSteps.isEmpty()) {
+                candidateSteps = embedder.stepsFactory().createCandidateSteps();
+            }
+        }
     }
 
     private void initRootDescription() {
-	rootDescription = Description
-		.createSuiteDescription(configurableEmbedder.getClass());
-	for (Description storyDescription : storyDescriptions) {
-	    rootDescription.addChild(storyDescription);
-	}
+        rootDescription = Description
+                .createSuiteDescription(configurableEmbedder.getClass());
+        for (Description storyDescription : storyDescriptions) {
+            rootDescription.addChild(storyDescription);
+        }
     }
 
     private void addToStoryReporterFormats(JUnitScenarioReporter junitReporter) {
-	StoryReporterBuilder storyReporterBuilder = configuration
-		.storyReporterBuilder();
-	StoryReporterBuilder.ProvidedFormat junitReportFormat = new StoryReporterBuilder.ProvidedFormat(
-		junitReporter);
-	storyReporterBuilder.withFormats(junitReportFormat);
+        StoryReporterBuilder storyReporterBuilder = configuration
+                .storyReporterBuilder();
+        StoryReporterBuilder.ProvidedFormat junitReportFormat = new StoryReporterBuilder.ProvidedFormat(
+                junitReporter);
+        storyReporterBuilder.withFormats(junitReportFormat);
     }
 
     private List<Description> buildDescriptionFromStories() {
-	JUnitDescriptionGenerator descriptionGenerator = new JUnitDescriptionGenerator(
-		candidateSteps, configuration);
-	StoryRunner storyRunner = new StoryRunner();
-	List<Description> storyDescriptions = new ArrayList<Description>();
+        JUnitDescriptionGenerator descriptionGenerator = new JUnitDescriptionGenerator(
+                candidateSteps, configuration);
+        StoryRunner storyRunner = new StoryRunner();
+        List<Description> storyDescriptions = new ArrayList<Description>();
 
-	addSuite(storyDescriptions, "BeforeStories");
-	addStories(storyDescriptions, storyRunner, descriptionGenerator);
-	addSuite(storyDescriptions, "AfterStories");
+        addSuite(storyDescriptions, "BeforeStories");
+        addStories(storyDescriptions, storyRunner, descriptionGenerator);
+        addSuite(storyDescriptions, "AfterStories");
 
-	numberOfTestCases += descriptionGenerator.getTestCases();
+        numberOfTestCases += descriptionGenerator.getTestCases();
 
-	return storyDescriptions;
+        return storyDescriptions;
     }
 
     private void addStories(List<Description> storyDescriptions,
-	    StoryRunner storyRunner, JUnitDescriptionGenerator gen) {
-	for (String storyPath : storyPaths) {
-	    Story parseStory = storyRunner
-		    .storyOfPath(configuration, storyPath);
-	    Description descr = gen.createDescriptionFrom(parseStory);
-	    storyDescriptions.add(descr);
-	}
+            StoryRunner storyRunner, JUnitDescriptionGenerator gen) {
+        for (String storyPath : storyPaths) {
+            Story parseStory = storyRunner
+                    .storyOfPath(configuration, storyPath);
+            Description descr = gen.createDescriptionFrom(parseStory);
+            storyDescriptions.add(descr);
+        }
     }
 
     private void addSuite(List<Description> storyDescriptions, String name) {
-	storyDescriptions.add(Description.createTestDescription(Object.class,
-		name));
-	numberOfTestCases++;
+        storyDescriptions.add(Description.createTestDescription(Object.class,
+                name));
+        numberOfTestCases++;
     }
 
     // ============================================================================================
     //                      Spring-Boot
     // ============================================================================================
-    
-	/**
-	 * Get the {@link TestContextManager} associated with this runner.
-	 */
-	protected final TestContextManager getTestContextManager() {
-		return this.testContextManager;
-	}
+
+    /**
+     * Get the {@link TestContextManager} associated with this runner.
+     */
+    protected final TestContextManager getTestContextManager() {
+        return this.testContextManager;
+    }
 
     /**
      * Invoke JUnit's private {@code withRules()} method using reflection.
      */
     private Statement withRulesReflectively(FrameworkMethod frameworkMethod, Object testInstance, Statement statement) {
-	return (Statement) ReflectionUtils.invokeMethod(withRulesMethod, this, frameworkMethod, testInstance, statement);
+        return (Statement) ReflectionUtils.invokeMethod(withRulesMethod, this, frameworkMethod, testInstance, statement);
     }
 
     /**
@@ -575,10 +569,11 @@ public class SpringJBehaveRunner extends BlockJUnit4ClassRunner  {
      * @see ProfileValueUtils#isTestEnabledInThisEnvironment(Method, Class)
      */
     protected boolean isTestMethodIgnored(FrameworkMethod frameworkMethod) {
-	Method method = frameworkMethod.getMethod();
-	return (method.isAnnotationPresent(Ignore.class) ||
-		!ProfileValueUtils.isTestEnabledInThisEnvironment(method, getTestClass().getJavaClass()));
+        Method method = frameworkMethod.getMethod();
+        return (method.isAnnotationPresent(Ignore.class) ||
+                !ProfileValueUtils.isTestEnabledInThisEnvironment(method, getTestClass().getJavaClass()));
     }
+
     /**
      * Get the {@code exception} that the supplied {@linkplain FrameworkMethod
      * test method} is expected to throw.
@@ -587,8 +582,8 @@ public class SpringJBehaveRunner extends BlockJUnit4ClassRunner  {
      * @return the expected exception, or {@code null} if none was specified
      */
     protected Class<? extends Throwable> getExpectedException(FrameworkMethod frameworkMethod) {
-	Test test = frameworkMethod.getAnnotation(Test.class);
-	return (test != null && test.expected() != Test.None.class ? test.expected() : null);
+        Test test = frameworkMethod.getAnnotation(Test.class);
+        return (test != null && test.expected() != Test.None.class ? test.expected() : null);
     }
 
     /**
@@ -597,8 +592,8 @@ public class SpringJBehaveRunner extends BlockJUnit4ClassRunner  {
      * @return the timeout, or {@code 0} if none was specified
      */
     protected long getJUnitTimeout(FrameworkMethod frameworkMethod) {
-	Test test = frameworkMethod.getAnnotation(Test.class);
-	return (test != null && test.timeout() > 0 ? test.timeout() : 0);
+        Test test = frameworkMethod.getAnnotation(Test.class);
+        return (test != null && test.timeout() > 0 ? test.timeout() : 0);
     }
 
     /**
@@ -609,7 +604,7 @@ public class SpringJBehaveRunner extends BlockJUnit4ClassRunner  {
      * @see TestAnnotationUtils#getTimeout(Method)
      */
     protected long getSpringTimeout(FrameworkMethod frameworkMethod) {
-	return TestAnnotationUtils.getTimeout(frameworkMethod.getMethod());
+        return TestAnnotationUtils.getTimeout(frameworkMethod.getMethod());
     }
 
     /**
@@ -620,7 +615,7 @@ public class SpringJBehaveRunner extends BlockJUnit4ClassRunner  {
      * @see SpringRepeat
      */
     protected Statement withPotentialRepeat(FrameworkMethod frameworkMethod, Object testInstance, Statement next) {
-	return new SpringRepeat(next, frameworkMethod.getMethod());
+        return new SpringRepeat(next, frameworkMethod.getMethod());
     }
 
     /**
@@ -629,7 +624,7 @@ public class SpringJBehaveRunner extends BlockJUnit4ClassRunner  {
      * @param clazz the test class to be managed
      */
     protected TestContextManager createTestContextManager(Class<?> clazz) {
-	return new TestContextManager(clazz);
+        return new TestContextManager(clazz);
     }
 
     // ============================================================================================
@@ -637,16 +632,16 @@ public class SpringJBehaveRunner extends BlockJUnit4ClassRunner  {
     // ============================================================================================
 
     private static void ensureSpringRulesAreNotPresent(Class<?> testClass) {
-	for (Field field : testClass.getFields()) {
-	    if (SpringClassRule.class.isAssignableFrom(field.getType())) {
-		throw new IllegalStateException(String.format("Detected SpringClassRule field in test class [%s], " +
-			"but SpringClassRule cannot be used with the SpringJUnit4ClassRunner.", testClass.getName()));
-	    }
-	    if (SpringMethodRule.class.isAssignableFrom(field.getType())) {
-		throw new IllegalStateException(String.format("Detected SpringMethodRule field in test class [%s], " +
-			"but SpringMethodRule cannot be used with the SpringJUnit4ClassRunner.", testClass.getName()));
-	    }
-	}
+        for (Field field : testClass.getFields()) {
+            if (SpringClassRule.class.isAssignableFrom(field.getType())) {
+                throw new IllegalStateException(String.format("Detected SpringClassRule field in test class [%s], " +
+                        "but SpringClassRule cannot be used with the SpringJUnit4ClassRunner.", testClass.getName()));
+            }
+            if (SpringMethodRule.class.isAssignableFrom(field.getType())) {
+                throw new IllegalStateException(String.format("Detected SpringMethodRule field in test class [%s], " +
+                        "but SpringMethodRule cannot be used with the SpringJUnit4ClassRunner.", testClass.getName()));
+            }
+        }
     }
 
     // ============================================================================================
@@ -654,17 +649,17 @@ public class SpringJBehaveRunner extends BlockJUnit4ClassRunner  {
     // ============================================================================================
 
     public static EmbedderControls recommandedControls(Embedder embedder) {
-	return recommendedControls(embedder);
+        return recommendedControls(embedder);
     }
 
     public static EmbedderControls recommendedControls(Embedder embedder) {
-	return embedder.embedderControls()
-		// don't throw an exception on generating reports for failing stories
-		.doIgnoreFailureInView(true)
-		// don't throw an exception when a story failed
-		.doIgnoreFailureInStories(true)
-		// .doVerboseFailures(true)
-		.useThreads(1);
+        return embedder.embedderControls()
+                // don't throw an exception on generating reports for failing stories
+                .doIgnoreFailureInView(true)
+                // don't throw an exception when a story failed
+                .doIgnoreFailureInStories(true)
+                // .doVerboseFailures(true)
+                .useThreads(1);
     }
 
 }

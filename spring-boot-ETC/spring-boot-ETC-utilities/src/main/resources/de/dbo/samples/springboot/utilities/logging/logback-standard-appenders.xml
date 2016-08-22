@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+
+<included>
+ 
+	<!-- ======================================================================================================= -->
+	<!-- STANDARD APPENDERS                                                                                      -->
+	<!-- ======================================================================================================= -->
+	
+	<property name="STANDARD_PATTERN" value="%8relative ms. [%26thread] %-5level %50logger{0} - %msg%n" />
+
+	<!-- Normal console for INFO, DEBUG and TRACE -->
+	<appender name="CONSOLE_STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<target>System.out</target>
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>ERROR</level>
+			<onMatch>DENY</onMatch>
+			<onMismatch>NEUTRAL</onMismatch>
+		</filter>
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>WARN</level>
+			<onMatch>DENY</onMatch>
+			<onMismatch>NEUTRAL</onMismatch>
+		</filter>
+		<encoder>
+			<pattern>${STANDARD_PATTERN}</pattern>
+		</encoder>
+	</appender>
+
+	<!-- Error console for WARNINGS and ERRORS -->
+	<appender name="CONSOLE_STDERR" class="ch.qos.logback.core.ConsoleAppender">
+		<target>System.err</target>
+		<!-- deny all events with a level below WARN, that is INFO, TRACE and DEBUG -->
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>WARN</level>
+		</filter>
+		<encoder>
+			<pattern>${STANDARD_PATTERN}</pattern>
+		</encoder>
+	</appender>
+	
+	<!-- ======================================================================================================= -->
+	<!--                              LOGGERS                                                                    -->
+	<!-- ======================================================================================================= -->
+	
+	<!-- Any warning or error has to be logged as a "red"-message -->
+	<root level="WARN">
+		<appender-ref ref="CONSOLE_STDERR" />
+	</root>
+	
+
+</included>
+
+	

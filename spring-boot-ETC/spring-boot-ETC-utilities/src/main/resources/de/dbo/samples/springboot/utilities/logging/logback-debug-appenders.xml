@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+
+<included>
+ 
+	<!-- ======================================================================================================= -->
+	<!--                              SPECIAL DEBUG APPENDERS                                                    -->
+	<!-- Attention:                                                                                              -->
+	<!---   - this resource should be alwaysused with logback-standard-appenders.xml                             -->
+    <!---   - classpath should contain                                                                           -->
+	<!--          <groupId>org.codehaus.janino</groupId> -													     -->
+	<!--          <artifactId>janino</artifactId>                                                                -->
+	<!-- ======================================================================================================= -->
+
+	<!-- Spring messages with bean-creation confirmation  -->
+	<appender name="CONSOLE_STDOUT_SPRING_BEANS" class="ch.qos.logback.core.ConsoleAppender">
+		<filter class="ch.qos.logback.core.filter.EvaluatorFilter">
+			<evaluator>
+				<expression>
+					return message.contains("Finished creating instance of bean");
+				</expression>
+			</evaluator>
+			<OnMismatch>DENY</OnMismatch>
+			<OnMatch>NEUTRAL</OnMatch>
+		</filter>
+		<encoder>
+			<pattern>${STANDARD_PATTERN}</pattern>
+		</encoder>
+	</appender>
+
+	<!-- Spring Property Sources Property-Resolver Positive  -->
+	<appender name="CONSOLE_STDOUT_SPRING_PROPERTES_FOUND" class="ch.qos.logback.core.ConsoleAppender">
+		<filter class="ch.qos.logback.core.filter.EvaluatorFilter">
+			<evaluator>
+				<expression>
+					return message.contains("Found key");
+				</expression>
+			</evaluator>
+			<OnMismatch>DENY</OnMismatch>
+			<OnMatch>NEUTRAL</OnMatch>
+		</filter>
+		<encoder>
+			<pattern>${STANDARD_PATTERN}</pattern>
+		</encoder>
+	</appender>
+	
+	<!-- Spring Property Sources Property-Resolver Negative  -->
+	<appender name="CONSOLE_STDOUT_SPRING_PROPERTES_NOT_FOUND" class="ch.qos.logback.core.ConsoleAppender">
+		<filter class="ch.qos.logback.core.filter.EvaluatorFilter">
+			<evaluator>
+				<expression>
+					return message.contains("Could not find key");
+				</expression>
+			</evaluator>
+			<OnMismatch>DENY</OnMismatch>
+			<OnMatch>NEUTRAL</OnMatch>
+		</filter>
+		<encoder>
+			<pattern>${STANDARD_PATTERN}</pattern>
+		</encoder>
+	</appender>
+</included>
+
+	
