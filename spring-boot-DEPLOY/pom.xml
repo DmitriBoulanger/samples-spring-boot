@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>de.dbo.samples.springboot</groupId>
+		<artifactId>spring-boot</artifactId>
+		<version>0.0.0-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>spring-boot-DEPLOY</artifactId>
+	<packaging>pom</packaging>
+
+	<name>Samples Spring-Boot DEPLOY reactor</name>
+	<description>
+Reactor for Spring-Boot DEPLOY-samples.
+	</description>
+
+	<properties>
+		<commons-logging.version>1.2</commons-logging.version>
+	</properties>
+
+	<modules>
+		<module>spring-boot-DEPLOY-0</module>
+	</modules>
+	
+	<dependencies>
+	
+		<!-- ========================================================================================= -->	
+	    <!--                                  SPRING-BOOT                                              -->
+		<!-- ========================================================================================= -->	
+
+	    <!-- Spring-Boot-Web -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-logging</artifactId>
+		</dependency>	    
+		
+		<!-- ========================================================================================= -->	
+	    <!--                                  ETC                                                      -->
+		<!-- ========================================================================================= -->	
+		
+	</dependencies>
+
+	<build>
+		
+	</build>
+	
+
+</project>

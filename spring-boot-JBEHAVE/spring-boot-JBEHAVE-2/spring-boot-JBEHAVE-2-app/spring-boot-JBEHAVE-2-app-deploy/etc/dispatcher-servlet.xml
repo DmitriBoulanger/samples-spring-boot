@@ -1,0 +1,192 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc
+		 http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd
+		 http://www.springframework.org/schema/beans 
+		 http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+		 http://www.springframework.org/schema/context 
+		 http://www.springframework.org/schema/context/spring-context-4.1.xsd
+		 http://www.springframework.org/schema/task
+		 http://www.springframework.org/schema/task/spring-task-3.0.xsd">
+
+	<context:component-scan base-package="de.ityx.licensing"></context:component-scan>
+
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
+
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/jsp/"  />
+		<property name="suffix" value=".jsp"/>
+		<property name="order" value="0"/>
+	</bean>
+
+	<import resource="hibernate-config.xml" />
+
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="mySessionFactory" />
+	</bean>
+
+	<bean class="org.springframework.orm.hibernate4.HibernateExceptionTranslator" />
+
+	<bean id="daoService" class="de.ityx.licensing.webmanager.dao.impl.DaoServiceImpl">
+		<property name="genericDao" ref="genericDao" />
+		<property name="securityTokenDao" ref="securityTokenDao" />
+		<property name="domainDao" ref="domainDao" />
+		<property name="propertiesDao" ref="propertiesDao" />
+		<property name="userDao" ref="userDao" />
+		<property name="masterLicenseDao" ref="masterLicenseDao" />
+		<property name="dashboardDao" ref="dashboardDao" />
+		<property name="runtimeLicenseTemplateDao" ref="runtimeLicenseTemplateDao" />
+		<property name="loginHistoryDao" ref="loginHistoryDao" />
+		<property name="auditTrailDao" ref="auditTrailDao" />		
+	</bean>
+
+	<bean id="genericDao" class="de.ityx.licensing.webmanager.dao.impl.GenericDaoImpl">
+		<property name="sessionFactory" ref="mySessionFactory" />
+	</bean>
+
+	<bean id="masterLicenseDao"
+		class="de.ityx.licensing.webmanager.dao.impl.MasterLicenseDaoImpl">
+		<property name="sessionFactory" ref="mySessionFactory" />
+	</bean>
+
+	<bean id="propertiesDao" class="de.ityx.licensing.webmanager.dao.impl.PropertiesDaoImpl">
+		<property name="sessionFactory" ref="mySessionFactory" />
+	</bean>
+
+	<bean id="securityTokenDao"
+		class="de.ityx.licensing.webmanager.dao.impl.SecurityTokenDaoImpl">
+		<property name="sessionFactory" ref="mySessionFactory" />
+	</bean>
+
+	<bean id="domainDao" class="de.ityx.licensing.webmanager.dao.impl.DomainDaoImpl">
+		<property name="sessionFactory" ref="mySessionFactory" />
+	</bean>
+
+	<bean id="userDao" class="de.ityx.licensing.webmanager.dao.impl.UserDaoImpl">
+		<property name="sessionFactory" ref="mySessionFactory" />
+	</bean>
+	
+	<bean id="auditTrailDao" class="de.ityx.licensing.webmanager.dao.impl.AuditTrailDaoImpl">
+		<property name="sessionFactory" ref="mySessionFactory" />
+	</bean>	
+
+	<bean id="dashboardDao" class="de.ityx.licensing.webmanager.dao.impl.DashboardDaoImpl">
+		<property name="sessionFactory" ref="mySessionFactory" />
+	</bean>
+
+	<bean id="runtimeLicenseTemplateDao"
+		class="de.ityx.licensing.webmanager.dao.impl.RuntimeLicenseTemplateDaoImpl">
+		<property name="sessionFactory" ref="mySessionFactory" />
+	</bean>
+
+	<bean id="loginHistoryDao"
+		class="de.ityx.licensing.webmanager.dao.impl.LoginHistoryDaoImpl">
+		<property name="sessionFactory" ref="mySessionFactory" />
+	</bean>
+
+	<bean id="requestHandler" class="de.ityx.licensing.webmanager.security.RequestHandler"/>
+
+	<context:property-placeholder location="file:${ityx.conf}/keystore.properties, file:${ityx.conf}/license-core.properties" 
+		ignore-resource-not-found="false" system-properties-mode="OVERRIDE"/>
+	
+	<bean name="licenceCoreService" class="de.ityx.license.core.LicenseCoreServiceImpl">
+		<property name="keyProvider" ref="lmCoreKeyProvider" />
+	</bean>
+	
+	<bean name="lmCoreKeyProvider" class="de.ityx.licensing.common.rsa.WebServerKeyPairProvider" />
+	<bean name="lmCorePropertes" class="de.ityx.license.core.LicenseCoreProperties" />
+	
+	<mvc:interceptors>
+		<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" />
+		<bean class="org.springframework.web.servlet.theme.ThemeChangeInterceptor" />
+ 		<bean class="de.ityx.licensing.webmanager.util.LockIntercepter" />
+		<bean class="de.ityx.licensing.webmanager.security.RequestHandler" />
+		<bean class="de.ityx.licensing.webmanager.security.CSRFHandlerInterceptor"/>
+	</mvc:interceptors>
+
+	<bean id="localeResolver"
+		class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
+		<property name="defaultLocale" value="en" />
+	</bean>
+
+	<bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basename" value="messages" />
+	</bean>
+
+	<bean id="themeSource"
+		class="org.springframework.ui.context.support.ResourceBundleThemeSource">
+		<property name="basenamePrefix" value="themes." />
+	</bean>
+
+	<!-- Theme Change Interceptor and Resolver definition -->
+	<bean id="themeChangeInterceptor"
+		class="org.springframework.web.servlet.theme.ThemeChangeInterceptor">
+		<property name="paramName" value="theme" />
+	</bean>
+	
+	
+	<bean id="securityHandler" class="de.ityx.licensing.webmanager.util.LockIntercepter">
+		<property name="daoService" ref="daoService"></property>
+	</bean>
+
+
+	<bean id="themeResolver" class="de.ityx.licensing.webmanager.common.ThemeResolver">
+		<property name="defaultThemeName" value="default" />
+	</bean>
+
+
+	<!-- Validators -->
+	<bean id="loginFormValidator"
+		class="de.ityx.licensing.webmanager.form.validators.LoginFormValidator">
+		<property name="daoService" ref="daoService"></property>
+	</bean>
+
+	<bean id="masterLicenseFormValidator"
+		class="de.ityx.licensing.webmanager.form.validators.MasterLicenseFormValidator">
+		<property name="daoService" ref="daoService"></property>
+	</bean>
+
+	<bean id="runtimeLicenseTemplateValidator"
+		class="de.ityx.licensing.webmanager.form.validators.RuntimeLicenseTemplateValidator">
+		<property name="daoService" ref="daoService"></property>
+	</bean>
+
+	<bean id="domainFormValidator"
+		class="de.ityx.licensing.webmanager.form.validators.DomainFormValidator">
+		<property name="daoService" ref="daoService"></property>
+	</bean>
+
+	<bean id="userValidator"
+		class="de.ityx.licensing.webmanager.form.validators.UserValidator">
+		<property name="daoService" ref="daoService"></property>
+	</bean>
+
+	<bean id="runtimeLicenseValidator"
+		class="de.ityx.licensing.webmanager.form.validators.RuntimeLicenseValidator">
+		<property name="daoService" ref="daoService"></property>
+	</bean>
+
+ 	<bean id="tilesConfigurer"
+		class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+		<property name="definitions">
+			<list>
+				<value>/WEB-INF/license-manager-tiles-def.xml</value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean name="requestDataValueProcessor"
+		class="de.ityx.licensing.webmanager.security.CSRFRequestDataValueProcessor" />
+	
+	<bean id="propertyConfigurer"
+		class="de.ityx.licensing.common.PropertiesConfigurer">
+		<property name="location">
+			<value>lm_app.properties</value>
+		</property>
+	</bean>
+</beans>

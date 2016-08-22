@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+
+<!-- =========================================================================================================== -->
+<!--              LOGBACK SPRING-BOOT CONFIGURATION                                                              -->
+<!-- =========================================================================================================== -->
+
+<configuration debug="false">
+
+	<contextName>JBehave Tests Logback-Configuration</contextName>
+	<include resource="de/dbo/samples/springboot/utilities/logging/logback-standard-appenders.xml"/>
+	<include resource="de/dbo/samples/springboot/utilities/logging/logback-debug-appenders.xml"/>
+
+	<!-- ======================================================================================================= -->
+	<!--                            LOGGERS                                                                      -->
+	<!-- ======================================================================================================= -->
+
+	<logger name="de.dbo.samples.springboot" 
+		level="INFO" additivity="true">
+		<appender-ref ref="CONSOLE_STDOUT" />
+	</logger>
+	
+<!-- 	<logger name="org.jbehave"  -->
+<!-- 		level="DEBU" additivity="true"> -->
+<!-- 		<appender-ref ref="CONSOLE_STDOUT" /> -->
+<!-- 	</logger> -->
+	
+	<logger name="org.springframework" 
+		level="INFO" additivity="false">
+		<appender-ref ref="CONSOLE_STDOUT" />
+	</logger>
+
+<!-- 	<logger name="org.springframework.web.servlet.mvc"  -->
+<!-- 		level="DEBUG" additivity="false"> -->
+<!-- 		<appender-ref ref="CONSOLE_STDOUT" /> -->
+<!-- 	</logger> -->
+	
+<!-- 	<logger name="org.springframework.web.servlet.resource"  -->
+<!-- 		level="DEBUG" additivity="false"> -->
+<!-- 		<appender-ref ref="CONSOLE_STDOUT" /> -->
+<!-- 	</logger>		 -->
+	
+<!-- 	<logger name="org.springframework.web.servlet.handler"  -->
+<!-- 		level="DEBUG" additivity="false"> -->
+<!-- 		<appender-ref ref="CONSOLE_STDOUT" /> -->
+<!-- 	</logger> -->
+	
+<!-- 	 <logger name="org.springframework.boot.context.embedded.tomcat"  -->
+<!-- 		level="DEBUG" additivity="false"> -->
+<!-- 		<appender-ref ref="CONSOLE_STDOUT" /> -->
+<!-- 	</logger> -->
+	
+	<!-- =================================================================================================== -->
+	<!--                                SPECIAL LOGGERS                                                      -->
+	<!-- =================================================================================================== -->
+	
+<!-- 	<logger name="org.springframework.beans.factory.support" level="DEBUG" -->
+<!-- 		additivity="false"> -->
+<!-- 		<appender-ref ref="CONSOLE_STDOUT_SPRING" /> -->
+<!-- 	</logger> -->
+
+</configuration>
