@@ -112,6 +112,7 @@
 		<!--         APPLICATIONS TO BE DEPLOYED                                                         -->
 		<!-- =========================================================================================== -->
 
+        <!-- Application 1 (JAR) -->
 		<dependency>
 			<groupId>de.dbo.samples.springboot</groupId>
 			<artifactId>spring-boot-JBEHAVE-2-app-1</artifactId>
@@ -128,6 +129,7 @@
 			</exclusions>
 		</dependency>
 
+		 <!-- Application 2 (WAR) -->
 		<dependency>
 			<groupId>de.dbo.samples.springboot</groupId>
 			<artifactId>spring-boot-JBEHAVE-2-app-2</artifactId>
@@ -141,6 +143,7 @@
 			</exclusions>
 		</dependency>
 
+ 		<!-- Application 3 (JAR) -->
 		<dependency>
 			<groupId>de.dbo.samples.springboot</groupId>
 			<artifactId>spring-boot-JBEHAVE-2-app-3</artifactId>
