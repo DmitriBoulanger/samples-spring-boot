@@ -1,4 +1,4 @@
-package de.dbo.samples.springboot.jbehave2.IT.commons.configuration;
+package de.dbo.samples.springboot.jbehave2.IT.commons.jbehave.configuration;
 
 import static de.dbo.samples.springboot.jbehave2.IT.commons.util.print.Print.lines;
 /* Hamcrest */

@@ -9,7 +9,7 @@ package de.dbo.samples.springboot.jbehave2.IT.commons.server;
  *           only incidentally for computers to execute
  *
  */
-public interface TestServer {
+public interface TestContainer {
 
     public Integer port();
 
@@ -23,6 +23,6 @@ public interface TestServer {
 
     public String name();
 
-    public TestServer clone(final String name);
+    public TestContainer clone(final String name);
 
 }

@@ -1,4 +1,4 @@
-package de.dbo.samples.springboot.jbehave2.IT.commons.configuration;
+package de.dbo.samples.springboot.jbehave2.IT.commons.jbehave.configuration;
 
 /* SLF4J */
 import org.slf4j.Logger;

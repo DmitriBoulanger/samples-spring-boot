@@ -1,6 +1,6 @@
 package de.dbo.samples.springboot.jbehave2.IT.steps;
 
-import static de.dbo.samples.springboot.jbehave2.IT.commons.server.TestServerAssertions.assertThatTestServerInitialized;
+import static de.dbo.samples.springboot.jbehave2.IT.commons.server.TestContainerAssertions.assertThatTestServerInitialized;
 /* Hamcrest */
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -20,7 +20,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 import de.dbo.samples.springboot.jbehave2.IT.commons.context.ContextThreadLocal;
-import de.dbo.samples.springboot.jbehave2.IT.commons.server.TestServer;
+import de.dbo.samples.springboot.jbehave2.IT.commons.server.TestContainer;
 import de.dbo.samples.springboot.jbehave2.IT.commons.stepsimpl.StepsBase;
 import de.dbo.samples.springboot.jbehave2.IT.steps.ctx.A3_ReesSteps_Data;
 import de.dbo.samples.springboot.jbehave2.app3.domain.Greeting;
@@ -35,7 +35,7 @@ public class A3_ReesSteps extends StepsBase {
 
     @Given("A3 server initialized")
     public void init() {
-        final TestServer testServer = testServer("A3 server-clone");
+        final TestContainer testServer = testServer("A3 server-clone");
         assertThatTestServerInitialized(testServer);
         ctx().setTestSever(testServer);
     }

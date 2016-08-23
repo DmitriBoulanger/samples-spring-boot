@@ -15,6 +15,7 @@ import org.springframework.context.ApplicationContext;
 
 import de.dbo.samples.springboot.jbehave2.IT.commons.jbehave.configuration.ConfigurationJBehaveDefault;
 import de.dbo.samples.springboot.jbehave2.IT.commons.jbehave.configuration.ConfigurationJBehaveProperties;
+import de.dbo.samples.springboot.jbehave2.IT.commons.server.TestContainerProperties;
 import de.dbo.samples.springboot.jbehave2.IT.commons.stories.StoriesProvider;
 
 /**
@@ -44,6 +45,9 @@ public abstract class JBehaveRunnerDefault extends JUnitStories {
 
     @Autowired
     protected ConfigurationJBehaveProperties jbehaveProperties;
+    
+    @Autowired
+    protected TestContainerProperties 	     testContainerProperties;
 
     private boolean                          initilizationDone = false;
 
@@ -73,7 +77,12 @@ public abstract class JBehaveRunnerDefault extends JUnitStories {
         embedderControls.useStoryTimeouts(Integer.toString(jbehaveProperties.getStoriesTimeout()));
 
         initilizationDone = true;
-        log.info("initialized. HashCode=[" + hashCode() + "]. " + jbehaveProperties.print());
+        if (log.isDebugEnabled()) {
+            log.debug("initialized. HashCode=[" + hashCode() + "]. ");
+        }
+        log.info("Using " + jbehaveProperties.print());
+        log.info("Using " + testContainerProperties.print());
+
     }
 
     /**
@@ -101,6 +110,9 @@ public abstract class JBehaveRunnerDefault extends JUnitStories {
             throw new IllegalStateException("JBehave stories provider is null!");
         }
         if (null == jbehaveProperties) {
+            throw new IllegalStateException("JBehave properties is null!");
+        }
+        if (null == testContainerProperties) {
             throw new IllegalStateException("JBehave properties is null!");
         }
     }

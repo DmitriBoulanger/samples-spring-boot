@@ -22,8 +22,6 @@
 		<module>spring-boot-JBEHAVE-2-app-1</module>
 		<module>spring-boot-JBEHAVE-2-app-2</module>
 		<module>spring-boot-JBEHAVE-2-app-3</module>
-		
-		<module>spring-boot-JBEHAVE-2-app-deploy</module>
 	</modules>
 
 </project>

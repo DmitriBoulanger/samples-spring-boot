@@ -2,7 +2,7 @@ package de.dbo.samples.springboot.jbehave2.IT.commons.stepsimpl;
 
 import de.dbo.samples.springboot.jbehave2.IT.commons.jbehave.configuration.ConfigurationJBehaveProperties;
 import de.dbo.samples.springboot.jbehave2.IT.commons.jbehave.configuration.ConfigurationJBehaveSystemProperties;
-import de.dbo.samples.springboot.jbehave2.IT.commons.server.TestServer;
+import de.dbo.samples.springboot.jbehave2.IT.commons.server.TestContainer;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,13 +19,13 @@ public abstract class StepsBase {
     }
     
     @Autowired
-    private TestServer testServer;
+    private TestContainer testServer;
     
     @Autowired
     protected ConfigurationJBehaveProperties jbehaveProperties;
     
     
-    protected TestServer testServer(final String clonename) {
+    protected TestContainer testServer(final String clonename) {
 	synchronized (LOCK) {
 	    return testServer.clone(clonename);
 	}

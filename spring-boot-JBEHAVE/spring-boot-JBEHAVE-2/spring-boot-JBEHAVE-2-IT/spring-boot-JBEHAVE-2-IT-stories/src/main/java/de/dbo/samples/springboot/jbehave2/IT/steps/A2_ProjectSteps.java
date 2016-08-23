@@ -1,7 +1,7 @@
 package de.dbo.samples.springboot.jbehave2.IT.steps;
 
 import static com.jayway.restassured.RestAssured.given;
-import static de.dbo.samples.springboot.jbehave2.IT.commons.server.TestServerAssertions.assertThatTestServerInitialized;
+import static de.dbo.samples.springboot.jbehave2.IT.commons.server.TestContainerAssertions.assertThatTestServerInitialized;
 
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
@@ -15,7 +15,7 @@ import com.jayway.restassured.config.LogConfig;
 import com.jayway.restassured.http.ContentType;
 
 import de.dbo.samples.springboot.jbehave2.IT.commons.context.ContextThreadLocal;
-import de.dbo.samples.springboot.jbehave2.IT.commons.server.TestServer;
+import de.dbo.samples.springboot.jbehave2.IT.commons.server.TestContainer;
 import de.dbo.samples.springboot.jbehave2.IT.commons.stepsimpl.StepsBaseRestAssured;
 import de.dbo.samples.springboot.jbehave2.IT.steps.ctx.A2_ProjectSteps_Data;
 
@@ -24,7 +24,7 @@ public class A2_ProjectSteps extends StepsBaseRestAssured {
     private static final Logger log = LoggerFactory.getLogger(A2_ProjectSteps.class);
 
     @Autowired
-    private TestServer          testServer;
+    private TestContainer          testServer;
 
     public A2_ProjectSteps() {
         LogConfig.logConfig().enablePrettyPrinting(false);

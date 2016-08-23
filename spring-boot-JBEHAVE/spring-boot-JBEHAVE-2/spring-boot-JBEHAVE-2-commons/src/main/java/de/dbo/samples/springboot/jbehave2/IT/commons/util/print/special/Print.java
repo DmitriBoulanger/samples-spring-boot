@@ -56,6 +56,30 @@ public class Print implements Line {
 	return printList("Available beans:", beanNames);
     }
     
+    /**
+     * 
+     * @param name
+     * @param defaltValue
+     * @return pretty-print
+     */
+    public static final String q2(final String name, final boolean defaltValue) {
+        return name + " (" + defaltValue + ")";
+    }
+
+    /**
+     * 
+     * @param name
+     * @param defaltValue
+     * @return pretty-print
+     */
+    public static final String q2(final String name, final int defaltValue) {
+        return name + " (" + defaltValue + ")";
+    }
+    
+    public static final String q2(final String name, final String defaltValue) {
+        return name + " (" + defaltValue + ")";
+    }
+
 
     /**
      * Pretty-print of configured properties.
@@ -85,16 +109,16 @@ public class Print implements Line {
     
     private static final int SPACE1 = 36;
     private static final int SPACE2 = 40;
-    private static final int SPACE3 = 8;
+    private static final int SPACE3 = 15;
     
     private static final void appendProperyTriple(final StringBuilder sb, ConfigurationPropertyTriple triple) {
 	sb.append(NL + TAB_ITEM  + Pad.right(triple.property(),SPACE1)    +    " = " + Pad.right(triple.propertyValue(),SPACE3));
 	final String systemValue = System.getProperty(triple.systemPropery());
 	final String marker;
 	if (null==systemValue) {
-	    marker = "    #####  ";
+	    marker = "  # ";
 	} else {
-	    marker = "   <=====  ";
+	    marker = " <= ";
 	}
 	sb.append(marker + Pad.right( triple.systemPropery(), SPACE2) + " = " + systemValue);
     }

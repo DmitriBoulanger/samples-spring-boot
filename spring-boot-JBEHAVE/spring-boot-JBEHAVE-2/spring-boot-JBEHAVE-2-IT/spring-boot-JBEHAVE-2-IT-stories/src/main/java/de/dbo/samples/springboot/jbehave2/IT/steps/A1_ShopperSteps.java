@@ -21,7 +21,7 @@ import org.springframework.stereotype.Component;
 import com.jayway.restassured.http.ContentType;
 
 import de.dbo.samples.springboot.jbehave2.IT.commons.context.ContextThreadLocal;
-import de.dbo.samples.springboot.jbehave2.IT.commons.server.TestServer;
+import de.dbo.samples.springboot.jbehave2.IT.commons.server.TestContainer;
 import de.dbo.samples.springboot.jbehave2.IT.commons.stepsimpl.StepsBaseRestAssured;
 import de.dbo.samples.springboot.jbehave2.IT.steps.ctx.A1_ShopperSteps_Data;
 /* Application */
@@ -37,7 +37,7 @@ public class A1_ShopperSteps extends StepsBaseRestAssured {
 
     @Given("A1 server initialized")
     public void init() {
-        final TestServer testServer = testServer("A1 server-clone");
+        final TestContainer testServer = testServer("A1 server-clone");
         assertThatTestServerInitialized(testServer);
         ctx().setRequestSpecification(requestSpecBuilder()
                 .setContentType(ContentType.JSON)
@@ -97,7 +97,7 @@ public class A1_ShopperSteps extends StepsBaseRestAssured {
     /**
      * assert test-server initialization
      */
-    private void assertThatTestServerInitialized(final TestServer testServer) {
+    private void assertThatTestServerInitialized(final TestContainer testServer) {
         final int port = testServer.port();
         assertThat("A1 Server port is not as expected", port, greaterThan(9999));
         final String host = testServer.host();

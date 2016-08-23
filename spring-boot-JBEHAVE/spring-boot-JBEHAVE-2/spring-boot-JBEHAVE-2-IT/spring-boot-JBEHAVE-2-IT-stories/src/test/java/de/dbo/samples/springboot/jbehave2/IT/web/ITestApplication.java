@@ -39,6 +39,6 @@ public class ITestApplication {
     public static void main(String[] args) {
         final ConfigurableApplicationContext ctx = SpringApplication.run(ITestApplication.class, args);
         ctx.registerShutdownHook();
-        log.info("ITest Server " + ctx.getBean(ITestServer.class).print());
+        log.info("ITest Server " + ctx.getBean(ITestContainer.class).print());
     }
 }

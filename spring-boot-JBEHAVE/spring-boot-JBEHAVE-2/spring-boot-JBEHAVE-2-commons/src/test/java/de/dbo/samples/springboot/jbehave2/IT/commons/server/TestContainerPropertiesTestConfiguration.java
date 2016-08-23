@@ -1,4 +1,4 @@
-package de.dbo.samples.springboot.jbehave2.IT.commons.configuration;
+package de.dbo.samples.springboot.jbehave2.IT.commons.server;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,7 +12,7 @@ import de.dbo.samples.springboot.jbehave2.IT.commons.jbehave.configuration.Confi
  * Spring-Boot Test-Application.
  * The configuration declares the bean to be tested
  *
- * @see ConfigurationJBehavePropertiesTestConfiguration
+ * @see TestContainerPropertiesTestConfiguration
  *
  * @author Dmitri Boulanger
  *
@@ -21,10 +21,10 @@ import de.dbo.samples.springboot.jbehave2.IT.commons.jbehave.configuration.Confi
  */
 
 @Configuration
-public class ConfigurationJBehavePropertiesTestConfiguration {
-    private static final Logger log = LoggerFactory.getLogger(ConfigurationJBehavePropertiesTestConfiguration.class);
+public class TestContainerPropertiesTestConfiguration {
+    private static final Logger log = LoggerFactory.getLogger(TestContainerPropertiesTestConfiguration.class);
 
-    public ConfigurationJBehavePropertiesTestConfiguration() {
+    public TestContainerPropertiesTestConfiguration() {
         log.info("created. HashCode=[" + hashCode() + "]");
     }
 

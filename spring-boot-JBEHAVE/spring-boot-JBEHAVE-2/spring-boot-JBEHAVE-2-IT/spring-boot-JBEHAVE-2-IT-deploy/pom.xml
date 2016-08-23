@@ -89,7 +89,7 @@
 						</properties>
 					</configuration>
 					
-					<!--Configuration of the WARs to be deployed to the Container -->
+					<!-- Application WARs (see dependencies in the paremt POM) to be deployed to the Container -->
 					<deployables>
 						<deployable>
 							<groupId>${project.groupId}</groupId>
@@ -108,8 +108,7 @@
 	</build>
 
 	<dependencies>
-
-	<dependency>
+		<dependency>
 			<groupId>org.apache.tomcat.embed</groupId>
 			<artifactId>tomcat-embed-core</artifactId>
 			<scope>provided</scope>

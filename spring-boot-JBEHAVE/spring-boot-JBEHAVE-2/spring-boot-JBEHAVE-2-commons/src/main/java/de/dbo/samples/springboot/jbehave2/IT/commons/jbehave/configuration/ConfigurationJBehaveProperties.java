@@ -92,30 +92,18 @@ public class ConfigurationJBehaveProperties implements ConfigurationJBehaveSyste
 
     public StringBuilder print() {
         final ConfigurationPropertyTriple triple0 =
-            new ConfigurationPropertyTriple(q2(FAIL_IF_PENDING_STEP_FOUND, DEFAULT_FAIL_IF_PENDING_STEP_FOUND), isStepsFailIfPendingStepFound(), SYSTEM_PROPERTY_JBEHAVE_FAIL_IF_PENDING_STEP_FOUND);
+            new ConfigurationPropertyTriple(Print.q2(FAIL_IF_PENDING_STEP_FOUND, DEFAULT_FAIL_IF_PENDING_STEP_FOUND), isStepsFailIfPendingStepFound(), SYSTEM_PROPERTY_JBEHAVE_FAIL_IF_PENDING_STEP_FOUND);
         final ConfigurationPropertyTriple triple1 =
-            new ConfigurationPropertyTriple(q2(STORIES_THREAD_CNT, DEFAULT_STORIES_THREAD_CNT), getStoriesThreadCnt(), SYSTEM_PROPERTY_JBEHAVE_STORIES_THREAD_CNT);
+            new ConfigurationPropertyTriple(Print.q2(STORIES_THREAD_CNT, DEFAULT_STORIES_THREAD_CNT), getStoriesThreadCnt(), SYSTEM_PROPERTY_JBEHAVE_STORIES_THREAD_CNT);
         final ConfigurationPropertyTriple triple4 =
-            new ConfigurationPropertyTriple(q2(STORIES_TIMEOUT, DEFAULT_STORIES_TIMEOUT), getStoriesTimeout(), SYSTEM_PROPERTY_JBEHAVE_STORIES_TIMEOUT);
+            new ConfigurationPropertyTriple(Print.q2(STORIES_TIMEOUT, DEFAULT_STORIES_TIMEOUT), getStoriesTimeout(), SYSTEM_PROPERTY_JBEHAVE_STORIES_TIMEOUT);
         final ConfigurationPropertyTriple triple2 =
-            new ConfigurationPropertyTriple(q2(STORIES_CONSOLE, DEFAULT_STORIES_CONSOLE), isStoriesConsole(), SYSTEM_PROPERTY_JBEHAVE_STORIES_CONSOLE);
+            new ConfigurationPropertyTriple(Print.q2(STORIES_CONSOLE, DEFAULT_STORIES_CONSOLE), isStoriesConsole(), SYSTEM_PROPERTY_JBEHAVE_STORIES_CONSOLE);
         final ConfigurationPropertyTriple triple3 =
-            new ConfigurationPropertyTriple(q2(LOGGING_THRID_PARTIES_SILENT, DEFAULT_LOGGING_THRID_PARTIES_SILENT), isLoggingThirdPartiesSilent(), SYSTEM_PROPERTY_JBEHAVE_LOGGING_THRID_PARTIES__SILENT);
+            new ConfigurationPropertyTriple(Print.q2(LOGGING_THRID_PARTIES_SILENT, DEFAULT_LOGGING_THRID_PARTIES_SILENT), isLoggingThirdPartiesSilent(), SYSTEM_PROPERTY_JBEHAVE_LOGGING_THRID_PARTIES__SILENT);
 
         return Print.configurationProperties("JBehave Properties:",
                 new ConfigurationPropertyTriple[]{triple0, triple1, triple2, triple3, triple4});
-    }
-
-    //    private static final String q2(final String name, final String defaltValue) {
-    //	return name + " (" + defaltValue + ")";
-    //    }
-
-    private static final String q2(final String name, final boolean defaltValue) {
-        return name + " (" + defaltValue + ")";
-    }
-
-    private static final String q2(final String name, final int defaltValue) {
-        return name + " (" + defaltValue + ")";
     }
 
     // =========================================================================================================
