@@ -1,0 +1,83 @@
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>de.dbo.samples.springboot</groupId>
+		<artifactId>spring-boot-JBEHAVE-2</artifactId>
+		<version>0.0.0-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>spring-boot-JBEHAVE-2-IT</artifactId>
+	<packaging>pom</packaging>
+
+	<name>Samples Spring-Boot JBEHAVE 2-IT</name>
+	
+	<modules>
+		<module>spring-boot-JBEHAVE-2-IT-deploy</module>
+		<module>spring-boot-JBEHAVE-2-IT-stories</module>
+	</modules>
+	
+	<build>
+		 
+	</build>
+
+	<dependencies>
+
+		<!-- =========================================================================================== -->
+		<!--         APPLICATIONS TO BE DEPLOYED                                                         -->
+		<!-- =========================================================================================== -->
+
+        <!-- Application 1 (JAR) -->
+		<dependency>
+			<groupId>de.dbo.samples.springboot</groupId>
+			<artifactId>spring-boot-JBEHAVE-2-app-1</artifactId>
+			<version>0.0.0-SNAPSHOT</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-test</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-tomcat</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		 <!-- Application 2 (WAR) -->
+		<dependency>
+			<groupId>de.dbo.samples.springboot</groupId>
+			<artifactId>spring-boot-JBEHAVE-2-app-2</artifactId>
+			<version>0.0.0-SNAPSHOT</version>
+			<classifier>classes</classifier>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-test</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+ 		<!-- Application 3 (JAR) -->
+		<dependency>
+			<groupId>de.dbo.samples.springboot</groupId>
+			<artifactId>spring-boot-JBEHAVE-2-app-3</artifactId>
+			<version>0.0.0-SNAPSHOT</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-test</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.tomcat.embed</groupId>
+			<artifactId>tomcat-embed-core</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		 
+	</dependencies>
+
+</project>

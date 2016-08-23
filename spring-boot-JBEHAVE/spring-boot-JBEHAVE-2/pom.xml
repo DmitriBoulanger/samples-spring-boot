@@ -17,11 +17,11 @@ Main reactor with sample projects to learn an implementation
 of Integration Test using JBehave framework in a Spring-Boot environment.
 The modules of this project are as follows:
 
-- jb is a library with commons and APIs used in developing of JBehave Steps
+- commons is a library with commons and APIs used in developing of JBehave Steps
 
 - app is a reactor with sample applications to be integrated and tested
 
-- stories-java is a pure Java Integration Test
+- IT  is the Integration Test of the applications in app
 
 - stories-web is a complete Integration Test that uses REST controllers and Elasticsearch data-repositories</description>
 	<url></url>
@@ -33,8 +33,7 @@ The modules of this project are as follows:
 	<modules>
 		<module>spring-boot-JBEHAVE-2-commons</module>
 		<module>spring-boot-JBEHAVE-2-app</module>
-		
-		<module>spring-boot-JBEHAVE-2-stories</module>
+		<module>spring-boot-JBEHAVE-2-IT</module>
 	</modules>
 
 </project>
