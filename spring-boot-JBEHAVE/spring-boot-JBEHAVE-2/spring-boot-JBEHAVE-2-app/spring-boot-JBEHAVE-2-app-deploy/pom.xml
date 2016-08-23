@@ -20,6 +20,20 @@
 	    <!--           REMOTE SERVER TO DEPLOY                   -->
 	    <!-- =================================================== -->
 	    
+	    <!-- =================================================== --> 
+	    <!-- 
+	         Attention: TOMCAT DEPLOYMENT
+	         1. 
+	         users.xml in the Tomcat conf-directory
+	         should have the following user 
+	    	 <role rolename="manager-script"/>
+ 			 <user username="IT123" password="123" roles="manager-script"/>
+ 			 2.
+ 			 This POM cannot perform re-deployment, i.e
+ 			 the Tomact webapp should not contain the application 
+ 		 -->
+	     <!-- =================================================== -->
+	    
 		<remote.containerId>tomcat8x</remote.containerId>
 		<remote.protocol>http</remote.protocol>
 		<remote.host>localhost</remote.host>
