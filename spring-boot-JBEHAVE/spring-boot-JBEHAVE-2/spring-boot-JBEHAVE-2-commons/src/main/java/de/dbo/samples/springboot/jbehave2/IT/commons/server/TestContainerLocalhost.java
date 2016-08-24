@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
 
 /**
- * Local server typically initialized in Spring-Boot Tests
+ * Local server typically used in Spring-Boot Tests
  *
  * @author Dmitri Boulanger, Hombach
  *
@@ -15,7 +15,7 @@ import org.springframework.core.env.Environment;
  */
 public abstract class TestContainerLocalhost implements TestContainer {
 
-    /* Spring-Boot Environment */
+    /* Spring-Boot Environment! */
     @Autowired
     private Environment environment;
     
@@ -31,6 +31,7 @@ public abstract class TestContainerLocalhost implements TestContainer {
     public Integer port() {
 	final TestContainerType type = type();
 	final String port;
+	
 	switch(type) {
 	case EMBEDED_WEB_CONTAINER:
 	    port = environment.getProperty("local.server.port"); /* from application.properties */
@@ -40,7 +41,7 @@ public abstract class TestContainerLocalhost implements TestContainer {
 	    
 	    break;
 	case REMOTE_WEB_CONTAINER:
-	    return testContainerProperties.remoteServerPort; 
+	    return testContainerProperties.remoteServerPort(); 
 	    
 	case NULL:
 	    return null;
@@ -55,6 +56,7 @@ public abstract class TestContainerLocalhost implements TestContainer {
     @Override
     public String host() {
 	final TestContainerType type = type();
+	
 	switch(type) {
 	case EMBEDED_WEB_CONTAINER:
 		return "localhost";
@@ -73,14 +75,20 @@ public abstract class TestContainerLocalhost implements TestContainer {
 
     @Override
     public String context() {
-        return environment.getProperty("server.context-path");
+        return environment.getProperty("server.context-path");  /* from application.properties */
     }
 
+    /**
+     * Complete HTTP URL of the deployed application to be tested
+     */
     @Override
     public String contextURL() {
         return "http://" + host() + ":" + port() + context();
     }
 
+    /**
+     * pretty-print 
+     */
     @Override
     public String print() {
         return type() + " " + name() + "[" + host() + ":" + port() + "]";
@@ -96,6 +104,11 @@ public abstract class TestContainerLocalhost implements TestContainer {
             private final String  print      = new String(TestContainerLocalhost.this.print() + "as clone [" + clonename + "]");
             private final String  context    = new String(TestContainerLocalhost.this.context());
             private final String  contextURL = new String(TestContainerLocalhost.this.contextURL());
+            
+            @Override
+            public TestContainer clone(final String name) {
+                throw new IllegalStateException("Server-clone cannot be cloned again. Do it only once!");
+            }
 
             @Override
             public String name() {
@@ -115,11 +128,6 @@ public abstract class TestContainerLocalhost implements TestContainer {
             @Override
             public String print() {
                 return print;
-            }
-
-            @Override
-            public TestContainer clone(final String name) {
-                throw new IllegalStateException("Server-clone cannot be cloned again. Do it only once!");
             }
 
             @Override

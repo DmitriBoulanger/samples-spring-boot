@@ -1,5 +1,6 @@
 package de.dbo.samples.springboot.jbehave2.IT.commons.server;
 
+import static de.dbo.samples.springboot.jbehave2.IT.commons.util.print.special.Print.q2;
 import de.dbo.samples.springboot.jbehave2.IT.commons.util.print.special.Print;
 import de.dbo.samples.springboot.jbehave2.IT.commons.util.print.special.Print.ConfigurationPropertyTriple;
 
@@ -9,6 +10,15 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 
+/**
+ * Properties of the Test Container.
+ * 
+ * @author Dmitri Boulanger, Hombach
+ *
+ * D. Knuth: Programs are meant to be read by humans and 
+ *           only incidentally for computers to execute 
+ *
+ */
 @Configuration
 @PropertySource(name = "Test Continer Properties", value = {"file:container.properties"}, ignoreResourceNotFound = true)
 public class TestContainerProperties implements TestContainerSystemProperties {
@@ -32,14 +42,15 @@ public class TestContainerProperties implements TestContainerSystemProperties {
     }
     
     public StringBuilder print() {
-        final ConfigurationPropertyTriple triple0 =
-            new ConfigurationPropertyTriple(Print.q2("port", DEFAULT_REMOTE_SERVER_PORT), remoteServerPort(),  SYSTEM_PROPERTY_REMOTE_SERVER_PORT);
+	   final ConfigurationPropertyTriple address =
+	                new ConfigurationPropertyTriple(q2("address", DEFAULT_REMOTE_SERVER_ADDRESS), remoteServerAddress(),  SYSTEM_PROPERTY_REMOTE_SERVER_ADDRESS);
+	   
+        final ConfigurationPropertyTriple port =
+            new ConfigurationPropertyTriple(q2("port", DEFAULT_REMOTE_SERVER_PORT), remoteServerPort(),  SYSTEM_PROPERTY_REMOTE_SERVER_PORT);
         
-        final ConfigurationPropertyTriple triple1 =
-                new ConfigurationPropertyTriple(Print.q2("address", DEFAULT_REMOTE_SERVER_ADDRESS), remoteServerAddress(),  SYSTEM_PROPERTY_REMOTE_SERVER_ADDRESS);
-        
+     
         return Print.configurationProperties("Test Container:",
-                new ConfigurationPropertyTriple[]{triple0, triple1});
+                new ConfigurationPropertyTriple[]{address, port});
     }
     
     // =========================================================================================================
