@@ -7,7 +7,7 @@
 	</configSuffixes>
 	<enableImports><![CDATA[false]]></enableImports>
 	<configs>
-		<config>java:de.dbo.samples.springboot.jbehave2.IT.deploy.DeployApplication</config>
+		<config>java:de.ityx.response.it.deploy.DeployApplication</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>

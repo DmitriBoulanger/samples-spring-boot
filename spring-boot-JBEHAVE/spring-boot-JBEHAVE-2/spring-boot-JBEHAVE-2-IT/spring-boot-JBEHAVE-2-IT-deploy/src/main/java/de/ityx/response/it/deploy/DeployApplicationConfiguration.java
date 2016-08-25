@@ -1,4 +1,4 @@
-package de.dbo.samples.springboot.jbehave2.IT.deploy;
+package de.ityx.response.it.deploy;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,7 +23,7 @@ import de.dbo.samples.springboot.utilities.logging.LoggingInfo;
  */
 
 @Configuration
-@ComponentScan(value = {"de.dbo.samples.springboot.jbehave2.IT.deploy"
+@ComponentScan(value = {"de.ityx.response.it.deploy"
 	
         // DeployApplication 1
         , "de.dbo.samples.springboot.jbehave2.app1"
@@ -34,13 +34,13 @@ import de.dbo.samples.springboot.utilities.logging.LoggingInfo;
 })
 @EnableElasticsearchRepositories(basePackages = {"de.dbo.samples.springboot.jbehave2.app3.domain"})
 public class DeployApplicationConfiguration {
-    private static final Logger log = LoggerFactory.getLogger(DeployApplicationConfiguration.class);
+    private static final Logger LOG = LoggerFactory.getLogger(DeployApplicationConfiguration.class);
 
     @Bean
     public Jackson2RepositoryPopulatorFactoryBean repositoryPopulator() {
 
-        if (log.isTraceEnabled()) {
-            log.trace(LoggingInfo.printAvailableLoggers(120).toString());
+        if (LOG.isTraceEnabled()) {
+            LOG.trace(LoggingInfo.printAvailableLoggers(120).toString());
         }
 
         final Jackson2RepositoryPopulatorFactoryBean factory = new Jackson2RepositoryPopulatorFactoryBean();
