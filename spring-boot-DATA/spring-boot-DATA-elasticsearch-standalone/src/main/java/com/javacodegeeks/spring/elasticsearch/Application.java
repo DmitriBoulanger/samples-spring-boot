@@ -1,29 +1,43 @@
 package com.javacodegeeks.spring.elasticsearch;
 
+import static org.elasticsearch.node.NodeBuilder.nodeBuilder;
+
 import java.net.URISyntaxException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
+import org.elasticsearch.client.node.NodeClient;
+//import org.elasticsearch.common.settings.Settings;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.data.elasticsearch.core.query.IndexQuery;
+import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
 
-@Configuration
-public class SpringElasticsearchExample {
+@SpringBootApplication
+@Configuration("mainBean")
+@EnableElasticsearchRepositories(basePackages = "com.javacodegeeks.spring.elasticsearch")
+@EnableAutoConfiguration
+public class Application {
 	@Autowired
 	private EmployeeRepository repository;
 
 	@Autowired
 	private ElasticsearchTemplate template;
+	
 
 	public static void main(String[] args) throws URISyntaxException, Exception {
-		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext(
-				"applicationContext.xml");
+		AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();
 		try {
+			ctx.register(Application.class);
+			ctx.refresh();
 			System.out.println("Load context");
-			SpringElasticsearchExample s = (SpringElasticsearchExample) ctx
+			Application s = (Application) ctx
 					.getBean("mainBean");
 			System.out.println("Add employees");
 			s.addEmployees();
