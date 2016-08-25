@@ -1,4 +1,4 @@
-package de.dbo.samples.springboot.jbehave2.IT.deploy;
+package de.ityx.response.it.deploy;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
