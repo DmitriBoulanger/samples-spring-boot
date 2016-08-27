@@ -48,13 +48,19 @@ public class ApplicationClient {
     }
 
     public void addEmployees() {
-//      it works bus as a separate application!
-//	elasticsearchTemplate.deleteIndex("department");
+
+	if (elasticsearchTemplate.indexExists("department") ) {
+	    final boolean indexDeleted = elasticsearchTemplate.deleteIndex("department");
+	    log.info("indexDeleted = " + indexDeleted);
+	    final boolean indexCreated = elasticsearchTemplate.createIndex("department");
+	    log.info("indexCreated = " + indexCreated);
+	}
 	
 	log.info("addEmployees() ...");
 	final Employee joe = new Employee("Joe", 32);
 	final Skill javaSkill = new Skill("Java", 10);
 	final Skill db = new Skill("Oracle", 5);
+	joe.setCreated(new Date());
 	joe.setSkills(Arrays.asList(javaSkill, db));
 	
 	final Employee johnS = new Employee("John S", 32);
@@ -71,6 +77,7 @@ public class ApplicationClient {
 	indexQuery.setObject(joe);
 	elasticsearchTemplate.index(indexQuery);
 	elasticsearchTemplate.refresh(Employee.class);
+	
 	
 	johnS.setCreated(new Date());
 	johnP.setCreated(new Date());
