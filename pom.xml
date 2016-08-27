@@ -338,10 +338,6 @@ This reactor performs complete plug-in management and fixes Java with its compil
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-logging</artifactId>
 		</dependency>
 		<dependency>
@@ -349,15 +345,25 @@ This reactor performs complete plug-in management and fixes Java with its compil
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-
+		
 		<!-- ========================================================================================= -->	
-	    <!--                                  LOGGING  CALLBACK EXTENSIONS                            -->
+	    <!--                                  ETC                                                      -->
+		<!-- ========================================================================================= -->
+		
+		<dependency>
+			<groupId>de.dbo.samples.springboot</groupId>
+			<artifactId>spring-boot-ETC-utilities</artifactId>
+		</dependency>
+		
+		<!-- ========================================================================================= -->	
+	    <!--                                  LOGGING  CALLBACK EXTENSIONS                             -->
 		<!-- ========================================================================================= -->
 
 		<dependency>
 			<groupId>org.codehaus.janino</groupId>
 			<artifactId>janino</artifactId>
 		</dependency>
+
 
 	</dependencies>
 
