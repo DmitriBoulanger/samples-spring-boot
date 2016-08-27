@@ -5,6 +5,7 @@ import de.dbo.samples.springboot.data.elasticsearch.client.domain.EmployeeReposi
 import de.dbo.samples.springboot.data.elasticsearch.client.domain.Skill;
 
 import java.util.Arrays;
+import java.util.Date;
 
 import javax.annotation.PostConstruct;
 
@@ -47,20 +48,23 @@ public class ApplicationClient {
     }
 
     public void addEmployees() {
+//      it works bus as a separate application!
+//	elasticsearchTemplate.deleteIndex("department");
 	
 	log.info("addEmployees() ...");
-	final Employee joe = new Employee("01", "Joe", 32);
+	final Employee joe = new Employee("Joe", 32);
 	final Skill javaSkill = new Skill("Java", 10);
 	final Skill db = new Skill("Oracle", 5);
 	joe.setSkills(Arrays.asList(javaSkill, db));
 	
-	final Employee johnS = new Employee("02", "John S", 32);
+	final Employee johnS = new Employee("John S", 32);
 	
-	final Employee johnP = new Employee("03", "John P", 42);
+	final Employee johnP = new Employee("John P", 42);
 	
-	final Employee sam = new Employee("04", "Sam", 30);
+	final Employee sam = new Employee("Sam", 30);
 
 	elasticsearchTemplate.putMapping(Employee.class);
+	
 	
 	final IndexQuery indexQuery = new IndexQuery();
 	indexQuery.setId(joe.getId());
@@ -68,6 +72,9 @@ public class ApplicationClient {
 	elasticsearchTemplate.index(indexQuery);
 	elasticsearchTemplate.refresh(Employee.class);
 	
+	johnS.setCreated(new Date());
+	johnP.setCreated(new Date());
+	sam.setCreated(new Date());
 	repository.save(johnS);
 	repository.save(johnP);
 	repository.save(sam);
