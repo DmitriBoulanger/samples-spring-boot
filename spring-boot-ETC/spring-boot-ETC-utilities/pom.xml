@@ -27,7 +27,6 @@ Utilities for Spring-Boot.
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-logging</artifactId>
 		</dependency>
-		
 
 	</dependencies>
 

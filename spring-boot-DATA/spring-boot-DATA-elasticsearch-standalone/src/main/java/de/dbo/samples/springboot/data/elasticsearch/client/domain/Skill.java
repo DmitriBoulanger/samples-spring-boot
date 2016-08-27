@@ -1,7 +1,9 @@
-package com.javacodegeeks.spring.elasticsearch.domain;
+package de.dbo.samples.springboot.data.elasticsearch.client.domain;
 
 public class Skill {
+    
 	private String name;
+	
 	private int experience;
 
 	public Skill() {

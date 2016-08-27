@@ -1,4 +1,4 @@
-package com.javacodegeeks.spring.elasticsearch.domain;
+package de.dbo.samples.springboot.data.elasticsearch.client.domain;
 
 import java.util.List;
 

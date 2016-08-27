@@ -15,7 +15,7 @@
 	<!--                            LOGGERS                                                                      -->
 	<!-- ======================================================================================================= -->
 
-	<logger name="com.javacodegeeks.spring.elasticsearch" 
+	<logger name="de.dbo.samples.springboot.data.elasticsearch.client" 
 		level="INFO" additivity="true">
 		<appender-ref ref="CONSOLE_STDOUT" />
 	</logger>
