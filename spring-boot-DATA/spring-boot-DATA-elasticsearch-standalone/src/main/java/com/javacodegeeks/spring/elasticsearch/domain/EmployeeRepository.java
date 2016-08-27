@@ -1,4 +1,4 @@
-package com.javacodegeeks.spring.elasticsearch;
+package com.javacodegeeks.spring.elasticsearch.domain;
 
 import java.util.List;
 

@@ -15,48 +15,23 @@
 	<!--                            LOGGERS                                                                      -->
 	<!-- ======================================================================================================= -->
 
-	<logger name="de.dbo.samples.springboot" 
+	<logger name="com.javacodegeeks.spring.elasticsearch" 
 		level="INFO" additivity="true">
 		<appender-ref ref="CONSOLE_STDOUT" />
 	</logger>
 	
-<!-- 	<logger name="org.jbehave"  -->
-<!-- 		level="DEBU" additivity="true"> -->
+<!-- 	<logger name="org.springframework"  -->
+<!-- 		level="INFO" additivity="false"> -->
 <!-- 		<appender-ref ref="CONSOLE_STDOUT" /> -->
 <!-- 	</logger> -->
-	
-	<logger name="org.springframework" 
-		level="INFO" additivity="false">
-		<appender-ref ref="CONSOLE_STDOUT" />
-	</logger>
 
-<!-- 	<logger name="org.springframework.web.servlet.mvc"  -->
-<!-- 		level="DEBUG" additivity="false"> -->
-<!-- 		<appender-ref ref="CONSOLE_STDOUT" /> -->
-<!-- 	</logger> -->
-	
-<!-- 	<logger name="org.springframework.web.servlet.resource"  -->
-<!-- 		level="DEBUG" additivity="false"> -->
-<!-- 		<appender-ref ref="CONSOLE_STDOUT" /> -->
-<!-- 	</logger>		 -->
-	
-<!-- 	<logger name="org.springframework.web.servlet.handler"  -->
-<!-- 		level="DEBUG" additivity="false"> -->
-<!-- 		<appender-ref ref="CONSOLE_STDOUT" /> -->
-<!-- 	</logger> -->
-	
-<!-- 	 <logger name="org.springframework.boot.context.embedded.tomcat"  -->
-<!-- 		level="DEBUG" additivity="false"> -->
-<!-- 		<appender-ref ref="CONSOLE_STDOUT" /> -->
-<!-- 	</logger> -->
-	
 	<!-- =================================================================================================== -->
 	<!--                                SPECIAL LOGGERS                                                      -->
 	<!-- =================================================================================================== -->
 	
 <!-- 	<logger name="org.springframework.beans.factory.support" level="DEBUG" -->
 <!-- 		additivity="false"> -->
-<!-- 		<appender-ref ref="CONSOLE_STDOUT_SPRING" /> -->
+<!-- 		<appender-ref ref="CONSOLE_STDOUT_SPRING_BEANS" /> -->
 <!-- 	</logger> -->
 
 </configuration>
