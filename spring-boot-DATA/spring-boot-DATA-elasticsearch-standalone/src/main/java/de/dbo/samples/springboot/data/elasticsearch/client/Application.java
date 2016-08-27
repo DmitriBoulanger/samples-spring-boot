@@ -1,11 +1,5 @@
 package de.dbo.samples.springboot.data.elasticsearch.client;
 
-import de.dbo.samples.springboot.data.elasticsearch.client.domain.Employee;
-import de.dbo.samples.springboot.data.elasticsearch.client.domain.EmployeeRepository;
-import de.dbo.samples.springboot.data.elasticsearch.client.domain.Skill;
-
-import java.util.Arrays;
-
 import javax.annotation.PostConstruct;
 
 /* SLF4J */
@@ -16,9 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
-/* Spring-Data */
-import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
-import org.springframework.data.elasticsearch.core.query.IndexQuery;
 
 @SpringBootApplication
 public class Application {

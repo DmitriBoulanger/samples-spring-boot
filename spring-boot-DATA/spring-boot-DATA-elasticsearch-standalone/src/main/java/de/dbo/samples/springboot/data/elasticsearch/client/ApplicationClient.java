@@ -11,11 +11,8 @@ import javax.annotation.PostConstruct;
 /* SLF4J */
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-/* Spring-Boot */
+/* Spring */
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ConfigurableApplicationContext;
 /* Spring-Data */
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.data.elasticsearch.core.query.IndexQuery;
