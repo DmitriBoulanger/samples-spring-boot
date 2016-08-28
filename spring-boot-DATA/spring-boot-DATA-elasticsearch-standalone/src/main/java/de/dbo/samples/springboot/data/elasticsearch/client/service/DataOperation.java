@@ -4,5 +4,7 @@ public interface DataOperation {
     
     public static final String CONTEXT = "/data-operation-at-elasticsearch-server";
     public static final String OPERATION_PARAMETER_NANE = "operation";
+    public static final String INDEX_PARAMETER_NANE = "index";
+
     
 }

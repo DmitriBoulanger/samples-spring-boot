@@ -1,4 +1,4 @@
-package de.dbo.samples.springboot.data.elasticsearch.client.domain;
+package de.dbo.samples.springboot.data.elasticsearch.client.domain2;
 
 import java.util.Date;
 import java.util.List;
@@ -10,8 +10,8 @@ import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 
 
-@Document(indexName = EmployeeRepositoryIndexAndType.INDEX, type =  EmployeeRepositoryIndexAndType.TYPE)
-public class Employee {
+@Document(indexName = CustomerRepositoryIndexAndType.INDEX, type = CustomerRepositoryIndexAndType.TYPE)
+public class Customer {
     
     @Id
     private final String id;
@@ -23,17 +23,14 @@ public class Employee {
     
     private Integer age;
 
-    /* This type is recognized in Kibana! */
-    @Field( type = FieldType.Nested)
-    private List<Skill> skills;
-
-    public Employee(){
+   
+    public Customer(){
 	this.name = "Nobody";
 	this.age = -1;
 	this.id = UUID.randomUUID().toString();
     }
 
-    public Employee(final String name, final int age) {
+    public Customer(final String name, final int age) {
 	this.name = name;
 	this.age = age;
 	this.id = UUID.randomUUID().toString();
@@ -57,16 +54,10 @@ public class Employee {
 	this.age = age;
     }	
 
-    public List<Skill> getSkills() {
-	return skills;
-    }
-
-    public void setSkills(List<Skill> skills) {
-	this.skills = skills;
-    }
+    
 
     public String toString() {
-	return "Employee [(" + getId() + ", " + getName() + ", " + age + "), skills: " + getSkills() +", created: " + getCreated()+ "]";
+	return "Customer [(" + getId() + ", " + getName() + ", " + age + "), created: " + getCreated()+ "]";
     }
 
     public Date getCreated() {

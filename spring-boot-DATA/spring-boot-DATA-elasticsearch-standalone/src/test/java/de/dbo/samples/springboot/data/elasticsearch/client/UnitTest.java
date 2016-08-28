@@ -5,6 +5,7 @@ import static org.hamcrest.Matchers.equalTo;
 //
 import de.dbo.samples.springboot.data.elasticsearch.client.service.DataOperation;
 import de.dbo.samples.springboot.data.elasticsearch.client.service.DataOperationConfirmation;
+import de.dbo.samples.springboot.data.elasticsearch.client.service.DataOperationIndex;
 import de.dbo.samples.springboot.data.elasticsearch.client.service.DataOperationType;
 //
 import java.net.URI;
@@ -27,8 +28,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
 /**
- * Unit-Test uses embedded TOMACT-container and STANDALONE Elasticsearch server.
- * The  Elasticsearch server is configured in the test application.propertes
+ * Unit-Test is designed to use embedded TOMACT-container and a STANDALONE Elasticsearch server.
+ * The Elasticsearch server is configured in the test application.propertes.
+ * However, the default test-configuration uses the embedded elasticsearch server.
+ * Edit the the test application.propertes and start the corresponding standalone embedded elasticsearch server
  *
  * @author Dmitri Boulanger, Hombach
  *
@@ -52,15 +55,15 @@ public class UnitTest implements DataOperation {
 	return "http://" + HOST + ":" + port + CONTEXT + "?" + OPERATION_PARAMETER_NANE + "=";
     }
     
-    private static  final URI uri(final DataOperationType operation, final int port) {
+    private static  final URI uri(final DataOperationType operation, final int port, final String index) {
         try {
             switch (operation) {
 
                 case UPLOAD:
-                    return new URI(baseUri(port) + DataOperationType.UPLOAD);
+                    return new URI(baseUri(port) + DataOperationType.UPLOAD + "&" + INDEX_PARAMETER_NANE + "=" + index);
 
                 case CLEANUP:
-                    return new URI(baseUri(port) + DataOperationType.CLEANUP);
+                    return new URI(baseUri(port) + DataOperationType.CLEANUP + "&" + INDEX_PARAMETER_NANE + "=" + index);
 
                 default:
                     return new URI(baseUri(port) + "unknow");
@@ -76,25 +79,51 @@ public class UnitTest implements DataOperation {
     private int port;
 
     @Test
-    public void test00_CleanUpDataAtElasticsearchServer() throws Exception {
-	 final URI uri = uri(DataOperationType.CLEANUP,port);
-       
-        log.info("request " + uri + " ...");
-        final TestRestTemplate restTemplate = new TestRestTemplate();
-	final ResponseEntity<DataOperationConfirmation> entity = restTemplate.getForEntity(uri, DataOperationConfirmation.class);
-	final int actualCnt = (int )entity.getBody().getCnt();
-        assertThatConfirmation(HttpStatus.OK,  entity.getStatusCode(), 
-        	-1 /* unknown: since Elasticsearch server needs time to relax after index-deletion */, actualCnt );
+    public void test01_CleanUpDataAtElasticsearchServer() throws Exception {
+	doCleanUpDataAtElasticsearchServer(DataOperationIndex.DEPARTMENT.name() );
+        
+    }
+    
+    @Test
+    public void test02_CleanUpDataAtElasticsearchServer() throws Exception {
+	doCleanUpDataAtElasticsearchServer(DataOperationIndex.CUSTOMERS.name() );
+        
     }
 
     @Test
-    public void test01_UploadDataToElasticsearchServer() throws Exception {
-	 final URI uri = uri(DataOperationType.UPLOAD,port);
+    public void test11_UploadDepartmentDataToElasticsearchServer() throws Exception {
+	 doUloadCustomerDataToElasticsearchServer(DataOperationIndex.DEPARTMENT.name(), 4);
+	
+    }
+    
+    @Test
+    public void test12_UploadCustomerDataToElasticsearchServer() throws Exception {
+	 doUloadCustomerDataToElasticsearchServer(DataOperationIndex.CUSTOMERS.name(), 1);
+	
+    }
+    
+    // ========================
+    // Implementations
+    // ========================
+    
+    private void doCleanUpDataAtElasticsearchServer(final String index) throws Exception {
+	 final URI uri = uri(DataOperationType.CLEANUP, port, index);
+      
+       log.info("request " + uri + " ...");
+       final TestRestTemplate restTemplate = new TestRestTemplate();
+	final ResponseEntity<DataOperationConfirmation> entity = restTemplate.getForEntity(uri, DataOperationConfirmation.class);
+	final int actualCnt = (int )entity.getBody().getCnt();
+       assertThatConfirmation(HttpStatus.OK,  entity.getStatusCode(), 
+       	-1 /* unknown: since Elasticsearch server needs time to relax after index-deletion */, actualCnt );
+   }
+    
+    private void doUloadCustomerDataToElasticsearchServer(final String index, int expectedCnt) throws Exception {
+	 final URI uri = uri(DataOperationType.UPLOAD,port, index);
 	 log.info("request " + uri + " ...");
 	 final TestRestTemplate restTemplate = new TestRestTemplate();
         final ResponseEntity<DataOperationConfirmation> entity = restTemplate.getForEntity(uri, DataOperationConfirmation.class);
         final int actualCnt = (int )entity.getBody().getCnt();
-        assertThatConfirmation(HttpStatus.OK,  entity.getStatusCode(), 4,  actualCnt);
+        assertThatConfirmation(HttpStatus.OK,  entity.getStatusCode(), expectedCnt,  actualCnt);
     }
 
     // ========================
@@ -103,10 +132,8 @@ public class UnitTest implements DataOperation {
 
     private static final void assertThatConfirmation(final HttpStatus expectedHttpStatus, final HttpStatus actualHttpStatus
 	    , final int expectedCnt, final int actualCnt) {
-        assertThat("HTTP response code is not as expected", expectedHttpStatus, equalTo(actualHttpStatus));
-        assertThat("Repository counter is not as expected", expectedCnt, equalTo(actualCnt));
+        assertThat("HTTP response code is not as expected", actualHttpStatus, equalTo(expectedHttpStatus));
+        assertThat("Repository counter is not as expected", actualCnt, equalTo(expectedCnt));
     }
  
-
-
 }

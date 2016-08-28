@@ -95,6 +95,11 @@
 			<artifactId>janino</artifactId>
 			<scope>${remote.scope}</scope>
 		</dependency>
+		<dependency>
+			<groupId>net.java.dev.jna</groupId>
+			<artifactId>jna</artifactId>
+			<scope>${remote.scope}</scope>
+		</dependency>
 		
 		<!-- Custom resources with all dependencies -->
 		<dependency>
@@ -102,7 +107,8 @@
 			<artifactId>spring-boot-ETC-utilities</artifactId>
 			<scope>${remote.scope}</scope>
 		</dependency>
-		
+
+
 	</dependencies>
 
 	<build>
