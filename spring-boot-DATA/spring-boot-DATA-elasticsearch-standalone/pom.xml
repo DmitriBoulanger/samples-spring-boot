@@ -9,69 +9,159 @@
 	</parent>
 
 	<artifactId>spring-boot-DATA-elasticsearch-standalone</artifactId>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 
 	<name>SpringElasticsearchExample</name>
 	<url>https://examples.javacodegeeks.com/enterprise-java/spring/spring-data-elasticsearch-example/</url>
 	<description>Example of spring elasticsearch</description>
 
+	<properties>
+	
+	    <!-- =================================================== -->
+	    <!--           REMOTE SERVER TO DEPLOY                   -->
+	    <!-- =================================================== -->
+	    
+	    <!-- =================================================== --> 
+	    <!-- 
+	         Attention: TOMCAT DEPLOYMENT
+	         1. users.xml in the Tomcat conf-directory should have the following user 
+	         
+				<role rolename="manager-gui"/>
+				<role rolename="manager-script"/>
+				<role rolename="manager-jmx"/>
+				<role rolename="manager-status"/>
+				<user username="admin" password="admin" roles="manager-script,manager-gui,manager-jmx,manager-status"/>
+				
+ 			 2. This POM CANNOT perform re-deployment, i.e the Tomact webapp should not contain the application!
+ 		 -->
+	     <!-- =================================================== -->
+
+		<remote.containerId>tomcat8x</remote.containerId>
+		<remote.protocol>http</remote.protocol>
+		<remote.host>localhost</remote.host>
+		<remote.port>8080</remote.port>
+		<remote.user>admin</remote.user>
+		<remote.pass>admin</remote.pass>
+		<remote.context>/ElasticsearchClient</remote.context>
+		<remote.pingTimeout>30000</remote.pingTimeout>
+		<remote.pingURL>${remote.protocol}://${remote.host}:${remote.port}${remote.context}/index.html</remote.pingURL>
+
+		<remote.scope>provided</remote.scope>
+
+	</properties>
+
 	<dependencies>
 	
+	    <!-- ==================================================================================================================== -->
+	    <!-- ATTENTION: RESOURCES BELOW AND THEIR TRANSITIVE DEPENDENCIES HAS TO BE LOADED IN THE TOMCAT LIB-directory !          -->
+	    <!-- ==================================================================================================================== -->
+	    
+	    <!-- Spring-Boot with all dependencies -->
 		<dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-elasticsearch</artifactId>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot</artifactId>
+			<scope>${remote.scope}</scope>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-test-autoconfigure</artifactId>
-		</dependency>
-		
-		<!-- ================================================================================================= -->
-		<!--               EXCLUDE                                                                             -->
-		<!-- ================================================================================================= -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-			<exclusions>
-				<exclusion>
-					<groupId>*</groupId>
-					<artifactId>*</artifactId>
-				</exclusion>
-			</exclusions>
+			<scope>${remote.scope}</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-tx</artifactId>
-			<exclusions>
-				<exclusion>
-					<groupId>*</groupId>
-					<artifactId>*</artifactId>
-				</exclusion>
-			</exclusions>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+			<scope>${remote.scope}</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-aop</artifactId>
-			<exclusions>
-				<exclusion>
-					<groupId>*</groupId>
-					<artifactId>*</artifactId>
-				</exclusion>
-			</exclusions>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-logging</artifactId>
+			<scope>${remote.scope}</scope>
 		</dependency>
+
+		<!-- Logback extra resources -->
+		<dependency>
+			<groupId>org.codehaus.janino</groupId>
+			<artifactId>commons-compiler</artifactId>
+			<version>2.7.8</version>
+			<scope>${remote.scope}</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.janino</groupId>
+			<artifactId>janino</artifactId>
+			<scope>${remote.scope}</scope>
+		</dependency>
+		
+		<!-- Custom resources with all dependencies -->
+		<dependency>
+			<groupId>de.dbo.samples.springboot</groupId>
+			<artifactId>spring-boot-ETC-utilities</artifactId>
+			<scope>${remote.scope}</scope>
+		</dependency>
+		
 	</dependencies>
 
 	<build>
 		<plugins>
+		
+			<!-- =========================================================================================== -->
+			<!--               STANDARD (DEFAULT) WAR GENERATION (see dependencies above)                    -->
+			<!-- =========================================================================================== -->
 			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<failOnMissingWebXml>true</failOnMissingWebXml>
+				</configuration>
 			</plugin>
+			
+			<!-- =========================================================================================== -->
+			<!--                     DEPLOYMENT TO REMOTE CONTAINER                                          -->
+			<!-- =========================================================================================== -->
+			<!-- http://callistaenterprise.se/blogg/teknik/2012/03/12/remote-deploy-to-tomcat-7-using-cargo/ -->
+			<!-- https://codehaus-cargo.github.io/cargo/Deploying+to+a+running+container.html                -->
+			<plugin>
+				<groupId>org.codehaus.cargo</groupId>
+				<artifactId>cargo-maven2-plugin</artifactId>
+				<configuration>
+					<!-- Configuration of the container  -->
+					<container>
+						<containerId>${remote.containerId}</containerId>
+						<type>remote</type>
+					</container>
+					<!-- Configuration to use with the container -->
+					<configuration>
+						<type>runtime</type>
+						<properties>
+							<cargo.hostname>${remote.host}</cargo.hostname>
+							<cargo.protocol>${remote.protocol}</cargo.protocol>
+							<cargo.servlet.port>${remote.port}</cargo.servlet.port>
+							<cargo.remote.username>${remote.user}</cargo.remote.username>
+							<cargo.remote.password>${remote.pass}</cargo.remote.password>
+						</properties>
+					</configuration>
+					
+					<!-- Application WAR (see dependencies above) to be deployed to the Container -->
+					<deployables>
+						<deployable>
+							<groupId>${project.groupId}</groupId>
+							<artifactId>${project.artifactId}</artifactId>
+							<type>war</type>
+							<properties>
+								<context>${remote.context}</context>
+							</properties>
+							<pingURL>${remote.pingURL}</pingURL>
+							<pingTimeout>${remote.pingTimeout}</pingTimeout>
+						</deployable>
+					</deployables>
+				</configuration>
+			</plugin>
+
 		</plugins>
 	</build>
+
+
 </project>
