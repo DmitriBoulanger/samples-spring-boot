@@ -28,6 +28,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 /**
  * Unit-Test uses embedded TOMACT-container and STANDALONE Elasticsearch server.
+ * The  Elasticsearch server is configured in the test application.propertes
  *
  * @author Dmitri Boulanger, Hombach
  *
@@ -81,7 +82,9 @@ public class UnitTest implements DataOperation {
         log.info("request " + uri + " ...");
         final TestRestTemplate restTemplate = new TestRestTemplate();
 	final ResponseEntity<DataOperationConfirmation> entity = restTemplate.getForEntity(uri, DataOperationConfirmation.class);
-//        assertThatConfirmation(HttpStatus.OK, entity, -1);
+	final int actualCnt = (int )entity.getBody().getCnt();
+        assertThatConfirmation(HttpStatus.OK,  entity.getStatusCode(), 
+        	-1 /* unknown: since Elasticsearch server needs time to relax after index-deletion */, actualCnt );
     }
 
     @Test
@@ -90,20 +93,18 @@ public class UnitTest implements DataOperation {
 	 log.info("request " + uri + " ...");
 	 final TestRestTemplate restTemplate = new TestRestTemplate();
         final ResponseEntity<DataOperationConfirmation> entity = restTemplate.getForEntity(uri, DataOperationConfirmation.class);
-//        assertThatConfirmation(HttpStatus.OK, entity, 4);
-        
-        
-       
+        final int actualCnt = (int )entity.getBody().getCnt();
+        assertThatConfirmation(HttpStatus.OK,  entity.getStatusCode(), 4,  actualCnt);
     }
 
     // ========================
     // Test-specific assertions
     // ========================
 
-    private static final void assertThatConfirmation(final HttpStatus expectedHttpStatus, final ResponseEntity<DataOperationConfirmation> entity, final int expectedCnt) {
-        final HttpStatus responseHttpStatus = entity.getStatusCode();
-        assertThat("HTTP response code is not as expected", expectedHttpStatus, equalTo(responseHttpStatus));
-        assertThat("Repository counter is not as expected", expectedCnt, equalTo(entity.getBody().getCnt()));
+    private static final void assertThatConfirmation(final HttpStatus expectedHttpStatus, final HttpStatus actualHttpStatus
+	    , final int expectedCnt, final int actualCnt) {
+        assertThat("HTTP response code is not as expected", expectedHttpStatus, equalTo(actualHttpStatus));
+        assertThat("Repository counter is not as expected", expectedCnt, equalTo(actualCnt));
     }
  
 

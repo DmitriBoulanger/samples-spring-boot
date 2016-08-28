@@ -14,7 +14,7 @@ public class DataOperationConfirmation {
         this.id = id;
         this.content = content;
         this.cnt = cnt;
-        log.info("created. ID=" + id + " cnt=" + cnt+ ": " + content);
+        log.info("created. ID=" + id + " cnt=" + cnt+ " content=[" + content + "]");
     }
    
     public DataOperationConfirmation() {
