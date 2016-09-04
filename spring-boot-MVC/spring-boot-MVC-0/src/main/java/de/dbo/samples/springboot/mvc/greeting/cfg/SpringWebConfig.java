@@ -1,4 +1,4 @@
-package de.dbo.samples.springboot.mvc.greeting.config;
+package de.dbo.samples.springboot.mvc.greeting.cfg;
  
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;

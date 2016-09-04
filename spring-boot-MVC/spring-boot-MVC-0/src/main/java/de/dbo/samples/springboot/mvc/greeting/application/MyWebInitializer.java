@@ -1,6 +1,6 @@
-package de.dbo.samples.springboot.mvc.greeting.servlet3;
+package de.dbo.samples.springboot.mvc.greeting.application;
 
-import de.dbo.samples.springboot.mvc.greeting.config.SpringWebConfig;
+import de.dbo.samples.springboot.mvc.greeting.cfg.SpringWebConfig;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 

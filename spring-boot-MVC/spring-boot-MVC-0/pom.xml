@@ -2,36 +2,23 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	
-<!-- 	<parent> -->
-<!-- 		<groupId>de.dbo.samples.springboot</groupId> -->
-<!-- 		<artifactId>spring-boot-MVC</artifactId> -->
-<!-- 		<version>0.0.0-SNAPSHOT</version> -->
-<!-- 	</parent> -->
+	<parent>
+		<groupId>de.dbo.samples.springboot</groupId>
+		<artifactId>spring-boot-MVC</artifactId>
+		<version>0.0.0-SNAPSHOT</version>
+	</parent>
 	
-	<groupId>de.dbo.samples.springboot</groupId>
 	<artifactId>spring-boot-MVC-0</artifactId>
-	<version>0.0.0-SNAPSHOT</version>
-	
 	<packaging>war</packaging>
+	
 	<name>Samples Spring-Boot MVC - 0</name>
 	<url>http://www.mkyong.com/spring-mvc/spring-4-mvc-ajax-hello-world-example/</url>
-
-	<properties>
-		<jdk.version>1.8</jdk.version>
-		<spring.version>4.2.2.RELEASE</spring.version>
-		<jackson.version>2.6.3</jackson.version>
-		<logback.version>1.1.3</logback.version>
-		<jcl.slf4j.version>1.7.12</jcl.slf4j.version>
-		<jstl.version>1.2</jstl.version>
-		<servletapi.version>3.1.0</servletapi.version>
-	</properties>
 
 	<dependencies>
 
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
-			<version>${spring.version}</version>
 			<exclusions>
 				<exclusion>
 					<groupId>commons-logging</groupId>
@@ -39,38 +26,33 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-
+		
 		<!-- Need this for json to/from object -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-core</artifactId>
-			<version>${jackson.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
-			<version>${jackson.version}</version>
 		</dependency>
 
 		<!-- JSTL for views -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
-			<version>${jstl.version}</version>
 		</dependency>
 
 		<!-- Logging -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>jcl-over-slf4j</artifactId>
-			<version>${jcl.slf4j.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
-			<version>${logback.version}</version>
 		</dependency>
 
 		<!-- compile only, deployed container will provide this -->
@@ -78,24 +60,32 @@
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
-			<version>${servletapi.version}</version>
 			<scope>provided</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.jayway.restassured</groupId>
+			<artifactId>rest-assured</artifactId>
+			<version>2.5.0</version>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.assertj</groupId>
+			<artifactId>assertj-core</artifactId>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
 
 		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.3</version>
-				<configuration>
-					<source>${jdk.version}</source>
-					<target>${jdk.version}</target>
-				</configuration>
-			</plugin>
 
 			<plugin>
 				<groupId>org.eclipse.jetty</groupId>
@@ -104,7 +94,7 @@
 				<configuration>
 					<scanIntervalSeconds>10</scanIntervalSeconds>
 					<webApp>
-						<contextPath>/spring4ajax</contextPath>
+						<contextPath>/spring-boot-mvc-ajax</contextPath>
 					</webApp>
 				</configuration>
 			</plugin>
@@ -112,21 +102,20 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-eclipse-plugin</artifactId>
-				<version>2.10</version>
 				<configuration>
 					<downloadSources>true</downloadSources>
 					<downloadJavadocs>true</downloadJavadocs>
 					<wtpversion>2.0</wtpversion>
-					<wtpContextName>spring4ajax</wtpContextName>
+					<wtpContextName>spring-boot-mvc-ajax</wtpContextName>
 				</configuration>
 			</plugin>
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
-				<version>2.6</version>
 				<configuration>
-					<failOnMissingWebXml>false</failOnMissingWebXml>
+					<failOnMissingWebXml>true</failOnMissingWebXml>
+					<warName>spring-boot-mvc-ajax</warName>
 				</configuration>
 			</plugin>
 
@@ -140,7 +129,7 @@
 					<port>9990</port>
 					<username>admin</username>
 					<password>admin</password>
-					<name>spring4ajax.war</name>
+					<name>spring-boot-mvc-ajax.war</name>
 				</configuration>
 			</plugin>
 

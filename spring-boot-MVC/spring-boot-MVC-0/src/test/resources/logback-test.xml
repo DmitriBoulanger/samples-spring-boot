@@ -12,11 +12,11 @@
 		</encoder>
 	</appender>
 
-	<logger name="org.springframework" level="debug" additivity="false">
+	<logger name="org.springframework" level="info" additivity="false">
 		<appender-ref ref="STDOUT" />
 	</logger>
 	
-	<logger name="de.dbo.samples.springboot.mvc" level="debug" additivity="false">
+	<logger name="de.dbo.samples" level="debug" additivity="false">
 		<appender-ref ref="STDOUT" />
 	</logger>
 	 
