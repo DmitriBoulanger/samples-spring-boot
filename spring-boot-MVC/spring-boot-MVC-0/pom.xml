@@ -15,16 +15,16 @@
 	<url>http://www.mkyong.com/spring-mvc/spring-4-mvc-ajax-hello-world-example/</url>
 
 	<dependencies>
+	
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+			<scope>test</scope>
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
-			<exclusions>
-				<exclusion>
-					<groupId>commons-logging</groupId>
-					<artifactId>commons-logging</artifactId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 		
 		<!-- Need this for json to/from object -->
@@ -63,11 +63,7 @@
 			<scope>provided</scope>
 		</dependency>
 
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-			<scope>test</scope>
-		</dependency>
+
 		
 		<dependency>
 			<groupId>com.jayway.restassured</groupId>
@@ -92,7 +88,7 @@
 				<artifactId>jetty-maven-plugin</artifactId>
 				<version>9.2.11.v20150529</version>
 				<configuration>
-					<scanIntervalSeconds>10</scanIntervalSeconds>
+					<scanIntervalSeconds>2</scanIntervalSeconds>
 					<webApp>
 						<contextPath>/spring-boot-mvc-ajax</contextPath>
 					</webApp>
