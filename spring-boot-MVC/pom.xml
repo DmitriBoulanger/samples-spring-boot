@@ -9,24 +9,17 @@
 		<version>0.0.0-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>spring-boot-REST</artifactId>
+	<artifactId>spring-boot-MVC</artifactId>
 	<packaging>pom</packaging>
 
-	<name>Samples Spring-Boot REST reactor</name>
+	<name>Samples Spring-Boot MVC reactor</name>
 	<description>
-Reactor for Spring-Boot REST-samples.
+Reactor for Spring-Boot MVC-samples.
 	</description>
 
-	<properties>
-		 
-	</properties>
-
+	
 	<modules>
-		<module>spring-boot-REST-0</module>
-		<module>spring-boot-REST-1</module>
-		<module>spring-boot-REST-2</module>
-		<module>spring-boot-REST-3</module>
-		<module>spring-boot-REST-4</module>
+		<module>spring-boot-MVC-0</module>
 	</modules>
 	
 	<dependencies>
@@ -35,12 +28,7 @@ Reactor for Spring-Boot REST-samples.
 	    <!--                                  SPRING-BOOT                                              -->
 		<!-- ========================================================================================= -->	
 
-	    <!-- Spring-Boot-Web -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>	    
-		
+	  
 		<!-- ========================================================================================= -->	
 	    <!--                                  ETC                                                      -->
 		<!-- ========================================================================================= -->	
@@ -48,17 +36,7 @@ Reactor for Spring-Boot REST-samples.
 	</dependencies>
 
 	<build>
-		<plugins>
 		
-			<!-- ========================================================================================= -->	
-	    	<!--                                  SPRING-BOOT                                              -->
-			<!-- ========================================================================================= -->	
-			
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
 	</build>
 	
 
