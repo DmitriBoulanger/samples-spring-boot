@@ -1,16 +1,19 @@
-package com.mkyong.web.model;
+package de.dbo.samples.springboot.mvc.greeting.mvc.model;
+
+import de.dbo.samples.springboot.mvc.greeting.mvc.jsonview.Views;
 
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.mkyong.web.jsonview.Views;
 
 public class AjaxResponseBody {
 
 	@JsonView(Views.Public.class)
 	String msg;
+	
 	@JsonView(Views.Public.class)
 	String code;
+	
 	@JsonView(Views.Public.class)
 	List<User> result;
 

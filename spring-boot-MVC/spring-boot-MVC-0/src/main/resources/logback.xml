@@ -13,7 +13,7 @@
 		<appender-ref ref="STDOUT" />
 	</logger>
 	
-	<logger name="com.mkyong.ajax" level="debug" additivity="false">
+	<logger name="de.dbo.samples.springboot.mvc.greeting.ajax" level="debug" additivity="false">
 		<appender-ref ref="STDOUT" />
 	</logger>
 	 

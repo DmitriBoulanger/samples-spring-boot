@@ -1,4 +1,4 @@
-package com.mkyong.web.model;
+package de.dbo.samples.springboot.mvc.greeting.mvc.model;
 
 public class SearchCriteria {
 

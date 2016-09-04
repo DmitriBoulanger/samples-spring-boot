@@ -14,6 +14,7 @@
 	
 	<packaging>war</packaging>
 	<name>Samples Spring-Boot MVC - 0</name>
+	<url>http://www.mkyong.com/spring-mvc/spring-4-mvc-ajax-hello-world-example/</url>
 
 	<properties>
 		<jdk.version>1.8</jdk.version>

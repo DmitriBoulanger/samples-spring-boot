@@ -1,4 +1,9 @@
-package com.mkyong.web.controller;
+package de.dbo.samples.springboot.mvc.greeting.mvc.controller;
+
+import de.dbo.samples.springboot.mvc.greeting.mvc.jsonview.Views;
+import de.dbo.samples.springboot.mvc.greeting.mvc.model.AjaxResponseBody;
+import de.dbo.samples.springboot.mvc.greeting.mvc.model.SearchCriteria;
+import de.dbo.samples.springboot.mvc.greeting.mvc.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,10 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.mkyong.web.jsonview.Views;
-import com.mkyong.web.model.AjaxResponseBody;
-import com.mkyong.web.model.SearchCriteria;
-import com.mkyong.web.model.User;
 
 @RestController
 public class AjaxController {

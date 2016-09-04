@@ -1,4 +1,4 @@
-package com.mkyong.config;
+package de.dbo.samples.springboot.mvc.greeting.config;
  
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -11,7 +11,7 @@ import org.springframework.web.servlet.view.JstlView;
  
 @EnableWebMvc
 @Configuration
-@ComponentScan({ "com.mkyong.web" })
+@ComponentScan({ "de.dbo.samples.springboot.mvc.greeting.mvc" })
 public class SpringWebConfig extends WebMvcConfigurerAdapter {
  
 	@Override

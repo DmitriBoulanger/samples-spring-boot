@@ -1,17 +1,22 @@
-package com.mkyong.web.model;
+package de.dbo.samples.springboot.mvc.greeting.mvc.model;
+
+import de.dbo.samples.springboot.mvc.greeting.mvc.jsonview.Views;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.mkyong.web.jsonview.Views;
 
 public class User {
 
 	@JsonView(Views.Public.class)
 	String username;
+	
 	String password;
+	
 	@JsonView(Views.Public.class)
 	String email;
+	
 	@JsonView(Views.Public.class)
 	String phone;
+	
 	String address;
 
 	public User() {

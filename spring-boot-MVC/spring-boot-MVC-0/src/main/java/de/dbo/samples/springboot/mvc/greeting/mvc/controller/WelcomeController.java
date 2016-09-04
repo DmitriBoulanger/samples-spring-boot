@@ -1,4 +1,4 @@
-package com.mkyong.web.controller;
+package de.dbo.samples.springboot.mvc.greeting.mvc.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
