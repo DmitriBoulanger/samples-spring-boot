@@ -39,14 +39,14 @@ import com.jayway.restassured.specification.RequestSpecification;
 public class GreetingTest {
     private static final Logger LOG = LoggerFactory.getLogger(AjaxController.class);
 
-//    @LocalServerPort
+    @LocalServerPort
     int port = 8080;
 
     private String host = "localhost";
 
     private final String contextPath = "/spring-boot-mvc-ajax";
     private final String searchResult = "/search/api/getSearchResult";
-    private final String open = "open";
+    private final String open = "/";
 
     private  RequestSpecification requestSpecification;
 

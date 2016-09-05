@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class OpenController {
     private static final Logger LOG = LoggerFactory.getLogger(OpenController.class);
 
-	@RequestMapping(value = "/open", method = RequestMethod.GET)
+	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String printWelcome(final ModelMap model) {
 	    LOG.info("open ...");
 	    return "welcome";
