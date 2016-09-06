@@ -1,4 +1,4 @@
-package com.programmingfree.springservice;
+package de.dbo.samples.springboot.mvc.angularjs;
 
 import java.util.List;
 

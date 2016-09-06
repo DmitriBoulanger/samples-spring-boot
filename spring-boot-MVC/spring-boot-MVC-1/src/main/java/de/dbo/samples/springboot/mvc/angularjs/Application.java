@@ -1,4 +1,4 @@
-package com.programmingfree.springservice;
+package de.dbo.samples.springboot.mvc.angularjs;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;

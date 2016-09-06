@@ -20,6 +20,7 @@ Reactor for Spring-Boot MVC-samples.
 	
 	<modules>
 		<module>spring-boot-MVC-0</module>
+		<module>spring-boot-MVC-1</module>
 	</modules>
 	
 	<dependencies>

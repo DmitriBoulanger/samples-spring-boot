@@ -1,4 +1,4 @@
-package com.programmingfree.springservice;
+package de.dbo.samples.springboot.mvc.angularjs;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
