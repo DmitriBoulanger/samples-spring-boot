@@ -11,6 +11,8 @@
 	</parent>
 
 	<artifactId>spring-boot-AngularJS-0</artifactId>
+	<name>Samples Spring-Boot AngularJS - 0</name>
+	<url>https://examples.javacodegeeks.com/enterprise-java/spring/boot/spring-boot-and-angularjs-integration-tutorial/</url>
     
     
     <dependencies>
@@ -18,6 +20,10 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+        	<groupId>org.springframework.boot</groupId>
+        	<artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
         
         <dependency>
@@ -33,9 +39,6 @@
             <version>3.3.6</version>
             <scope>runtime</scope>
         </dependency>
-        <dependency>
-        	<groupId>org.springframework.boot</groupId>
-        	<artifactId>spring-boot-starter-thymeleaf</artifactId>
-        </dependency>
+
     </dependencies>
 </project>
