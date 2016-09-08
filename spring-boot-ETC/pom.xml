@@ -18,7 +18,7 @@ Reactor for Spring-Boot ETC-samples.
 	</description>
 
 	<properties>
-		<commons-logging.version>1.2</commons-logging.version>
+	
 	</properties>
 
 	<modules>
@@ -33,12 +33,6 @@ Reactor for Spring-Boot ETC-samples.
 	    <!--                                  SPRING-BOOT                                              -->
 		<!-- ========================================================================================= -->	
 
-	    <!-- Spring-Boot-Web -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-logging</artifactId>
-		</dependency>	    
-		
 		<!-- ========================================================================================= -->	
 	    <!--                                  ETC                                                      -->
 		<!-- ========================================================================================= -->	

@@ -349,15 +349,6 @@ This reactor performs complete plug-in management and fixes Java with its compil
 		</dependency>
 		
 		<!-- ========================================================================================= -->	
-	    <!--                                  ETC                                                      -->
-		<!-- ========================================================================================= -->
-		
-		<dependency>
-			<groupId>de.dbo.samples.springboot</groupId>
-			<artifactId>spring-boot-ETC-utilities</artifactId>
-		</dependency>
-		
-		<!-- ========================================================================================= -->	
 	    <!--                                  LOGGING  CALLBACK EXTENSIONS                             -->
 		<!-- ========================================================================================= -->
 
