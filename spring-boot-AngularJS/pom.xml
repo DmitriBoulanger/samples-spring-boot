@@ -20,6 +20,7 @@ Reactor for Spring-Boot AngularJS-samples.
 	
 	<modules>
 		<module>spring-boot-AngularJS-0</module>
+		<module>spring-boot-AngularJS-1</module>
 	</modules>
 	
 	<dependencies>
