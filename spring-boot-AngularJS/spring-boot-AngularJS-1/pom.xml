@@ -39,11 +39,10 @@
         </dependency>
 
         <!-- HAL browser webjar -->
-        <!-- <dependency> -->
-        <!-- <groupId>org.webjars</groupId> -->
-        <!-- <artifactId>hal-browser</artifactId> -->
-        <!-- <version>9f96c74</version> -->
-        <!-- </dependency> -->
+	<dependency>
+		<groupId>org.webjars</groupId>
+		<artifactId>hal-browser</artifactId>
+	</dependency>
         
          <dependency>
             <groupId>org.springframework.boot</groupId>

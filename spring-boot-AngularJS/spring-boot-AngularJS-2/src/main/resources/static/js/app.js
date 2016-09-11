@@ -1,10 +1,7 @@
-var app = angular.module('myApp', []);
+var app = angular.module('SetupApplication', []);
 
-angular.module('myApp', [])
-.run(function($rootScope) {
-  $rootScope.user = {
-    email: 'balliue@gmail.com'
-  };
+angular.module('SetupApplication', []).run(function($rootScope) {
+  $rootScope.user = { email: 'balliue@gmail.com' };
   $rootScope.message = "Welcome back";
 });
 

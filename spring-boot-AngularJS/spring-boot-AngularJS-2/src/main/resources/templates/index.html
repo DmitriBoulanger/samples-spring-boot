@@ -1,20 +1,23 @@
 <!DOCTYPE html>
 <html>
+<!-- ====================================================================================================== -->
+<!--    See; https://www.webcodegeeks.com/javascript/angular-js/getting-started-angular-js/#settingup       -->
+<!-- ====================================================================================================== -->
 <head>
 
     <meta charset="utf-8"/>
-    <title>Basic Angular App</title>
+    <title> Angular JS Set-up Application</title>
     
     <!-- Important: the Angular comes first of all -->
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.1/angular.min.js"/>
+    <script src="/webjars/angularjs/1.4.9/angular.js"></script>
+	<script src="/webjars/angularjs/1.4.9/angular-resource.js"></script>
+	<script src="/webjars/angularjs/1.4.9/angular-route.js"></script>
     
     <script src="/js/app.js"/>
     <script src="/js/directives.js"/>
     
-    
-    
 </head>
-<body ng-app='myApp'>
+<body ng-app='SetupApplication'>
 
 <input type="text" ng-model="message" placeholder="Enter a message" />
 <h3>{{ message }} {{ user.email }}</h3>
