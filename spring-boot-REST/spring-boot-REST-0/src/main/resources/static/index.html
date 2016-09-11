@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="refresh" content="1;url=error-hateoas.html">
+        <script src="js/jquery.min.js"></script>
+        <script type="text/javascript">
+        
+            <!-- ======================================== -->
+        	var hateoasService = "http://localhost:8080";
+        	<!-- ======================================== -->
+        	
+        	$.ajax({
+            	type: 'HEAD', url: (hateoasService + "/hateoas"),
+            	success: function() {
+            		window.location.href = hateoasService + "/service?ctx=abc";
+            	},
+            	error: function() { 
+            		<!-- redirection to error page -->	
+            	}
+        	});
+        </script>
+    </head>
+    <body></body>
+</html>
