@@ -20,22 +20,23 @@ import javax.sql.DataSource;
 @SpringBootApplication
 @ComponentScan(basePackages={"com.opencredo.demo.hateoas"})
 public class ApplicationLauncher  extends SpringBootServletInitializer {
-	  private final static Logger LOG = LoggerFactory.getLogger(ApplicationLauncher.class);
+    private final static Logger LOG = LoggerFactory.getLogger(ApplicationLauncher.class);
 
-	    @Override
-	    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-	        return application.sources(ApplicationLauncher.class);
-	    }
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+	return application.sources(ApplicationLauncher.class);
+    }
 
-	    public static void main(String[] args) throws Exception {
-	        SpringApplication.run(ApplicationLauncher.class, args);
-	    }
+    public static void main(String[] args) throws Exception {
+	SpringApplication.run(ApplicationLauncher.class, args);
+    }
 
-    @Bean @Primary
+    @Bean 
+    @Primary
     @ConditionalOnProperty("externaldb")
     @ConfigurationProperties(prefix="extdb.datasource")
     public DataSource dataSource() {
-        LOG.info("Using external database");
-        return DataSourceBuilder.create().build();
+	LOG.info("Using external database");
+	return DataSourceBuilder.create().build();
     }
 }

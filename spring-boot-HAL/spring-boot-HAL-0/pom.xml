@@ -11,7 +11,7 @@
 
 	<artifactId>spring-boot-HAL-0</artifactId>
 	<packaging>war</packaging>
-	<name>Samples Spring-Boot HAL - 0</name>
+	<name>Samples Spring-Boot HAL - 0 (Browser)</name>
 	<description>HAL Browser</description>
 
 	<dependencies>
