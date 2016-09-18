@@ -1,5 +1,7 @@
 package com.opencredo.demo.hateoas.api;
 
+import javax.annotation.PostConstruct;
+
 import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.runner.RunWith;
@@ -11,7 +13,6 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.jayway.restassured.RestAssured;
 import com.jayway.restassured.builder.RequestSpecBuilder;
 import com.jayway.restassured.filter.log.RequestLoggingFilter;
 import com.jayway.restassured.filter.log.ResponseLoggingFilter;
@@ -41,18 +42,14 @@ public abstract class AbstractControllerTest {
    PublisherRepository publisherRepository;
    
    protected RequestSpecification spec;
+   
+   @PostConstruct
+   public void init() {
+       spec =  new RequestSpecBuilder()
+	       .setBaseUri("http://localhost:" + port + CONTEXT_PATH)
+	       .addFilter(new RequestLoggingFilter())
+	       .addFilter(new ResponseLoggingFilter())
+	       .build();
+   }
 
-   @Before
-   public void setUp() {
-//      RestAssured.port = port;
-      
-      spec =  new RequestSpecBuilder()
-      .setBaseUri("http://localhost:" + port + CONTEXT_PATH)
-      .addFilter(new RequestLoggingFilter())
-      .addFilter(new ResponseLoggingFilter())
-      .build();
-   }   
-   
-  
-   
 }

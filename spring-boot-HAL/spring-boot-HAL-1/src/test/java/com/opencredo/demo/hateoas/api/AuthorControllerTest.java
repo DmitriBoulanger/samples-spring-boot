@@ -1,11 +1,10 @@
 package com.opencredo.demo.hateoas.api;
 
-import static java.util.Arrays.asList;
+import static com.jayway.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalTo;
-
-import static com.jayway.restassured.RestAssured.*;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 
 import java.util.List;
 
@@ -17,6 +16,8 @@ import com.jayway.restassured.http.ContentType;
 import com.jayway.restassured.response.ExtractableResponse;
 import com.jayway.restassured.response.Response;
 import com.opencredo.demo.hateoas.domain.Author;
+
+import static java.util.Arrays.asList;
 
 //This is actually an integration test
 public class AuthorControllerTest extends AbstractControllerTest {

@@ -1,8 +1,6 @@
 package com.opencredo.demo.hateoas.api;
 
 import static com.jayway.restassured.RestAssured.given;
-import static com.jayway.restassured.RestAssured.when;
-import static java.util.Arrays.asList;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
@@ -17,6 +15,8 @@ import com.jayway.restassured.http.ContentType;
 import com.opencredo.demo.hateoas.domain.Author;
 import com.opencredo.demo.hateoas.domain.Book;
 import com.opencredo.demo.hateoas.domain.Publisher;
+
+import static java.util.Arrays.asList;
 
 public class ETagSupportTest extends AbstractControllerTest {
    List<Publisher> publishers;

@@ -1,8 +1,6 @@
 package com.opencredo.demo.hateoas.api;
 
 import static com.jayway.restassured.RestAssured.given;
-import static com.jayway.restassured.RestAssured.when;
-import static java.util.Arrays.asList;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasItems;
@@ -32,6 +30,8 @@ import com.opencredo.demo.hateoas.api.resources.PublisherResource;
 import com.opencredo.demo.hateoas.domain.Author;
 import com.opencredo.demo.hateoas.domain.Book;
 import com.opencredo.demo.hateoas.domain.Publisher;
+
+import static java.util.Arrays.asList;
 // This is actually an integration test starting the full application
 public class BookControllerTest extends AbstractControllerTest {
    List<Publisher> publishers;
