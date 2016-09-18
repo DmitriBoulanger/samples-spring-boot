@@ -33,7 +33,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
                     <mainClass>de.dbo.samples.springboot.hal.browser.ApplicationLauncher</mainClass>
-                    <layout>WAR</layout>
+                    <layout>MODULE</layout>
                 </configuration>
                 <executions>
                     <execution>
