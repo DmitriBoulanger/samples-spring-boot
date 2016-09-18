@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.opencredo.demo.hateoas.api.resourceassemblers.BookResourceAssembler;
 import com.opencredo.demo.hateoas.api.resources.BookPurchase;
 import com.opencredo.demo.hateoas.api.resources.BookResource;
-import com.opencredo.demo.hateoas.api.resources.BookNew;
+import com.opencredo.demo.hateoas.api.resources.newinrequest.BookNew;
 import com.opencredo.demo.hateoas.domain.Author;
 import com.opencredo.demo.hateoas.domain.Book;
 import com.opencredo.demo.hateoas.domain.Publisher;

@@ -4,7 +4,15 @@ import com.opencredo.demo.hateoas.domain.Author;
 import com.opencredo.demo.hateoas.domain.Book;
 import com.opencredo.demo.hateoas.domain.Publisher;
 
-// Encapsulate the logic to get the resource ID out of the domain entity
+/**
+ * Encapsulate the logic to get the resource ID out of the domain entity
+ * 
+ * @author Dmitri Boulanger, Hombach
+ *
+ * D. Knuth: Programs are meant to be read by humans and 
+ *           only incidentally for computers to execute 
+ *
+ */
 public abstract class ResourceIdFactory {
 
    public static String getId(Author author) {

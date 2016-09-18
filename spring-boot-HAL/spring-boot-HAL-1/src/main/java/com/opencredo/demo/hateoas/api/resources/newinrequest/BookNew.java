@@ -1,4 +1,4 @@
-package com.opencredo.demo.hateoas.api.resources;
+package com.opencredo.demo.hateoas.api.resources.newinrequest;
 
 import java.util.ArrayList;
 import java.util.List;

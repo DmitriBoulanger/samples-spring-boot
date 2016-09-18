@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.opencredo.demo.hateoas.api.resourceassemblers.AuthorResourceAssembler;
 import com.opencredo.demo.hateoas.api.resources.AuthorResource;
-import com.opencredo.demo.hateoas.api.resources.AuthorNew;
+import com.opencredo.demo.hateoas.api.resources.newinrequest.AuthorNew;
 import com.opencredo.demo.hateoas.domain.Author;
 import com.opencredo.demo.hateoas.domain.persistence.AuthorRepository;
 

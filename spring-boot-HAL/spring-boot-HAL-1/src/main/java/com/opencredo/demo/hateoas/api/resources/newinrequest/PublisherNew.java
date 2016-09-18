@@ -1,4 +1,4 @@
-package com.opencredo.demo.hateoas.api.resources;
+package com.opencredo.demo.hateoas.api.resources.newinrequest;
 
 /**
  *  Doesn't extend ResourceSupport being used for request only
