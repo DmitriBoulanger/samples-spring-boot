@@ -12,7 +12,7 @@
 		</encoder>
 	</appender>
 
-	<logger name="com.opencredo" level="info" additivity="true">
+	<logger name="com.opencredo" level="info" additivity="false">
 		<appender-ref ref="STDOUT" />
 	</logger>
 	

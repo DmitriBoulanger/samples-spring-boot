@@ -12,7 +12,7 @@
 		</encoder>
 	</appender>
 
-	<logger name="de.dbo.samples" level="info" additivity="true">
+	<logger name="de.dbo.samples" level="info" additivity="false">
 		<appender-ref ref="STDOUT" />
 	</logger>
 	
