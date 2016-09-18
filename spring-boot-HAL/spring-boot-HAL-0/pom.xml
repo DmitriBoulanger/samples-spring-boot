@@ -10,80 +10,40 @@
 	</parent>
 
 	<artifactId>spring-boot-HAL-0</artifactId>
+	<packaging>war</packaging>
 	<name>Samples Spring-Boot HAL - 0</name>
 	<description>HAL Browser</description>
 
 	<dependencies>
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-
-		<!--HATEOAS -->
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-hateoas</artifactId>
-		</dependency>
-		
-		<!-- THYMELEAF -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-thymeleaf</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>net.sourceforge.nekohtml</groupId>
-			<artifactId>nekohtml</artifactId>
-		</dependency>
-        
-        <!-- HAL BROWSER -->
-		<dependency>
-			<groupId>org.webjars</groupId>
-			<artifactId>hal-browser</artifactId>
-		</dependency>
-		
-		<!-- WEBJARS -->
-		<dependency>
-			<groupId>org.webjars</groupId>
-			<artifactId>jquery</artifactId>
-			<version>1.11.1</version>
-		</dependency>
-		<dependency>
-			<groupId>org.webjars</groupId>
-			<artifactId>angularjs</artifactId>
-			<version>1.4.9</version>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.webjars</groupId>
-			<artifactId>bootstrap</artifactId>
-			<version>3.3.6</version>
-			<scope>runtime</scope>
-		</dependency>
-
-		<!-- TEST -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.jayway.jsonpath</groupId>
-			<artifactId>json-path</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.jayway.restassured</groupId>
-			<artifactId>rest-assured</artifactId>
-			<version>2.5.0</version>
-			<scope>test</scope>
-		</dependency>
-
+        	<groupId>org.springframework.data</groupId>
+        	<artifactId>spring-data-rest-hal-browser</artifactId>
+    	</dependency>
 	</dependencies>
-
-	<build>
-
-
-	</build>
+	
+    <build>
+        <finalName>hal-service</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>de.dbo.samples.springboot.hal.browser.ApplicationLauncher</mainClass>
+                    <layout>WAR</layout>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
