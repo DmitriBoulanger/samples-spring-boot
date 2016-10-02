@@ -16,7 +16,6 @@
     <name>spring-boot-DOCKER-0 consul-microservice</name>
 
     <properties>
-        <docker.image.prefix>kbastani</docker.image.prefix>
         <docker.plugin.version>0.3.258</docker.plugin.version>
     </properties>
     <dependencies>

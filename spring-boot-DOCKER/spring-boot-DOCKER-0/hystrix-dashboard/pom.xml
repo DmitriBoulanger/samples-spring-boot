@@ -15,10 +15,6 @@
 
 	<name>spring-boot-DOCKER-0 hystrix-dashboar</name>	
 
-	<properties>
-		<docker.image.prefix>kbastani</docker.image.prefix>
-	</properties>
-
 	<build>
 		<plugins>
 			<plugin>

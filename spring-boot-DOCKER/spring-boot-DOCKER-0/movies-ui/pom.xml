@@ -15,12 +15,6 @@
     <name>spring-boot-DOCKER-0 movies-ui</name>
     <description>Movies ui project for Spring Boot</description>
 
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <java.version>1.8</java.version>
-        <docker.image.prefix>kbastani</docker.image.prefix>
-    </properties>
-
     <dependencies>
         <dependency>
             <groupId>com.vaadin</groupId>

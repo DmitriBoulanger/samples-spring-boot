@@ -16,7 +16,6 @@
     <name>spring-boot-DOCKER-0 config-microservice</name>
 
     <properties>
-        <docker.image.prefix>kbastani</docker.image.prefix>
         <start-class>services.Application</start-class>
     </properties>
 

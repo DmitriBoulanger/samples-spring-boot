@@ -10,13 +10,8 @@
     </parent>
     
     <artifactId>users-microservice</artifactId>
-    <packaging>jar</packaging>
     
     <name>spring-boot-DOCKER-0 users-microservice</name>
-
-    <properties>
-        <docker.image.prefix>kbastani</docker.image.prefix>
-    </properties>
 
     <dependencies>
         <dependency>

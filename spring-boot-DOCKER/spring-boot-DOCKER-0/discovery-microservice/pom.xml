@@ -13,11 +13,7 @@
     <packaging>jar</packaging>
     
     <name>spring-boot-DOCKER-0 discovery-microservice</name>
-
-    <properties>
-        <docker.image.prefix>kbastani</docker.image.prefix>
-    </properties>
-
+    
     <dependencies>
         <dependency>
             <groupId>org.springframework.cloud</groupId>

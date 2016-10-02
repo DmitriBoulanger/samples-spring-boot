@@ -11,13 +11,8 @@
     </parent>
 
     <artifactId>api-gateway-microservice</artifactId>
-    <packaging>jar</packaging>
     
     <name>spring-boot-DOCKER-0 api-gateway-microservice</name>
-
-    <properties>
-        <docker.image.prefix>kbastani</docker.image.prefix>
-    </properties>
 
     <dependencies>
         <dependency>
@@ -36,6 +31,7 @@
 
     <build>
         <plugins>
+        
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
@@ -47,6 +43,7 @@
                     </execution>
                 </executions>
             </plugin>
+            
             <plugin>
                 <groupId>com.spotify</groupId>
                 <artifactId>docker-maven-plugin</artifactId>
@@ -71,6 +68,7 @@
                     </resources>
                 </configuration>
             </plugin>
+            
         </plugins>
     </build>
 
