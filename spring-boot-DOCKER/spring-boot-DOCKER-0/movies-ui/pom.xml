@@ -2,18 +2,18 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>movies-ui</artifactId>
-    <version>0.1.0</version>
-    <packaging>jar</packaging>
-
-    <name>movies-ui</name>
-    <description>Movies ui project for Spring Boot</description>
 
     <parent>
-        <groupId>org.kbastani</groupId>
-        <artifactId>spring-cloud-microservice-example-parent</artifactId>
-        <version>0.1.0-SNAPSHOT</version>
+    	<groupId>de.dbo.samples.springboot</groupId>
+   		<artifactId>spring-boot-DOCKER-0</artifactId>
+   	 	<version>0.0.0-SNAPSHOT</version>
     </parent>
+    
+    <artifactId>movies-ui</artifactId>
+    <packaging>jar</packaging>
+
+    <name>spring-boot-DOCKER-0 movies-ui</name>
+    <description>Movies ui project for Spring Boot</description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

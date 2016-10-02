@@ -105,8 +105,10 @@ This reactor performs complete plug-in management and fixes Java with its compil
 	<modules>
 		<!--  SPRING-BOOT DEPENDENCIS as POM-artifact spring-boot-bom -->
 		<module>spring-boot-bom/v${spring-boot.version}</module>
+		
 		<module>spring-boot-REST</module>
 		<module>spring-boot-DATA</module>
+		<module>spring-boot-DOCKER</module>
 		<module>spring-boot-JBEHAVE</module>
 		<module>spring-boot-CAMEL</module>
 		<module>spring-boot-MVC</module>

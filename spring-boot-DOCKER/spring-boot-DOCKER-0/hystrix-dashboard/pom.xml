@@ -3,17 +3,17 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>org.kbastani</groupId>
+    <parent>
+    	<groupId>de.dbo.samples.springboot</groupId>
+   		<artifactId>spring-boot-DOCKER-0</artifactId>
+   	 	<version>0.0.0-SNAPSHOT</version>
+    </parent>
+    
 	<artifactId>hystrix-dashboard</artifactId>
 	<packaging>jar</packaging>
 	<url>http://projects.spring.io/spring-cloud/</url>
-	<version>0.1.0</version>
 
-	<parent>
-		<artifactId>spring-cloud-microservice-example-parent</artifactId>
-		<groupId>org.kbastani</groupId>
-		<version>0.1.0-SNAPSHOT</version>
-	</parent>
+	<name>spring-boot-DOCKER-0 hystrix-dashboar</name>	
 
 	<properties>
 		<docker.image.prefix>kbastani</docker.image.prefix>
