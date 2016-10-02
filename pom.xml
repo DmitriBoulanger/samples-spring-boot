@@ -87,6 +87,11 @@ This reactor performs complete plug-in management and fixes Java with its compil
 		<cargo-maven2-plugin.version>1.4.8</cargo-maven2-plugin.version>
 		
 		<!-- ====================================================================================================== -->
+		<!--                       DOCKER Plug-Ins Versions                                                         -->
+		<!-- ====================================================================================================== -->
+		<docker.plugin.version>0.4.13</docker.plugin.version>
+		
+		<!-- ====================================================================================================== -->
 		<!--                     SPRING-BOOT Plug-Ins Versions                                                      -->
 		<!-- ====================================================================================================== -->
 
@@ -275,9 +280,19 @@ This reactor performs complete plug-in management and fixes Java with its compil
 					<groupId>org.springframework.boot</groupId>
 					<artifactId>spring-boot-maven-plugin</artifactId>
 					<version>${spring-boot-maven-plugin.version}</version>
-				</plugin>	
-								
+				</plugin>
+				
 
+				<!-- ============================================================================================ -->
+				<!--                         DOCKER Plug-Ins                                                      -->
+				<!-- ============================================================================================ -->
+				
+				<plugin>			
+                	<groupId>com.spotify</groupId>
+                	<artifactId>docker-maven-plugin</artifactId>
+               	 	<version>${docker.plugin.version}</version>
+				</plugin>	
+				
 				<!-- ============================================================================================ -->
 				<!--                             ETC Plug-Ins                                                     -->
 				<!-- ============================================================================================ -->

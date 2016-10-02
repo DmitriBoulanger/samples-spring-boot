@@ -4,17 +4,15 @@
     <modelVersion>4.0.0</modelVersion>
     
     <parent>
-        <groupId>org.springframework.cloud</groupId>
-        <artifactId>spring-cloud-starter-parent</artifactId>
-        <version>Brixton.BUILD-SNAPSHOT</version>
-        <relativePath/>
-        <!-- lookup parent from repository -->
+        <groupId>de.dbo.samples.springboot</groupId>
+        <artifactId>spring-boot-DOCKER</artifactId>
+        <version>0.0.0-SNAPSHOT</version>
     </parent>
 
-    <groupId>de.dbo.samples.springboot</groupId>
     <artifactId>spring-boot-DOCKER-0</artifactId>
-    <version>0.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
+    
+    <name>spring-boot-DOCKER-0 Reactor</name>
 
     <modules>
         <module>users-microservice</module>
@@ -30,10 +28,9 @@
 
 
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <java.version>1.8</java.version>
+       
         
-        <docker.plugin.version>0.4.13</docker.plugin.version>
+       
         <docker.image.prefix>dbosample</docker.image.prefix>
     </properties>
 

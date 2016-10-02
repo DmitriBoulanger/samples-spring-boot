@@ -10,21 +10,21 @@
     </parent>
     
 	<artifactId>hystrix-dashboard</artifactId>
-	<packaging>jar</packaging>
-	<url>http://projects.spring.io/spring-cloud/</url>
 
+	<url>http://projects.spring.io/spring-cloud/</url>
 	<name>spring-boot-DOCKER-0 hystrix-dashboar</name>	
 
 	<build>
 		<plugins>
+		
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			
 			<plugin>
 				<groupId>com.spotify</groupId>
 				<artifactId>docker-maven-plugin</artifactId>
-				<version>${docker.plugin.version}</version>
 				<executions>
 					<execution>
 						<phase>package</phase>

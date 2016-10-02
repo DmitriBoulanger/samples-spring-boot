@@ -10,7 +10,6 @@
     </parent>
     
     <artifactId>recommendation-microservice</artifactId>
-    <packaging>jar</packaging>
     
     <name>spring-boot-DOCKER-0 recommendation-microservice</name>
     
@@ -39,6 +38,7 @@
 
     <build>
         <plugins>
+        
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
@@ -50,10 +50,10 @@
                     </execution>
                 </executions>
             </plugin>
+            
             <plugin>
                 <groupId>com.spotify</groupId>
                 <artifactId>docker-maven-plugin</artifactId>
-                <version>${docker.plugin.version}</version>
                 <executions>
                     <execution>
                         <phase>package</phase>
