@@ -1,0 +1,9 @@
+---
+applications:
+- name: hystrixdashboard
+  memory: 512M
+  instances: 1
+  timeout: 90
+  path: target/hystrixdashboard-0.0.0-SNAPSHOT.jar
+  env:
+    SPRING_PROFILES_ACTIVE: cloud

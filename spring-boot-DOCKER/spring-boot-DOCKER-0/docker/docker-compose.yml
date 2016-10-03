@@ -1,22 +1,22 @@
 hystrix:
-  image: kbastani/hystrix-dashboard
+  image: dbosample/hystrix-dashboard
   ports:
    - "7979:7979"
   links:
    - gateway
    - discovery
 discovery:
-  image: kbastani/discovery-microservice
+  image: dbosample/discovery-microservice
   ports:
    - "8761:8761"
 configserver:
-  image: kbastani/config-microservice
+  image: dbosample/config-microservice
   ports:
    - "8888:8888"
   links:
    - discovery
 gateway:
-  image: kbastani/api-gateway-microservice
+  image: dbosample/api-gateway-microservice
   ports:
    - "10000:10000"
   links:
@@ -26,22 +26,22 @@ gateway:
    - movie
    - recommendation
 user:
-  image: kbastani/users-microservice
+  image: dbosample/users-microservice
   links:
    - discovery
    - configserver
 movie:
-  image: kbastani/movie-microservice
+  image: dbosample/movie-microservice
   links:
    - discovery
    - configserver
 recommendation:
-  image: kbastani/recommendation-microservice
+  image: dbosample/recommendation-microservice
   links:
    - discovery
    - configserver
 moviesui:
-  image: kbastani/movies-ui
+  image: dbosample/movies-ui
   ports:
      - "9006:9006"
   links:
