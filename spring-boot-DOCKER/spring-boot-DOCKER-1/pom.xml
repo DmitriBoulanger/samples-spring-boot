@@ -18,13 +18,6 @@
   * Stops and removes the containers.
 
   -->
-  
-<!--    <groupId>de.dbo.samples.springboot</groupId -->
-<!--    <artifactId>spring-boot-DOCKER-0</artifactId> -->
-<!--    <version>0.0.0-SNAPSHOT</version> -->
-<!--    <packaging>pom</packaging> -->
-    
-  <name>spring-boot-DOCKER-0 Reactor</name>
 
   <groupId>io.fabric8</groupId>
   <artifactId>dmp-sample-parent</artifactId>
@@ -59,4 +52,5 @@
    <module>data-jolokia-demo</module> 
    <!-- module>cargo-jolokia-demo</module --> 
   </modules>
+  
 </project>
