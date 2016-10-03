@@ -1,0 +1,46 @@
+{
+	"status": "UP",
+	"localApplication": {
+		"status": "UP"
+	},
+	"discoveryComposite": {
+		"description": "Spring Cloud Eureka Discovery Client",
+		"status": "UP",
+		"discoveryClient": {
+			"description": "Spring Cloud Eureka Discovery Client",
+			"status": "UP",
+			"services": [
+				"gateway",
+				"configserver",
+				"moviesui",
+				"user",
+				"recommendation",
+				"movie"
+			]
+		},
+		"eureka": {
+			"description": "Remote status from Eureka server",
+			"status": "UP",
+			"applications": {
+				"GATEWAY": 1,
+				"MOVIE": 1,
+				"CONFIGSERVER": 1,
+				"MOVIESUI": 1,
+				"USER": 1,
+				"RECOMMENDATION": 1
+			}
+		}
+	},
+	"diskSpace": {
+		"status": "UP",
+		"total": 19195224064,
+		"free": 1814622208,
+		"threshold": 10485760
+	},
+	"refreshScope": {
+		"status": "UP"
+	},
+	"hystrix": {
+		"status": "UP"
+	}
+}

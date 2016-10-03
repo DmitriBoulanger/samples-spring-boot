@@ -1,0 +1,50 @@
+[
+	{
+		"metadata": {
+			
+		},
+		"instanceInfo": {
+			"instanceId": "2cfbb420076a:gateway:10000",
+			"app": "GATEWAY",
+			"appGroupName": null,
+			"ipAddr": "172.17.0.9",
+			"sid": "na",
+			"homePageUrl": "http://gateway:8000/",
+			"statusPageUrl": "http://gateway:10000/info",
+			"healthCheckUrl": "http://gateway:10000/health",
+			"secureHealthCheckUrl": null,
+			"vipAddress": "gateway",
+			"secureVipAddress": "gateway",
+			"countryId": 1,
+			"dataCenterInfo": {
+				"@class": "com.netflix.appinfo.InstanceInfo$DefaultDataCenterInfo",
+				"name": "MyOwn"
+			},
+			"hostName": "gateway",
+			"status": "UP",
+			"leaseInfo": {
+				"renewalIntervalInSecs": 30,
+				"durationInSecs": 90,
+				"registrationTimestamp": 1475517117010,
+				"lastRenewalTimestamp": 1475517232146,
+				"evictionTimestamp": 0,
+				"serviceUpTimestamp": 1475517117010
+			},
+			"isCoordinatingDiscoveryServer": false,
+			"metadata": {
+				
+			},
+			"lastUpdatedTimestamp": 1475517117010,
+			"lastDirtyTimestamp": 1475517113312,
+			"actionType": "ADDED",
+			"asgName": null,
+			"overriddenStatus": "UNKNOWN"
+		},
+		"serviceId": "GATEWAY",
+		"uri": "http://gateway:8000",
+		"secure": false,
+		"host": "gateway",
+		"port": 8000
+	}
+]
+
