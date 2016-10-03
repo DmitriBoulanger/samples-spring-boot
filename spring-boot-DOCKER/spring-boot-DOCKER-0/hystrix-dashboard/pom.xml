@@ -11,16 +11,26 @@
     
 	<artifactId>hystrix-dashboard</artifactId>
 
+	<name>spring-boot-DOCKER-0 hystrix-dashboar</name>
 	<url>http://projects.spring.io/spring-cloud/</url>
-	<name>spring-boot-DOCKER-0 hystrix-dashboar</name>	
 
 	<build>
 		<plugins>
 		
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>hystrixdashboard.HystrixDashboardApplication</mainClass>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
 			
 			<plugin>
 				<groupId>com.spotify</groupId>
