@@ -51,10 +51,11 @@
   <modules>
     <module>net</module>
     <module>custom-net</module>
-    <module>properties</module>
+    <module>spring-boot-DOCKER-1-properties</module>
     <module>dockerignore</module>
     <module>data-jolokia-demo</module>
     <module>multi-wait</module>
+    
    <!-- module>cargo-jolokia-demo</module -->
   </modules>
 </project>
