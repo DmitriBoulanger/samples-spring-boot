@@ -2,10 +2,6 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <!--
-  Sample project for showing a vanilla Dockerfile usage from the top-level directory
-  -->
-
   <parent>
     <groupId>de.dbo.samples.springboot</groupId>
     <artifactId>spring-boot-DOCKER-1</artifactId>
@@ -16,6 +12,16 @@
   <packaging>docker-build</packaging>
   
   <name>spring-boot-DOCKER-1 Docker File Properties</name>
+  
+  <properties>
+    <postgres.docker.name>postgres:9.5.2</postgres.docker.name>
+    <postgres.docker.log.prefix>postgres</postgres.docker.log.prefix>
+    <postgres.docker.ports.1>${itest.postgres.port}:5432</postgres.docker.ports.1>
+    <postgres.docker.env.POSTGRES_USER>superuser</postgres.docker.env.POSTGRES_USER>
+    <postgres.docker.env.POSTGRES_PASSWORD>superuser-password</postgres.docker.env.POSTGRES_PASSWORD>
+    <postgres.docker.wait.time>10000</postgres.docker.wait.time>
+    <postgres.docker.wait.log>PostgreSQL init process complete</postgres.docker.wait.log>
+  </properties>
 
   <build>
     <plugins>
@@ -37,13 +43,4 @@
     </plugins>
   </build>
 
-  <properties>
-    <postgres.docker.name>postgres:9.5.2</postgres.docker.name>
-    <postgres.docker.log.prefix>postgres</postgres.docker.log.prefix>
-    <postgres.docker.ports.1>${itest.postgres.port}:5432</postgres.docker.ports.1>
-    <postgres.docker.env.POSTGRES_USER>superuser</postgres.docker.env.POSTGRES_USER>
-    <postgres.docker.env.POSTGRES_PASSWORD>superuser-password</postgres.docker.env.POSTGRES_PASSWORD>
-    <postgres.docker.wait.time>10000</postgres.docker.wait.time>
-    <postgres.docker.wait.log>PostgreSQL init process complete</postgres.docker.wait.log>
-  </properties>
 </project>
