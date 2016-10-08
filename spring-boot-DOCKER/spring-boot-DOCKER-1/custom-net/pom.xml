@@ -19,6 +19,7 @@
   </parent>
 
   <artifactId>dmp-custom-net</artifactId>
+  <name>spring-boot-DOCKER-1 dmp-custom-net</name>
 
   <build>
     <plugins>

@@ -26,6 +26,7 @@
   </parent>
 
   <artifactId>cargo-jolokia-demo</artifactId>
+  <name>spring-boot-DOCKER-1 cargo-jolokia-demo</name>
 
   <url>http://www.jolokia.org</url>
 

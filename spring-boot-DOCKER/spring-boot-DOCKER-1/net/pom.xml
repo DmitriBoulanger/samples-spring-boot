@@ -20,6 +20,8 @@
   </parent>
 
   <artifactId>dmp-sample-net</artifactId>
+  
+   <name>spring-boot-DOCKER-1 dmp-sample-net</name>
 
   <profiles>
     <profile>

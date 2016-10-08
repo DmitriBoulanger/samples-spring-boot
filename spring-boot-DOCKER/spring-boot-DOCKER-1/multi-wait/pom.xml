@@ -10,10 +10,11 @@
   
   <artifactId>docker-maven-sample-multi-wait</artifactId>
   
+  <name>spring-boot-DOCKER-1 docker-maven-sample-multi-wait</name>
+  
   
   <!-- Sample exhibiting connection error described in https://github.com/fabric8io/docker-maven-plugin/issues/574 -->
 
-  
   <build>
     <plugins>
       <plugin>

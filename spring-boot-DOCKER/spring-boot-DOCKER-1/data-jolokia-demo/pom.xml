@@ -26,6 +26,9 @@
   </parent>
 
   <artifactId>docker-jolokia-demo</artifactId>
+  <name>spring-boot-DOCKER-1 docker-jolokia-demo</name>
+
+  
   <!-- add custom lifecycle -->
   <packaging>docker</packaging>
 
