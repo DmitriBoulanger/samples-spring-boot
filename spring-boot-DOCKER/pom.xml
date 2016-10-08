@@ -18,7 +18,9 @@ Reactor for Spring-Boot DOCKER-samples.
 	</description>
 
 	<properties>
-	 
+	
+		<dbosample.artifactimage.prefix>dbosample</dbosample.artifactimage.prefix>
+		
 	</properties>
 
 	<modules>

@@ -28,7 +28,7 @@
           <images>
             <image>
               <alias>simple</alias>
-              <name>dmp-sample/dockerignore</name>
+              <name>${dbosample.artifactimage.prefix}/docker-ignore</name>
               <build>
                 <dockerFileDir>${project.basedir}</dockerFileDir>
                 <compression>gzip</compression>

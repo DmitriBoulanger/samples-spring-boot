@@ -14,7 +14,7 @@
   <url>http://www.jolokia.org</url>
 
   <properties>
-    <docker.maven.plugin.version>0.16-SNAPSHOT</docker.maven.plugin.version>
+   
   </properties>
 
   <modules>
@@ -23,8 +23,7 @@
     <module>spring-boot-DOCKER-1-dockerproperties</module>
     <module>spring-boot-DOCKER-1-dockerignore</module>
     <module>spring-boot-DOCKER-1-wait-multi</module>
-    
-    <module>data-jolokia-demo</module>
+    <module>spring-boot-DOCKER-1-it</module>
     
 <!--    <module>cargo-jolokia-demo</module> -->
   </modules>

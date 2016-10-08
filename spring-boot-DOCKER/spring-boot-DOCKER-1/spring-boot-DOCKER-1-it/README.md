@@ -1,4 +1,4 @@
-## Integration Test with small tests for Jolokia
+## Integration Test for Jolokia
 
   Call it with
   
@@ -6,7 +6,7 @@
 
  The test does the following:
 
-  * Creates a Docker data container with **jolokia.war** and **jolokia-it.war**  as described in assembly descriptor src/main/docker-assembly.xml
+  * Creates a Docker **data** container with **jolokia.war** and **jolokia-it.war**  as described in assembly descriptor src/main/docker-assembly.xml
   * Starts (and optionally pulls) the **jolokia/tomcat-7.0 container** with the data container linked to it
   * Waits until Tomcat is up (i.e. until it is reachable via an HTTP request)
   * Runs an integration test via *maven-failsafe-plugin*, using rest-assured for accessing the deployed app.
