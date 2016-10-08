@@ -12,7 +12,7 @@
 		</encoder>
 	</appender>
 
-	<logger name="hystrixdashboard" level="DEBUG" additivity="false">
+	<logger name="hystrixdashboard" level="INFO" additivity="false">
 		<appender-ref ref="STDOUT" />
 	</logger>
 	

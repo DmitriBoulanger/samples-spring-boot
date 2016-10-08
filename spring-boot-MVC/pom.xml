@@ -19,7 +19,12 @@ Reactor for Spring-Boot MVC-samples.
 
 	
 	<modules>
-		<module>spring-boot-MVC-0</module>
+<!--  		<module>spring-boot-MVC-0</module> -->
+<!-- 
+Compiler Error: 
+[ERROR] symbol:   variable SpringApplication
+[ERROR] location: class de.dbo.samples.springboot.mvc.greeting.application.MyWebInitializer
+-->
 		<module>spring-boot-MVC-1</module>
 		<module>spring-boot-MVC-2</module>
 	</modules>

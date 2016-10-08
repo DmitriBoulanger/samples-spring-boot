@@ -1,6 +1,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
+  
+  <parent>
+        <groupId>de.dbo.samples.springboot</groupId>
+        <artifactId>spring-boot-DOCKER</artifactId>
+        <version>0.0.0-SNAPSHOT</version>
+   </parent>
 
   <!--
   Integration test demo which makes some small tests for Jolokia
@@ -18,10 +24,8 @@
   * Stops and removes the containers.
 
   -->
-
-  <groupId>io.fabric8</groupId>
-  <artifactId>dmp-sample-parent</artifactId>
-  <version>0.16.5</version>
+  
+  <artifactId>spring-boot-DOCKER-1</artifactId>
   <packaging>pom</packaging>
 
   <url>http://www.jolokia.org</url>
@@ -45,12 +49,12 @@
   </build>
 
   <modules>
-   <module>net</module>
-   <module>custom-net</module>
-   <module>properties</module>
-   <module>dockerignore</module> 
-   <module>data-jolokia-demo</module> 
-   <!-- module>cargo-jolokia-demo</module --> 
+    <module>net</module>
+    <module>custom-net</module>
+    <module>properties</module>
+    <module>dockerignore</module>
+    <module>data-jolokia-demo</module>
+    <module>multi-wait</module>
+   <!-- module>cargo-jolokia-demo</module -->
   </modules>
-  
 </project>

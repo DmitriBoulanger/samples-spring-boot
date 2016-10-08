@@ -3,19 +3,16 @@
   <modelVersion>4.0.0</modelVersion>
 
   <!--
-  Sample project for showing a vanilla Dockerfile
-  usage from the top-level directory
+  Sample project for showing a vanilla Dockerfile usage from the top-level directory
   -->
 
   <parent>
-    <groupId>io.fabric8</groupId>
-    <artifactId>dmp-sample-parent</artifactId>
-    <version>0.16.5</version>
-    <relativePath>../pom.xml</relativePath>
+    <groupId>de.dbo.samples.springboot</groupId>
+    <artifactId>spring-boot-DOCKER-1</artifactId>
+    <version>0.0.0-SNAPSHOT</version>
   </parent>
 
   <artifactId>dmp-sample-properties</artifactId>
-  <version>0.16.5</version>
   <packaging>docker-build</packaging>
 
   <build>

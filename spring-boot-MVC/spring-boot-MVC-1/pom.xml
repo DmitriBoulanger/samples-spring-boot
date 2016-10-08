@@ -9,7 +9,7 @@
 	</parent>
 
 	<artifactId>spring-boot-MVC-1</artifactId>
-	<name>>spring-boot-MVC-1 Rest + AngularJS</name>
+	<name>spring-boot-MVC-1 Rest + AngularJS</name>
 
 	<description>This project uses Spring Data Rest and AngularJS to perform CRUD operations against Database.</description>
 

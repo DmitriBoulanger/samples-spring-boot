@@ -20,15 +20,12 @@
   -->
 
   <parent>
-    <groupId>io.fabric8</groupId>
-    <artifactId>dmp-sample-parent</artifactId>
-    <version>0.16.5</version>
-    <relativePath>../pom.xml</relativePath>
+    <groupId>de.dbo.samples.springboot</groupId>
+    <artifactId>spring-boot-DOCKER-1</artifactId>
+    <version>0.0.0-SNAPSHOT</version>
   </parent>
 
-  <groupId>io.fabric8</groupId>
   <artifactId>docker-jolokia-demo</artifactId>
-  <version>0.16.5</version>
   <!-- add custom lifecycle -->
   <packaging>docker</packaging>
 
@@ -48,6 +45,7 @@
        src/main/docker-assembly.xml descriptor. These are the WAR files which gets
        stored in the data docker container which then is linked into tomcat container for
        deployment -->
+       
     <!-- Jolokia Agent -->
     <dependency>
       <groupId>org.jolokia</groupId>
@@ -55,6 +53,7 @@
       <version>${jolokia.version}</version>
       <type>war</type>
     </dependency>
+    
     <!-- Jolokia Integration Test Setup (registers some Test MBeans) -->
     <dependency>
       <groupId>org.jolokia</groupId>
@@ -75,6 +74,11 @@
       <groupId>com.jayway.restassured</groupId>
       <artifactId>rest-assured</artifactId>
       <version>2.3.1</version>
+    </dependency>
+    <dependency>
+    	<groupId>org.ow2.asm</groupId>
+    	<artifactId>asm</artifactId>
+    	<version>5.0.4</version>
     </dependency>
   </dependencies>
 
@@ -110,13 +114,19 @@
                   <EMPTY_PROP></EMPTY_PROP>
                 </env>
                 <envPropertyFile>${project.basedir}/src/main/docker/environment.properties</envPropertyFile>
+                
                 <ports>
-                  <!-- Port mappings: Container internal port (which must be exposed) will be
-                 dynamically mapped and this (random) port will be assigned to the maven variable
-                 ${jolokia.port}. Multiple port mappings can be specified here-->
+                  <!-- 
+                       Port mappings: 
+                       Container internal port (which must be exposed) will be
+                       dynamically mapped and this (random) port will be assigned to the maven variable ${jolokia.port}. 
+                       Multiple port mappings can be specified here
+                  -->
                   <port>${jolokia.host}:${jolokia.port}:8080</port>
                 </ports>
+                
                 <wait>
+                
                   <!-- The plugin waits until this URL is reachable via HTTP ... -->
                   <log>Server startup</log>
                   <http>
@@ -124,16 +134,20 @@
                     <method>GET</method>
                     <status>200</status>
                   </http>
+                  
                   <exec>
                     <postStart>ls -l /maven</postStart>
                   </exec>
                   <time>10000</time>
                   <shutdown>500</shutdown>
+                  
                 </wait>
+                
                 <log>
                   <enabled>true</enabled>
                   <color>red</color>
                 </log>
+                
                 <ulimits>
                   <ulimit>
                     <name>memlock</name>
@@ -141,6 +155,7 @@
                     <soft>1024</soft>
                   </ulimit>
                 </ulimits>
+                
               </run>
               <watch>
                 <mode>none</mode>
@@ -207,6 +222,7 @@
         <artifactId>maven-help-plugin</artifactId>
         <version>2.2</version>
       </plugin>
+      
     </plugins>
   </build>
 
@@ -533,5 +549,7 @@
         </plugins>
       </build>
     </profile>
+    
+    
   </profiles>
 </project>

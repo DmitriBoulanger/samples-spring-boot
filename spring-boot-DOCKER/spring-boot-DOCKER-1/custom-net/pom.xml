@@ -3,22 +3,22 @@
   <modelVersion>4.0.0</modelVersion>
 
   <!--
+ 
   Sample project for demonstrating the custom network mode
 
   Call it with 'mvn install'.
-  It will automatically create the custom network "test-network" and create two automatically named containers that can
-  talk to each other via their netAlias names.
+  It will automatically create the custom network "test-network" 
+  and create two automatically named containers that can talk to each other via their netAlias names.
+  
   -->
-
-  <parent>
-    <groupId>io.fabric8</groupId>
-    <artifactId>dmp-sample-parent</artifactId>
-    <version>0.16.5</version>
-    <relativePath>../pom.xml</relativePath>
+  
+ <parent>
+    <groupId>de.dbo.samples.springboot</groupId>
+    <artifactId>spring-boot-DOCKER-1</artifactId>
+    <version>0.0.0-SNAPSHOT</version>
   </parent>
 
   <artifactId>dmp-custom-net</artifactId>
-  <version>0.16.5</version>
 
   <build>
     <plugins>
