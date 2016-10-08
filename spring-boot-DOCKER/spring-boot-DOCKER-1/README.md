@@ -1,4 +1,4 @@
-## docker-maven-plugin examples
+## Farbric8 Docker Maven Plug-in Samples
 
 This directory holds various examples for the usage of the docker-maven
 plugin. It can be used as starting point for your own projects.

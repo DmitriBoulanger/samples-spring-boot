@@ -56,6 +56,6 @@
     <module>data-jolokia-demo</module>
     <module>multi-wait</module>
     
-   <!-- module>cargo-jolokia-demo</module -->
+<!--    <module>cargo-jolokia-demo</module> -->
   </modules>
 </project>

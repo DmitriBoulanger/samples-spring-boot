@@ -2,7 +2,9 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2 http://maven.apache.org/xsd/assembly-1.1.2.xsd">
   <id>jolokia-it</id>
+  
   <dependencySets>
+  
     <dependencySet>
       <includes>
         <include>org.jolokia:jolokia-war</include>
@@ -11,6 +13,7 @@
       <outputFileNameMapping>jolokia.war</outputFileNameMapping>
       <useProjectArtifact>false</useProjectArtifact>
     </dependencySet>
+    
     <dependencySet>
       <includes>
         <include>org.jolokia:jolokia-it-war</include>
@@ -19,7 +22,10 @@
       <outputFileNameMapping>jolokia-it.war</outputFileNameMapping>
       <useProjectArtifact>false</useProjectArtifact>
     </dependencySet>
+    
   </dependencySets>
+  
+  
   <fileSets>
     <fileSet>
       <directory>${project.basedir}/src/main/docker</directory>
@@ -31,4 +37,5 @@
       <fileMode>755</fileMode>
     </fileSet>
   </fileSets>
+  
 </assembly>

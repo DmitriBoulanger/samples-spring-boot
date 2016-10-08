@@ -32,15 +32,16 @@ public class VersionIT {
 
         // Alternatively, set the mime type before, then Rest-assured's fluent API can be used
         given()
-                .param("mimeType", "application/json")
-                .get("/version")
-        .then().assertThat()
-                .header("content-type", containsString("application/json"))
-                .body("value.agent", equalTo(versionExpected))
-                .body("timestamp", lessThanOrEqualTo((int) (System.currentTimeMillis() / 1000)))
-                .body("status", equalTo(200))
-                .body("value.protocol", equalTo("7.2"))
-                .body("value.config",notNullValue());
+                 .param("mimeType", "application/json")
+                 .get("/version")
+                 .then()
+                 .assertThat()
+                 .header("content-type", containsString("application/json"))
+                 .body("value.agent", equalTo(versionExpected))
+                 .body("timestamp", lessThanOrEqualTo((int) (System.currentTimeMillis() / 1000)))
+                 .body("status", equalTo(200))
+                 .body("value.protocol", equalTo("7.2"))
+                 .body("value.config",notNullValue());
 
     }
 
