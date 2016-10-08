@@ -2,26 +2,15 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <!--
-  Sample project for demonstrating the various network modes
-
-  Call it with 'mvn install' and one of the following profiles:
-
-  * "container" : Container connecting to another container's network
-  * "bridge"    : Bridge mode
-  * "host"      : Host mode
-  * "custom"    : Custom network 'test-network' (must be created with 'docker network create test-network' in advance)
-  -->
-
   <parent>
     <groupId>de.dbo.samples.springboot</groupId>
     <artifactId>spring-boot-DOCKER-1</artifactId>
     <version>0.0.0-SNAPSHOT</version>
   </parent>
 
-  <artifactId>dmp-sample-net</artifactId>
+  <artifactId>spring-boot-DOCKER-1-net</artifactId>
   
-   <name>spring-boot-DOCKER-1 dmp-sample-net</name>
+  <name>spring-boot-DOCKER-1 Network</name>
 
   <profiles>
     <profile>

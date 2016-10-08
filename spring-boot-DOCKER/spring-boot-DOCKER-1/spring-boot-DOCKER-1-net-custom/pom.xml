@@ -2,27 +2,18 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <!--
- 
-  Sample project for demonstrating the custom network mode
-
-  Call it with 'mvn install'.
-  It will automatically create the custom network "test-network" 
-  and create two automatically named containers that can talk to each other via their netAlias names.
-  
-  -->
-  
  <parent>
     <groupId>de.dbo.samples.springboot</groupId>
     <artifactId>spring-boot-DOCKER-1</artifactId>
     <version>0.0.0-SNAPSHOT</version>
   </parent>
 
-  <artifactId>dmp-custom-net</artifactId>
-  <name>spring-boot-DOCKER-1 dmp-custom-net</name>
+  <artifactId>spring-boot-DOCKER-1-net-custom</artifactId>
+  <name>spring-boot-DOCKER-1 Network Customized</name>
 
   <build>
     <plugins>
+    
       <plugin>
         <groupId>io.fabric8</groupId>
         <artifactId>docker-maven-plugin</artifactId>

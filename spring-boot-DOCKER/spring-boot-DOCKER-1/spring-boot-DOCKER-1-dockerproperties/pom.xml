@@ -12,10 +12,10 @@
     <version>0.0.0-SNAPSHOT</version>
   </parent>
 
-  <artifactId>spring-boot-DOCKER-1-properties</artifactId>
+  <artifactId>spring-boot-DOCKER-1-dockerproperties</artifactId>
   <packaging>docker-build</packaging>
   
-  <name>spring-boot-DOCKER-1 Properties</name>
+  <name>spring-boot-DOCKER-1 Docker File Properties</name>
 
   <build>
     <plugins>

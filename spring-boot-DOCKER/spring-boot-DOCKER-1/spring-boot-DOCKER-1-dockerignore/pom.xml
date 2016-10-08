@@ -13,10 +13,10 @@
     <version>0.0.0-SNAPSHOT</version>
   </parent>
   
-  <artifactId>dmp-sample-dockerignore</artifactId>
+  <artifactId>spring-boot-DOCKER-1-dockerignore</artifactId>
   <packaging>docker-build</packaging>
 
-  <name>spring-boot-DOCKER-1 dmp-sample-dockerignore</name>
+  <name>spring-boot-DOCKER-1 Docker File Ignore</name>
   
   <build>
     <plugins>

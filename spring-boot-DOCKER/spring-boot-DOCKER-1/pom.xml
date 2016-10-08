@@ -18,12 +18,13 @@
   </properties>
 
   <modules>
-    <module>net</module>
-    <module>custom-net</module>
-    <module>spring-boot-DOCKER-1-properties</module>
-    <module>dockerignore</module>
+    <module>spring-boot-DOCKER-1-net</module>
+    <module>spring-boot-DOCKER-1-net-custom</module>
+    <module>spring-boot-DOCKER-1-dockerproperties</module>
+    <module>spring-boot-DOCKER-1-dockerignore</module>
+    <module>spring-boot-DOCKER-1-wait-multi</module>
+    
     <module>data-jolokia-demo</module>
-    <module>spring-boot-DOCKER-1-multi-wait</module>
     
 <!--    <module>cargo-jolokia-demo</module> -->
   </modules>
