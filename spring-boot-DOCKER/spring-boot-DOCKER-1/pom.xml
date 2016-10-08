@@ -8,23 +8,6 @@
         <version>0.0.0-SNAPSHOT</version>
    </parent>
 
-  <!--
-  Integration test demo which makes some small tests for Jolokia
-
-  Call it with: 'mvn verify'
-
-  The test does the following:
-
-  * Creates a Docker data container with 'jolokia.war' and 'jolokia-it.war' as described in
-    assembly descriptor src/main/docker-assembly.xml
-  * Starts (and optionally pull) the jolokia/tomcat-7.0 container with the data container linked to it
-  * Waits until Tomcat is up (i.e. until it is reachable via an HTTP request)
-  * Runs an integration test via maven-failsafe-plugin, using rest-assured for accessing the deployed app.
-  * Prints out some version information about the contaner running (in order prove that's not a fake ;-)
-  * Stops and removes the containers.
-
-  -->
-  
   <artifactId>spring-boot-DOCKER-1</artifactId>
   <packaging>pom</packaging>
 
@@ -32,21 +15,7 @@
 
   <properties>
     <docker.maven.plugin.version>0.16-SNAPSHOT</docker.maven.plugin.version>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
   </properties>
-
-  <build>
-    <pluginManagement>
-      <plugins>
-        <plugin>
-          <groupId>io.fabric8</groupId>
-          <artifactId>docker-maven-plugin</artifactId>
-          <version>${docker.maven.plugin.version}</version>
-        </plugin>
-      </plugins>
-    </pluginManagement>
-  </build>
 
   <modules>
     <module>net</module>
@@ -54,7 +23,7 @@
     <module>spring-boot-DOCKER-1-properties</module>
     <module>dockerignore</module>
     <module>data-jolokia-demo</module>
-    <module>multi-wait</module>
+    <module>spring-boot-DOCKER-1-multi-wait</module>
     
 <!--    <module>cargo-jolokia-demo</module> -->
   </modules>

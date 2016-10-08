@@ -90,7 +90,7 @@ This reactor performs complete plug-in management and fixes Java with its compil
 		<!--                       DOCKER Plug-Ins Versions                                                         -->
 		<!-- ====================================================================================================== -->
 		<spotify-docker.plugin.version>0.4.13</spotify-docker.plugin.version>
-		<fabric8-docker.plugin.version>0.16.5</fabric8-docker.plugin.version>
+		<fabric8-docker.plugin.version>0.16-SNAPSHOT</fabric8-docker.plugin.version>
 		
 		<!-- ====================================================================================================== -->
 		<!--                     SPRING-BOOT Plug-Ins Versions                                                      -->

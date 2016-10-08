@@ -8,19 +8,16 @@
     <version>0.0.0-SNAPSHOT</version>
   </parent>
   
-  <artifactId>docker-maven-sample-multi-wait</artifactId>
+  <artifactId>spring-boot-DOCKER-1-multi-wait</artifactId>
   
-  <name>spring-boot-DOCKER-1 docker-maven-sample-multi-wait</name>
+  <name>spring-boot-DOCKER-1 Start-up waiting</name>
   
-  
-  <!-- Sample exhibiting connection error described in https://github.com/fabric8io/docker-maven-plugin/issues/574 -->
-
   <build>
     <plugins>
       <plugin>
         <groupId>io.fabric8</groupId>
         <artifactId>docker-maven-plugin</artifactId>
-        <version>0.16.6</version>
+        
         <configuration>
           <logDate>none</logDate>
           <images>
@@ -53,6 +50,7 @@
             </image>
           </images>
         </configuration>
+        
         <executions>
           <execution>
             <id>start</id>
@@ -70,6 +68,7 @@
           </execution>
         </executions>
       </plugin>
+      
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-failsafe-plugin</artifactId>
@@ -82,6 +81,7 @@
           </execution>
         </executions>
       </plugin>
+      
     </plugins>
   </build>
 </project>
