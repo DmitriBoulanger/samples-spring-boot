@@ -15,25 +15,23 @@
 	<url>http://projects.spring.io/spring-cloud/</url>
 
 	<build>
+		<finalName>${project.artifactId}</finalName>
 		<plugins>
-		
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <mainClass>hystrixdashboard.HystrixDashboardApplication</mainClass>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>repackage</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-			
+
 			<plugin>
-				<groupId>com.spotify</groupId>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>io.fabric8</groupId>
 				<artifactId>docker-maven-plugin</artifactId>
 				<executions>
 					<execution>
@@ -44,17 +42,27 @@
 					</execution>
 				</executions>
 				<configuration>
-					<imageName>${docker.image.prefix}/${project.artifactId}</imageName>
-					<dockerDirectory>${project.basedir}/src/main/docker</dockerDirectory>
-					<resources>
-						<resource>
-							<targetPath>/</targetPath>
-							<directory>${project.build.directory}</directory>
-							<include>${project.build.finalName}.jar</include>
-						</resource>
-					</resources>
+					<images>
+						<image>
+							<alias>hystrix</alias>
+							<name>${dbosample.artifactimage.prefix}/${project.build.finalName}:latest</name>
+							<build>
+								<from>java:latest</from>
+								<assembly>
+									<descriptorRef>artifact</descriptorRef>
+								</assembly>
+								<tags>
+									<tag>latest</tag>
+								</tags>
+								<cmd>
+									<shell>java -jar /maven/${project.build.finalName}.jar</shell>
+								</cmd>
+							</build>
+						</image>
+					</images>
 				</configuration>
 			</plugin>
+
 		</plugins>
 	</build>
 

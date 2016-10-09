@@ -87,9 +87,8 @@ This reactor performs complete plug-in management and fixes Java with its compil
 		<cargo-maven2-plugin.version>1.4.8</cargo-maven2-plugin.version>
 		
 		<!-- ====================================================================================================== -->
-		<!--                       DOCKER Plug-Ins Versions                                                         -->
+		<!--                       DOCKER Plug-In Version                                                           -->
 		<!-- ====================================================================================================== -->
-		<spotify-docker.plugin.version>0.4.13</spotify-docker.plugin.version>
 		<fabric8-docker.plugin.version>0.16.7</fabric8-docker.plugin.version>
 		
 		<!-- ====================================================================================================== -->
