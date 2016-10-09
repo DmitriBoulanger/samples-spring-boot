@@ -21,7 +21,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>${project.artifactId}</finalName>
+		<finalName>discovery-microservice</finalName>
 		<plugins>
 
 			<plugin>
@@ -53,7 +53,7 @@
 							<alias>eureka</alias>
 							<name>${dbosample.artifactimage.prefix}/${project.build.finalName}:latest</name>
 							<build>
-								<from>java:latest</from>
+								<from>java:8</from>
 								<assembly>
 									<descriptorRef>artifact</descriptorRef>
 								</assembly>
@@ -71,6 +71,5 @@
 
 		</plugins>
 	</build>
-
 
 </project>

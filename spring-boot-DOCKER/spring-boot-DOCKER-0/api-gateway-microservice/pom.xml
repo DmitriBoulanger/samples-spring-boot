@@ -29,7 +29,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>${project.artifactId}</finalName>
+		<finalName>api-gateway-microservice</finalName>
 		<plugins>
 
 			<plugin>
@@ -61,7 +61,7 @@
 							<alias>gateway</alias>
 							<name>${dbosample.artifactimage.prefix}/${project.build.finalName}:latest</name>
 							<build>
-								<from>java:latest</from>
+								<from>java:8</from>
 								<assembly>
 									<descriptorRef>artifact</descriptorRef>
 								</assembly>

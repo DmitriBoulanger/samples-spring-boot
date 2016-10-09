@@ -1,0 +1,288 @@
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>de.dbo.samples.springboot</groupId>
+		<artifactId>spring-boot-DOCKER-0</artifactId>
+		<version>0.0.0-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>spring-boot-DOCKER-0-integration-test</artifactId>
+	<packaging>jar</packaging>
+
+	<name>spring-boot-DOCKER-0 Integration Test</name>
+
+	<properties>
+	    <startup.timeout>100000</startup.timeout>
+	    
+	    <image.alias.discovery>discovery</image.alias.discovery>
+	    <image.alias.hystrix>hystrix</image.alias.hystrix>
+	    <image.alias.configuration>configuration</image.alias.configuration>
+	    <image.alias.users>users</image.alias.users>
+	    <image.alias.moviesui>moviesui</image.alias.moviesui>
+	   
+	    <image.alias.gateway>gateway</image.alias.gateway>
+	
+		<image.name.discovery>${dbosample.artifactimage.prefix}/discovery-microservice:latest</image.name.discovery>
+		<image.name.hystrix>${dbosample.artifactimage.prefix}/hystrix-dashboard:latest</image.name.hystrix>
+		<image.name.configuration>${dbosample.artifactimage.prefix}/api-gateway-microservice:latest</image.name.configuration>
+		<image.name.users>${dbosample.artifactimage.prefix}/users-microservice:latest</image.name.users>
+		<image.name.moviesui>${dbosample.artifactimage.prefix}/movies-ui:latest</image.name.moviesui>
+		
+		<image.name.gateway>${dbosample.artifactimage.prefix}/config-microservice:latest</image.name.gateway>
+		
+	</properties>
+
+	<dependencies>
+    	<!-- ======================================================================================  -->
+    	<!--  Integration test itself                                                                -->
+   		<!-- ======================================================================================  -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.jayway.restassured</groupId>
+			<artifactId>rest-assured</artifactId>
+			<version>2.3.1</version>
+		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.ow2.asm</groupId> -->
+<!-- 			<artifactId>asm</artifactId> -->
+<!-- 			<version>5.0.4</version> -->
+<!-- 		</dependency> -->
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+			
+			    <!-- ======================================================================================  -->
+    			<!--       Starting micro-service images                                                     -->
+   				<!-- ======================================================================================  -->
+   				
+				<groupId>io.fabric8</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
+				<configuration>
+					<watchInterval>200</watchInterval>
+					<logDate>default</logDate>
+					<verbose>true</verbose>
+<!-- 					<watchPostGoal>org.apache.maven.plugins:maven-help-plugin:help</watchPostGoal> -->
+					<images>
+					
+            			<!--  Discovery (to be started first)      -->
+            			<!-- ===================================== -->
+						<image>
+							<alias>${image.alias.discovery}</alias>
+							<name>${image.name.discovery}</name>
+							<run>
+								<ports>
+									<port>${discovery.host}:${discovery.port}:8761</port>
+								</ports>
+								<wait>
+									<log>Discovery startup</log>
+									<time>${startup.timeout}</time>
+									<shutdown>500</shutdown>
+									<http>
+										<url>http://${discovery.host}:${discovery.port}</url>
+										<method>GET</method>
+										<status>200</status>
+									</http>
+									<exec>
+										<postStart>ls -la /maven</postStart>
+									</exec>
+								</wait>
+							</run>
+							<watch>
+								<mode>none</mode>
+							</watch>
+						</image>
+						
+            			<!--   Hystrix (to be started first)       -->
+            			<!-- ===================================== -->
+						<image>
+							<alias>${image.alias.hystrix}</alias>
+							<name>${image.name.hystrix}</name>
+							<run>
+								<ports>
+									<port>${hystrix.host}:${hystrix.port}:7979</port>
+								</ports>
+								<wait>
+									<log>Hystrix startup</log>
+									<time>${startup.timeout}</time>
+									<shutdown>500</shutdown>
+									<http>
+										<url>http://${hystrix.host}:${hystrix.port}</url>
+										<method>GET</method>
+										<status>200</status>
+									</http>
+									<exec>
+										<postStart>ls -la /maven</postStart>
+									</exec>
+								</wait>
+							</run>
+							<watch>
+								<mode>none</mode>
+							</watch>
+						</image>
+						
+						<!-- Configuration (second level)          -->
+            			<!-- ===================================== -->
+						<image>
+              			<!--  -->
+							<alias>${image.alias.configuration}</alias>
+							<name>${image.name.configuration}</name>
+							<run>
+								<ports>
+									<port>${configuration.host}:${configuration.port}:7979</port>
+								</ports>
+								<wait>
+									<log>Configuration startup</log>
+									<time>${startup.timeout}</time>
+									<shutdown>500</shutdown>
+									<http>
+										<url>http://${configuration.host}:${configuration.port}</url>
+										<method>GET</method>
+										<status>200</status>
+									</http>
+									<exec>
+										<postStart>ls -la /maven</postStart>
+									</exec>
+								</wait>
+							</run>
+							<watch>
+								<mode>none</mode>
+							</watch>
+						</image>
+						
+						<!-- Users (third level)                   -->
+            			<!-- ===================================== -->
+						<image>
+              			<!--  -->
+							<alias>${image.alias.users}</alias>
+							<name>${image.name.users}</name>
+							<run>
+								<ports>
+									<port>${users.host}:${users.port}:7979</port>
+								</ports>
+								<wait>
+									<log>users startup</log>
+									<time>${startup.timeout}</time>
+									<shutdown>500</shutdown>
+									<http>
+										<url>http://${users.host}:${users.port}</url>
+										<method>GET</method>
+										<status>200</status>
+									</http>
+									<exec>
+										<postStart>ls -la /maven</postStart>
+									</exec>
+								</wait>
+							</run>
+							<watch>
+								<mode>none</mode>
+							</watch>
+						</image>
+						
+						<!-- Movies UI (thrird level)              -->
+            			<!-- ===================================== -->
+						<image>
+              			<!--  -->
+							<alias>${image.alias.moviesui}</alias>
+							<name>${image.name.moviesui}</name>
+							<run>
+								<ports>
+									<port>${moviesui.host}:${moviesui.port}:7979</port>
+								</ports>
+								<wait>
+									<log>moviesui startup</log>
+									<time>${startup.timeout}</time>
+									<shutdown>500</shutdown>
+									<http>
+										<url>http://${moviesui.host}:${moviesui.port}</url>
+										<method>GET</method>
+										<status>200</status>
+									</http>
+									<exec>
+										<postStart>ls -la /maven</postStart>
+									</exec>
+								</wait>
+							</run>
+							<watch>
+								<mode>none</mode>
+							</watch>
+						</image>						
+
+					</images>
+				</configuration>
+
+				<executions>
+					<execution>
+						<id>start</id>
+						<phase>pre-integration-test</phase>
+						<goals>
+							<goal>start</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>stop</id>
+						<phase>post-integration-test</phase>
+						<goals>
+							<goal>stop</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+      <!-- 
+           fails-safe-plugin should be used instead of surefire so that the container gets stopped even
+           when the tests fail 
+      -->
+      
+      	    <!-- ======================================================================================  -->
+    		<!--       Starting micro-service images                                                     -->
+   			<!-- ======================================================================================  -->
+			<plugin>
+				<artifactId>maven-failsafe-plugin</artifactId>
+				<configuration>
+					<systemPropertyVariables>
+            			<!--
+                 			Needs to be repeated here (the following lines strangely doesn't work when the next line is omitted although)
+                 			Maven, you are little sneaky beast ... 
+             			-->
+						<discovery.port>${discovery.port}</discovery.port>
+						<hystrix.port>${hystrix.port}</hystrix.port>
+						<configuration.port>${configuration.port}</configuration.port>
+						<users.port>${users.port}</users.port>
+						<moviesui.port>${users.port}</moviesui.port>
+
+            			<!-- Map maven variables to system properties which in turn are used in the test IT-classes -->
+						<discovery.url>http://${docker.host.address}:${discovery.port}</discovery.url>
+						<hystrix.url>http://${docker.host.address}:${hystrix.port}</hystrix.url>
+						<configuration.url>http://${docker.host.address}:${configuration.port}</configuration.url>
+						<users.url>http://${docker.host.address}:${users.port}</users.url>
+						<moviesui.url>http://${docker.host.address}:${moviesui.port}</moviesui.url>
+						
+					</systemPropertyVariables>
+				</configuration>
+
+				<executions>
+					<execution>
+						<goals>
+							<goal>integration-test</goal>
+							<goal>verify</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-help-plugin</artifactId>
+			</plugin>
+
+		</plugins>
+	</build>
+
+</project>

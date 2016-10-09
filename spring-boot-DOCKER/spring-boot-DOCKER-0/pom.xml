@@ -15,15 +15,18 @@
     <name>spring-boot-DOCKER-0 Reactor</name>
 
     <modules>
+    
         <module>users-microservice</module>
         <module>discovery-microservice</module>
         <module>api-gateway-microservice</module>
         <module>recommendation-microservice</module>
         <module>config-microservice</module>
         <module>hystrix-dashboard</module>
-        <module>consul-microservice</module>
         <module>movie-microservice</module>
         <module>movies-ui</module>
+        
+        <module>spring-boot-DOCKER-0-integration-test</module>
+<!--         <module>spring-boot-DOCKER-0-integration-test-2</module> -->
     </modules>
 
     <properties>
