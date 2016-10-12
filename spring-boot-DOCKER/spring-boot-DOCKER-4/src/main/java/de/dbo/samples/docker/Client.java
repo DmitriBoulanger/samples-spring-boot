@@ -75,8 +75,19 @@ public class Client  {
 	 buildImageCmd.withDockerfile(new File("src/main/resources/image", "Dockerfile"));
 	 buildImageCmd.withTag("latest");
 	 final String imageId = buildImageCmd.exec(new BuildImageResultCallback()).awaitImageId();
-	 LOG.info("Image ID {} ", imageId);
+	 LOG.info("Image {} created", imageId);
 	 LOG.info("Created image: " +  printImage(dockerClient.listImagesCmd().exec(), imageId)  );
+	 
+	 LOG.info(""
+		+  "\n====================================================================================="
+		+  "\n Now open your Docker console and run the command: "
+		+  "\n"
+		+  "\n             docker run {}                        "
+		+  "\n"
+		+  "\n=====================================================================================",
+		imageId
+		);
+	 
 	
     }
     
