@@ -25,7 +25,7 @@ Reactor for Spring-Boot DOCKER-samples.
 
 	<modules>
 <!-- 	<module>spring-boot-DOCKER-fabric8</module> -->
-		<module>spring-boot-DOCKER-0</module>
+<!-- 		<module>spring-boot-DOCKER-0</module> -->
 <!-- 		<module>spring-boot-DOCKER-1</module> -->
 	</modules>
 	
