@@ -6,6 +6,8 @@ public class Main {
 	
 	 final Client client = new Client();
 	 client.connectToDockerServer();
+	 client.createImage();
+	 client.close();
 
     }
 

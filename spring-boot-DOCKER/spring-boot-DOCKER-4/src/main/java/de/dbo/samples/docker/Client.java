@@ -22,6 +22,7 @@ import org.slf4j.LoggerFactory;
 import org.testng.ITestResult;
 
 import com.github.dockerjava.api.DockerClient;
+import com.github.dockerjava.api.command.BuildImageCmd;
 import com.github.dockerjava.api.command.DockerCmdExecFactory;
 import com.github.dockerjava.api.command.InspectContainerResponse;
 import com.github.dockerjava.api.command.InspectContainerResponse.Mount;
@@ -66,6 +67,22 @@ public class Client  {
         
         final List<Image> images = dockerClient.listImagesCmd().exec();
         LOG.info("found {} images: " + printImages(images) , images.size() );
+    }
+    
+    public void createImage() throws Exception {
+	 LOG.info("Creating image ...");
+	 final BuildImageCmd buildImageCmd    = dockerClient.buildImageCmd();
+	 buildImageCmd.withDockerfile(new File("src/main/resources/image", "Dockerfile"));
+	 buildImageCmd.withTag("latest");
+	 final String imageId = buildImageCmd.exec(new BuildImageResultCallback()).awaitImageId();
+	 LOG.info("Image ID {} ", imageId);
+	 LOG.info("Created image: " +  printImage(dockerClient.listImagesCmd().exec(), imageId)  );
+	
+    }
+    
+    public void close() throws Exception {
+	 LOG.info("Closing ...");
+	 dockerClient.close();
     }
 
     private DefaultDockerClientConfig config() {

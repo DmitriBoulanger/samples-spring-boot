@@ -38,6 +38,18 @@ public class ClientPrint {
 	return ret;
     }
     
+    public static StringBuilder printImage( final List<Image> images, final String imageId) {
+	final StringBuilder ret = new StringBuilder();
+	for (final Image image:images) {
+	    if (image.getId().contains(imageId)) {
+		ret.append("\n\t - " + image.getId()  + " Tags: " + printImageTags(image.getRepoTags()));
+	    }
+	}
+	return ret;
+    }
+    
+   
+    
     public static StringBuilder printPorts( final ContainerPort[] ports) {
 	final StringBuilder ret = new StringBuilder();
 	for (final ContainerPort port:ports) {
