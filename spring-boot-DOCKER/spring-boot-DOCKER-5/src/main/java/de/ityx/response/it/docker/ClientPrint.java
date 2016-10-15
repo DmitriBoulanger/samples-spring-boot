@@ -1,11 +1,15 @@
 package de.ityx.response.it.docker;
 
 import java.util.List;
+import java.util.Map;
 
+import com.github.dockerjava.api.model.Bind;
 import com.github.dockerjava.api.model.Container;
 import com.github.dockerjava.api.model.ContainerPort;
 import com.github.dockerjava.api.model.ExposedPort;
 import com.github.dockerjava.api.model.Image;
+import com.github.dockerjava.api.model.Ports;
+import com.github.dockerjava.api.model.Ports.Binding;
 import com.github.dockerjava.core.DockerClientConfig;
 
 public final class ClientPrint {
@@ -71,11 +75,33 @@ public final class ClientPrint {
             if (null==exposedPorts) {
     	    	ret.append(NLT + "NULL");
     	    } else {
-    		ret.append(NLT + right(exposedPort.toString(), 20));
+    		ret.append(NLT + right(exposedPort.getProtocol() + ":" + exposedPort.getPort(), 20));
     	    }
         }
         return ret;
     }
+    
+    public static StringBuilder prinPorts(final Ports ports) {
+	final StringBuilder ret = new StringBuilder();
+	if (null==ports) {
+	    ret.append("NULL");
+	    return ret;
+	}
+	final Map<ExposedPort, Binding[]> bindings = ports.getBindings();
+	if (null == bindings || bindings.isEmpty()) {
+	    ret.append("NULL");
+	    return ret;
+	}
+        for (final ExposedPort exposedPort : bindings.keySet()) {
+            ret.append(exposedPort.getProtocol() + ":" + exposedPort.getPort() + " ==>");
+            final Binding[] portBindings = bindings.get(exposedPort);
+            for (final Binding portBinding: portBindings) {
+        	ret.append(" " +  portBinding.getHostIp() + ":" + portBinding.getHostPortSpec());
+            }
+        }
+        return ret;
+    }
+    
 
     private static StringBuilder printContanerNames(final String[] names) {
         final StringBuilder ret = new StringBuilder();
@@ -93,16 +119,17 @@ public final class ClientPrint {
         return ret;
     }
     
+    public static final String LINE   = "\n===========================================================================================================";
+    public static final String LINENL = LINE + "\n";
+    
     public static final String bannerContainerRunning(final String containerId) {
-	  return String.format("\n"
-	                + "\n===========================================================================================================B"
-	                + "\n           Now open your Docker console and run the following commands: "
-	                + "\n   "
-	                + "\n              docker inspect %s                        "
-	                + "\n              docker logs -f %s                        "
-	                + "\n  "
-	                + "\n===========================================================================================================E",
-	                containerId, containerId);
+	  return String.format(""
+	                + LINE
+	                + "\n           Open your Docker console and run the following commands:"
+	                + "\n              docker inspect %s"
+	                + "\n              docker logs -f %s"
+	                + "\n              docker port    %s"
+	                + LINENL, containerId, containerId, containerId);
     }
 
     /**

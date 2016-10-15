@@ -22,20 +22,26 @@ public final class Main {
         client.init();
         
         // clean-up
-        client.removeAvaiableContainers(client.getAvaiableContainers());
-        client.removeAvaiableImages(client.getAvaiableImages(), "java");
+        client.removeAvaiableContainers();
+        client.removeAvaiableImages(/* but not*/ "java" );
         
         // container 1
         final String imageId = client.createImage("discovery-microservice", "discovery");
-        final String containerId = client.createContainer(imageId);
+        final String containerId = client.createContainer(imageId, 8761, "eureka");
         client.startContainer(containerId);
-        LOG.info(bannerContainerRunning(containerId));
+//        client.waitContainer(containerId);
+        client.inspectContainer(containerId);
         
-        // container 2
-        final String imageId2 = client.createImage("testrun", "testrun");
-        final String containerId2 = client.createContainer(imageId2);
+         // container 2
+        final String imageId2 = client.createImage("api-gateway-microservice", "gateway");
+        final String containerId2 = client.createContainer(imageId2, 10000, "gateway");
         client.startContainer(containerId2);
+//        client.waitContainer(containerId2);
+        client.inspectContainer(containerId2);
+        
+       
         LOG.info(bannerContainerRunning(containerId2));
+
        
         // finish
         client.close();

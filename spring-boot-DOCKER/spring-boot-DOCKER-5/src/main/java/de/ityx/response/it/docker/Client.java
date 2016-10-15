@@ -13,6 +13,7 @@ import java.net.ServerSocket;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.lang.StringUtils;
 import org.hamcrest.FeatureMatcher;
@@ -28,11 +29,18 @@ import com.github.dockerjava.api.command.CreateContainerResponse;
 import com.github.dockerjava.api.command.InspectContainerResponse;
 import com.github.dockerjava.api.command.InspectContainerResponse.Mount;
 import com.github.dockerjava.api.command.StartContainerCmd;
+import com.github.dockerjava.api.command.WaitContainerCmd;
+import com.github.dockerjava.api.exception.ConflictException;
 import com.github.dockerjava.api.model.Container;
 import com.github.dockerjava.api.model.ExposedPort;
 import com.github.dockerjava.api.model.Frame;
+import com.github.dockerjava.api.model.HostConfig;
 import com.github.dockerjava.api.model.Image;
 import com.github.dockerjava.api.model.Network;
+import com.github.dockerjava.api.model.PortBinding;
+import com.github.dockerjava.api.model.Ports;
+import com.github.dockerjava.api.model.Ports.Binding;
+import com.github.dockerjava.api.model.UpdateContainerResponse;
 import com.github.dockerjava.api.model.Volume;
 
 // DOCKER CORE
@@ -41,6 +49,7 @@ import com.github.dockerjava.core.DockerClientBuilder;
 import com.github.dockerjava.core.DockerClientConfig;
 import com.github.dockerjava.core.command.BuildImageResultCallback;
 import com.github.dockerjava.core.command.LogContainerResultCallback;
+import com.github.dockerjava.core.command.WaitContainerResultCallback;
 
 /**
  * @author Dmitri Boulanger, Hombach
@@ -62,48 +71,69 @@ public class Client {
     }
     
     public  List<Container> getAvaiableContainers() throws Exception {
- 	 LOG.info("Getting available containers ....");
+	 final String msg = "Available containers ";
+ 	 LOG.info(LINENL + msg + "....");
          final List<Container> containers = dockerClient.listContainersCmd().exec();
-         LOG.info("Getting available containers DONE. Found {} containers: " + printContainers(containers), containers.size());
+         LOG.info(msg + "DONE. Found {} containers: " + printContainers(containers), containers.size());
          return containers;
      }
     
     public  List<Image> getAvaiableImages() throws Exception {
-         LOG.info("Getting available images ....");
-         final List<Image> images = dockerClient.listImagesCmd().exec();
-         LOG.info("Getting available images DONE. Found {} images: " + printImages(images), images.size());
+	 final String msg = "Available images ";
+         LOG.info(LINENL + msg + "....");
+         final List<Image> images = dockerClient.listImagesCmd().withShowAll(true).exec();
+         LOG.info(msg + "DONE. Found {} images: " + printImages(images), images.size());
          return images;
      }
     
+    public  void removeAvaiableContainers() throws Exception {
+	removeAvaiableContainers(getAvaiableContainers());
+    }
+    
     public  void removeAvaiableContainers(List<Container> containers) throws Exception {
- 	 LOG.info("Removing available containers ....");
+	 final String msg = "Removing available containers ";
+ 	 LOG.info(LINENL + msg + "....");
  	 for (final Container container: containers) {
- 	    dockerClient.stopContainerCmd(container.getId()).exec();
- 	    dockerClient.removeContainerCmd(container.getId()).exec();
+ 	     if (container.getStatus().equalsIgnoreCase("running")) {
+ 		dockerClient.killContainerCmd(container.getId()).exec();
+ 	     } else {
+ 	    	dockerClient.removeContainerCmd(container.getId()).withForce(true)  .exec();
+ 	     }
+ 	    
  	 }
- 	LOG.info("Removing available containers DONE");
+ 	LOG.info(msg + "DONE");
      }
     
-    public  void removeAvaiableImages(List<Image> images, final String negativeFilter) throws Exception {
- 	 LOG.info("Removing available images ....");
+    public boolean removeAvaiableImages(final String negativeFilter) throws Exception {
+	return removeAvaiableImages(getAvaiableImages(), negativeFilter);
+    }
+    
+    public boolean removeAvaiableImages(List<Image> images, final String negativeFilter) throws Exception {
+	 final String msg = "Removing available images ";
+ 	 LOG.info(LINENL + msg + "....");
+ 	 boolean ret = true;
  	 for (final Image image: images) {
  	     final String[] tags = image.getRepoTags();
  	     for (final String tag:tags) {
  		 if (tag.contains(negativeFilter)) {
- 		    LOG.info("Removing available images: no deletion of the image {} ", tag);
+ 		    LOG.info(msg + " - no deletion of the image {} ", tag);
  		 } else {
- 	 	    dockerClient.removeImageCmd(image.getId());
+ 	 	    try {
+			dockerClient.removeImageCmd(image.getId()).withForce(true).exec();
+		    } catch (Exception e) {
+			LOG.warn(msg + " - can't remove image: " + e.getMessage());
+			ret = false;
+		    }
  		 }
  	     }
- 	     
- 	     
-
  	 }
- 	LOG.info("Removing available images DONE");
+ 	LOG.info(msg + "DONE");
+ 	return ret;
      }
     
     public String createImage(final String imageSource, final String tag) throws Exception {
-        LOG.info("Creating image ...");
+	final String msg = "Creating image  " + tag + " ";
+        LOG.info(LINENL + "...");
         final BuildImageCmd buildImageCmd = dockerClient.buildImageCmd();
         final File baseDirectory = new File("src/main/resources/" + imageSource);
         buildImageCmd.withBaseDirectory(baseDirectory);
@@ -113,26 +143,61 @@ public class Client {
         final String imageId = buildImageCmd.exec(new BuildImageResultCallback()).awaitImageId();
         LOG.info("Image {} created", imageId);
         LOG.info("Creating image DONE. Image: " + printImage(dockerClient.listImagesCmd().exec(), imageId));
+        LOG.info(LINENL + "DONE. imageId="+imageId);
         return imageId;
     }
 
-    public String createContainer(String imageId) throws Exception {
-        
+    public String createContainer(final String imageId, final int containerPort, final String name) throws Exception {
+	final String msg = "Creating container " + name + " ";
+	LOG.info(LINENL + msg + " ...");
         final CreateContainerCmd  createContainerCmd = dockerClient.createContainerCmd(imageId);
+        createContainerCmd.withName(name);
+        configureWithAutogeneratedExposedPort(createContainerCmd,8761);
         final CreateContainerResponse createContainerResponse = createContainerCmd.exec();
         final String containerId = createContainerResponse.getId();
+        LOG.info(LINENL + msg + " DONE. continerId = " + containerId);
         return containerId;
     }
     
+    private static final void configureWithAutogeneratedExposedPort(final CreateContainerCmd createContainerCmd, int containerPort) {
+
+	        createContainerCmd.withExposedPorts(ExposedPort.tcp(containerPort));
+	        
+	        final Binding binding = Binding.bindIp("0.0.0.0");
+	        final Ports ports = new Ports();
+	        ports.bind(ExposedPort.tcp(containerPort), binding); 
+	        final HostConfig hostConfig = new HostConfig();
+	        hostConfig.withPortBindings(ports);
+	        createContainerCmd.withHostConfig(hostConfig);
+	        
+    }
+    
     public void startContainer(String containerId) throws Exception {
-	LOG.info("Starting container ...");
+	LOG.info(LINENL + "Starting container ...");
         final StartContainerCmd  startContainerCmd = dockerClient.startContainerCmd(containerId);
         startContainerCmd.exec();
-        
+    }
+    
+    public void inspectContainer(String containerId) throws Exception {
+	LOG.info(LINENL + "Inspecting container ...");
         final InspectContainerResponse inspectContainerResponse = dockerClient.inspectContainerCmd(containerId).exec();
-        final ExposedPort[] exposedPorts = inspectContainerResponse.getConfig().getExposedPorts();
-        LOG.info("Starting container DONE. Exposed ports: " + printExposedPorts(exposedPorts));
-        
+        LOG.info("Inspecting container DONE: "
+        	+ "\n\t - Running: " + inspectContainerResponse.getState().getRunning()
+        	+ "\n\t - Status:  " + inspectContainerResponse.getState().getStatus()
+        	+ "\n\t - Ports:   " + prinPorts(inspectContainerResponse.getNetworkSettings().getPorts()));
+    }
+    
+    public void waitContainer(final String containerId) throws Exception {
+	LOG.info(LINENL + "Waiting container ...");
+	final long start = System.currentTimeMillis();
+        final WaitContainerCmd  waitContainerCmd = dockerClient.waitContainerCmd(containerId);
+        final WaitContainerResultCallback waitContainerResultCallback = waitContainerCmd.exec(new WaitContainerResultCallback());
+//        waitContainerResultCallback.awaitStarted(30, TimeUnit.SECONDS);
+       
+        UpdateContainerResponse updateContainerResponse = dockerClient.updateContainerCmd(containerId).exec();
+
+        dockerClient.close();
+
     }
 
     public void close() throws Exception {
