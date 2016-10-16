@@ -3,13 +3,10 @@ package de.ityx.response.it.docker.commander;
 import static de.ityx.response.it.docker.util.PrintManager.DONE;
 import static de.ityx.response.it.docker.util.PrintManager.LINENL;
 import static de.ityx.response.it.docker.util.PrintManager.NLT;
-import static de.ityx.response.it.docker.util.PrintManager.prinPorts;
 import static de.ityx.response.it.docker.util.PrintManager.printConfig;
-import static de.ityx.response.it.docker.util.PrintManager.printImage;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Method;
 import java.net.DatagramSocket;
 import java.net.ServerSocket;
 import java.util.ArrayList;
@@ -23,28 +20,19 @@ import org.slf4j.LoggerFactory;
 
 //DOCKER API
 import com.github.dockerjava.api.DockerClient;
-import com.github.dockerjava.api.command.BuildImageCmd;
 import com.github.dockerjava.api.command.CreateContainerCmd;
 import com.github.dockerjava.api.command.CreateContainerResponse;
 import com.github.dockerjava.api.command.InspectContainerResponse;
 import com.github.dockerjava.api.command.InspectContainerResponse.Mount;
-import com.github.dockerjava.api.command.StartContainerCmd;
-import com.github.dockerjava.api.command.WaitContainerCmd;
-import com.github.dockerjava.api.model.ExposedPort;
 import com.github.dockerjava.api.model.Frame;
-import com.github.dockerjava.api.model.HostConfig;
 import com.github.dockerjava.api.model.Image;
 import com.github.dockerjava.api.model.Network;
-import com.github.dockerjava.api.model.Ports;
-import com.github.dockerjava.api.model.Ports.Binding;
-import com.github.dockerjava.api.model.UpdateContainerResponse;
 import com.github.dockerjava.api.model.Volume;
 // DOCKER CORE
 import com.github.dockerjava.core.DefaultDockerClientConfig;
 import com.github.dockerjava.core.DockerClientBuilder;
 import com.github.dockerjava.core.command.BuildImageResultCallback;
 import com.github.dockerjava.core.command.LogContainerResultCallback;
-import com.github.dockerjava.core.command.WaitContainerResultCallback;
 
 import de.ityx.response.it.docker.container.ContainerManager;
 import de.ityx.response.it.docker.image.ImageManager;
