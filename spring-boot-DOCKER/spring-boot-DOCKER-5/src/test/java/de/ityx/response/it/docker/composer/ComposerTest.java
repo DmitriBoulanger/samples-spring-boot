@@ -1,4 +1,4 @@
-package de.ityx.response.it.docker.jobs;
+package de.ityx.response.it.docker.composer;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -9,7 +9,9 @@ import org.junit.runners.MethodSorters;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.ityx.response.it.docker.TestAbstraction;
+import de.ityx.response.it.docker.composer.Composer;
+import de.ityx.response.it.docker.testimpl.TestAbstraction;
+import de.ityx.response.it.docker.testimpl.TestImageSources;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class ComposerTest extends TestAbstraction {
@@ -23,8 +25,9 @@ public class ComposerTest extends TestAbstraction {
      */
     @Test
     public void t00_readComposeFile() throws FileNotFoundException, IOException {
-	final Composer composer = new Composer(testComposeFile());
-	LOG.info("Compose-file contents: " + composer.print());
+	final Composer composer = new Composer(testComposerFile());
+	LOG.info("Composer-file contents: " + composer.print());
+	composer.assertThatCovered(TestImageSources.imageSources("test/composer"));
     }
 
 }

@@ -1,4 +1,4 @@
-package de.ityx.response.it.docker.jobs;
+package de.ityx.response.it.docker.image;
 
 import java.util.Set;
 

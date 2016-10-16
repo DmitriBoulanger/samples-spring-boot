@@ -1,4 +1,4 @@
-package de.ityx.response.it.docker;
+package de.ityx.response.it.docker.commander;
 
 import com.github.dockerjava.api.async.ResultCallback;
 import com.github.dockerjava.api.command.AttachContainerCmd;
@@ -73,7 +73,7 @@ import java.util.List;
  *           only incidentally for computers to execute 
  *
  */
-public class ClientCmdExecFactory implements DockerCmdExecFactory {
+public class CommandFactory implements DockerCmdExecFactory {
 
     private List<String> containerNames = new ArrayList<String>();
 
@@ -85,7 +85,7 @@ public class ClientCmdExecFactory implements DockerCmdExecFactory {
 
     private DockerCmdExecFactory delegate;
 
-    public ClientCmdExecFactory(final DockerCmdExecFactory delegate) {
+    public CommandFactory(final DockerCmdExecFactory delegate) {
         this.delegate = delegate;
     }
 

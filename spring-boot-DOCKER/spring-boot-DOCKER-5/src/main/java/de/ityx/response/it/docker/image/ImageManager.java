@@ -1,4 +1,4 @@
-package de.ityx.response.it.docker.jobs;
+package de.ityx.response.it.docker.image;
 
 import static de.ityx.response.it.docker.util.PrintManager.DONE;
 import static de.ityx.response.it.docker.util.PrintManager.printImage;
@@ -18,10 +18,10 @@ import com.github.dockerjava.api.command.BuildImageCmd;
 import com.github.dockerjava.api.model.Image;
 import com.github.dockerjava.core.command.BuildImageResultCallback;
 
-import de.ityx.response.it.docker.Client;
+import de.ityx.response.it.docker.commander.Commander;
 
 public final class ImageManager {
-    private static final Logger     LOG                  = LoggerFactory.getLogger(Client.class);
+    private static final Logger     LOG                  = LoggerFactory.getLogger(Commander.class);
     
     private ImageManager() {
 	
@@ -51,7 +51,7 @@ public final class ImageManager {
          final BuildImageCmd buildImageCmd = dockerClient.buildImageCmd();
          buildImageCmd.withBaseDirectory(baseDirectory);
          buildImageCmd.withDockerfile(imageSource.dockerFile());
-         final String path = imageSource.getPath();
+         final String path = imageSource.getRepositoryPath();
          final String actualTag;
          if (null!=path) {
              actualTag = path + tag;

@@ -1,4 +1,4 @@
-package de.ityx.response.it.docker;
+package de.ityx.response.it.docker.commander;
 
 import static de.ityx.response.it.docker.util.PrintManager.DONE;
 import static de.ityx.response.it.docker.util.PrintManager.LINENL;
@@ -33,6 +33,7 @@ import com.github.dockerjava.api.command.WaitContainerCmd;
 import com.github.dockerjava.api.model.ExposedPort;
 import com.github.dockerjava.api.model.Frame;
 import com.github.dockerjava.api.model.HostConfig;
+import com.github.dockerjava.api.model.Image;
 import com.github.dockerjava.api.model.Network;
 import com.github.dockerjava.api.model.Ports;
 import com.github.dockerjava.api.model.Ports.Binding;
@@ -45,26 +46,30 @@ import com.github.dockerjava.core.command.BuildImageResultCallback;
 import com.github.dockerjava.core.command.LogContainerResultCallback;
 import com.github.dockerjava.core.command.WaitContainerResultCallback;
 
-import de.ityx.response.it.docker.jobs.ContainerManager;
-import de.ityx.response.it.docker.jobs.ImageManager;
-import de.ityx.response.it.docker.jobs.ImageSource;
+import de.ityx.response.it.docker.container.ContainerManager;
+import de.ityx.response.it.docker.image.ImageManager;
+import de.ityx.response.it.docker.image.ImageSource;
 
 /**
  * @author Dmitri Boulanger, Hombach
  *         D. Knuth: Programs are meant to be read by humans and
  *         only incidentally for computers to execute
  */
-public class Client {
-    private static final Logger     LOG                  = LoggerFactory.getLogger(Client.class);
+public class Commander {
+    private static final Logger     LOG                  = LoggerFactory.getLogger(Commander.class);
 
     protected DockerClient         dockerClient;
-    protected ClientCmdExecFactory dockerCmdExecFactory = new ClientCmdExecFactory(DockerClientBuilder.getDefaultDockerCmdExecFactory());
+    protected CommandFactory dockerCmdExecFactory = new CommandFactory(DockerClientBuilder.getDefaultDockerCmdExecFactory());
     
     public void init() {
 	final DefaultDockerClientConfig config = config();
         LOG.info("configuration: " + printConfig(config));
         dockerClient = DockerClientBuilder.getInstance(config).withDockerCmdExecFactory(dockerCmdExecFactory).build();
         LOG.info("initialized");
+    }
+    
+    public DockerClient dockerClient() {
+	return dockerClient;
     }
     
     public void close() throws Exception {
@@ -79,6 +84,10 @@ public class Client {
         LOG.info(LINENL + msg + "....");
 	ContainerManager.showAvaiableContainers(true,dockerClient);
 	ImageManager.showAvaiableImages(true,dockerClient);
+    }
+    
+    public List<Image> avialbleImages() throws Exception {
+	return ImageManager.showAvaiableImages(false,dockerClient);
     }
     
     public void removeDockerResources(final String negativeImageFilter) throws Exception {

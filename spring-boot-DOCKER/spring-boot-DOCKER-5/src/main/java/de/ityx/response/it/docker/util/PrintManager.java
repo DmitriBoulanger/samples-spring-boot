@@ -3,7 +3,6 @@ package de.ityx.response.it.docker.util;
 import java.util.List;
 import java.util.Map;
 
-import com.github.dockerjava.api.model.Bind;
 import com.github.dockerjava.api.model.Container;
 import com.github.dockerjava.api.model.ContainerPort;
 import com.github.dockerjava.api.model.ExposedPort;

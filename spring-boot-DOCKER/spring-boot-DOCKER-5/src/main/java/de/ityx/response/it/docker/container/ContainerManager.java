@@ -1,4 +1,4 @@
-package de.ityx.response.it.docker.jobs;
+package de.ityx.response.it.docker.container;
 
 import static de.ityx.response.it.docker.util.PrintManager.DONE;
 import static de.ityx.response.it.docker.util.PrintManager.prinPorts;
@@ -20,10 +20,10 @@ import com.github.dockerjava.api.model.HostConfig;
 import com.github.dockerjava.api.model.Ports;
 import com.github.dockerjava.api.model.Ports.Binding;
 
-import de.ityx.response.it.docker.Client;
+import de.ityx.response.it.docker.commander.Commander;
 
 public class ContainerManager {
-    private static final Logger LOG = LoggerFactory.getLogger(Client.class);
+    private static final Logger LOG = LoggerFactory.getLogger(Commander.class);
 
     private ContainerManager() {
 

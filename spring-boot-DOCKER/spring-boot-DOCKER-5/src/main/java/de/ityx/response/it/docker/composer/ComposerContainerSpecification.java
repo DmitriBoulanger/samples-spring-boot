@@ -1,18 +1,20 @@
-package de.ityx.response.it.docker.jobs;
+package de.ityx.response.it.docker.composer;
 
 import java.io.FileNotFoundException;
 import java.util.List;
 
-public class ContainerSpecification {
+import de.ityx.response.it.docker.image.ImageSource;
+
+public class ComposerContainerSpecification {
     
     private String title;
     private String image;
-    private List<String> ports;
+    private ComposerPorts composePorts;
     private List<String> links;
     
     private ImageSource imageSource;
     
-    ContainerSpecification() {
+    ComposerContainerSpecification() {
 	
     }
     
@@ -32,11 +34,11 @@ public class ContainerSpecification {
         this.image = image;
     }
     
-    public List<String> getPorts() {
-        return ports;
+    public ComposerPorts getPorts() {
+        return composePorts;
     }
-    public void setPorts(List<String> ports) {
-        this.ports = ports;
+    public void setPorts(ComposerPorts composePorts) {
+        this.composePorts = composePorts;
     }
     
     public List<String> getLinks() {
@@ -59,7 +61,7 @@ public class ContainerSpecification {
 	final StringBuilder sb = new StringBuilder();
 	    sb.append("\n\t - CONTAINER " + title);
 	    sb.append("\n\t    - Image " + image);
-	    sb.append("\n\t    - Ports " + ports);
+	    sb.append("\n\t    - " + composePorts.print());
 	    sb.append("\n\t    - Links " + links);
 	return sb;
     }

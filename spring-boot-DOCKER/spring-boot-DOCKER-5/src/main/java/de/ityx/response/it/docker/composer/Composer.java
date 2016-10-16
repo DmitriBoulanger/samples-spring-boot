@@ -1,4 +1,4 @@
-package de.ityx.response.it.docker.jobs;
+package de.ityx.response.it.docker.composer;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -6,10 +6,17 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import org.yaml.snakeyaml.Yaml;
+
+import com.github.dockerjava.api.model.Image;
+
+import de.ityx.response.it.docker.image.ImageSource;
 
 public class Composer {
 
@@ -46,12 +53,49 @@ public class Composer {
 	}
 	return ret;
     }
-   
-    public final ContainerSpecification getContainerSpecification(final String title) throws FileNotFoundException {
-	    final ContainerSpecification containerSpecification = new ContainerSpecification();
+    
+    public final void assertThatCovered(final Map<String, ImageSource> imageSources) {
+	final Set<String> imageSourceComposerTitles = new HashSet<String>();
+	for (final ImageSource imageSource: imageSources.values()) {
+	    imageSourceComposerTitles.add(imageSource.getComposerTitle());
+	}
+	final List<String> titles = getContainerTitles();
+	for (final String title: titles) {
+	    assertThat("Container specification ["+title+"] is not covered by the image-sources", imageSourceComposerTitles.contains(title));
+	}
+    }
+    
+    public final void assertThatCovered(final List<Image> images) {
+	final Set<String> imageTags = new HashSet<String>();
+	for (final Image image:images) {
+	   imageTags.add(tags(image));
+	}
+	final List<String> titles = getContainerTitles();
+	for (final String title: titles) {
+	    final String composerImageTag = getContainerImage(title);
+	    assertThat("Composer image specification [" + composerImageTag + "] is not covered by the available images", imageTags.contains(composerImageTag));
+	}
+    }
+    
+    private static String tags(final Image image) {
+        final StringBuilder sb = new StringBuilder();
+        for (final String tag:image.getRepoTags()) {
+            sb.append(tag);
+        }
+        final String ret = sb.toString();
+        final int posVersion = ret.indexOf(":");
+        if ( -1!=posVersion ) {
+            return new String(ret.substring(0,posVersion));
+        } else {
+            return ret;
+        }
+    }
+    
+    public final ComposerContainerSpecification getContainerSpecification(final String title) throws FileNotFoundException {
+	    final ComposerContainerSpecification containerSpecification = new ComposerContainerSpecification();
 	    containerSpecification.setTitle(title);
 	    containerSpecification.setImage( getContainerImage(title));
-	    containerSpecification.setPorts( getContainerPorts(title));
+	    containerSpecification.setPorts( new ComposerPorts(getContainerPorts(title)));
 	    containerSpecification.setLinks(  getContainerLinks(title));
 	    return containerSpecification;
     }
@@ -68,7 +112,7 @@ public class Composer {
 	final List<String> titles = getContainerTitles();
 	final StringBuilder sb = new StringBuilder();
 	for (final String title: titles) {
-	    final ContainerSpecification containerSpecification = getContainerSpecification(title);
+	    final ComposerContainerSpecification containerSpecification = getContainerSpecification(title);
 	    sb.append(containerSpecification.print());
 	}
 	return sb;

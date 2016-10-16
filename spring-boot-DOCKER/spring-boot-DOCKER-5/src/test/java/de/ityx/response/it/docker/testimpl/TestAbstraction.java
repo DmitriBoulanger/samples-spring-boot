@@ -1,4 +1,4 @@
-package de.ityx.response.it.docker;
+package de.ityx.response.it.docker.testimpl;
 
 import java.io.File;
 import java.io.IOException;
@@ -19,8 +19,8 @@ public class TestAbstraction {
 	return new File(TEST_PROPERTIES.getProperty("spring-cloud-microservice-example.directory"));
     }
     
-    public static File testComposeFile() {
-	return new File(TEST_PROPERTIES.getProperty("compose-file"));
+    public static File testComposerFile() {
+	return new File(TEST_PROPERTIES.getProperty("composer"));
     }
     
     public static File sourceDockerDirectory(final String service) {

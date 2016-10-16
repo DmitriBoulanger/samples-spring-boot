@@ -1,24 +1,17 @@
 package de.ityx.response.it.docker;
 
-import static de.ityx.response.it.docker.util.PrintManager.*;
-
-import java.io.File;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import de.ityx.response.it.docker.jobs.ImageSource;
+import de.ityx.response.it.docker.commander.Commander;
+import de.ityx.response.it.docker.testimpl.TestAbstraction;
 
 public final class Main extends TestAbstraction {
-    private static final Logger LOG = LoggerFactory.getLogger(Main.class);
    
     public static void main(final String[] args) throws Exception {
 
-        final Client client = new Client();
-        client.init();
+        final Commander commander = new Commander();
+        commander.init();
         
-        client.showDockerResources();
-        client.removeDockerResources(/* but not */ "java" );
+        commander.showDockerResources();
+        commander.removeDockerResources(/* but not */ "java" );
 
 //        // container 1
 //        final ImageSource imageSource = new ImageSource("Discovery",
@@ -39,8 +32,8 @@ public final class Main extends TestAbstraction {
 
        
         // finish
-        client.showDockerResources();
-        client.close();
+        commander.showDockerResources();
+        commander.close();
 
     }
 
