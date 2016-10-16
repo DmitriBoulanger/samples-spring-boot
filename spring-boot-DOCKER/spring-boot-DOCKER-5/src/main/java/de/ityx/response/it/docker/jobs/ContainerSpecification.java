@@ -10,6 +10,8 @@ public class ContainerSpecification {
     private List<String> ports;
     private List<String> links;
     
+    private ImageSource imageSource;
+    
     ContainerSpecification() {
 	
     }
@@ -17,15 +19,19 @@ public class ContainerSpecification {
     public String getTitle() {
         return title;
     }
+    
     public void setTitle(String title) {
         this.title = title;
     }
+    
     public String getImage() {
         return image;
     }
+    
     public void setImage(String image) {
         this.image = image;
     }
+    
     public List<String> getPorts() {
         return ports;
     }
@@ -36,8 +42,17 @@ public class ContainerSpecification {
     public List<String> getLinks() {
         return links;
     }
+    
     public void setLinks(List<String> links) {
         this.links = links;
+    }
+    
+    public ImageSource getImageSource() {
+        return imageSource;
+    }
+
+    public void setImageSource(ImageSource imageSource) {
+        this.imageSource = imageSource;
     }
     
     public final StringBuilder print() throws FileNotFoundException {
@@ -48,10 +63,4 @@ public class ContainerSpecification {
 	    sb.append("\n\t    - Links " + links);
 	return sb;
     }
-
-    
-    
-    
-    
-
 }

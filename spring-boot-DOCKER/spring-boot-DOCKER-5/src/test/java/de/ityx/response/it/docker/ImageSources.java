@@ -16,19 +16,19 @@ public final class ImageSources extends TestAbstraction {
 	
 	ImageSource imageSource = null;
 	
-	imageSource = new ImageSource("Discovery",
+	imageSource = new ImageSource("discovery",
 	   new File(sourceDockerDirectory("discovery-microservice"), "discovery-microservice-0.1.0.jar"), path);
         ret.put(imageSource.getName(), imageSource);
         
-        imageSource  = new ImageSource("Gateway",
+        imageSource  = new ImageSource("gateway",
 	   new File(sourceDockerDirectory("api-gateway-microservice"), "api-gateway-microservice-0.1.0.jar"), path);
         ret.put(imageSource.getName(), imageSource);
         
-        imageSource  = new ImageSource("Consul",
+        imageSource  = new ImageSource("consul",
 	   new File(sourceDockerDirectory("consul-microservice"), "consul-microservice-0.1.0.jar"), path);
         ret.put(imageSource.getName(), imageSource);
         
-        imageSource  = new ImageSource("Config",
+        imageSource  = new ImageSource("configserver",
 	   new File(sourceDockerDirectory("config-microservice"), "config-microservice-0.1.0.jar"), path);
         ret.put(imageSource.getName(), imageSource);
         
@@ -36,19 +36,19 @@ public final class ImageSources extends TestAbstraction {
 	   new File(sourceDockerDirectory("hystrix-dashboard"), "hystrix-dashboard-0.1.0.jar"), path);
         ret.put(imageSource.getName(), imageSource);
         
-        imageSource  = new ImageSource("Movie",
+        imageSource  = new ImageSource("movie",
 	   new File(sourceDockerDirectory("movie-microservice"), "movie-microservice-0.1.0.jar"), path);
         ret.put(imageSource.getName(), imageSource);
         
-        imageSource  = new ImageSource("MoviesUI",
+        imageSource  = new ImageSource("moviesui",
 	   new File(sourceDockerDirectory("movies-ui"), "movies-ui-0.1.0.jar"), path);
         ret.put(imageSource.getName(), imageSource);
         
-        imageSource  = new ImageSource("Recommendation",
+        imageSource  = new ImageSource("recommendation",
 	   new File(sourceDockerDirectory("recommendation-microservice"), "recommendation-microservice-0.1.0.jar"), path);
         ret.put(imageSource.getName(), imageSource);
         
-        imageSource  = new ImageSource("Users",
+        imageSource  = new ImageSource("user",
 	   new File(sourceDockerDirectory("users-microservice"), "users-microservice-0.1.0.jar"), path);
         ret.put(imageSource.getName(), imageSource);	
 	

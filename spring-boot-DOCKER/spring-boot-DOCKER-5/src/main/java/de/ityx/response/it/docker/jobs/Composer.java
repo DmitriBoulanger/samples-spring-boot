@@ -5,20 +5,17 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.nio.channels.IllegalSelectorException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.yaml.snakeyaml.Yaml;
 
 public class Composer {
-    private static final Logger LOG= LoggerFactory.getLogger(Composer.class);
-    
+
     private final File composeFile;
-    private final Yaml yaml = new Yaml();
+    
+    @SuppressWarnings("rawtypes")
     private final LinkedHashMap composeYaml;
     
     @SuppressWarnings("rawtypes")
@@ -26,9 +23,10 @@ public class Composer {
 	this.composeFile = composeFile;
 	assertFileCorrectnes();
 	try {
+	    final Yaml yaml = new Yaml();
 	    this.composeYaml = (LinkedHashMap) yaml.load(new FileInputStream(composeFile));
 	} catch (Exception e) {
-	   throw new IllegalStateException("Failure loading compose-file: ",e);
+	   throw new IllegalStateException("Failure loading/parsing compose-file: ",e);
 	}
     }
     
@@ -48,22 +46,7 @@ public class Composer {
 	}
 	return ret;
     }
-    
-    @SuppressWarnings("rawtypes")
-    private final String getContainerImage(final String containerTitle) {
-	return (String) ((LinkedHashMap) composeYaml.get(containerTitle)).get("image");
-    }
-    
-    @SuppressWarnings({ "rawtypes", "unchecked" })
-    private final List<String> getContainerPorts(final String containerTitle) {
- 	return (List<String>) ((LinkedHashMap) composeYaml.get(containerTitle)).get("ports");
-    }
-    
-    @SuppressWarnings({ "rawtypes", "unchecked" })
-    private final List<String> getContainerLinks(final String containerTitle) {
- 	return (List<String>) ((LinkedHashMap) composeYaml.get(containerTitle)).get("links");
-    }
-    
+   
     public final ContainerSpecification getContainerSpecification(final String title) throws FileNotFoundException {
 	    final ContainerSpecification containerSpecification = new ContainerSpecification();
 	    containerSpecification.setTitle(title);
@@ -91,7 +74,6 @@ public class Composer {
 	return sb;
     }
     
-    
     // ==============================================================================================================================
     //                  PRIVATE IMPLEMENTATION
     // ==============================================================================================================================
@@ -99,7 +81,20 @@ public class Composer {
     private final void assertFileCorrectnes() {
 	assertThat("Compose file doesn't exist. Check the file:\n" +  composeFile,   composeFile.exists() && composeFile.isFile() );
     }
-
     
-
+    @SuppressWarnings("rawtypes")
+    private final String getContainerImage(final String containerTitle) {
+	return (String) ((LinkedHashMap) composeYaml.get(containerTitle)).get("image");
+    }
+    
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+    private final List<String> getContainerPorts(final String containerTitle) {
+ 	return (List<String>) ((LinkedHashMap) composeYaml.get(containerTitle)).get("ports");
+    }
+    
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+    private final List<String> getContainerLinks(final String containerTitle) {
+ 	return (List<String>) ((LinkedHashMap) composeYaml.get(containerTitle)).get("links");
+    }
+    
 }
