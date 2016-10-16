@@ -2,27 +2,78 @@
 <configuration debug="false"> 
 
 	<property name="STANDARD_PATTERN" value="%8relative ms. [%26thread] %-5level %50logger{0} - %msg%n" />
+	
+		<!-- ======================================================================================================= -->
+	<!-- STANDARD APPENDERS                                                                                      -->
+	<!-- ======================================================================================================= -->
+	
+	<property name="STANDARD_PATTERN" value="%8relative ms. [%26thread] %-5level %50logger{0} - %msg%n" />
 
-	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
-	   <target>System.out</target>
-	    <encoder>
+	<!-- Normal console for INFO, DEBUG and TRACE -->
+	<appender name="NORMAL_MESSAGES" class="ch.qos.logback.core.ConsoleAppender">
+		<target>System.out</target>
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>ERROR</level>
+			<onMatch>DENY</onMatch>
+			<onMismatch>NEUTRAL</onMismatch>
+		</filter>
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>WARN</level>
+			<onMatch>DENY</onMatch>
+			<onMismatch>NEUTRAL</onMismatch>
+		</filter>
+		<encoder>
 			<pattern>${STANDARD_PATTERN}</pattern>
 		</encoder>
 	</appender>
-    
-     <logger name="de.ityx.response.it.docker" level="DEBUG"/>
-     
-    <logger name="com.github.dockerjava" level="INFO"/>
-    <logger name="com.github.dockerjava.jaxrs" level="INFO"/>
-    <logger name="com.github.dockerjava.netty" level="INFO"/>
-    
-    <logger name="org.apache.http.impl.conn" level="DEBUG"/>
-   
-  
 
+	<!-- Error console for WARNINGS and ERRORS -->
+	<appender name="WARNINGS_ERRORS" class="ch.qos.logback.core.ConsoleAppender">
+		<target>System.err</target>
+		<!-- deny all events with a level below WARN, that is INFO, TRACE and DEBUG -->
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>WARN</level>
+		</filter>
+		<encoder>
+			<pattern>${STANDARD_PATTERN}</pattern>
+		</encoder>
+	</appender>
 
-    <root level="WARN">
-        <appender-ref ref="STDOUT" />
-    </root>
-
+	<!-- ======================================================================================================= -->
+	<!--                                  LOGGERS                                                                -->
+	<!-- ======================================================================================================= -->
+	
+	<!-- Any warning or error has to be logged -->
+	<root level="WARN">
+		<appender-ref ref="WARNINGS_ERRORS" />
+	</root>
+	
+	<logger name="de.ityx.response.it.docker" level="INFO">
+		<appender-ref ref="NORMAL_MESSAGES" />
+	</logger>
+	
+	<logger name="com.github.dockerjava" level="INFO">
+		<appender-ref ref="NORMAL_MESSAGES" />
+	</logger>
+	
+	<logger name="com.github.dockerjava.netty" level="INFO">
+		<appender-ref ref="NORMAL_MESSAGES" />
+	</logger>
+	
+	<!-- ======================================================================= -->
+	<!-- CORE: Responses from the Docker (JerseyDockerCmdExecFactory)            -->
+	<!-- Useful to see the JSON data from the docker-machine                     -->
+	<!-- Use DEBUG                                                               -->
+	<logger name="com.github.dockerjava.jaxrs" level="INFO">
+		<appender-ref ref="NORMAL_MESSAGES" />
+	</logger>
+	
+	<!-- ======================================================================= -->
+	<!-- HTTP: requests to the docker-machine                                    -->
+	<!-- Useful to see the request traffic between client and the docker-machine -->
+	<!-- Use DEBUG                                                               -->
+	<logger name="org.apache.http.impl.conn" level="INFO">
+		<appender-ref ref="NORMAL_MESSAGES" />
+	</logger>
+	
 </configuration>

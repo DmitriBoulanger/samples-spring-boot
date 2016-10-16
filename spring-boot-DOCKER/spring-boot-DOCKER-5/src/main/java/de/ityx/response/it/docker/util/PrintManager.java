@@ -1,4 +1,4 @@
-package de.ityx.response.it.docker;
+package de.ityx.response.it.docker.util;
 
 import java.util.List;
 import java.util.Map;
@@ -12,18 +12,20 @@ import com.github.dockerjava.api.model.Ports;
 import com.github.dockerjava.api.model.Ports.Binding;
 import com.github.dockerjava.core.DockerClientConfig;
 
-public final class ClientPrint {
+public final class PrintManager {
     
-    private static final String NLT = "\n\t - ";
+    public static final String DONE = "DONE. ";
     
-    private ClientPrint() {
+    public static final String NLT = "\n\t - ";
+    
+    private PrintManager() {
         
     }
 
     public static StringBuilder printConfig(final DockerClientConfig config) {
         final StringBuilder ret = new StringBuilder();
-        ret.append("\n\t - Docker host:  " + config.getDockerHost());
-        ret.append("\n\t - Registry URL: " + config.getRegistryUrl());
+        ret.append("\n\t - Docker machine (host): " + config.getDockerHost());
+        ret.append("\n\t - Docker registry URL:   " + config.getRegistryUrl());
         return ret;
     }
 
@@ -33,7 +35,7 @@ public final class ClientPrint {
             ret.append(NLT // + container.getId()
                     + printContanerNames(container.getNames())
                     + "\tStatus: " + container.getStatus()
-                    + "\tPorts: " + printPorts(container.getPorts()));
+                    + "\tPorts: "  + printPorts(container.getPorts()));
         }
         return ret;
     }
@@ -111,7 +113,7 @@ public final class ClientPrint {
         return ret;
     }
 
-    private static StringBuilder printImageTags(final String[] names) {
+    public static StringBuilder printImageTags(final String[] names) {
         final StringBuilder ret = new StringBuilder();
         for (final String name : names) {
             ret.append(" " + name);
@@ -130,6 +132,10 @@ public final class ClientPrint {
 	                + "\n              docker logs -f %s"
 	                + "\n              docker port    %s"
 	                + LINENL, containerId, containerId, containerId);
+    }
+   
+    public static final String q(final Object x) {
+	return "[" + x + "]";
     }
 
     /**

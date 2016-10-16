@@ -20,6 +20,16 @@
 			<artifactId>docker-java</artifactId>
 			<version>3.0.6</version>
 		</dependency>
+		
+		<dependency>
+    		<groupId>org.yaml</groupId>
+    		<artifactId>snakeyaml</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>hamcrest-core</artifactId>
+		</dependency>
 	</dependencies>
 
 </project>
