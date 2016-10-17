@@ -68,6 +68,10 @@ public class Composer {
     public final void assertThatCovered(final List<Image> images) {
 	final Set<String> imageTags = new HashSet<String>();
 	for (final Image image:images) {
+	   final String tags = tags(image);
+	   if (null==tags) {
+	       continue;
+	   }
 	   imageTags.add(tags(image));
 	}
 	final List<String> titles = getContainerTitles();
@@ -79,7 +83,11 @@ public class Composer {
     
     private static String tags(final Image image) {
         final StringBuilder sb = new StringBuilder();
-        for (final String tag:image.getRepoTags()) {
+        final String[] tags = image.getRepoTags();
+        if (null==tags) {
+            return null;
+        }
+        for (final String tag: tags) {
             sb.append(tag);
         }
         final String ret = sb.toString();

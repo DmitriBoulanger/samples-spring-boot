@@ -24,10 +24,6 @@ public final class TestImageSources extends TestAbstraction {
 	   new File(sourceDockerDirectory("api-gateway-microservice"), "api-gateway-microservice-0.1.0.jar"), repositotyPath);
         ret.put(imageSource.getName(), imageSource);
         
-        imageSource  = new ImageSource("consul-microservice", "consul",
-	   new File(sourceDockerDirectory("consul-microservice"), "consul-microservice-0.1.0.jar"), repositotyPath);
-        ret.put(imageSource.getName(), imageSource);
-        
         imageSource  = new ImageSource("config-microservice", "configserver",
 	   new File(sourceDockerDirectory("config-microservice"), "config-microservice-0.1.0.jar"), repositotyPath);
         ret.put(imageSource.getName(), imageSource);
@@ -35,22 +31,10 @@ public final class TestImageSources extends TestAbstraction {
         imageSource  = new ImageSource("hystrix-dashboard", "hystrix",
 	   new File(sourceDockerDirectory("hystrix-dashboard"), "hystrix-dashboard-0.1.0.jar"), repositotyPath);
         ret.put(imageSource.getName(), imageSource);
-        
-        imageSource  = new ImageSource("movie-microservice", "movie",
-	   new File(sourceDockerDirectory("movie-microservice"), "movie-microservice-0.1.0.jar"), repositotyPath);
-        ret.put(imageSource.getName(), imageSource);
-        
+            
         imageSource  = new ImageSource("movies-ui", "moviesui",
 	   new File(sourceDockerDirectory("movies-ui"), "movies-ui-0.1.0.jar"), repositotyPath);
         ret.put(imageSource.getName(), imageSource);
-        
-        imageSource  = new ImageSource("recommendation-microservice", "recommendation",
-	   new File(sourceDockerDirectory("recommendation-microservice"), "recommendation-microservice-0.1.0.jar"), repositotyPath);
-        ret.put(imageSource.getName(), imageSource);
-        
-        imageSource  = new ImageSource("users-microservice", "user",
-	   new File(sourceDockerDirectory("users-microservice"), "users-microservice-0.1.0.jar"), repositotyPath);
-        ret.put(imageSource.getName(), imageSource);	
 	
         return ret;
 	

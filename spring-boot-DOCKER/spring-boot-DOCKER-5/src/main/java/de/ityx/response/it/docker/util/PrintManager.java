@@ -14,7 +14,7 @@ import com.github.dockerjava.core.DockerClientConfig;
 public final class PrintManager {
     
     public static final String DONE = "DONE. ";
-    
+    public static final String NULL = "NULL";
     public static final String NLT = "\n\t - ";
     
     private PrintManager() {
@@ -69,12 +69,12 @@ public final class PrintManager {
     public static StringBuilder printExposedPorts(final ExposedPort[] exposedPorts) {
 	final StringBuilder ret = new StringBuilder();
 	if (null==exposedPorts) {
-	    ret.append(NLT + "NULL");
+	    ret.append(NLT + NULL);
 	    return ret;
 	}
         for (final ExposedPort exposedPort : exposedPorts) {
             if (null==exposedPorts) {
-    	    	ret.append(NLT + "NULL");
+    	    	ret.append(NLT + NULL);
     	    } else {
     		ret.append(NLT + right(exposedPort.getProtocol() + ":" + exposedPort.getPort(), 20));
     	    }
@@ -85,12 +85,12 @@ public final class PrintManager {
     public static StringBuilder prinPorts(final Ports ports) {
 	final StringBuilder ret = new StringBuilder();
 	if (null==ports) {
-	    ret.append("NULL");
+	    ret.append(NULL);
 	    return ret;
 	}
 	final Map<ExposedPort, Binding[]> bindings = ports.getBindings();
 	if (null == bindings || bindings.isEmpty()) {
-	    ret.append("NULL");
+	    ret.append(NULL);
 	    return ret;
 	}
         for (final ExposedPort exposedPort : bindings.keySet()) {
@@ -114,6 +114,10 @@ public final class PrintManager {
 
     public static StringBuilder printImageTags(final String[] names) {
         final StringBuilder ret = new StringBuilder();
+        if (null==names) {
+            ret.append(" " + NULL);
+            return ret;
+        }
         for (final String name : names) {
             ret.append(" " + name);
         }

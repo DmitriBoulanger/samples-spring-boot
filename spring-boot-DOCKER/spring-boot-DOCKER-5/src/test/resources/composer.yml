@@ -22,24 +22,6 @@ gateway:
   links:
    - discovery
    - configserver
-   - user
-   - movie
-   - recommendation
-user:
-  image: test/users-microservice
-  links:
-   - discovery
-   - configserver
-movie:
-  image: test/movie-microservice
-  links:
-   - discovery
-   - configserver
-recommendation:
-  image: test/recommendation-microservice
-  links:
-   - discovery
-   - configserver
 moviesui:
   image: test/movies-ui
   ports:
