@@ -81,9 +81,9 @@ public final class ImageManager {
      * @return
      * @throws Exception
      */
-    public static boolean removeAvaiableImages(final boolean all, final String negativeFilter,
+    public static boolean removeAvaiableImages(final boolean all, final String[] negativeFilters,
             final DockerClient dockerClient) throws Exception {
-        return removeAvaiableImages(avialbleImages(all, dockerClient), negativeFilter, dockerClient);
+        return removeAvaiableImages(avialbleImages(all, dockerClient), negativeFilters, dockerClient);
     }
 
     public static List<Image> avialbleImages(final boolean all, final DockerClient dockerClient) {
@@ -94,31 +94,16 @@ public final class ImageManager {
     // PRIVATE IMPLEMENTATION
     // ==============================================================================================================================
 
-    private static boolean keepImage(final Image image, final String negativeFilter, final String msg) {
-        final ImageFilter imageFilter = new ImageFilter(negativeFilter, true);
-        if (imageFilter.isMatch(image)) {
-            LOG.info(msg + " - keep the image with tags: " + printImageTags(image.getRepoTags()));
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
-
-    private static boolean removeAvaiableImages(final List<Image> images, final String negativeFilter,
+    private static boolean removeAvaiableImages(final List<Image> images, final String[] negativeFilters,
             final DockerClient dockerClient) throws Exception {
         final String msg = "Removing available images ";
         LOG.info(msg + "....");
         boolean ret = true;
         final List<Image> imagesWithConflict = new ArrayList<Image>();
         for (final Image image : images) {
-            if (keepImage(image, negativeFilter, msg)) {
+            if (keepImage(image, negativeFilters, msg)) {
                 continue;
             }
-            // if (!nn(image.getParentId())) {
-            // imagesWithConflict.add(image);
-            // continue;
-            // }
             try {
                 dockerClient.removeImageCmd(image.getId()).withForce(true).exec();
             }
@@ -144,7 +129,7 @@ public final class ImageManager {
         }
 
         final int conflictCnt = imagesWithConflict.size();
-        LOG.info(msg + " - removing {} confliction image(s) ...", conflictCnt);
+        LOG.info(msg + " - removing {} conflicting image(s) ...", conflictCnt);
         for (final Image image : imagesWithConflict) {
             try {
                 dockerClient.removeImageCmd(image.getId()).withForce(true).exec();
@@ -162,5 +147,18 @@ public final class ImageManager {
         LOG.info(msg + DONE);
         return ret;
     }
+    
+
+    private static boolean keepImage(final Image image, final String[] negativeFilters, final String msg) {
+        final ImageFilter imageFilter = new ImageFilter(negativeFilters, true);
+        if (imageFilter.isMatch(image)) {
+            LOG.info(msg + " - keeping image: " + printImageTags(image.getRepoTags()));
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
 
 }

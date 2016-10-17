@@ -4,11 +4,9 @@ import static de.ityx.response.it.docker.util.DockerPrint.DONE;
 import static de.ityx.response.it.docker.util.DockerPrint.LINENL;
 import static de.ityx.response.it.docker.util.DockerPrint.NLT;
 import static de.ityx.response.it.docker.util.DockerPrint.printConfig;
+import static de.ityx.response.it.docker.util.DockerPrint.printList;
 
 import java.io.File;
-import java.io.IOException;
-import java.net.DatagramSocket;
-import java.net.ServerSocket;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +16,7 @@ import org.hamcrest.Matcher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-//DOCKER API
+// DOCKER API
 import com.github.dockerjava.api.DockerClient;
 import com.github.dockerjava.api.command.CreateContainerCmd;
 import com.github.dockerjava.api.command.CreateContainerResponse;
@@ -34,6 +32,7 @@ import com.github.dockerjava.core.DockerClientBuilder;
 import com.github.dockerjava.core.command.BuildImageResultCallback;
 import com.github.dockerjava.core.command.LogContainerResultCallback;
 
+import de.ityx.response.it.docker.composer.ComposerContainerSpecification;
 import de.ityx.response.it.docker.container.ContainerManager;
 import de.ityx.response.it.docker.image.ImageManager;
 import de.ityx.response.it.docker.image.ImageSource;
@@ -44,9 +43,9 @@ import de.ityx.response.it.docker.image.ImageSource;
  *         only incidentally for computers to execute
  */
 public class Commander {
-    private static final Logger     LOG                  = LoggerFactory.getLogger(Commander.class);
+    private static final Logger LOG = LoggerFactory.getLogger(Commander.class);
 
-    protected DockerClient         dockerClient;
+    protected DockerClient   dockerClient;
     protected CommandFactory dockerCmdExecFactory = new CommandFactory(DockerClientBuilder.getDefaultDockerCmdExecFactory());
     
     public void init() {
@@ -70,26 +69,33 @@ public class Commander {
     public void showDockerResources() throws Exception {
 	final String msg = "Available docker resources ";
         LOG.info(LINENL + msg + "....");
-	ContainerManager.showAvaiableContainers(true,dockerClient);
-	ImageManager.showAvaiableImages(true,dockerClient);
+	ContainerManager.showAvaiableContainers(false,dockerClient);
+	ImageManager.showAvaiableImages(false,dockerClient);
     }
     
     public List<Image> avialbleImages() throws Exception {
 	return ImageManager.showAvaiableImages(false,dockerClient);
     }
     
-    public void removeDockerResources(final String negativeImageFilter) throws Exception {
-	final String msg = "Renoving docker resources  ";
-        LOG.info(LINENL + msg + "....");
-        ContainerManager.removeAvaiableContainers(true, dockerClient);
-        ImageManager.removeAvaiableImages(true, negativeImageFilter, dockerClient);
+    public void removeDockerResources(final String[] negativeImageFilters) throws Exception {
+	final String msg = "Renoving docker resources ";
+        LOG.info(LINENL + msg +  "but " + printList(negativeImageFilters) + " ....");
+        ContainerManager.removeAvaiableContainers(true, negativeImageFilters, dockerClient);
+        ImageManager.removeAvaiableImages(true, negativeImageFilters, dockerClient);
     }
 
     public String createImage(final ImageSource imageSource, final String tag) throws Exception {
 	return ImageManager.createImage(imageSource, tag, dockerClient);
     }
     
-    public String createAndStartContainer(final String name, final String imageId, final int containerPort, 
+    public String createAndStartContainer(final ComposerContainerSpecification containerSpecification) throws Exception {
+	 final String name = containerSpecification.getTitle();
+	 final Integer port = containerSpecification.getPorts().getSingleExposedPort();
+         final String imageId =  containerSpecification.getImageSource().getDockerImageId();
+         return createAndStartContainer(name, imageId, port, false);
+    }
+    
+    private String createAndStartContainer(final String name, final String imageId, final int containerPort, 
 	    final boolean randomExposedPort) throws Exception {
 	final String msg = "Creating container [" + name + "] ";
 	LOG.info(LINENL + msg + " ...");
@@ -123,52 +129,9 @@ public class Commander {
     }
 
 
-   
-  
-  
-
     // UTIL
 
-    /**
-     * Checks to see if a specific port is available.
-     *
-     * @param port
-     *            the port to check for availability
-     */
-    public static Boolean available(final int port) {
-        if (port < 1100 || port > 60000) {
-            throw new IllegalArgumentException("Invalid start port: " + port);
-        }
 
-        ServerSocket ss = null;
-        DatagramSocket ds = null;
-        try {
-            ss = new ServerSocket(port);
-            ss.setReuseAddress(true);
-            ds = new DatagramSocket(port);
-            ds.setReuseAddress(true);
-            return true;
-        }
-        catch(IOException ignored) {
-            ignored.printStackTrace();
-        }
-        finally {
-            if (ds != null) {
-                ds.close();
-            }
-
-            if (ss != null) {
-                try {
-                    ss.close();
-                }
-                catch(IOException e) {
-                    /* should not be thrown */
-                }
-            }
-        }
-
-        return false;
-    }
 
     protected MountedVolumes mountedVolumes(final Matcher<? super List<Volume>> subMatcher) {
         return new MountedVolumes(subMatcher, "Mounted volumes", "mountedVolumes");

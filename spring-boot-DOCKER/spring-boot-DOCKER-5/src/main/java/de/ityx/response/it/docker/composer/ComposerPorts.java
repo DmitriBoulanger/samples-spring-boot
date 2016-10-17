@@ -13,7 +13,7 @@ public class ComposerPorts {
 
     public final StringBuilder print() throws FileNotFoundException {
 	final StringBuilder sb = new StringBuilder();
-	sb.append("Ports " + ports);
+	sb.append(ports);
 	return sb;
     }
     

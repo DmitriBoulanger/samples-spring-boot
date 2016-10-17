@@ -2,6 +2,7 @@ package de.ityx.response.it.docker.util;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import com.github.dockerjava.api.model.Container;
 import com.github.dockerjava.api.model.ContainerPort;
@@ -32,7 +33,7 @@ public final class DockerPrint {
         final StringBuilder ret = new StringBuilder();
         for (final Container container : containers) {
             ret.append(NLT // + container.getId()
-                    + printContanerNames(container.getNames())
+                    + printContainerNames(container.getNames())
                     + "\tStatus: " + container.getStatus()
                     + "\tPorts: "  + printPorts(container.getPorts()));
         }
@@ -103,8 +104,24 @@ public final class DockerPrint {
         return ret;
     }
     
+    public static final String printList(final String[] items) {
+        final StringBuilder ret = new StringBuilder();
+        for (final String item : items) {
+            ret.append(" " + item);
+        }
+        return "[" + ret.toString().trim() + "]";
+    }
+    
+    public static final String printList(final Set<String> items) {
+        final StringBuilder ret = new StringBuilder();
+        for (final String item : items) {
+            ret.append(" " + item);
+        }
+        return "[" + ret.toString().trim() + "]";
+    }
+    
 
-    private static StringBuilder printContanerNames(final String[] names) {
+    public static StringBuilder printContainerNames(final String[] names) {
         final StringBuilder ret = new StringBuilder();
         for (final String name : names) {
             ret.append(" " + right(name, 20));

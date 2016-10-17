@@ -3,7 +3,9 @@ package de.ityx.response.it.docker.container;
 import static de.ityx.response.it.docker.util.DockerPrint.DONE;
 import static de.ityx.response.it.docker.util.DockerPrint.prinPorts;
 import static de.ityx.response.it.docker.util.DockerPrint.printContainers;
+import static de.ityx.response.it.docker.util.DockerPrint.printContainerNames;
 import static de.ityx.response.it.docker.util.DockerPrint.q;
+import static de.ityx.response.it.docker.util.DockerPrint.printList;
 
 import java.util.List;
 
@@ -17,10 +19,12 @@ import com.github.dockerjava.api.command.StartContainerCmd;
 import com.github.dockerjava.api.model.Container;
 import com.github.dockerjava.api.model.ExposedPort;
 import com.github.dockerjava.api.model.HostConfig;
+import com.github.dockerjava.api.model.Image;
 import com.github.dockerjava.api.model.Ports;
 import com.github.dockerjava.api.model.Ports.Binding;
 
 import de.ityx.response.it.docker.commander.Commander;
+import de.ityx.response.it.docker.image.ImageFilter;
 
 public class ContainerManager {
     private static final Logger LOG = LoggerFactory.getLogger(Commander.class);
@@ -59,9 +63,9 @@ public class ContainerManager {
      * @return true only if no problems occur
      * @throws Exception
      */
-    public static boolean removeAvaiableContainers(final boolean all, final DockerClient dockerClient)
+    public static boolean removeAvaiableContainers(final boolean all, final String[] negativeFilters, final DockerClient dockerClient)
             throws Exception {
-        return removeAvaiableContainers(avialbleContainers(all, dockerClient), dockerClient);
+        return removeAvaiableContainers(avialbleContainers(all, dockerClient), negativeFilters, dockerClient);
     }
 
     public static void startContainer(final String containerId, final DockerClient dockerClient) throws Exception {
@@ -137,33 +141,34 @@ public class ContainerManager {
     // PRIVATE IMPLEMENTATION
     // ==============================================================================================================================
 
-    private static boolean removeAvaiableContainers(final List<Container> containers, final DockerClient dockerClient)
+    private static boolean removeAvaiableContainers(final List<Container> containers, final String[] negativeFilters, final DockerClient dockerClient)
             throws Exception {
         final String msg = "Removing available containers ";
         LOG.info(msg + "....");
         boolean ret = true;
        for (final Container container : containers) {
-            if (occurs("dddev", container.getNames())) {
+            if (keepContainer(container, negativeFilters, msg)) {
                 continue;
             }
+            
             if (container.getStatus().equalsIgnoreCase("running")) {
                 dockerClient.killContainerCmd(container.getId()).exec();
             }
-            else {
-                dockerClient.removeContainerCmd(container.getId()).withForce(true).exec();
-            }
+            dockerClient.removeContainerCmd(container.getId()).withForce(true).exec();
         }
         LOG.info(msg + DONE);
         return ret;
     }
     
-    private static final boolean occurs(final String key, final String[] values) {
-        for (final String value:values) {
-            if (-1!=value.indexOf(key)) {
-                return true;
-            }
+    private static boolean keepContainer(final Container container, final String[] negativeFilters, final String msg) {
+        final ContainerFilter containerFilter = new ContainerFilter(negativeFilters, true);
+        if (containerFilter.isMatch(container)) {
+            LOG.info(msg + " - keeping container: " + printContainerNames(container.getNames()));
+            return true;
         }
-        return false;
+        else {
+            return false;
+        }
     }
 
 }

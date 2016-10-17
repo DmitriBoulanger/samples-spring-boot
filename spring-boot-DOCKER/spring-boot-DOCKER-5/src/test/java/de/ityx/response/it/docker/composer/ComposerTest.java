@@ -27,7 +27,7 @@ public class ComposerTest extends TestAbstraction {
     public void t00_readComposeFile() throws FileNotFoundException, IOException {
         final Composer composer = new Composer(testComposerFile());
         LOG.info("Composer-file contents: " + composer.print());
-        composer.assertThatImagesourcesCoverContainerSpecication(TestImageSources.imageSources("test/composer"));
+        composer.assertThatImageSourcesCoverContainerSpecication(TestImageSources.imageSources("test/composer"));
     }
 
 }

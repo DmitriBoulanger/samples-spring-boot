@@ -1,4 +1,31 @@
-case-service:
-  image: test/case-service
+hystrix:
+  image: test/hystrix
   ports:
-   - "8100:8100"
+   - "7979:7979"
+  links:
+   - gateway
+   - discovery
+discovery:
+  image: test/discovery-microservice
+  ports:
+   - "8761:8761"
+configserver:
+  image: test/config-microservice
+  ports:
+   - "8888:8888"
+  links:
+   - discovery
+gateway:
+  image: test/api-gateway-microservice
+  ports:
+   - "10000:10000"
+  links:
+   - discovery
+   - configserver
+moviesui:
+  image: test/movies-ui
+  ports:
+     - "9006:9006"
+  links:
+   - discovery
+   - configserver

@@ -53,16 +53,18 @@ public class ComposerContainerSpecification {
         return imageSource;
     }
 
-    public void setImageSource(ImageSource imageSource) {
+    public void setImageSource(final ImageSource imageSource) {
         this.imageSource = imageSource;
     }
     
     public final StringBuilder print() throws FileNotFoundException {
 	final StringBuilder sb = new StringBuilder();
 	    sb.append("\n\t - CONTAINER " + title);
-	    sb.append("\n\t    - Image " + image);
-	    sb.append("\n\t    - " + composePorts.print());
-	    sb.append("\n\t    - Links " + links);
+	    sb.append("\n\t    - Image        : " + image);
+	    sb.append("\n\t    - Image source : " + imageSource.getName());
+	    sb.append("\n\t    - Image ID     : " + imageSource.getDockerImageId());
+	    sb.append("\n\t    - Ports        : " + composePorts.print());
+	    sb.append("\n\t    - Links        : " + links);
 	return sb;
     }
 }
