@@ -1,8 +1,8 @@
 package de.ityx.response.it.docker.image;
 
-import static de.ityx.response.it.docker.util.PrintManager.NLT;
-import static de.ityx.response.it.docker.util.PrintManager.left;
-import static de.ityx.response.it.docker.util.PrintManager.right;
+import static de.ityx.response.it.docker.util.DockerPrint.NLT;
+import static de.ityx.response.it.docker.util.DockerPrint.left;
+import static de.ityx.response.it.docker.util.DockerPrint.right;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 

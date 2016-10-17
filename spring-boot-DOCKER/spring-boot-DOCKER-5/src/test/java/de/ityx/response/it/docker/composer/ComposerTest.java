@@ -15,19 +15,19 @@ import de.ityx.response.it.docker.testimpl.TestImageSources;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class ComposerTest extends TestAbstraction {
-    private static final Logger LOG= LoggerFactory.getLogger(ComposerTest.class);
-    
+    private static final Logger LOG = LoggerFactory.getLogger(ComposerTest.class);
+
     /**
-     * creating and cleaning Image Source.
+     * read composer-file and verify that it is covered with images-sources
      * 
      * @throws FileNotFoundException
      * @throws IOException
      */
     @Test
     public void t00_readComposeFile() throws FileNotFoundException, IOException {
-	final Composer composer = new Composer(testComposerFile());
-	LOG.info("Composer-file contents: " + composer.print());
-	composer.assertThatCovered(TestImageSources.imageSources("test/composer"));
+        final Composer composer = new Composer(testComposerFile());
+        LOG.info("Composer-file contents: " + composer.print());
+        composer.assertThatImagesourcesCoverContainerSpecication(TestImageSources.imageSources("test/composer"));
     }
 
 }

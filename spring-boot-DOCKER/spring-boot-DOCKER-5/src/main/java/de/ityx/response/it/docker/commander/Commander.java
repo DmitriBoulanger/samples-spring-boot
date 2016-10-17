@@ -1,9 +1,9 @@
 package de.ityx.response.it.docker.commander;
 
-import static de.ityx.response.it.docker.util.PrintManager.DONE;
-import static de.ityx.response.it.docker.util.PrintManager.LINENL;
-import static de.ityx.response.it.docker.util.PrintManager.NLT;
-import static de.ityx.response.it.docker.util.PrintManager.printConfig;
+import static de.ityx.response.it.docker.util.DockerPrint.DONE;
+import static de.ityx.response.it.docker.util.DockerPrint.LINENL;
+import static de.ityx.response.it.docker.util.DockerPrint.NLT;
+import static de.ityx.response.it.docker.util.DockerPrint.printConfig;
 
 import java.io.File;
 import java.io.IOException;
