@@ -1,12 +1,9 @@
 package de.ityx.response.it.docker.util;
 
-import static de.ityx.response.it.docker.util.Utils.nn;
-import static de.ityx.response.it.docker.util.Utils.occurs;
-
 import java.io.IOException;
 import java.net.DatagramSocket;
 import java.net.ServerSocket;
-import java.util.Collection;
+
 import java.util.List;
 import java.util.Set;
 

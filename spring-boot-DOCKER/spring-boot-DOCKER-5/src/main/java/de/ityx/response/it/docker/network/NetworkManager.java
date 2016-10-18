@@ -1,5 +1,6 @@
 package de.ityx.response.it.docker.network;
 
+import static de.ityx.response.it.docker.network.NetworkIpamGeberator.*;
 import static de.ityx.response.it.docker.util.DockerPrint.DONE;
 import static de.ityx.response.it.docker.util.DockerPrint.printNetworks;
 import static de.ityx.response.it.docker.util.DockerPrint.q;
@@ -21,7 +22,6 @@ import com.github.dockerjava.api.command.ListNetworksCmd;
 import com.github.dockerjava.api.command.RemoveNetworkCmd;
 import com.github.dockerjava.api.model.Network;
 import com.github.dockerjava.api.model.Network.Ipam;
-import com.github.dockerjava.api.model.Network.Ipam.Config;
 
 import de.ityx.response.it.docker.commander.Commander;
 
@@ -98,23 +98,19 @@ public class NetworkManager {
     /**
      * creates a custom network
      * 
-     * @param offs
+     * @param freeOffs
      *            used to have different gateway/subnet IP-addresses. Its value should be 1 .... 100
      * @param networkName unique network name
      * @param dockerClient
      * 
      * @return docker network ID
      */
-    public static final String createCustomNetwork(final int offs, final String networkName, final DockerClient dockerClient) {
+    public static final String createCustomNetwork(final int freeOffs, final String networkName, final DockerClient dockerClient) {
         final CreateNetworkCmd createNetworkCmd = dockerClient.createNetworkCmd();
         createNetworkCmd.withName(networkName);
         createNetworkCmd.withDriver(DOCKER_NETWWORK_DEFAULT_DRIVER);
 
-        final Ipam ipam = new Ipam();
-        final Config ipamConfig = new Config();
-        ipamConfig.withGateway(gateway(offs));
-        ipamConfig.withSubnet(subnet(offs));
-        ipam.withConfig(ipamConfig);
+        final Ipam ipam = newImap(freeOffs);
 
         createNetworkCmd.withIpam(ipam);
 
@@ -131,148 +127,5 @@ public class NetworkManager {
 
         return networkId;
     }
-    
-    /*
-     * EXAMPLE ddev_net
-     * 
-     * networks:
-     * net:
-     * driver: bridge
-     * ipam:
-     * driver: default
-     * config:
-     * - subnet: 10.254.99.0/24
-     * gateway: 10.254.99.1
-     */
-
-    private static final String prefix(int offs) {
-        return "10.254." + (100 + offs) + ".";
-    }
-
-    private static final String gateway(int offs) {
-        return prefix(offs) + "1";
-    }
-
-    private static final String subnet(int offs) {
-        return prefix(offs) + "0" + "/24";
-    }
-
-    // /**
-    // * remove available Docker containers.
-    // *
-    // * @param all
-    // * if true then the available containers are listed as CLI
-    // * "docker ps -a"
-    // * @param dockerClient
-    // * @return true only if no problems occur
-    // * @throws Exception
-    // */
-    // public static boolean removeAvaiableContainers(final boolean all, final String[] negativeFilters, final DockerClient dockerClient)
-    // throws Exception {
-    // return removeAvaiableContainers(avialbleContainers(all, dockerClient), negativeFilters, dockerClient);
-    // }
-    //
-    // public static void startContainer(final String containerId, final DockerClient dockerClient) throws Exception {
-    // final String msg = "Starting container ";
-    // LOG.info(msg + "..");
-    // final StartContainerCmd startContainerCmd = dockerClient.startContainerCmd(containerId);
-    // startContainerCmd.exec();
-    // LOG.info(msg + DONE);
-    // }
-    //
-    // public static void waitContainer(final String containerId, int timeoutSeconds, final DockerClient dockerClient)
-    // throws Exception {
-    // final String msg = "Waiting container ";
-    // LOG.info(msg + "....");
-    // final long start = System.currentTimeMillis();
-    // final long timeout = timeoutSeconds * 1000;
-    // while (true) {
-    // final InspectContainerResponse inspectContainerResponse = dockerClient.inspectContainerCmd(containerId)
-    // .exec();
-    // final boolean running = inspectContainerResponse.getState().getRunning();
-    // if (running) {
-    // break;
-    // }
-    // final String error = inspectContainerResponse.getState().getError();
-    // if (null != error && 0 != error.trim().length()) {
-    // throw new IllegalStateException("Error " + q(error) + " while wating for container start-up");
-    // }
-    // if ((System.currentTimeMillis() - start) > timeout) {
-    // throw new IllegalStateException(
-    // "Timeout [" + timeoutSeconds + " sec.] while wating for container start-up");
-    // }
-    // Thread.sleep(200);
-    // }
-    // LOG.info(msg + DONE + "Elapsed " + (System.currentTimeMillis() - start) + " ms.");
-    // }
-    //
-    // public static void inspectContainer(String containerId, final DockerClient dockerClient) throws Exception {
-    // final String msg = "Inspecting container ";
-    // LOG.info(msg + "...");
-    // final InspectContainerResponse inspectContainerResponse = dockerClient.inspectContainerCmd(containerId).exec();
-    // LOG.info(msg + DONE + "\n\t - Running: " + inspectContainerResponse.getState().getRunning() + "\n\t - Status: "
-    // + inspectContainerResponse.getState().getStatus() + "\n\t - Ports: "
-    // + prinPorts(inspectContainerResponse.getNetworkSettings().getPorts()));
-    // }
-    //
-    // // ==============================================================================================================================
-    // // PORT CONFIGURATION
-    // // ==============================================================================================================================
-    //
-    // public static final void configureWithRandomExposedPort(final CreateContainerCmd createContainerCmd,
-    // int containerPort) {
-    // createContainerCmd.withExposedPorts(ExposedPort.tcp(containerPort));
-    // final Binding binding = Binding.bindIp("0.0.0.0");
-    // final Ports ports = new Ports();
-    // ports.bind(ExposedPort.tcp(containerPort), binding);
-    // final HostConfig hostConfig = new HostConfig();
-    // hostConfig.withPortBindings(ports);
-    // createContainerCmd.withHostConfig(hostConfig);
-    // }
-    //
-    // public static final void configureWithFixedExposedPort(final CreateContainerCmd createContainerCmd,
-    // int containerPort) {
-    // createContainerCmd.withExposedPorts(ExposedPort.tcp(containerPort));
-    // final Binding binding = Binding.bindIpAndPort("0.0.0.0", containerPort);
-    // final Ports ports = new Ports();
-    // ports.bind(ExposedPort.tcp(containerPort), binding);
-    // final HostConfig hostConfig = new HostConfig();
-    // hostConfig.withPortBindings(ports);
-    // createContainerCmd.withHostConfig(hostConfig);
-    // }
-    //
-    // // ==============================================================================================================================
-    // // PRIVATE IMPLEMENTATION
-    // // ==============================================================================================================================
-    //
-    // private static boolean removeAvaiableContainers(final List<Container> containers, final String[] negativeFilters, final DockerClient dockerClient)
-    // throws Exception {
-    // final String msg = "Removing available containers ";
-    // LOG.info(msg + "....");
-    // boolean ret = true;
-    // for (final Container container : containers) {
-    // if (keepContainer(container, negativeFilters, msg)) {
-    // continue;
-    // }
-    //
-    // if (container.getStatus().equalsIgnoreCase("running")) {
-    // dockerClient.killContainerCmd(container.getId()).exec();
-    // }
-    // dockerClient.removeContainerCmd(container.getId()).withForce(true).exec();
-    // }
-    // LOG.info(msg + DONE);
-    // return ret;
-    // }
-    //
-    // private static boolean keepContainer(final Container container, final String[] negativeFilters, final String msg) {
-    // final NetworFilter networFilter = new NetworFilter(negativeFilters, true);
-    // if (networFilter.isMatch(container)) {
-    // LOG.info(msg + " - keeping container: " + printContainerNames(container.getNames()));
-    // return true;
-    // }
-    // else {
-    // return false;
-    // }
-    // }
-
+  
 }
