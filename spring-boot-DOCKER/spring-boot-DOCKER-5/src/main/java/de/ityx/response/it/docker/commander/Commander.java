@@ -1,5 +1,6 @@
 package de.ityx.response.it.docker.commander;
 
+import static de.ityx.response.it.docker.commander.CommanderConfig.config;
 import static de.ityx.response.it.docker.util.DockerPrint.DONE;
 import static de.ityx.response.it.docker.util.DockerPrint.LINENL;
 import static de.ityx.response.it.docker.util.DockerPrint.NLT;
@@ -7,12 +8,9 @@ import static de.ityx.response.it.docker.util.DockerPrint.printConfig;
 import static de.ityx.response.it.docker.util.DockerPrint.printList;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
-import org.hamcrest.FeatureMatcher;
-import org.hamcrest.Matcher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,17 +18,11 @@ import org.slf4j.LoggerFactory;
 import com.github.dockerjava.api.DockerClient;
 import com.github.dockerjava.api.command.CreateContainerCmd;
 import com.github.dockerjava.api.command.CreateContainerResponse;
-import com.github.dockerjava.api.command.InspectContainerResponse;
-import com.github.dockerjava.api.command.InspectContainerResponse.Mount;
-import com.github.dockerjava.api.model.Frame;
 import com.github.dockerjava.api.model.Image;
 import com.github.dockerjava.api.model.Network;
-import com.github.dockerjava.api.model.Volume;
-// DOCKER CORE
-import com.github.dockerjava.core.DefaultDockerClientConfig;
 import com.github.dockerjava.core.DockerClientBuilder;
+import com.github.dockerjava.core.DockerClientConfig;
 import com.github.dockerjava.core.command.BuildImageResultCallback;
-import com.github.dockerjava.core.command.LogContainerResultCallback;
 
 import de.ityx.response.it.docker.composer.ComposerContainerSpecification;
 import de.ityx.response.it.docker.container.ContainerManager;
@@ -40,30 +32,57 @@ import de.ityx.response.it.docker.network.NetworkManager;
 
 /**
  * @author Dmitri Boulanger, Hombach
+ * 
  *         D. Knuth: Programs are meant to be read by humans and
  *         only incidentally for computers to execute
  */
 public class Commander {
-    private static final Logger LOG                  = LoggerFactory.getLogger(Commander.class);
+    private static final Logger LOG = LoggerFactory.getLogger(Commander.class);
 
-    protected DockerClient      dockerClient;
-    protected CommandFactory    dockerCmdExecFactory = new CommandFactory(DockerClientBuilder.getDefaultDockerCmdExecFactory());
-
-    public void init() {
-        final DefaultDockerClientConfig config = config();
-        LOG.info("configuration: " + printConfig(config));
-        dockerClient = DockerClientBuilder.getInstance(config).withDockerCmdExecFactory(dockerCmdExecFactory).build();
-        LOG.info("initialized");
+    protected DockerClient   dockerClient         = null;
+    protected CommandFactory dockerCmdExecFactory = null;
+    
+    public Commander() {
+        
     }
 
+    public void init() {
+        final String msg = "Initialization ";
+        LOG.info(LINENL + msg + "...");
+        final DockerClientConfig config = config();
+        LOG.info(msg + " configuration: " + printConfig(config));
+        
+        // Command Factory
+        dockerCmdExecFactory = new CommandFactory(DockerClientBuilder.getDefaultDockerCmdExecFactory());
+        
+        // Docker Client
+        final DockerClientBuilder dockerClientBuilder =  DockerClientBuilder.getInstance(config);
+        dockerClientBuilder.withDockerCmdExecFactory(dockerCmdExecFactory);
+        dockerClient = dockerClientBuilder.build();
+        
+        LOG.info(msg + DONE);
+    }
+
+    /**
+     * @return configured Docker-client
+     */
     public DockerClient dockerClient() {
         return dockerClient;
     }
 
+    /**
+     * closes the configured Docker-client
+     * @throws Exception
+     */
     public void close() throws Exception {
+        if (null==dockerClient) {
+            return;
+        }
         final String msg = "Closing ";
         LOG.info(LINENL + msg + "...");
         dockerClient.close();
+        dockerClient = null;
+        dockerCmdExecFactory = null;
         LOG.info(msg + DONE);
     }
 
@@ -128,78 +147,6 @@ public class Commander {
         return containerId;
     }
 
-    private DefaultDockerClientConfig config() {
-        return config(null);
-    }
-
-    protected DefaultDockerClientConfig config(final String password) {
-        DefaultDockerClientConfig.Builder builder = DefaultDockerClientConfig.createDefaultConfigBuilder().withRegistryUrl("https://index.docker.io/v1/");
-        if (password != null) {
-            builder = builder.withRegistryPassword(password);
-        }
-
-        return builder.build();
-    }
-
-    // UTIL
-
-    protected MountedVolumes mountedVolumes(final Matcher<? super List<Volume>> subMatcher) {
-        return new MountedVolumes(subMatcher, "Mounted volumes", "mountedVolumes");
-    }
-
-    private static class MountedVolumes extends FeatureMatcher<InspectContainerResponse, List<Volume>> {
-        MountedVolumes(final Matcher<? super List<Volume>> subMatcher, final String featureDescription, final String featureName) {
-            super(subMatcher, featureDescription, featureName);
-        }
-
-        @Override
-        public List<Volume> featureValueOf(final InspectContainerResponse item) {
-            final List<Volume> volumes = new ArrayList<Volume>();
-            for (Mount mount : item.getMounts()) {
-                volumes.add(mount.getDestination());
-            }
-            return volumes;
-        }
-    }
-
-    protected String containerLog(final String containerId) throws Exception {
-        return dockerClient.logContainerCmd(containerId).withStdOut(true).exec(new LogContainerTestCallback())
-                .awaitCompletion().toString();
-    }
-
-    public static class LogContainerTestCallback extends LogContainerResultCallback {
-        protected final StringBuffer log             = new StringBuffer();
-
-        List<Frame>                  collectedFrames = new ArrayList<Frame>();
-
-        boolean                      collectFrames   = false;
-
-        public LogContainerTestCallback() {
-            this(false);
-        }
-
-        public LogContainerTestCallback(final boolean collectFrames) {
-            this.collectFrames = collectFrames;
-        }
-
-        @Override
-        public void onNext(final Frame frame) {
-            if (collectFrames) {
-                collectedFrames.add(frame);
-            }
-            log.append(new String(frame.getPayload()));
-        }
-
-        @Override
-        public String toString() {
-            return log.toString();
-        }
-
-        public List<Frame> getCollectedFrames() {
-            return collectedFrames;
-        }
-    }
-
     protected String buildImage(final File baseDir) throws Exception {
 
         return dockerClient.buildImageCmd(baseDir).withNoCache(true).exec(new BuildImageResultCallback())
@@ -209,7 +156,7 @@ public class Commander {
     protected Network findNetwork(final List<Network> networks, final String name) {
 
         for (Network network : networks) {
-            if (StringUtils.equals(network.getName(), name)) {
+            if (StringUtils.equalsIgnoreCase(network.getName(), name)) {
                 return network;
             }
         }

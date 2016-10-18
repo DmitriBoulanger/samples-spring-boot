@@ -32,8 +32,8 @@ import de.ityx.response.it.docker.testimpl.TestImageSources;
  *         only incidentally for computers to execute
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class MainShowTest extends TestAbstraction {
-    private static final Logger LOG = LoggerFactory.getLogger(MainShowTest.class);
+public class ShowTest extends TestAbstraction {
+    private static final Logger LOG = LoggerFactory.getLogger(ShowTest.class);
 
     private static Commander commander;
     private static final Map<String, ImageSource> imageSources = TestImageSources.imageSources("test/");
