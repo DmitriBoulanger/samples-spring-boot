@@ -43,7 +43,6 @@ public class PullManager {
             final InspectImageResponse inspectImageResponse = dockerClient.inspectImageCmd(compleImageName).exec();
             assertThat("No image-pull confirmation for image image [" + compleImageName + "]", inspectImageResponse, notNullValue());
         }
-
         LOG.info(msg + DONE);
     }
 
