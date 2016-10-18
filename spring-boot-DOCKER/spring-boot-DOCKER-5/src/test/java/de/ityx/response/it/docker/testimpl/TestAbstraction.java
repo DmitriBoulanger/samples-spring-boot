@@ -16,7 +16,7 @@ public class TestAbstraction {
     }
 
     public static File testRepository() {
-        return new File(TEST_PROPERTIES.getProperty("spring-cloud-microservice-example.directory"));
+        return new File(TEST_PROPERTIES.getProperty("image-sources-directory"));
     }
 
     public static File testComposerFile() {
