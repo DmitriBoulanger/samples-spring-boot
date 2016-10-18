@@ -1,5 +1,6 @@
 package de.ityx.response.it.docker.composer;
 
+import static de.ityx.response.it.docker.util.DockerPrint.*;
 import java.io.FileNotFoundException;
 import java.util.List;
 
@@ -9,8 +10,10 @@ public class ComposerContainerSpecification {
     
     private String title;
     private String image;
+    private String network;
     private ComposerPorts composePorts;
     private List<String> links;
+    private List<String> environment;
     
     private ImageSource imageSource;
     
@@ -26,6 +29,22 @@ public class ComposerContainerSpecification {
         this.title = title;
     }
     
+    public String getNetwork() {
+        return network;
+    }
+
+    public void setNetwork(String network) {
+        this.network = network;
+    }
+
+    public List<String> getEnvironment() {
+        return environment;
+    }
+
+    public void setEnvironment(List<String> environment) {
+        this.environment = environment;
+    }
+
     public String getImage() {
         return image;
     }
@@ -61,10 +80,12 @@ public class ComposerContainerSpecification {
 	final StringBuilder sb = new StringBuilder();
 	    sb.append("\n\t - CONTAINER " + title);
 	    sb.append("\n\t    - Image        : " + image);
-	    sb.append("\n\t    - Image source : " + imageSource.getName());
-	    sb.append("\n\t    - Image ID     : " + imageSource.getDockerImageId());
+	    sb.append("\n\t    - Image source : " + (null==imageSource? NULL  : imageSource.getName()));
+	    sb.append("\n\t    - Image ID     : " + (null== imageSource? NULL : imageSource.getDockerImageId()));
+	    sb.append("\n\t    - Network name : " + network);
 	    sb.append("\n\t    - Ports        : " + composePorts.print());
 	    sb.append("\n\t    - Links        : " + links);
+	    sb.append("\n\t    - Environment  : " + environment);
 	return sb;
     }
 }

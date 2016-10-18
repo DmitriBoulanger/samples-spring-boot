@@ -36,6 +36,7 @@ import de.ityx.response.it.docker.composer.ComposerContainerSpecification;
 import de.ityx.response.it.docker.container.ContainerManager;
 import de.ityx.response.it.docker.image.ImageManager;
 import de.ityx.response.it.docker.image.ImageSource;
+import de.ityx.response.it.docker.network.NetworkManager;
 
 /**
  * @author Dmitri Boulanger, Hombach
@@ -43,75 +44,87 @@ import de.ityx.response.it.docker.image.ImageSource;
  *         only incidentally for computers to execute
  */
 public class Commander {
-    private static final Logger LOG = LoggerFactory.getLogger(Commander.class);
+    private static final Logger LOG                  = LoggerFactory.getLogger(Commander.class);
 
-    protected DockerClient   dockerClient;
-    protected CommandFactory dockerCmdExecFactory = new CommandFactory(DockerClientBuilder.getDefaultDockerCmdExecFactory());
-    
+    protected DockerClient      dockerClient;
+    protected CommandFactory    dockerCmdExecFactory = new CommandFactory(DockerClientBuilder.getDefaultDockerCmdExecFactory());
+
     public void init() {
-	final DefaultDockerClientConfig config = config();
+        final DefaultDockerClientConfig config = config();
         LOG.info("configuration: " + printConfig(config));
         dockerClient = DockerClientBuilder.getInstance(config).withDockerCmdExecFactory(dockerCmdExecFactory).build();
         LOG.info("initialized");
     }
-    
+
     public DockerClient dockerClient() {
-	return dockerClient;
+        return dockerClient;
     }
-    
+
     public void close() throws Exception {
-	final String msg = "Closing ";
+        final String msg = "Closing ";
         LOG.info(LINENL + msg + "...");
         dockerClient.close();
         LOG.info(msg + DONE);
     }
-    
+
     public void showDockerResources() throws Exception {
-	final String msg = "Available docker resources ";
+        final String msg = "Available docker resources ";
         LOG.info(LINENL + msg + "....");
-	ContainerManager.showAvaiableContainers(false,dockerClient);
-	ImageManager.showAvaiableImages(false,dockerClient);
+        ContainerManager.showAvaiableContainers(false, dockerClient);
+        NetworkManager.showAvaiableNetworks(true, dockerClient);
+        ImageManager.showAvaiableImages(false, dockerClient);
     }
-    
+
     public List<Image> avialbleImages() throws Exception {
-	return ImageManager.showAvaiableImages(false,dockerClient);
+        return ImageManager.showAvaiableImages(false, dockerClient);
     }
-    
+
     public void removeDockerResources(final String[] negativeImageFilters) throws Exception {
-	final String msg = "Renoving docker resources ";
-        LOG.info(LINENL + msg +  "but " + printList(negativeImageFilters) + " ....");
+        final String msg = "Renoving docker resources ";
+        LOG.info(LINENL + msg + "but " + printList(negativeImageFilters) + " ....");
         ContainerManager.removeAvaiableContainers(true, negativeImageFilters, dockerClient);
         ImageManager.removeAvaiableImages(true, negativeImageFilters, dockerClient);
     }
 
     public String createImage(final ImageSource imageSource, final String tag) throws Exception {
-	return ImageManager.createImage(imageSource, tag, dockerClient);
+        return ImageManager.createImage(imageSource, tag, dockerClient);
     }
-    
-    public String createAndStartContainer(final ComposerContainerSpecification containerSpecification) throws Exception {
-	 final String name = containerSpecification.getTitle();
-	 final Integer port = containerSpecification.getPorts().getSingleExposedPort();
-         final String imageId =  containerSpecification.getImageSource().getDockerImageId();
-         return createAndStartContainer(name, imageId, port, false);
-    }
-    
-    private String createAndStartContainer(final String name, final String imageId, final int containerPort, 
-	    final boolean randomExposedPort) throws Exception {
-	final String msg = "Creating container [" + name + "] ";
-	LOG.info(LINENL + msg + " ...");
-        final CreateContainerCmd  createContainerCmd = dockerClient.createContainerCmd(imageId);
+
+    public String createAndStartContainer(final ComposerContainerSpecification containerSpecification, final boolean randomExposedPort) throws Exception  {
+        final String name = containerSpecification.getTitle();
+        final String msg = "Creating container [" + name + "] ";
+        final String imageId = containerSpecification.getImageSource().getDockerImageId();
+        final Integer containerPort = containerSpecification.getPorts().getSingleExposedPort();
+        final List<String> environment = containerSpecification.getEnvironment();
+        final String customNetworkName = containerSpecification.getNetwork();
+        
+        final CreateContainerCmd createContainerCmd = dockerClient.createContainerCmd(imageId);
         createContainerCmd.withName(name);
+        createContainerCmd.withNetworkDisabled(false);
+        createContainerCmd.withEnv(environment);
+        
         if (randomExposedPort) {
-            ContainerManager.configureWithRandomExposedPort(createContainerCmd,containerPort);
-        } else {
-            ContainerManager.configureWithFixedExposedPort(createContainerCmd,containerPort);
+            ContainerManager.configureWithRandomExposedPort(createContainerCmd, containerPort);
+        }
+        else {
+            ContainerManager.configureWithFixedExposedPort(createContainerCmd, containerPort);
         }
         final CreateContainerResponse createContainerResponse = createContainerCmd.exec();
         final String containerId = createContainerResponse.getId();
-        LOG.info(msg + DONE + " Container" + NLT + containerId);
+        LOG.info(msg + DONE + " Container ID: " + containerId);
+        
+        if (null!=customNetworkName) {
+            NetworkManager.connectContainerToCustomNetwork(containerId, customNetworkName, dockerClient);
+        }
+        
+        final String msg2 = "Running container [" + name + "] ";
+        LOG.info(LINENL + msg2 + " ...");
+        
         ContainerManager.startContainer(containerId, dockerClient);
         ContainerManager.waitContainer(containerId, 20, dockerClient);
         ContainerManager.inspectContainer(containerId, dockerClient);
+        
+        LOG.info(msg2 + DONE + " Container" + NLT + containerId);
         return containerId;
     }
 
@@ -128,10 +141,7 @@ public class Commander {
         return builder.build();
     }
 
-
     // UTIL
-
-
 
     protected MountedVolumes mountedVolumes(final Matcher<? super List<Volume>> subMatcher) {
         return new MountedVolumes(subMatcher, "Mounted volumes", "mountedVolumes");

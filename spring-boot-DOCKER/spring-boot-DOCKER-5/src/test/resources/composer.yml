@@ -1,31 +1,8 @@
-hystrix:
-  image: test/hystrix
+case-service:
+  image: test/case-service
+  network: ddev_net
   ports:
-   - "7979:7979"
-  links:
-   - gateway
-   - discovery
-discovery:
-  image: test/discovery-microservice
-  ports:
-   - "8761:8761"
-configserver:
-  image: test/config-microservice
-  ports:
-   - "8888:8888"
-  links:
-   - discovery
-gateway:
-  image: test/api-gateway-microservice
-  ports:
-   - "10000:10000"
-  links:
-   - discovery
-   - configserver
-moviesui:
-  image: test/movies-ui
-  ports:
-     - "9006:9006"
-  links:
-   - discovery
-   - configserver
+   - "8100:8100"
+  environment:
+      - SPRING_PROFILES_ACTIVE=ddev
+      - RSPNS_OPTS=-Xmx128m -Xss256k -Djava.security.egd=file:/dev/./urandom

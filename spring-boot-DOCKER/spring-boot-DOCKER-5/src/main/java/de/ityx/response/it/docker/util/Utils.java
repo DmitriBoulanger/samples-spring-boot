@@ -86,6 +86,23 @@ public final class Utils {
         }
         return false;
     }
+    
+    public static final boolean keyFound(final Set<String> keys, final String data) {
+        if (null == keys || keys.isEmpty()) {
+            return false;
+        }
+        if (!nn(data)) {
+            return false;
+        }
+
+        for (final String key : keys) {
+            if ( -1!= data.indexOf(key)) {
+                return true;
+            }
+        }
+        
+        return false;
+    }
   
     
     /**

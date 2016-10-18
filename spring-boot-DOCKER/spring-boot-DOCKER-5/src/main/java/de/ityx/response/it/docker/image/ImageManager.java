@@ -87,7 +87,7 @@ public final class ImageManager {
     }
 
     public static List<Image> avialbleImages(final boolean all, final DockerClient dockerClient) {
-        return dockerClient.listImagesCmd().withShowAll(true).exec();
+        return dockerClient.listImagesCmd().withShowAll(all).exec();
     }
 
     // ==============================================================================================================================

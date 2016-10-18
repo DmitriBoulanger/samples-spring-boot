@@ -5,9 +5,11 @@ import java.util.Map;
 import java.util.Set;
 
 import com.github.dockerjava.api.model.Container;
+import com.github.dockerjava.api.model.ContainerNetwork;
 import com.github.dockerjava.api.model.ContainerPort;
 import com.github.dockerjava.api.model.ExposedPort;
 import com.github.dockerjava.api.model.Image;
+import com.github.dockerjava.api.model.Network;
 import com.github.dockerjava.api.model.Ports;
 import com.github.dockerjava.api.model.Ports.Binding;
 import com.github.dockerjava.core.DockerClientConfig;
@@ -34,8 +36,20 @@ public final class DockerPrint {
         for (final Container container : containers) {
             ret.append(NLT // + container.getId()
                     + printContainerNames(container.getNames())
-                    + "\tStatus: " + container.getStatus()
-                    + "\tPorts: "  + printPorts(container.getPorts()));
+                    + "\tStatus: " + right(container.getStatus(), 30)
+                    + "\tPorts:   "  + printPorts(container.getPorts())
+                    + "\tNetworks: "  + printNetworks(container.getNetworkSettings().getNetworks()));
+        }
+        return ret;
+    }
+    
+    public static StringBuilder printNetworks(final List<Network> networks) {
+        final StringBuilder ret = new StringBuilder();
+        for (final Network network : networks) {
+            ret.append(NLT 
+                    + "\tName: " + right(network.getName(), 30)
+                    + "\tID:   "  + right(network.getId(),20)
+                    + "\tScope: "  + network.getScope());
         }
         return ret;
     }
@@ -67,6 +81,19 @@ public final class DockerPrint {
         return ret;
     }
     
+    public static StringBuilder printNetworks(final Map<String,ContainerNetwork> networks) {
+        final StringBuilder ret = new StringBuilder();
+        final Set<String> names = networks.keySet();
+        for (final String name  : names) {
+            ret.append(" " + name);
+            final ContainerNetwork containerNetwork = networks.get(name);
+            ret.append(":" +  containerNetwork.getIpAddress());
+           
+        }
+        return ret;
+    }
+    
+     
     public static StringBuilder printExposedPorts(final ExposedPort[] exposedPorts) {
 	final StringBuilder ret = new StringBuilder();
 	if (null==exposedPorts) {
